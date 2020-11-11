@@ -11,7 +11,7 @@
     "projen": "node .projenrc.js",
     "no-changes": "(git log --oneline -1 | grep -q \"chore(release):\") && echo \"No changes to release.\"",
     "bump": "yarn run --silent no-changes || standard-version",
-    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin master)",
+    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin main)",
     "test": "rm -fr lib/ && jest --passWithNoTests --updateSnapshot && yarn run eslint",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot",
@@ -84,7 +84,7 @@
       "category": 2
     },
     "release": {
-      "desc": "Bumps version & push to master",
+      "desc": "Bumps version & push to main",
       "command": "yarn run release",
       "category": 2
     },
