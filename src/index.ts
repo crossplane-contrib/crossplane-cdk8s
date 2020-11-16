@@ -1,76 +1,176 @@
-import { ApiObject, Lazy } from 'cdk8s';
-import { Construct } from 'constructs';
+import { App, Chart } from 'cdk8s';
+import { Configuration } from './crossplane';
+import { CompositeResourceDefinition, Composition } from './crossplane/imports/apiextensions.crossplane.io';
 
-export interface ConfigurationProps {
-  readonly name?: string;
+const crossplanePackage = new App();
 
-  /**
-   * @default ">=v0.14.0-0"
-   */
-  readonly crossplaneVersion?: string;
+const crossplaneYaml = new Chart(crossplanePackage, 'crossplane');
+const definitionYaml = new Chart(crossplanePackage, 'definition');
+const compositionYaml = new Chart(crossplanePackage, 'composition');
 
-  readonly company?: string;
-  readonly maintainer?: string;
-  readonly keywords?: string[];
-  readonly source?: string;
-  readonly license?: string;
+const config = new Configuration(crossplaneYaml, 'configuration-package', {
+  company: 'Upbound',
+  keywords: ['aws', 'cloud-native', 'kubernetes', 'example', 'platform', 'reference'],
+});
 
-  readonly providers?: ProviderDep[];
-}
+config.addProvider('crossplane/provider-aws', '>=v0.14.0-0');
 
-export interface ProviderDep {
-  readonly provider: string;
-  readonly version: string;
-}
-
-export class Configuration extends Construct {
-
-  private readonly providers: ProviderDep[];
-
-  constructor(scope: Construct, id: string, props: ConfigurationProps = { }) {
-    super(scope, id);
-
-    this.providers = new Array<ProviderDep>();
-
-    const annotations: any = { };
-
-    if (props.company) { annotations.company = props.company; }
-    if (props.keywords) { annotations.keywords = props.keywords.join(', '); }
-    if (props.source) { annotations.source = props.source; }
-    if (props.license) { annotations.license = props.license; }
-
-    new ApiObject(this, 'Default', {
-      apiVersion: 'meta.pkg.crossplane.io/v1alpha1',
-      kind: 'Configuration',
-      metadata: {
-        name: props.name,
-        annotations: annotations,
-      },
-      spec: {
-        crossplane: {
-          version: props.crossplaneVersion ?? '>=v0.14.0-0',
+new CompositeResourceDefinition(definitionYaml, 'compositepostgresqlinstances.aws.platformref.crossplane.io', {
+  metadata: {
+    name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+  },
+  spec: {
+    claimNames: {
+      kind: 'PostgreSQLInstance',
+      plural: 'postgresqlinstances',
+    },
+    connectionSecretKeys: [
+      'username',
+      'password',
+      'endpoint',
+      'port',
+    ],
+    group: 'aws.platformref.crossplane.io',
+    names: {
+      kind: 'CompositePostgreSQLInstance',
+      plural: 'compositepostgresqlinstances',
+    },
+    versions: [
+      {
+        name: 'v1alpha1',
+        served: true,
+        referenceable: true,
+        schema: {
+          openAPIV3Schema: {
+            type: 'object',
+            properties: {
+              spec: {
+                type: 'object',
+                properties: {
+                  parameters: {
+                    type: 'object',
+                    properties: {
+                      storageGB: { type: 'integer' },
+                      networkRef: {
+                        type: 'object',
+                        description: 'A reference to the Network object that this postgres should be connected to.',
+                        properties: {
+                          id: { type: 'string', description: 'ID of the Network object this ref points to.' },
+                        },
+                        required: ['id'],
+                      },
+                    },
+                    required: [
+                      'storageGB',
+                      'networkRef',
+                    ],
+                  },
+                },
+                required: ['parameters'],
+              },
+            },
+          },
         },
-        dependsOn: Lazy.any({ produce: () => this._synthProviders() }),
       },
-    });
+    ],
+  },
+});
 
-    for (const p of props.providers ?? []) {
-      this.addProvider(p.provider, p.version);
-    }
-  }
+new Composition(compositionYaml, 'compositepostgresqlinstances.aws.platformref.crossplane.io', {
+  metadata: {
+    name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+    labels: {
+      provider: 'aws',
+    },
+  },
+  spec: {
+    writeConnectionSecretsToNamespace: 'crossplane-system',
+    compositeTypeRef: {
+      apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+      kind: 'CompositePostgreSQLInstance',
+    },
+    resources: [
+      {
+        base: {
+          apiVersion: 'database.aws.crossplane.io/v1beta1',
+          kind: 'DBSubnetGroup',
+          spec: {
+            forProvider: {
+              region: 'us-west-2',
+              description: 'An excellent formation of subnetworks.',
+            },
+            reclaimPolicy: 'Delete',
+          },
+        },
+        patches: [
+          {
+            fromFieldPath: 'spec.parameters.networkRef.id',
+            toFieldPath: 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+          },
+        ],
+      },
+      {
+        base: {
+          apiVersion: 'database.aws.crossplane.io/v1beta1',
+          kind: 'RDSInstance',
+          spec: {
+            forProvider: {
+              region: 'us-west-2',
+              dbSubnetGroupNameSelector: {
+                matchControllerRef: true,
+              },
+              dbInstanceClass: 'db.t2.small',
+              masterUsername: 'masteruser',
+              engine: 'postgres',
+              engineVersion: '9.6',
+              skipFinalSnapshotBeforeDeletion: true,
+              publiclyAccessible: false,
+            },
+            writeConnectionSecretToRef: {
+              namespace: 'crossplane-system',
+            },
+            reclaimPolicy: 'Delete',
+          },
+        },
+        patches: [
+          {
+            fromFieldPath: 'metadata.uid',
+            toFieldPath: 'spec.writeConnectionSecretToRef.name',
+            transforms: [
+              {
+                type: 'string',
+                string: {
+                  fmt: '%s-postgresql',
+                },
+              },
+            ],
+          },
+          {
+            fromFieldPath: 'spec.parameters.storageGB',
+            toFieldPath: 'spec.forProvider.allocatedStorage',
+          },
+          {
+            fromFieldPath: 'spec.parameters.networkRef.id',
+            toFieldPath: 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+          },
+        ],
+        connectionDetails: [
+          {
+            fromConnectionSecretKey: 'username',
+          },
+          {
+            fromConnectionSecretKey: 'password',
+          },
+          {
+            fromConnectionSecretKey: 'endpoint',
+          },
+          {
+            fromConnectionSecretKey: 'port',
+          },
+        ],
+      },
+    ],
+  },
+});
 
-  public addProvider(provider: string, version: string) {
-    this.providers.push({ provider, version });
-  }
-
-  private _synthProviders() {
-    const result = new Array();
-    for (const p of this.providers) {
-      result.push({
-        provider: p.provider,
-        version: p.version,
-      });
-    }
-    return result;
-  }
-}
+crossplanePackage.synth();
