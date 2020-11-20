@@ -93,9 +93,9 @@ export interface CertificateSpec {
  */
 export enum CertificateSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -279,9 +279,9 @@ export interface CertificateSpecForProviderCertificateAuthorityArnSelector {
  */
 export enum CertificateSpecForProviderCertificateTransparencyLoggingPreference {
   /** ENABLED */
-  ENABLED = 'ENABLED',
+  ENABLED = "ENABLED",
   /** DISABLED */
-  DISABLED = 'DISABLED',
+  DISABLED = "DISABLED",
 }
 
 /**
@@ -335,8 +335,8 @@ export interface CertificateSpecForProviderTags {
  */
 export enum CertificateSpecForProviderValidationMethod {
   /** DNS */
-  DNS = 'DNS',
+  DNS = "DNS",
   /** EMAIL */
-  EMAIL = 'EMAIL',
+  EMAIL = "EMAIL",
 }
 

@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * A ProviderConfig configures how AWS controllers will connect to AWS API.
- *
- * @schema ProviderConfig
- */
-export class ProviderConfig extends ApiObject {
-  /**
-   * Defines a "ProviderConfig" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ProviderConfig',
-      apiVersion: 'aws.crossplane.io/v1beta1',
-    });
-  }
-}
-
-/**
  * A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
  *
  * @schema ProviderConfigUsage
@@ -39,6 +18,27 @@ export class ProviderConfigUsage extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'ProviderConfigUsage',
+      apiVersion: 'aws.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * A ProviderConfig configures how AWS controllers will connect to AWS API.
+ *
+ * @schema ProviderConfig
+ */
+export class ProviderConfig extends ApiObject {
+  /**
+   * Defines a "ProviderConfig" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ProviderConfig',
       apiVersion: 'aws.crossplane.io/v1beta1',
     });
   }
@@ -63,26 +63,6 @@ export class Provider extends ApiObject {
       apiVersion: 'aws.crossplane.io/v1alpha3',
     });
   }
-}
-
-/**
- * A ProviderConfig configures how AWS controllers will connect to AWS API.
- *
- * @schema ProviderConfig
- */
-export interface ProviderConfigProps {
-  /**
-   * @schema ProviderConfig#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * A ProviderConfigSpec defines the desired state of a ProviderConfig.
-   *
-   * @schema ProviderConfig#spec
-   */
-  readonly spec: ProviderConfigSpec;
-
 }
 
 /**
@@ -113,6 +93,26 @@ export interface ProviderConfigUsageProps {
 }
 
 /**
+ * A ProviderConfig configures how AWS controllers will connect to AWS API.
+ *
+ * @schema ProviderConfig
+ */
+export interface ProviderConfigProps {
+  /**
+   * @schema ProviderConfig#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * A ProviderConfigSpec defines the desired state of a ProviderConfig.
+   *
+   * @schema ProviderConfig#spec
+   */
+  readonly spec: ProviderConfigSpec;
+
+}
+
+/**
  * A Provider configures an AWS 'provider', i.e. a connection to a particular AWS account using a particular AWS IAM role. Deprecated: Please migrate to ProviderConfig.
  *
  * @schema Provider
@@ -129,21 +129,6 @@ export interface ProviderProps {
    * @schema Provider#spec
    */
   readonly spec: ProviderSpec;
-
-}
-
-/**
- * A ProviderConfigSpec defines the desired state of a ProviderConfig.
- *
- * @schema ProviderConfigSpec
- */
-export interface ProviderConfigSpec {
-  /**
-   * Credentials required to authenticate to this provider.
-   *
-   * @schema ProviderConfigSpec#credentials
-   */
-  readonly credentials: ProviderConfigSpecCredentials;
 
 }
 
@@ -199,6 +184,21 @@ export interface ProviderConfigUsageResourceRef {
 }
 
 /**
+ * A ProviderConfigSpec defines the desired state of a ProviderConfig.
+ *
+ * @schema ProviderConfigSpec
+ */
+export interface ProviderConfigSpec {
+  /**
+   * Credentials required to authenticate to this provider.
+   *
+   * @schema ProviderConfigSpec#credentials
+   */
+  readonly credentials: ProviderConfigSpecCredentials;
+
+}
+
+/**
  * A ProviderSpec defines the desired state of a Provider.
  *
  * @schema ProviderSpec
@@ -219,7 +219,7 @@ export interface ProviderSpec {
   readonly region: string;
 
   /**
-   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html 
  If set to true, credentialsSecretRef will be ignored.
    *
    * @schema ProviderSpec#useServiceAccount
@@ -315,10 +315,10 @@ export interface ProviderConfigSpecCredentialsSecretRef {
  */
 export enum ProviderConfigSpecCredentialsSource {
   /** None */
-  NONE = 'None',
+  NONE = "None",
   /** Secret */
-  SECRET = 'Secret',
+  SECRET = "Secret",
   /** InjectedIdentity */
-  INJECTED_IDENTITY = 'InjectedIdentity',
+  INJECTED_IDENTITY = "InjectedIdentity",
 }
 

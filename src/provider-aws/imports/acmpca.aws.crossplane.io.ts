@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * CertificateAuthorityPermission is a managed resource that represents an AWS CertificateAuthorityPermission Manager.
- *
- * @schema CertificateAuthorityPermission
- */
-export class CertificateAuthorityPermission extends ApiObject {
-  /**
-   * Defines a "CertificateAuthorityPermission" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: CertificateAuthorityPermissionProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'CertificateAuthorityPermission',
-      apiVersion: 'acmpca.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * CertificateAuthority is a managed resource that represents an AWS CertificateAuthority Manager.
  *
  * @schema CertificateAuthority
@@ -49,19 +28,20 @@ export class CertificateAuthority extends ApiObject {
  *
  * @schema CertificateAuthorityPermission
  */
-export interface CertificateAuthorityPermissionProps {
+export class CertificateAuthorityPermission extends ApiObject {
   /**
-   * @schema CertificateAuthorityPermission#metadata
+   * Defines a "CertificateAuthorityPermission" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * CertificateAuthorityPermissionSpec defines the desired state of CertificateAuthorityPermission
-   *
-   * @schema CertificateAuthorityPermission#spec
-   */
-  readonly spec?: CertificateAuthorityPermissionSpec;
-
+  public constructor(scope: Construct, id: string, props: CertificateAuthorityPermissionProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'CertificateAuthorityPermission',
+      apiVersion: 'acmpca.aws.crossplane.io/v1alpha1',
+    });
+  }
 }
 
 /**
@@ -85,45 +65,22 @@ export interface CertificateAuthorityProps {
 }
 
 /**
- * CertificateAuthorityPermissionSpec defines the desired state of CertificateAuthorityPermission
+ * CertificateAuthorityPermission is a managed resource that represents an AWS CertificateAuthorityPermission Manager.
  *
- * @schema CertificateAuthorityPermissionSpec
+ * @schema CertificateAuthorityPermission
  */
-export interface CertificateAuthorityPermissionSpec {
+export interface CertificateAuthorityPermissionProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema CertificateAuthorityPermissionSpec#deletionPolicy
+   * @schema CertificateAuthorityPermission#metadata
    */
-  readonly deletionPolicy?: CertificateAuthorityPermissionSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * CertificateAuthorityPermissionParameters defines the desired state of an AWS CertificateAuthority.
+   * CertificateAuthorityPermissionSpec defines the desired state of CertificateAuthorityPermission
    *
-   * @schema CertificateAuthorityPermissionSpec#forProvider
+   * @schema CertificateAuthorityPermission#spec
    */
-  readonly forProvider: CertificateAuthorityPermissionSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema CertificateAuthorityPermissionSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: CertificateAuthorityPermissionSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema CertificateAuthorityPermissionSpec#providerRef
-   */
-  readonly providerRef?: CertificateAuthorityPermissionSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema CertificateAuthorityPermissionSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: CertificateAuthorityPermissionSpecWriteConnectionSecretToRef;
+  readonly spec?: CertificateAuthorityPermissionSpec;
 
 }
 
@@ -171,123 +128,45 @@ export interface CertificateAuthoritySpec {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * CertificateAuthorityPermissionSpec defines the desired state of CertificateAuthorityPermission
  *
- * @schema CertificateAuthorityPermissionSpecDeletionPolicy
+ * @schema CertificateAuthorityPermissionSpec
  */
-export enum CertificateAuthorityPermissionSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * CertificateAuthorityPermissionParameters defines the desired state of an AWS CertificateAuthority.
- *
- * @schema CertificateAuthorityPermissionSpecForProvider
- */
-export interface CertificateAuthorityPermissionSpecForProvider {
+export interface CertificateAuthorityPermissionSpec {
   /**
-   * The actions that the specified AWS service principal can use.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema CertificateAuthorityPermissionSpecForProvider#actions
+   * @schema CertificateAuthorityPermissionSpec#deletionPolicy
    */
-  readonly actions?: string[];
+  readonly deletionPolicy?: CertificateAuthorityPermissionSpecDeletionPolicy;
 
   /**
-   * The Amazon Resource Name (ARN) of the private certificate authority (CA)that will be used to issue the certificate.
+   * CertificateAuthorityPermissionParameters defines the desired state of an AWS CertificateAuthority.
    *
-   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARN
+   * @schema CertificateAuthorityPermissionSpec#forProvider
    */
-  readonly certificateAuthorityARN?: string;
+  readonly forProvider: CertificateAuthorityPermissionSpecForProvider;
 
   /**
-   * CertificateAuthorityARNRef references an CertificateAuthority to retrieve its Arn
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARNRef
+   * @schema CertificateAuthorityPermissionSpec#providerConfigRef
    */
-  readonly certificateAuthorityARNRef?: CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef;
+  readonly providerConfigRef?: CertificateAuthorityPermissionSpecProviderConfigRef;
 
   /**
-   * CertificateAuthorityARNSelector selects a reference to an CertificateAuthority to retrieve its Arn
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARNSelector
+   * @schema CertificateAuthorityPermissionSpec#providerRef
    */
-  readonly certificateAuthorityARNSelector?: CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector;
+  readonly providerRef?: CertificateAuthorityPermissionSpecProviderRef;
 
   /**
-   * The AWS Service or identity
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema CertificateAuthorityPermissionSpecForProvider#principal
+   * @schema CertificateAuthorityPermissionSpec#writeConnectionSecretToRef
    */
-  readonly principal?: string;
-
-  /**
-   * Region is the region of CertificateAuthorityPermission.
-   *
-   * @schema CertificateAuthorityPermissionSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * Calling Account ID
-   *
-   * @schema CertificateAuthorityPermissionSpecForProvider#sourceAccount
-   */
-  readonly sourceAccount?: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema CertificateAuthorityPermissionSpecProviderConfigRef
- */
-export interface CertificateAuthorityPermissionSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema CertificateAuthorityPermissionSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema CertificateAuthorityPermissionSpecProviderRef
- */
-export interface CertificateAuthorityPermissionSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema CertificateAuthorityPermissionSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef
- */
-export interface CertificateAuthorityPermissionSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
+  readonly writeConnectionSecretToRef?: CertificateAuthorityPermissionSpecWriteConnectionSecretToRef;
 
 }
 
@@ -298,9 +177,9 @@ export interface CertificateAuthorityPermissionSpecWriteConnectionSecretToRef {
  */
 export enum CertificateAuthoritySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -413,39 +292,123 @@ export interface CertificateAuthoritySpecWriteConnectionSecretToRef {
 }
 
 /**
- * CertificateAuthorityARNRef references an CertificateAuthority to retrieve its Arn
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef
+ * @schema CertificateAuthorityPermissionSpecDeletionPolicy
  */
-export interface CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef {
+export enum CertificateAuthorityPermissionSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * CertificateAuthorityPermissionParameters defines the desired state of an AWS CertificateAuthority.
+ *
+ * @schema CertificateAuthorityPermissionSpecForProvider
+ */
+export interface CertificateAuthorityPermissionSpecForProvider {
+  /**
+   * The actions that the specified AWS service principal can use.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#actions
+   */
+  readonly actions?: string[];
+
+  /**
+   * The Amazon Resource Name (ARN) of the private certificate authority (CA)that will be used to issue the certificate.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARN
+   */
+  readonly certificateAuthorityARN?: string;
+
+  /**
+   * CertificateAuthorityARNRef references an CertificateAuthority to retrieve its Arn
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARNRef
+   */
+  readonly certificateAuthorityARNRef?: CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef;
+
+  /**
+   * CertificateAuthorityARNSelector selects a reference to an CertificateAuthority to retrieve its Arn
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#certificateAuthorityARNSelector
+   */
+  readonly certificateAuthorityARNSelector?: CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector;
+
+  /**
+   * The AWS Service or identity
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#principal
+   */
+  readonly principal?: string;
+
+  /**
+   * Region is the region of CertificateAuthorityPermission.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * Calling Account ID
+   *
+   * @schema CertificateAuthorityPermissionSpecForProvider#sourceAccount
+   */
+  readonly sourceAccount?: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema CertificateAuthorityPermissionSpecProviderConfigRef
+ */
+export interface CertificateAuthorityPermissionSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef#name
+   * @schema CertificateAuthorityPermissionSpecProviderConfigRef#name
    */
   readonly name: string;
 
 }
 
 /**
- * CertificateAuthorityARNSelector selects a reference to an CertificateAuthority to retrieve its Arn
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector
+ * @schema CertificateAuthorityPermissionSpecProviderRef
  */
-export interface CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector {
+export interface CertificateAuthorityPermissionSpecProviderRef {
   /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   * Name of the referenced object.
    *
-   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector#matchControllerRef
+   * @schema CertificateAuthorityPermissionSpecProviderRef#name
    */
-  readonly matchControllerRef?: boolean;
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef
+ */
+export interface CertificateAuthorityPermissionSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
 
   /**
-   * MatchLabels ensures an object with matching labels is selected.
+   * Namespace of the secret.
    *
-   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector#matchLabels
+   * @schema CertificateAuthorityPermissionSpecWriteConnectionSecretToRef#namespace
    */
-  readonly matchLabels?: { [key: string]: string };
+  readonly namespace: string;
 
 }
 
@@ -521,9 +484,9 @@ export interface CertificateAuthoritySpecForProviderRevocationConfiguration {
  */
 export enum CertificateAuthoritySpecForProviderStatus {
   /** ACTIVE */
-  ACTIVE = 'ACTIVE',
+  ACTIVE = "ACTIVE",
   /** DISABLED */
-  DISABLED = 'DISABLED',
+  DISABLED = "DISABLED",
 }
 
 /**
@@ -555,9 +518,46 @@ export interface CertificateAuthoritySpecForProviderTags {
  */
 export enum CertificateAuthoritySpecForProviderType {
   /** ROOT */
-  ROOT = 'ROOT',
+  ROOT = "ROOT",
   /** SUBORINATE */
-  SUBORINATE = 'SUBORINATE',
+  SUBORINATE = "SUBORINATE",
+}
+
+/**
+ * CertificateAuthorityARNRef references an CertificateAuthority to retrieve its Arn
+ *
+ * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef
+ */
+export interface CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * CertificateAuthorityARNSelector selects a reference to an CertificateAuthority to retrieve its Arn
+ *
+ * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector
+ */
+export interface CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema CertificateAuthorityPermissionSpecForProviderCertificateAuthorityArnSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
@@ -567,13 +567,13 @@ export enum CertificateAuthoritySpecForProviderType {
  */
 export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfigurationKeyAlgorithm {
   /** RSA_2048 */
-  RSA_2048 = 'RSA_2048',
+  RSA_2048 = "RSA_2048",
   /** EC_secp384r1 */
-  EC_SECP384R1 = 'EC_secp384r1',
+  EC_SECP384R1 = "EC_secp384r1",
   /** EC_prime256v1 */
-  EC_PRIME256V1 = 'EC_prime256v1',
+  EC_PRIME256V1 = "EC_prime256v1",
   /** RSA_4096 */
-  RSA_4096 = 'RSA_4096',
+  RSA_4096 = "RSA_4096",
 }
 
 /**
@@ -583,17 +583,17 @@ export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfiguration
  */
 export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfigurationSigningAlgorithm {
   /** SHA512WITHECDSA */
-  SHA512_WITHECDSA = 'SHA512WITHECDSA',
+  SHA512_WITHECDSA = "SHA512WITHECDSA",
   /** SHA256WITHECDSA */
-  SHA256_WITHECDSA = 'SHA256WITHECDSA',
+  SHA256_WITHECDSA = "SHA256WITHECDSA",
   /** SHA384WITHECDSA */
-  SHA384_WITHECDSA = 'SHA384WITHECDSA',
+  SHA384_WITHECDSA = "SHA384WITHECDSA",
   /** SHA512WITHRSA */
-  SHA512_WITHRSA = 'SHA512WITHRSA',
+  SHA512_WITHRSA = "SHA512WITHRSA",
   /** SHA256WITHRSA */
-  SHA256_WITHRSA = 'SHA256WITHRSA',
+  SHA256_WITHRSA = "SHA256WITHRSA",
   /** SHA384WITHRSA */
-  SHA384_WITHRSA = 'SHA384WITHRSA',
+  SHA384_WITHRSA = "SHA384WITHRSA",
 }
 
 /**

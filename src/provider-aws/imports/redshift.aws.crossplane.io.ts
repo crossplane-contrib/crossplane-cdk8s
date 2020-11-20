@@ -93,9 +93,9 @@ export interface ClusterSpec {
  */
 export enum ClusterSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -475,9 +475,9 @@ export interface ClusterSpecForProviderClusterSecurityGroupSelector {
  */
 export enum ClusterSpecForProviderClusterType {
   /** multi-node */
-  MULTI_NODE = 'multi-node',
+  MULTI_NODE = "multi-node",
   /** single-node */
-  SINGLE_NODE = 'single-node',
+  SINGLE_NODE = "single-node",
 }
 
 /**

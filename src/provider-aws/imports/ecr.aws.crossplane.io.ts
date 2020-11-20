@@ -93,9 +93,9 @@ export interface RepositorySpec {
  */
 export enum RepositorySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -208,9 +208,9 @@ export interface RepositorySpecForProviderImageScanningConfiguration {
  */
 export enum RepositorySpecForProviderImageTagMutability {
   /** MUTABLE */
-  MUTABLE = 'MUTABLE',
+  MUTABLE = "MUTABLE",
   /** IMMUTABLE */
-  IMMUTABLE = 'IMMUTABLE',
+  IMMUTABLE = "IMMUTABLE",
 }
 
 /**

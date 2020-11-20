@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * An ELB is a managed resource that represents an AWS Classic Load Balancer.
- *
- * @schema ELB
- */
-export class Elb extends ApiObject {
-  /**
-   * Defines a "ELB" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ElbProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ELB',
-      apiVersion: 'elasticloadbalancing.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * An ELBAttachment is a managed resource that represents attachment of an AWS Classic Load Balancer and an AWS EC2 instance.
  *
  * @schema ELBAttachment
@@ -49,19 +28,20 @@ export class ElbAttachment extends ApiObject {
  *
  * @schema ELB
  */
-export interface ElbProps {
+export class Elb extends ApiObject {
   /**
-   * @schema ELB#metadata
+   * Defines a "ELB" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * An ELBSpec defines the desired state of an ELB.
-   *
-   * @schema ELB#spec
-   */
-  readonly spec: ElbSpec;
-
+  public constructor(scope: Construct, id: string, props: ElbProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ELB',
+      apiVersion: 'elasticloadbalancing.aws.crossplane.io/v1alpha1',
+    });
+  }
 }
 
 /**
@@ -85,45 +65,22 @@ export interface ElbAttachmentProps {
 }
 
 /**
- * An ELBSpec defines the desired state of an ELB.
+ * An ELB is a managed resource that represents an AWS Classic Load Balancer.
  *
- * @schema ElbSpec
+ * @schema ELB
  */
-export interface ElbSpec {
+export interface ElbProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema ElbSpec#deletionPolicy
+   * @schema ELB#metadata
    */
-  readonly deletionPolicy?: ElbSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * ELBParameters define the desired state of an AWS ELB.
+   * An ELBSpec defines the desired state of an ELB.
    *
-   * @schema ElbSpec#forProvider
+   * @schema ELB#spec
    */
-  readonly forProvider: ElbSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema ElbSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: ElbSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema ElbSpec#providerRef
-   */
-  readonly providerRef?: ElbSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema ElbSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: ElbSpecWriteConnectionSecretToRef;
+  readonly spec: ElbSpec;
 
 }
 
@@ -171,15 +128,165 @@ export interface ElbAttachmentSpec {
 }
 
 /**
+ * An ELBSpec defines the desired state of an ELB.
+ *
+ * @schema ElbSpec
+ */
+export interface ElbSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema ElbSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: ElbSpecDeletionPolicy;
+
+  /**
+   * ELBParameters define the desired state of an AWS ELB.
+   *
+   * @schema ElbSpec#forProvider
+   */
+  readonly forProvider: ElbSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema ElbSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: ElbSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema ElbSpec#providerRef
+   */
+  readonly providerRef?: ElbSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema ElbSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: ElbSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema ElbAttachmentSpecDeletionPolicy
+ */
+export enum ElbAttachmentSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * ELBAttachmentParameters define the desired state of an AWS ELBAttachment.
+ *
+ * @schema ElbAttachmentSpecForProvider
+ */
+export interface ElbAttachmentSpecForProvider {
+  /**
+   * Name of the Elastic Load Balancer to which the instances will attach.
+   *
+   * @schema ElbAttachmentSpecForProvider#elbName
+   */
+  readonly elbName?: string;
+
+  /**
+   * ELBNameRef references an ELB to and retrieves its external-name.
+   *
+   * @schema ElbAttachmentSpecForProvider#elbNameRef
+   */
+  readonly elbNameRef?: ElbAttachmentSpecForProviderElbNameRef;
+
+  /**
+   * ELBNameSelector selects a reference to a ELB to and retrieves its external-name.
+   *
+   * @schema ElbAttachmentSpecForProvider#elbNameSelector
+   */
+  readonly elbNameSelector?: ElbAttachmentSpecForProviderElbNameSelector;
+
+  /**
+   * List of identities of the instances to be attached.
+   *
+   * @schema ElbAttachmentSpecForProvider#instanceId
+   */
+  readonly instanceId: string;
+
+  /**
+   * Region is the region you'd like your ELBAttachment to be in.
+   *
+   * @schema ElbAttachmentSpecForProvider#region
+   */
+  readonly region: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema ElbAttachmentSpecProviderConfigRef
+ */
+export interface ElbAttachmentSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ElbAttachmentSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema ElbAttachmentSpecProviderRef
+ */
+export interface ElbAttachmentSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ElbAttachmentSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema ElbAttachmentSpecWriteConnectionSecretToRef
+ */
+export interface ElbAttachmentSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema ElbAttachmentSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ElbAttachmentSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
  * @schema ElbSpecDeletionPolicy
  */
 export enum ElbSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -327,109 +434,39 @@ export interface ElbSpecWriteConnectionSecretToRef {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * ELBNameRef references an ELB to and retrieves its external-name.
  *
- * @schema ElbAttachmentSpecDeletionPolicy
+ * @schema ElbAttachmentSpecForProviderElbNameRef
  */
-export enum ElbAttachmentSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * ELBAttachmentParameters define the desired state of an AWS ELBAttachment.
- *
- * @schema ElbAttachmentSpecForProvider
- */
-export interface ElbAttachmentSpecForProvider {
-  /**
-   * Name of the Elastic Load Balancer to which the instances will attach.
-   *
-   * @schema ElbAttachmentSpecForProvider#elbName
-   */
-  readonly elbName?: string;
-
-  /**
-   * ELBNameRef references an ELB to and retrieves its external-name.
-   *
-   * @schema ElbAttachmentSpecForProvider#elbNameRef
-   */
-  readonly elbNameRef?: ElbAttachmentSpecForProviderElbNameRef;
-
-  /**
-   * ELBNameSelector selects a reference to a ELB to and retrieves its external-name.
-   *
-   * @schema ElbAttachmentSpecForProvider#elbNameSelector
-   */
-  readonly elbNameSelector?: ElbAttachmentSpecForProviderElbNameSelector;
-
-  /**
-   * List of identities of the instances to be attached.
-   *
-   * @schema ElbAttachmentSpecForProvider#instanceId
-   */
-  readonly instanceId: string;
-
-  /**
-   * Region is the region you'd like your ELBAttachment to be in.
-   *
-   * @schema ElbAttachmentSpecForProvider#region
-   */
-  readonly region: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema ElbAttachmentSpecProviderConfigRef
- */
-export interface ElbAttachmentSpecProviderConfigRef {
+export interface ElbAttachmentSpecForProviderElbNameRef {
   /**
    * Name of the referenced object.
    *
-   * @schema ElbAttachmentSpecProviderConfigRef#name
+   * @schema ElbAttachmentSpecForProviderElbNameRef#name
    */
   readonly name: string;
 
 }
 
 /**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ * ELBNameSelector selects a reference to a ELB to and retrieves its external-name.
  *
- * @schema ElbAttachmentSpecProviderRef
+ * @schema ElbAttachmentSpecForProviderElbNameSelector
  */
-export interface ElbAttachmentSpecProviderRef {
+export interface ElbAttachmentSpecForProviderElbNameSelector {
   /**
-   * Name of the referenced object.
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema ElbAttachmentSpecProviderRef#name
+   * @schema ElbAttachmentSpecForProviderElbNameSelector#matchControllerRef
    */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema ElbAttachmentSpecWriteConnectionSecretToRef
- */
-export interface ElbAttachmentSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema ElbAttachmentSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
+  readonly matchControllerRef?: boolean;
 
   /**
-   * Namespace of the secret.
+   * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema ElbAttachmentSpecWriteConnectionSecretToRef#namespace
+   * @schema ElbAttachmentSpecForProviderElbNameSelector#matchLabels
    */
-  readonly namespace: string;
+  readonly matchLabels?: { [key: string]: string };
 
 }
 
@@ -612,43 +649,6 @@ export interface ElbSpecForProviderTags {
    * @schema ElbSpecForProviderTags#value
    */
   readonly value?: string;
-
-}
-
-/**
- * ELBNameRef references an ELB to and retrieves its external-name.
- *
- * @schema ElbAttachmentSpecForProviderElbNameRef
- */
-export interface ElbAttachmentSpecForProviderElbNameRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ElbAttachmentSpecForProviderElbNameRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ELBNameSelector selects a reference to a ELB to and retrieves its external-name.
- *
- * @schema ElbAttachmentSpecForProviderElbNameSelector
- */
-export interface ElbAttachmentSpecForProviderElbNameSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema ElbAttachmentSpecForProviderElbNameSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema ElbAttachmentSpecForProviderElbNameSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
 
 }
 

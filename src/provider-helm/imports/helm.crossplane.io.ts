@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * A ProviderConfig configures a Helm 'provider', i.e. a connection to a particular
- *
- * @schema ProviderConfig
- */
-export class ProviderConfig extends ApiObject {
-  /**
-   * Defines a "ProviderConfig" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ProviderConfig',
-      apiVersion: 'helm.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
  *
  * @schema ProviderConfigUsage
@@ -70,19 +49,20 @@ export class Release extends ApiObject {
  *
  * @schema ProviderConfig
  */
-export interface ProviderConfigProps {
+export class ProviderConfig extends ApiObject {
   /**
-   * @schema ProviderConfig#metadata
+   * Defines a "ProviderConfig" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * A ProviderConfigSpec defines the desired state of a Provider.
-   *
-   * @schema ProviderConfig#spec
-   */
-  readonly spec: ProviderConfigSpec;
-
+  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ProviderConfig',
+      apiVersion: 'helm.crossplane.io/v1alpha1',
+    });
+  }
 }
 
 /**
@@ -133,17 +113,22 @@ export interface ReleaseProps {
 }
 
 /**
- * A ProviderConfigSpec defines the desired state of a Provider.
+ * A ProviderConfig configures a Helm 'provider', i.e. a connection to a particular
  *
- * @schema ProviderConfigSpec
+ * @schema ProviderConfig
  */
-export interface ProviderConfigSpec {
+export interface ProviderConfigProps {
   /**
-   * Credentials required to authenticate to this provider.
-   *
-   * @schema ProviderConfigSpec#credentials
+   * @schema ProviderConfig#metadata
    */
-  readonly credentials: ProviderConfigSpecCredentials;
+  readonly metadata?: any;
+
+  /**
+   * A ProviderConfigSpec defines the desired state of a Provider.
+   *
+   * @schema ProviderConfig#spec
+   */
+  readonly spec: ProviderConfigSpec;
 
 }
 
@@ -249,24 +234,17 @@ export interface ReleaseSpec {
 }
 
 /**
- * Credentials required to authenticate to this provider.
+ * A ProviderConfigSpec defines the desired state of a Provider.
  *
- * @schema ProviderConfigSpecCredentials
+ * @schema ProviderConfigSpec
  */
-export interface ProviderConfigSpecCredentials {
+export interface ProviderConfigSpec {
   /**
-   * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
+   * Credentials required to authenticate to this provider.
    *
-   * @schema ProviderConfigSpecCredentials#secretRef
+   * @schema ProviderConfigSpec#credentials
    */
-  readonly secretRef?: ProviderConfigSpecCredentialsSecretRef;
-
-  /**
-   * Source of the provider credentials.
-   *
-   * @schema ProviderConfigSpecCredentials#source
-   */
-  readonly source: ProviderConfigSpecCredentialsSource;
+  readonly credentials: ProviderConfigSpecCredentials;
 
 }
 
@@ -277,9 +255,9 @@ export interface ProviderConfigSpecCredentials {
  */
 export enum ReleaseSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -375,46 +353,25 @@ export interface ReleaseSpecWriteConnectionSecretToRef {
 }
 
 /**
- * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
+ * Credentials required to authenticate to this provider.
  *
- * @schema ProviderConfigSpecCredentialsSecretRef
+ * @schema ProviderConfigSpecCredentials
  */
-export interface ProviderConfigSpecCredentialsSecretRef {
+export interface ProviderConfigSpecCredentials {
   /**
-   * The key to select.
+   * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
    *
-   * @schema ProviderConfigSpecCredentialsSecretRef#key
+   * @schema ProviderConfigSpecCredentials#secretRef
    */
-  readonly key: string;
-
-  /**
-   * Name of the secret.
-   *
-   * @schema ProviderConfigSpecCredentialsSecretRef#name
-   */
-  readonly name: string;
+  readonly secretRef?: ProviderConfigSpecCredentialsSecretRef;
 
   /**
-   * Namespace of the secret.
+   * Source of the provider credentials.
    *
-   * @schema ProviderConfigSpecCredentialsSecretRef#namespace
+   * @schema ProviderConfigSpecCredentials#source
    */
-  readonly namespace: string;
+  readonly source: ProviderConfigSpecCredentialsSource;
 
-}
-
-/**
- * Source of the provider credentials.
- *
- * @schema ProviderConfigSpecCredentialsSource
- */
-export enum ProviderConfigSpecCredentialsSource {
-  /** None */
-  NONE = 'None',
-  /** Secret */
-  SECRET = 'Secret',
-  /** InjectedIdentity */
-  INJECTED_IDENTITY = 'InjectedIdentity',
 }
 
 /**
@@ -514,6 +471,49 @@ export interface ReleaseSpecForProviderValuesFrom {
    */
   readonly secretKeyRef?: ReleaseSpecForProviderValuesFromSecretKeyRef;
 
+}
+
+/**
+ * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
+ *
+ * @schema ProviderConfigSpecCredentialsSecretRef
+ */
+export interface ProviderConfigSpecCredentialsSecretRef {
+  /**
+   * The key to select.
+   *
+   * @schema ProviderConfigSpecCredentialsSecretRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the secret.
+   *
+   * @schema ProviderConfigSpecCredentialsSecretRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ProviderConfigSpecCredentialsSecretRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * Source of the provider credentials.
+ *
+ * @schema ProviderConfigSpecCredentialsSource
+ */
+export enum ProviderConfigSpecCredentialsSource {
+  /** None */
+  NONE = "None",
+  /** Secret */
+  SECRET = "Secret",
+  /** InjectedIdentity */
+  INJECTED_IDENTITY = "InjectedIdentity",
 }
 
 /**

@@ -3,84 +3,42 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * An IAMRolePolicyAttachment is a managed resource that represents an AWS IAM Role policy attachment.
+ * An IAMRole is a managed resource that represents an AWS IAM Role.
  *
- * @schema IAMRolePolicyAttachment
+ * @schema IAMRole
  */
-export class IamRolePolicyAttachment extends ApiObject {
+export class IamRole extends ApiObject {
   /**
-   * Defines a "IAMRolePolicyAttachment" API object
+   * Defines a "IAMRole" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: IamRolePolicyAttachmentProps) {
+  public constructor(scope: Construct, id: string, props: IamRoleProps) {
     super(scope, id, {
       ...props,
-      kind: 'IAMRolePolicyAttachment',
+      kind: 'IAMRole',
       apiVersion: 'identity.aws.crossplane.io/v1beta1',
     });
   }
 }
 
 /**
- * An IAMGroupPolicyAttachment is a managed resource that represents an AWS IAM Group policy attachment.
+ * An IAMAccessKey is a managed resource that represents an the Access Key for an AWS IAM User.
  *
- * @schema IAMGroupPolicyAttachment
+ * @schema IAMAccessKey
  */
-export class IamGroupPolicyAttachment extends ApiObject {
+export class IamAccessKey extends ApiObject {
   /**
-   * Defines a "IAMGroupPolicyAttachment" API object
+   * Defines a "IAMAccessKey" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: IamGroupPolicyAttachmentProps) {
+  public constructor(scope: Construct, id: string, props: IamAccessKeyProps) {
     super(scope, id, {
       ...props,
-      kind: 'IAMGroupPolicyAttachment',
-      apiVersion: 'identity.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * An IAMUser is a managed resource that represents an AWS IAM IAMUser.
- *
- * @schema IAMUser
- */
-export class IamUser extends ApiObject {
-  /**
-   * Defines a "IAMUser" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: IamUserProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'IAMUser',
-      apiVersion: 'identity.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * An IAMUserPolicyAttachment is a managed resource that represents an AWS IAM User policy attachment.
- *
- * @schema IAMUserPolicyAttachment
- */
-export class IamUserPolicyAttachment extends ApiObject {
-  /**
-   * Defines a "IAMUserPolicyAttachment" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: IamUserPolicyAttachmentProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'IAMUserPolicyAttachment',
+      kind: 'IAMAccessKey',
       apiVersion: 'identity.aws.crossplane.io/v1alpha1',
     });
   }
@@ -108,21 +66,63 @@ export class IamGroup extends ApiObject {
 }
 
 /**
- * An IAMPolicy is a managed resource that represents an AWS IAM IAMPolicy.
+ * An IAMGroupPolicyAttachment is a managed resource that represents an AWS IAM Group policy attachment.
  *
- * @schema IAMPolicy
+ * @schema IAMGroupPolicyAttachment
  */
-export class IamPolicy extends ApiObject {
+export class IamGroupPolicyAttachment extends ApiObject {
   /**
-   * Defines a "IAMPolicy" API object
+   * Defines a "IAMGroupPolicyAttachment" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: IamPolicyProps) {
+  public constructor(scope: Construct, id: string, props: IamGroupPolicyAttachmentProps) {
     super(scope, id, {
       ...props,
-      kind: 'IAMPolicy',
+      kind: 'IAMGroupPolicyAttachment',
+      apiVersion: 'identity.aws.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * An IAMUserPolicyAttachment is a managed resource that represents an AWS IAM User policy attachment.
+ *
+ * @schema IAMUserPolicyAttachment
+ */
+export class IamUserPolicyAttachment extends ApiObject {
+  /**
+   * Defines a "IAMUserPolicyAttachment" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: IamUserPolicyAttachmentProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'IAMUserPolicyAttachment',
+      apiVersion: 'identity.aws.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * An IAMUser is a managed resource that represents an AWS IAM IAMUser.
+ *
+ * @schema IAMUser
+ */
+export class IamUser extends ApiObject {
+  /**
+   * Defines a "IAMUser" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: IamUserProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'IAMUser',
       apiVersion: 'identity.aws.crossplane.io/v1alpha1',
     });
   }
@@ -150,43 +150,22 @@ export class IamGroupUserMembership extends ApiObject {
 }
 
 /**
- * An IAMAccessKey is a managed resource that represents an the Access Key for an AWS IAM User.
+ * An IAMPolicy is a managed resource that represents an AWS IAM IAMPolicy.
  *
- * @schema IAMAccessKey
+ * @schema IAMPolicy
  */
-export class IamAccessKey extends ApiObject {
+export class IamPolicy extends ApiObject {
   /**
-   * Defines a "IAMAccessKey" API object
+   * Defines a "IAMPolicy" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: IamAccessKeyProps) {
+  public constructor(scope: Construct, id: string, props: IamPolicyProps) {
     super(scope, id, {
       ...props,
-      kind: 'IAMAccessKey',
+      kind: 'IAMPolicy',
       apiVersion: 'identity.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * An IAMRole is a managed resource that represents an AWS IAM Role.
- *
- * @schema IAMRole
- */
-export class IamRole extends ApiObject {
-  /**
-   * Defines a "IAMRole" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: IamRoleProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'IAMRole',
-      apiVersion: 'identity.aws.crossplane.io/v1beta1',
     });
   }
 }
@@ -196,138 +175,39 @@ export class IamRole extends ApiObject {
  *
  * @schema IAMRolePolicyAttachment
  */
-export interface IamRolePolicyAttachmentProps {
+export class IamRolePolicyAttachment extends ApiObject {
   /**
-   * @schema IAMRolePolicyAttachment#metadata
+   * Defines a "IAMRolePolicyAttachment" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * An IAMRolePolicyAttachmentSpec defines the desired state of an IAMRolePolicyAttachment.
-   *
-   * @schema IAMRolePolicyAttachment#spec
-   */
-  readonly spec: IamRolePolicyAttachmentSpec;
-
+  public constructor(scope: Construct, id: string, props: IamRolePolicyAttachmentProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'IAMRolePolicyAttachment',
+      apiVersion: 'identity.aws.crossplane.io/v1beta1',
+    });
+  }
 }
 
 /**
- * An IAMGroupPolicyAttachment is a managed resource that represents an AWS IAM Group policy attachment.
+ * An IAMRole is a managed resource that represents an AWS IAM Role.
  *
- * @schema IAMGroupPolicyAttachment
+ * @schema IAMRole
  */
-export interface IamGroupPolicyAttachmentProps {
+export interface IamRoleProps {
   /**
-   * @schema IAMGroupPolicyAttachment#metadata
+   * @schema IAMRole#metadata
    */
   readonly metadata?: any;
 
   /**
-   * An IAMGroupPolicyAttachmentSpec defines the desired state of an IAMGroupPolicyAttachment.
+   * An IAMRoleSpec defines the desired state of an IAMRole.
    *
-   * @schema IAMGroupPolicyAttachment#spec
+   * @schema IAMRole#spec
    */
-  readonly spec: IamGroupPolicyAttachmentSpec;
-
-}
-
-/**
- * An IAMUser is a managed resource that represents an AWS IAM IAMUser.
- *
- * @schema IAMUser
- */
-export interface IamUserProps {
-  /**
-   * @schema IAMUser#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An IAMUserSpec defines the desired state of an IAM User.
-   *
-   * @schema IAMUser#spec
-   */
-  readonly spec: IamUserSpec;
-
-}
-
-/**
- * An IAMUserPolicyAttachment is a managed resource that represents an AWS IAM User policy attachment.
- *
- * @schema IAMUserPolicyAttachment
- */
-export interface IamUserPolicyAttachmentProps {
-  /**
-   * @schema IAMUserPolicyAttachment#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An IAMUserPolicyAttachmentSpec defines the desired state of an IAMUserPolicyAttachment.
-   *
-   * @schema IAMUserPolicyAttachment#spec
-   */
-  readonly spec: IamUserPolicyAttachmentSpec;
-
-}
-
-/**
- * An IAMGroup is a managed resource that represents an AWS IAM IAMGroup. An IAMUser is a managed resource that represents an AWS IAM IAMUser.
- *
- * @schema IAMGroup
- */
-export interface IamGroupProps {
-  /**
-   * @schema IAMGroup#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An IAMGroupSpec defines the desired state of an IAM Group.
-   *
-   * @schema IAMGroup#spec
-   */
-  readonly spec: IamGroupSpec;
-
-}
-
-/**
- * An IAMPolicy is a managed resource that represents an AWS IAM IAMPolicy.
- *
- * @schema IAMPolicy
- */
-export interface IamPolicyProps {
-  /**
-   * @schema IAMPolicy#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An IAMPolicySpec defines the desired state of an IAMPolicy.
-   *
-   * @schema IAMPolicy#spec
-   */
-  readonly spec: IamPolicySpec;
-
-}
-
-/**
- * An IAMGroupUserMembership is a managed resource that represents an AWS IAM User group membership.
- *
- * @schema IAMGroupUserMembership
- */
-export interface IamGroupUserMembershipProps {
-  /**
-   * @schema IAMGroupUserMembership#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An IAMGroupUserMembershipSpec defines the desired state of an IAMGroupUserMembership.
-   *
-   * @schema IAMGroupUserMembership#spec
-   */
-  readonly spec: IamGroupUserMembershipSpec;
+  readonly spec: IamRoleSpec;
 
 }
 
@@ -352,366 +232,142 @@ export interface IamAccessKeyProps {
 }
 
 /**
- * An IAMRole is a managed resource that represents an AWS IAM Role.
+ * An IAMGroup is a managed resource that represents an AWS IAM IAMGroup. An IAMUser is a managed resource that represents an AWS IAM IAMUser.
  *
- * @schema IAMRole
+ * @schema IAMGroup
  */
-export interface IamRoleProps {
+export interface IamGroupProps {
   /**
-   * @schema IAMRole#metadata
+   * @schema IAMGroup#metadata
    */
   readonly metadata?: any;
 
   /**
-   * An IAMRoleSpec defines the desired state of an IAMRole.
+   * An IAMGroupSpec defines the desired state of an IAM Group.
    *
-   * @schema IAMRole#spec
+   * @schema IAMGroup#spec
    */
-  readonly spec: IamRoleSpec;
+  readonly spec: IamGroupSpec;
 
 }
 
 /**
- * An IAMRolePolicyAttachmentSpec defines the desired state of an IAMRolePolicyAttachment.
+ * An IAMGroupPolicyAttachment is a managed resource that represents an AWS IAM Group policy attachment.
  *
- * @schema IamRolePolicyAttachmentSpec
+ * @schema IAMGroupPolicyAttachment
  */
-export interface IamRolePolicyAttachmentSpec {
+export interface IamGroupPolicyAttachmentProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamRolePolicyAttachmentSpec#deletionPolicy
+   * @schema IAMGroupPolicyAttachment#metadata
    */
-  readonly deletionPolicy?: IamRolePolicyAttachmentSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMRolePolicyAttachmentParameters define the desired state of an AWS IAM Role policy attachment.
+   * An IAMGroupPolicyAttachmentSpec defines the desired state of an IAMGroupPolicyAttachment.
    *
-   * @schema IamRolePolicyAttachmentSpec#forProvider
+   * @schema IAMGroupPolicyAttachment#spec
    */
-  readonly forProvider: IamRolePolicyAttachmentSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamRolePolicyAttachmentSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamRolePolicyAttachmentSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamRolePolicyAttachmentSpec#providerRef
-   */
-  readonly providerRef?: IamRolePolicyAttachmentSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamRolePolicyAttachmentSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamRolePolicyAttachmentSpecWriteConnectionSecretToRef;
+  readonly spec: IamGroupPolicyAttachmentSpec;
 
 }
 
 /**
- * An IAMGroupPolicyAttachmentSpec defines the desired state of an IAMGroupPolicyAttachment.
+ * An IAMUserPolicyAttachment is a managed resource that represents an AWS IAM User policy attachment.
  *
- * @schema IamGroupPolicyAttachmentSpec
+ * @schema IAMUserPolicyAttachment
  */
-export interface IamGroupPolicyAttachmentSpec {
+export interface IamUserPolicyAttachmentProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamGroupPolicyAttachmentSpec#deletionPolicy
+   * @schema IAMUserPolicyAttachment#metadata
    */
-  readonly deletionPolicy?: IamGroupPolicyAttachmentSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMGroupPolicyAttachmentParameters define the desired state of an AWS IAMGroupPolicyAttachment.
+   * An IAMUserPolicyAttachmentSpec defines the desired state of an IAMUserPolicyAttachment.
    *
-   * @schema IamGroupPolicyAttachmentSpec#forProvider
+   * @schema IAMUserPolicyAttachment#spec
    */
-  readonly forProvider: IamGroupPolicyAttachmentSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamGroupPolicyAttachmentSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamGroupPolicyAttachmentSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamGroupPolicyAttachmentSpec#providerRef
-   */
-  readonly providerRef?: IamGroupPolicyAttachmentSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamGroupPolicyAttachmentSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamGroupPolicyAttachmentSpecWriteConnectionSecretToRef;
+  readonly spec: IamUserPolicyAttachmentSpec;
 
 }
 
 /**
- * An IAMUserSpec defines the desired state of an IAM User.
+ * An IAMUser is a managed resource that represents an AWS IAM IAMUser.
  *
- * @schema IamUserSpec
+ * @schema IAMUser
  */
-export interface IamUserSpec {
+export interface IamUserProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamUserSpec#deletionPolicy
+   * @schema IAMUser#metadata
    */
-  readonly deletionPolicy?: IamUserSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMUserParameters define the desired state of an AWS IAM User.
+   * An IAMUserSpec defines the desired state of an IAM User.
    *
-   * @schema IamUserSpec#forProvider
+   * @schema IAMUser#spec
    */
-  readonly forProvider: IamUserSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamUserSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamUserSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamUserSpec#providerRef
-   */
-  readonly providerRef?: IamUserSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamUserSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamUserSpecWriteConnectionSecretToRef;
+  readonly spec: IamUserSpec;
 
 }
 
 /**
- * An IAMUserPolicyAttachmentSpec defines the desired state of an IAMUserPolicyAttachment.
+ * An IAMGroupUserMembership is a managed resource that represents an AWS IAM User group membership.
  *
- * @schema IamUserPolicyAttachmentSpec
+ * @schema IAMGroupUserMembership
  */
-export interface IamUserPolicyAttachmentSpec {
+export interface IamGroupUserMembershipProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamUserPolicyAttachmentSpec#deletionPolicy
+   * @schema IAMGroupUserMembership#metadata
    */
-  readonly deletionPolicy?: IamUserPolicyAttachmentSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMUserPolicyAttachmentParameters define the desired state of an AWS IAMUserPolicyAttachment.
+   * An IAMGroupUserMembershipSpec defines the desired state of an IAMGroupUserMembership.
    *
-   * @schema IamUserPolicyAttachmentSpec#forProvider
+   * @schema IAMGroupUserMembership#spec
    */
-  readonly forProvider: IamUserPolicyAttachmentSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamUserPolicyAttachmentSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamUserPolicyAttachmentSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamUserPolicyAttachmentSpec#providerRef
-   */
-  readonly providerRef?: IamUserPolicyAttachmentSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamUserPolicyAttachmentSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamUserPolicyAttachmentSpecWriteConnectionSecretToRef;
+  readonly spec: IamGroupUserMembershipSpec;
 
 }
 
 /**
- * An IAMGroupSpec defines the desired state of an IAM Group.
+ * An IAMPolicy is a managed resource that represents an AWS IAM IAMPolicy.
  *
- * @schema IamGroupSpec
+ * @schema IAMPolicy
  */
-export interface IamGroupSpec {
+export interface IamPolicyProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamGroupSpec#deletionPolicy
+   * @schema IAMPolicy#metadata
    */
-  readonly deletionPolicy?: IamGroupSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMGroupParameters define the desired state of an AWS IAM Group.
+   * An IAMPolicySpec defines the desired state of an IAMPolicy.
    *
-   * @schema IamGroupSpec#forProvider
+   * @schema IAMPolicy#spec
    */
-  readonly forProvider?: IamGroupSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamGroupSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamGroupSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamGroupSpec#providerRef
-   */
-  readonly providerRef?: IamGroupSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamGroupSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamGroupSpecWriteConnectionSecretToRef;
+  readonly spec: IamPolicySpec;
 
 }
 
 /**
- * An IAMPolicySpec defines the desired state of an IAMPolicy.
+ * An IAMRolePolicyAttachment is a managed resource that represents an AWS IAM Role policy attachment.
  *
- * @schema IamPolicySpec
+ * @schema IAMRolePolicyAttachment
  */
-export interface IamPolicySpec {
+export interface IamRolePolicyAttachmentProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamPolicySpec#deletionPolicy
+   * @schema IAMRolePolicyAttachment#metadata
    */
-  readonly deletionPolicy?: IamPolicySpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * IAMPolicyParameters define the desired state of an AWS IAM Policy.
+   * An IAMRolePolicyAttachmentSpec defines the desired state of an IAMRolePolicyAttachment.
    *
-   * @schema IamPolicySpec#forProvider
+   * @schema IAMRolePolicyAttachment#spec
    */
-  readonly forProvider: IamPolicySpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamPolicySpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamPolicySpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamPolicySpec#providerRef
-   */
-  readonly providerRef?: IamPolicySpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamPolicySpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamPolicySpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * An IAMGroupUserMembershipSpec defines the desired state of an IAMGroupUserMembership.
- *
- * @schema IamGroupUserMembershipSpec
- */
-export interface IamGroupUserMembershipSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamGroupUserMembershipSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: IamGroupUserMembershipSpecDeletionPolicy;
-
-  /**
-   * IAMGroupUserMembershipParameters define the desired state of an AWS IAMGroupUserMembership.
-   *
-   * @schema IamGroupUserMembershipSpec#forProvider
-   */
-  readonly forProvider: IamGroupUserMembershipSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamGroupUserMembershipSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamGroupUserMembershipSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamGroupUserMembershipSpec#providerRef
-   */
-  readonly providerRef?: IamGroupUserMembershipSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamGroupUserMembershipSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamGroupUserMembershipSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * An IAMAccessKeySpec defines the desired state of an IAM Access Key.
- *
- * @schema IamAccessKeySpec
- */
-export interface IamAccessKeySpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IamAccessKeySpec#deletionPolicy
-   */
-  readonly deletionPolicy?: IamAccessKeySpecDeletionPolicy;
-
-  /**
-   * IAMAccessKeyParameters define the desired state of an AWS IAM Access Key.
-   *
-   * @schema IamAccessKeySpec#forProvider
-   */
-  readonly forProvider: IamAccessKeySpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IamAccessKeySpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IamAccessKeySpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IamAccessKeySpec#providerRef
-   */
-  readonly providerRef?: IamAccessKeySpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IamAccessKeySpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IamAccessKeySpecWriteConnectionSecretToRef;
+  readonly spec: IamRolePolicyAttachmentSpec;
 
 }
 
@@ -759,77 +415,421 @@ export interface IamRoleSpec {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * An IAMAccessKeySpec defines the desired state of an IAM Access Key.
  *
- * @schema IamRolePolicyAttachmentSpecDeletionPolicy
+ * @schema IamAccessKeySpec
  */
-export enum IamRolePolicyAttachmentSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
+export interface IamAccessKeySpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamAccessKeySpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamAccessKeySpecDeletionPolicy;
+
+  /**
+   * IAMAccessKeyParameters define the desired state of an AWS IAM Access Key.
+   *
+   * @schema IamAccessKeySpec#forProvider
+   */
+  readonly forProvider: IamAccessKeySpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamAccessKeySpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamAccessKeySpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamAccessKeySpec#providerRef
+   */
+  readonly providerRef?: IamAccessKeySpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamAccessKeySpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamAccessKeySpecWriteConnectionSecretToRef;
+
 }
 
 /**
- * IAMRolePolicyAttachmentParameters define the desired state of an AWS IAM Role policy attachment.
+ * An IAMGroupSpec defines the desired state of an IAM Group.
  *
- * @schema IamRolePolicyAttachmentSpecForProvider
+ * @schema IamGroupSpec
  */
-export interface IamRolePolicyAttachmentSpecForProvider {
+export interface IamGroupSpec {
   /**
-   * PolicyARN is the Amazon Resource Name (ARN) of the IAM policy you want to attach.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#policyArn
+   * @schema IamGroupSpec#deletionPolicy
    */
-  readonly policyArn?: string;
+  readonly deletionPolicy?: IamGroupSpecDeletionPolicy;
 
   /**
-   * PolicyARNRef references an IAMPolicy to retrieve its Policy ARN.
+   * IAMGroupParameters define the desired state of an AWS IAM Group.
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#policyArnRef
+   * @schema IamGroupSpec#forProvider
    */
-  readonly policyArnRef?: IamRolePolicyAttachmentSpecForProviderPolicyArnRef;
+  readonly forProvider?: IamGroupSpecForProvider;
 
   /**
-   * PolicyARNSelector selects a reference to an IAMPolicy to retrieve its Policy ARN
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#policyArnSelector
+   * @schema IamGroupSpec#providerConfigRef
    */
-  readonly policyArnSelector?: IamRolePolicyAttachmentSpecForProviderPolicyArnSelector;
+  readonly providerConfigRef?: IamGroupSpecProviderConfigRef;
 
   /**
-   * RoleName presents the name of the IAM role.
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#roleName
+   * @schema IamGroupSpec#providerRef
    */
-  readonly roleName?: string;
+  readonly providerRef?: IamGroupSpecProviderRef;
 
   /**
-   * RoleNameRef references an IAMRole to retrieve its Name
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#roleNameRef
+   * @schema IamGroupSpec#writeConnectionSecretToRef
    */
-  readonly roleNameRef?: IamRolePolicyAttachmentSpecForProviderRoleNameRef;
+  readonly writeConnectionSecretToRef?: IamGroupSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMGroupPolicyAttachmentSpec defines the desired state of an IAMGroupPolicyAttachment.
+ *
+ * @schema IamGroupPolicyAttachmentSpec
+ */
+export interface IamGroupPolicyAttachmentSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamGroupPolicyAttachmentSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamGroupPolicyAttachmentSpecDeletionPolicy;
 
   /**
-   * RoleNameSelector selects a reference to an IAMRole to retrieve its Name
+   * IAMGroupPolicyAttachmentParameters define the desired state of an AWS IAMGroupPolicyAttachment.
    *
-   * @schema IamRolePolicyAttachmentSpecForProvider#roleNameSelector
+   * @schema IamGroupPolicyAttachmentSpec#forProvider
    */
-  readonly roleNameSelector?: IamRolePolicyAttachmentSpecForProviderRoleNameSelector;
+  readonly forProvider: IamGroupPolicyAttachmentSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamGroupPolicyAttachmentSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamGroupPolicyAttachmentSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamGroupPolicyAttachmentSpec#providerRef
+   */
+  readonly providerRef?: IamGroupPolicyAttachmentSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamGroupPolicyAttachmentSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamGroupPolicyAttachmentSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMUserPolicyAttachmentSpec defines the desired state of an IAMUserPolicyAttachment.
+ *
+ * @schema IamUserPolicyAttachmentSpec
+ */
+export interface IamUserPolicyAttachmentSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamUserPolicyAttachmentSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamUserPolicyAttachmentSpecDeletionPolicy;
+
+  /**
+   * IAMUserPolicyAttachmentParameters define the desired state of an AWS IAMUserPolicyAttachment.
+   *
+   * @schema IamUserPolicyAttachmentSpec#forProvider
+   */
+  readonly forProvider: IamUserPolicyAttachmentSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamUserPolicyAttachmentSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamUserPolicyAttachmentSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamUserPolicyAttachmentSpec#providerRef
+   */
+  readonly providerRef?: IamUserPolicyAttachmentSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamUserPolicyAttachmentSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamUserPolicyAttachmentSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMUserSpec defines the desired state of an IAM User.
+ *
+ * @schema IamUserSpec
+ */
+export interface IamUserSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamUserSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamUserSpecDeletionPolicy;
+
+  /**
+   * IAMUserParameters define the desired state of an AWS IAM User.
+   *
+   * @schema IamUserSpec#forProvider
+   */
+  readonly forProvider: IamUserSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamUserSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamUserSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamUserSpec#providerRef
+   */
+  readonly providerRef?: IamUserSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamUserSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamUserSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMGroupUserMembershipSpec defines the desired state of an IAMGroupUserMembership.
+ *
+ * @schema IamGroupUserMembershipSpec
+ */
+export interface IamGroupUserMembershipSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamGroupUserMembershipSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamGroupUserMembershipSpecDeletionPolicy;
+
+  /**
+   * IAMGroupUserMembershipParameters define the desired state of an AWS IAMGroupUserMembership.
+   *
+   * @schema IamGroupUserMembershipSpec#forProvider
+   */
+  readonly forProvider: IamGroupUserMembershipSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamGroupUserMembershipSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamGroupUserMembershipSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamGroupUserMembershipSpec#providerRef
+   */
+  readonly providerRef?: IamGroupUserMembershipSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamGroupUserMembershipSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamGroupUserMembershipSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMPolicySpec defines the desired state of an IAMPolicy.
+ *
+ * @schema IamPolicySpec
+ */
+export interface IamPolicySpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamPolicySpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamPolicySpecDeletionPolicy;
+
+  /**
+   * IAMPolicyParameters define the desired state of an AWS IAM Policy.
+   *
+   * @schema IamPolicySpec#forProvider
+   */
+  readonly forProvider: IamPolicySpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamPolicySpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamPolicySpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamPolicySpec#providerRef
+   */
+  readonly providerRef?: IamPolicySpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamPolicySpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamPolicySpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * An IAMRolePolicyAttachmentSpec defines the desired state of an IAMRolePolicyAttachment.
+ *
+ * @schema IamRolePolicyAttachmentSpec
+ */
+export interface IamRolePolicyAttachmentSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IamRolePolicyAttachmentSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IamRolePolicyAttachmentSpecDeletionPolicy;
+
+  /**
+   * IAMRolePolicyAttachmentParameters define the desired state of an AWS IAM Role policy attachment.
+   *
+   * @schema IamRolePolicyAttachmentSpec#forProvider
+   */
+  readonly forProvider: IamRolePolicyAttachmentSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IamRolePolicyAttachmentSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IamRolePolicyAttachmentSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IamRolePolicyAttachmentSpec#providerRef
+   */
+  readonly providerRef?: IamRolePolicyAttachmentSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IamRolePolicyAttachmentSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IamRolePolicyAttachmentSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema IamRoleSpecDeletionPolicy
+ */
+export enum IamRoleSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * IAMRoleParameters define the desired state of an AWS IAM Role.
+ *
+ * @schema IamRoleSpecForProvider
+ */
+export interface IamRoleSpecForProvider {
+  /**
+   * AssumeRolePolicyDocument is the the trust relationship policy document that grants an entity permission to assume the role.
+   *
+   * @schema IamRoleSpecForProvider#assumeRolePolicyDocument
+   */
+  readonly assumeRolePolicyDocument: string;
+
+  /**
+   * Description is a description of the role.
+   *
+   * @schema IamRoleSpecForProvider#description
+   */
+  readonly description?: string;
+
+  /**
+   * MaxSessionDuration is the duration (in seconds) that you want to set for the specified role. The default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Default: 3600
+   *
+   * @schema IamRoleSpecForProvider#maxSessionDuration
+   */
+  readonly maxSessionDuration?: number;
+
+  /**
+   * Path is the path to the role. Default: /
+   *
+   * @schema IamRoleSpecForProvider#path
+   */
+  readonly path?: string;
+
+  /**
+   * PermissionsBoundary is the ARN of the policy that is used to set the permissions boundary for the role.
+   *
+   * @schema IamRoleSpecForProvider#permissionsBoundary
+   */
+  readonly permissionsBoundary?: string;
+
+  /**
+   * Tags. For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
+   *
+   * @schema IamRoleSpecForProvider#tags
+   */
+  readonly tags?: IamRoleSpecForProviderTags[];
 
 }
 
 /**
  * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
  *
- * @schema IamRolePolicyAttachmentSpecProviderConfigRef
+ * @schema IamRoleSpecProviderConfigRef
  */
-export interface IamRolePolicyAttachmentSpecProviderConfigRef {
+export interface IamRoleSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamRolePolicyAttachmentSpecProviderConfigRef#name
+   * @schema IamRoleSpecProviderConfigRef#name
    */
   readonly name: string;
 
@@ -838,13 +838,13 @@ export interface IamRolePolicyAttachmentSpecProviderConfigRef {
 /**
  * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema IamRolePolicyAttachmentSpecProviderRef
+ * @schema IamRoleSpecProviderRef
  */
-export interface IamRolePolicyAttachmentSpecProviderRef {
+export interface IamRoleSpecProviderRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamRolePolicyAttachmentSpecProviderRef#name
+   * @schema IamRoleSpecProviderRef#name
    */
   readonly name: string;
 
@@ -853,20 +853,199 @@ export interface IamRolePolicyAttachmentSpecProviderRef {
 /**
  * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
  *
- * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef
+ * @schema IamRoleSpecWriteConnectionSecretToRef
  */
-export interface IamRolePolicyAttachmentSpecWriteConnectionSecretToRef {
+export interface IamRoleSpecWriteConnectionSecretToRef {
   /**
    * Name of the secret.
    *
-   * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef#name
+   * @schema IamRoleSpecWriteConnectionSecretToRef#name
    */
   readonly name: string;
 
   /**
    * Namespace of the secret.
    *
-   * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef#namespace
+   * @schema IamRoleSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema IamAccessKeySpecDeletionPolicy
+ */
+export enum IamAccessKeySpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * IAMAccessKeyParameters define the desired state of an AWS IAM Access Key.
+ *
+ * @schema IamAccessKeySpecForProvider
+ */
+export interface IamAccessKeySpecForProvider {
+  /**
+   * The current status of this IAMAccessKey on the AWS Must be either Active or Inactive.
+   *
+   * @schema IamAccessKeySpecForProvider#accessKeyStatus
+   */
+  readonly accessKeyStatus?: IamAccessKeySpecForProviderAccessKeyStatus;
+
+  /**
+   * IAMUsername contains the name of the IAMUser.
+   *
+   * @schema IamAccessKeySpecForProvider#userName
+   */
+  readonly userName?: string;
+
+  /**
+   * IAMUsernameRef references to an IAMUser to retrieve its userName
+   *
+   * @schema IamAccessKeySpecForProvider#userNameRef
+   */
+  readonly userNameRef?: IamAccessKeySpecForProviderUserNameRef;
+
+  /**
+   * IAMUsernameSelector selects a reference to an IAMUser to retrieve its userName
+   *
+   * @schema IamAccessKeySpecForProvider#userNameSelector
+   */
+  readonly userNameSelector?: IamAccessKeySpecForProviderUserNameSelector;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema IamAccessKeySpecProviderConfigRef
+ */
+export interface IamAccessKeySpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IamAccessKeySpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema IamAccessKeySpecProviderRef
+ */
+export interface IamAccessKeySpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IamAccessKeySpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema IamAccessKeySpecWriteConnectionSecretToRef
+ */
+export interface IamAccessKeySpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema IamAccessKeySpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema IamAccessKeySpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema IamGroupSpecDeletionPolicy
+ */
+export enum IamGroupSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * IAMGroupParameters define the desired state of an AWS IAM Group.
+ *
+ * @schema IamGroupSpecForProvider
+ */
+export interface IamGroupSpecForProvider {
+  /**
+   * The path for the group name.
+   *
+   * @schema IamGroupSpecForProvider#path
+   */
+  readonly path?: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema IamGroupSpecProviderConfigRef
+ */
+export interface IamGroupSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IamGroupSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema IamGroupSpecProviderRef
+ */
+export interface IamGroupSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IamGroupSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema IamGroupSpecWriteConnectionSecretToRef
+ */
+export interface IamGroupSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema IamGroupSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema IamGroupSpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
 
@@ -879,9 +1058,9 @@ export interface IamRolePolicyAttachmentSpecWriteConnectionSecretToRef {
  */
 export enum IamGroupPolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -989,106 +1168,13 @@ export interface IamGroupPolicyAttachmentSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema IamUserSpecDeletionPolicy
- */
-export enum IamUserSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * IAMUserParameters define the desired state of an AWS IAM User.
- *
- * @schema IamUserSpecForProvider
- */
-export interface IamUserSpecForProvider {
-  /**
-   * The path for the user name.
-   *
-   * @schema IamUserSpecForProvider#path
-   */
-  readonly path?: string;
-
-  /**
-   * The ARN of the policy that is used to set the permissions boundary for the user.
-   *
-   * @schema IamUserSpecForProvider#permissionsBoundary
-   */
-  readonly permissionsBoundary?: string;
-
-  /**
-   * A list of tags that you want to attach to the newly created user.
-   *
-   * @schema IamUserSpecForProvider#tags
-   */
-  readonly tags?: IamUserSpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema IamUserSpecProviderConfigRef
- */
-export interface IamUserSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IamUserSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema IamUserSpecProviderRef
- */
-export interface IamUserSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IamUserSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema IamUserSpecWriteConnectionSecretToRef
- */
-export interface IamUserSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema IamUserSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema IamUserSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
  * @schema IamUserPolicyAttachmentSpecDeletionPolicy
  */
 export enum IamUserPolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -1196,40 +1282,54 @@ export interface IamUserPolicyAttachmentSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema IamGroupSpecDeletionPolicy
+ * @schema IamUserSpecDeletionPolicy
  */
-export enum IamGroupSpecDeletionPolicy {
+export enum IamUserSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
- * IAMGroupParameters define the desired state of an AWS IAM Group.
+ * IAMUserParameters define the desired state of an AWS IAM User.
  *
- * @schema IamGroupSpecForProvider
+ * @schema IamUserSpecForProvider
  */
-export interface IamGroupSpecForProvider {
+export interface IamUserSpecForProvider {
   /**
-   * The path for the group name.
+   * The path for the user name.
    *
-   * @schema IamGroupSpecForProvider#path
+   * @schema IamUserSpecForProvider#path
    */
   readonly path?: string;
+
+  /**
+   * The ARN of the policy that is used to set the permissions boundary for the user.
+   *
+   * @schema IamUserSpecForProvider#permissionsBoundary
+   */
+  readonly permissionsBoundary?: string;
+
+  /**
+   * A list of tags that you want to attach to the newly created user.
+   *
+   * @schema IamUserSpecForProvider#tags
+   */
+  readonly tags?: IamUserSpecForProviderTags[];
 
 }
 
 /**
  * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
  *
- * @schema IamGroupSpecProviderConfigRef
+ * @schema IamUserSpecProviderConfigRef
  */
-export interface IamGroupSpecProviderConfigRef {
+export interface IamUserSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamGroupSpecProviderConfigRef#name
+   * @schema IamUserSpecProviderConfigRef#name
    */
   readonly name: string;
 
@@ -1238,13 +1338,13 @@ export interface IamGroupSpecProviderConfigRef {
 /**
  * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema IamGroupSpecProviderRef
+ * @schema IamUserSpecProviderRef
  */
-export interface IamGroupSpecProviderRef {
+export interface IamUserSpecProviderRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamGroupSpecProviderRef#name
+   * @schema IamUserSpecProviderRef#name
    */
   readonly name: string;
 
@@ -1253,120 +1353,20 @@ export interface IamGroupSpecProviderRef {
 /**
  * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
  *
- * @schema IamGroupSpecWriteConnectionSecretToRef
+ * @schema IamUserSpecWriteConnectionSecretToRef
  */
-export interface IamGroupSpecWriteConnectionSecretToRef {
+export interface IamUserSpecWriteConnectionSecretToRef {
   /**
    * Name of the secret.
    *
-   * @schema IamGroupSpecWriteConnectionSecretToRef#name
+   * @schema IamUserSpecWriteConnectionSecretToRef#name
    */
   readonly name: string;
 
   /**
    * Namespace of the secret.
    *
-   * @schema IamGroupSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema IamPolicySpecDeletionPolicy
- */
-export enum IamPolicySpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * IAMPolicyParameters define the desired state of an AWS IAM Policy.
- *
- * @schema IamPolicySpecForProvider
- */
-export interface IamPolicySpecForProvider {
-  /**
-   * A description of the policy.
-   *
-   * @schema IamPolicySpecForProvider#description
-   */
-  readonly description?: string;
-
-  /**
-   * The JSON policy document that is the content for the policy.
-   *
-   * @schema IamPolicySpecForProvider#document
-   */
-  readonly document: string;
-
-  /**
-   * The name of the policy.
-   *
-   * @schema IamPolicySpecForProvider#name
-   */
-  readonly name: string;
-
-  /**
-   * The path to the policy.
-   *
-   * @schema IamPolicySpecForProvider#path
-   */
-  readonly path?: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema IamPolicySpecProviderConfigRef
- */
-export interface IamPolicySpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IamPolicySpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema IamPolicySpecProviderRef
- */
-export interface IamPolicySpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IamPolicySpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema IamPolicySpecWriteConnectionSecretToRef
- */
-export interface IamPolicySpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema IamPolicySpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema IamPolicySpecWriteConnectionSecretToRef#namespace
+   * @schema IamUserSpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
 
@@ -1379,9 +1379,9 @@ export interface IamPolicySpecWriteConnectionSecretToRef {
  */
 export enum IamGroupUserMembershipSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -1489,61 +1489,61 @@ export interface IamGroupUserMembershipSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema IamAccessKeySpecDeletionPolicy
+ * @schema IamPolicySpecDeletionPolicy
  */
-export enum IamAccessKeySpecDeletionPolicy {
+export enum IamPolicySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
- * IAMAccessKeyParameters define the desired state of an AWS IAM Access Key.
+ * IAMPolicyParameters define the desired state of an AWS IAM Policy.
  *
- * @schema IamAccessKeySpecForProvider
+ * @schema IamPolicySpecForProvider
  */
-export interface IamAccessKeySpecForProvider {
+export interface IamPolicySpecForProvider {
   /**
-   * The current status of this IAMAccessKey on the AWS Must be either Active or Inactive.
+   * A description of the policy.
    *
-   * @schema IamAccessKeySpecForProvider#accessKeyStatus
+   * @schema IamPolicySpecForProvider#description
    */
-  readonly accessKeyStatus?: IamAccessKeySpecForProviderAccessKeyStatus;
+  readonly description?: string;
 
   /**
-   * IAMUsername contains the name of the IAMUser.
+   * The JSON policy document that is the content for the policy.
    *
-   * @schema IamAccessKeySpecForProvider#userName
+   * @schema IamPolicySpecForProvider#document
    */
-  readonly userName?: string;
+  readonly document: string;
 
   /**
-   * IAMUsernameRef references to an IAMUser to retrieve its userName
+   * The name of the policy.
    *
-   * @schema IamAccessKeySpecForProvider#userNameRef
+   * @schema IamPolicySpecForProvider#name
    */
-  readonly userNameRef?: IamAccessKeySpecForProviderUserNameRef;
+  readonly name: string;
 
   /**
-   * IAMUsernameSelector selects a reference to an IAMUser to retrieve its userName
+   * The path to the policy.
    *
-   * @schema IamAccessKeySpecForProvider#userNameSelector
+   * @schema IamPolicySpecForProvider#path
    */
-  readonly userNameSelector?: IamAccessKeySpecForProviderUserNameSelector;
+  readonly path?: string;
 
 }
 
 /**
  * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
  *
- * @schema IamAccessKeySpecProviderConfigRef
+ * @schema IamPolicySpecProviderConfigRef
  */
-export interface IamAccessKeySpecProviderConfigRef {
+export interface IamPolicySpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamAccessKeySpecProviderConfigRef#name
+   * @schema IamPolicySpecProviderConfigRef#name
    */
   readonly name: string;
 
@@ -1552,13 +1552,13 @@ export interface IamAccessKeySpecProviderConfigRef {
 /**
  * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema IamAccessKeySpecProviderRef
+ * @schema IamPolicySpecProviderRef
  */
-export interface IamAccessKeySpecProviderRef {
+export interface IamPolicySpecProviderRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamAccessKeySpecProviderRef#name
+   * @schema IamPolicySpecProviderRef#name
    */
   readonly name: string;
 
@@ -1567,20 +1567,20 @@ export interface IamAccessKeySpecProviderRef {
 /**
  * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
  *
- * @schema IamAccessKeySpecWriteConnectionSecretToRef
+ * @schema IamPolicySpecWriteConnectionSecretToRef
  */
-export interface IamAccessKeySpecWriteConnectionSecretToRef {
+export interface IamPolicySpecWriteConnectionSecretToRef {
   /**
    * Name of the secret.
    *
-   * @schema IamAccessKeySpecWriteConnectionSecretToRef#name
+   * @schema IamPolicySpecWriteConnectionSecretToRef#name
    */
   readonly name: string;
 
   /**
    * Namespace of the secret.
    *
-   * @schema IamAccessKeySpecWriteConnectionSecretToRef#namespace
+   * @schema IamPolicySpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
 
@@ -1589,75 +1589,75 @@ export interface IamAccessKeySpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema IamRoleSpecDeletionPolicy
+ * @schema IamRolePolicyAttachmentSpecDeletionPolicy
  */
-export enum IamRoleSpecDeletionPolicy {
+export enum IamRolePolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
- * IAMRoleParameters define the desired state of an AWS IAM Role.
+ * IAMRolePolicyAttachmentParameters define the desired state of an AWS IAM Role policy attachment.
  *
- * @schema IamRoleSpecForProvider
+ * @schema IamRolePolicyAttachmentSpecForProvider
  */
-export interface IamRoleSpecForProvider {
+export interface IamRolePolicyAttachmentSpecForProvider {
   /**
-   * AssumeRolePolicyDocument is the the trust relationship policy document that grants an entity permission to assume the role.
+   * PolicyARN is the Amazon Resource Name (ARN) of the IAM policy you want to attach.
    *
-   * @schema IamRoleSpecForProvider#assumeRolePolicyDocument
+   * @schema IamRolePolicyAttachmentSpecForProvider#policyArn
    */
-  readonly assumeRolePolicyDocument: string;
+  readonly policyArn?: string;
 
   /**
-   * Description is a description of the role.
+   * PolicyARNRef references an IAMPolicy to retrieve its Policy ARN.
    *
-   * @schema IamRoleSpecForProvider#description
+   * @schema IamRolePolicyAttachmentSpecForProvider#policyArnRef
    */
-  readonly description?: string;
+  readonly policyArnRef?: IamRolePolicyAttachmentSpecForProviderPolicyArnRef;
 
   /**
-   * MaxSessionDuration is the duration (in seconds) that you want to set for the specified role. The default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Default: 3600
+   * PolicyARNSelector selects a reference to an IAMPolicy to retrieve its Policy ARN
    *
-   * @schema IamRoleSpecForProvider#maxSessionDuration
+   * @schema IamRolePolicyAttachmentSpecForProvider#policyArnSelector
    */
-  readonly maxSessionDuration?: number;
+  readonly policyArnSelector?: IamRolePolicyAttachmentSpecForProviderPolicyArnSelector;
 
   /**
-   * Path is the path to the role. Default: /
+   * RoleName presents the name of the IAM role.
    *
-   * @schema IamRoleSpecForProvider#path
+   * @schema IamRolePolicyAttachmentSpecForProvider#roleName
    */
-  readonly path?: string;
+  readonly roleName?: string;
 
   /**
-   * PermissionsBoundary is the ARN of the policy that is used to set the permissions boundary for the role.
+   * RoleNameRef references an IAMRole to retrieve its Name
    *
-   * @schema IamRoleSpecForProvider#permissionsBoundary
+   * @schema IamRolePolicyAttachmentSpecForProvider#roleNameRef
    */
-  readonly permissionsBoundary?: string;
+  readonly roleNameRef?: IamRolePolicyAttachmentSpecForProviderRoleNameRef;
 
   /**
-   * Tags. For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
+   * RoleNameSelector selects a reference to an IAMRole to retrieve its Name
    *
-   * @schema IamRoleSpecForProvider#tags
+   * @schema IamRolePolicyAttachmentSpecForProvider#roleNameSelector
    */
-  readonly tags?: IamRoleSpecForProviderTags[];
+  readonly roleNameSelector?: IamRolePolicyAttachmentSpecForProviderRoleNameSelector;
 
 }
 
 /**
  * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
  *
- * @schema IamRoleSpecProviderConfigRef
+ * @schema IamRolePolicyAttachmentSpecProviderConfigRef
  */
-export interface IamRoleSpecProviderConfigRef {
+export interface IamRolePolicyAttachmentSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamRoleSpecProviderConfigRef#name
+   * @schema IamRolePolicyAttachmentSpecProviderConfigRef#name
    */
   readonly name: string;
 
@@ -1666,13 +1666,13 @@ export interface IamRoleSpecProviderConfigRef {
 /**
  * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema IamRoleSpecProviderRef
+ * @schema IamRolePolicyAttachmentSpecProviderRef
  */
-export interface IamRoleSpecProviderRef {
+export interface IamRolePolicyAttachmentSpecProviderRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamRoleSpecProviderRef#name
+   * @schema IamRolePolicyAttachmentSpecProviderRef#name
    */
   readonly name: string;
 
@@ -1681,94 +1681,92 @@ export interface IamRoleSpecProviderRef {
 /**
  * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
  *
- * @schema IamRoleSpecWriteConnectionSecretToRef
+ * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef
  */
-export interface IamRoleSpecWriteConnectionSecretToRef {
+export interface IamRolePolicyAttachmentSpecWriteConnectionSecretToRef {
   /**
    * Name of the secret.
    *
-   * @schema IamRoleSpecWriteConnectionSecretToRef#name
+   * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef#name
    */
   readonly name: string;
 
   /**
    * Namespace of the secret.
    *
-   * @schema IamRoleSpecWriteConnectionSecretToRef#namespace
+   * @schema IamRolePolicyAttachmentSpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
 
 }
 
 /**
- * PolicyARNRef references an IAMPolicy to retrieve its Policy ARN.
+ * Tag represents user-provided metadata that can be associated with a IAM role. For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
  *
- * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnRef
+ * @schema IamRoleSpecForProviderTags
  */
-export interface IamRolePolicyAttachmentSpecForProviderPolicyArnRef {
+export interface IamRoleSpecForProviderTags {
+  /**
+   * The key name that can be used to look up or retrieve the associated value. For example, Department or Cost Center are common choices.
+   *
+   * @schema IamRoleSpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values. 
+ AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
+   *
+   * @schema IamRoleSpecForProviderTags#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * The current status of this IAMAccessKey on the AWS Must be either Active or Inactive.
+ *
+ * @schema IamAccessKeySpecForProviderAccessKeyStatus
+ */
+export enum IamAccessKeySpecForProviderAccessKeyStatus {
+  /** Active */
+  ACTIVE = "Active",
+  /** Inactive */
+  INACTIVE = "Inactive",
+}
+
+/**
+ * IAMUsernameRef references to an IAMUser to retrieve its userName
+ *
+ * @schema IamAccessKeySpecForProviderUserNameRef
+ */
+export interface IamAccessKeySpecForProviderUserNameRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnRef#name
+   * @schema IamAccessKeySpecForProviderUserNameRef#name
    */
   readonly name: string;
 
 }
 
 /**
- * PolicyARNSelector selects a reference to an IAMPolicy to retrieve its Policy ARN
+ * IAMUsernameSelector selects a reference to an IAMUser to retrieve its userName
  *
- * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector
+ * @schema IamAccessKeySpecForProviderUserNameSelector
  */
-export interface IamRolePolicyAttachmentSpecForProviderPolicyArnSelector {
+export interface IamAccessKeySpecForProviderUserNameSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector#matchControllerRef
+   * @schema IamAccessKeySpecForProviderUserNameSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * RoleNameRef references an IAMRole to retrieve its Name
- *
- * @schema IamRolePolicyAttachmentSpecForProviderRoleNameRef
- */
-export interface IamRolePolicyAttachmentSpecForProviderRoleNameRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * RoleNameSelector selects a reference to an IAMRole to retrieve its Name
- *
- * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector
- */
-export interface IamRolePolicyAttachmentSpecForProviderRoleNameSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector#matchLabels
+   * @schema IamAccessKeySpecForProviderUserNameSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
@@ -1849,28 +1847,6 @@ export interface IamGroupPolicyAttachmentSpecForProviderPolicyArnSelector {
 }
 
 /**
- * Tag represents a tag attached to a v1alpha1.User
- *
- * @schema IamUserSpecForProviderTags
- */
-export interface IamUserSpecForProviderTags {
-  /**
-   * The key name that can be used to look up or retrieve the associated value.
-   *
-   * @schema IamUserSpecForProviderTags#key
-   */
-  readonly key: string;
-
-  /**
-   * The value associated with this tag.
-   *
-   * @schema IamUserSpecForProviderTags#value
-   */
-  readonly value: string;
-
-}
-
-/**
  * PolicyARNRef references an IAMPolicy to retrieve its Policy ARN.
  *
  * @schema IamUserPolicyAttachmentSpecForProviderPolicyArnRef
@@ -1941,6 +1917,28 @@ export interface IamUserPolicyAttachmentSpecForProviderUserNameSelector {
    * @schema IamUserPolicyAttachmentSpecForProviderUserNameSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Tag represents a tag attached to a v1alpha1.User
+ *
+ * @schema IamUserSpecForProviderTags
+ */
+export interface IamUserSpecForProviderTags {
+  /**
+   * The key name that can be used to look up or retrieve the associated value.
+   *
+   * @schema IamUserSpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * The value associated with this tag.
+   *
+   * @schema IamUserSpecForProviderTags#value
+   */
+  readonly value: string;
 
 }
 
@@ -2019,74 +2017,76 @@ export interface IamGroupUserMembershipSpecForProviderUserNameSelector {
 }
 
 /**
- * The current status of this IAMAccessKey on the AWS Must be either Active or Inactive.
+ * PolicyARNRef references an IAMPolicy to retrieve its Policy ARN.
  *
- * @schema IamAccessKeySpecForProviderAccessKeyStatus
+ * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnRef
  */
-export enum IamAccessKeySpecForProviderAccessKeyStatus {
-  /** Active */
-  ACTIVE = 'Active',
-  /** Inactive */
-  INACTIVE = 'Inactive',
-}
-
-/**
- * IAMUsernameRef references to an IAMUser to retrieve its userName
- *
- * @schema IamAccessKeySpecForProviderUserNameRef
- */
-export interface IamAccessKeySpecForProviderUserNameRef {
+export interface IamRolePolicyAttachmentSpecForProviderPolicyArnRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IamAccessKeySpecForProviderUserNameRef#name
+   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnRef#name
    */
   readonly name: string;
 
 }
 
 /**
- * IAMUsernameSelector selects a reference to an IAMUser to retrieve its userName
+ * PolicyARNSelector selects a reference to an IAMPolicy to retrieve its Policy ARN
  *
- * @schema IamAccessKeySpecForProviderUserNameSelector
+ * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector
  */
-export interface IamAccessKeySpecForProviderUserNameSelector {
+export interface IamRolePolicyAttachmentSpecForProviderPolicyArnSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema IamAccessKeySpecForProviderUserNameSelector#matchControllerRef
+   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema IamAccessKeySpecForProviderUserNameSelector#matchLabels
+   * @schema IamRolePolicyAttachmentSpecForProviderPolicyArnSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
- * Tag represents user-provided metadata that can be associated with a IAM role. For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User Guide.
+ * RoleNameRef references an IAMRole to retrieve its Name
  *
- * @schema IamRoleSpecForProviderTags
+ * @schema IamRolePolicyAttachmentSpecForProviderRoleNameRef
  */
-export interface IamRoleSpecForProviderTags {
+export interface IamRolePolicyAttachmentSpecForProviderRoleNameRef {
   /**
-   * The key name that can be used to look up or retrieve the associated value. For example, Department or Cost Center are common choices.
+   * Name of the referenced object.
    *
-   * @schema IamRoleSpecForProviderTags#key
+   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameRef#name
    */
-  readonly key: string;
+  readonly name: string;
+
+}
+
+/**
+ * RoleNameSelector selects a reference to an IAMRole to retrieve its Name
+ *
+ * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector
+ */
+export interface IamRolePolicyAttachmentSpecForProviderRoleNameSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
 
   /**
-   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.
- AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
+   * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema IamRoleSpecForProviderTags#value
+   * @schema IamRolePolicyAttachmentSpecForProviderRoleNameSelector#matchLabels
    */
-  readonly value?: string;
+  readonly matchLabels?: { [key: string]: string };
 
 }
 

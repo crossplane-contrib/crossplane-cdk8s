@@ -6,6 +6,7 @@ cd ${repo_root}
 import(){
   output="${repo_root}/src/$2/imports"
   rm -rf ${output}
+  mkdir -p ${output}
 
   node ~/go/src/github.com/awslabs/cdk8s/packages/cdk8s-cli/lib/cli/index.js import -l typescript -o ${output} $1
 }

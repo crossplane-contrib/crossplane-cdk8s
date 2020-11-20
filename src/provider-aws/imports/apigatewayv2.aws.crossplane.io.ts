@@ -3,63 +3,63 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * Authorizer is the Schema for the Authorizers API
+ * APIMapping is the Schema for the APIMappings API
  *
- * @schema Authorizer
+ * @schema APIMapping
  */
-export class Authorizer extends ApiObject {
+export class ApiMapping extends ApiObject {
   /**
-   * Defines a "Authorizer" API object
+   * Defines a "APIMapping" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: AuthorizerProps = {}) {
+  public constructor(scope: Construct, id: string, props: ApiMappingProps = {}) {
     super(scope, id, {
       ...props,
-      kind: 'Authorizer',
+      kind: 'APIMapping',
       apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
     });
   }
 }
 
 /**
- * Deployment is the Schema for the Deployments API
+ * Integration is the Schema for the Integrations API
  *
- * @schema Deployment
+ * @schema Integration
  */
-export class Deployment extends ApiObject {
+export class Integration extends ApiObject {
   /**
-   * Defines a "Deployment" API object
+   * Defines a "Integration" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: DeploymentProps = {}) {
+  public constructor(scope: Construct, id: string, props: IntegrationProps = {}) {
     super(scope, id, {
       ...props,
-      kind: 'Deployment',
+      kind: 'Integration',
       apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
     });
   }
 }
 
 /**
- * Stage is the Schema for the Stages API
+ * Model is the Schema for the Models API
  *
- * @schema Stage
+ * @schema Model
  */
-export class Stage extends ApiObject {
+export class Model extends ApiObject {
   /**
-   * Defines a "Stage" API object
+   * Defines a "Model" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: StageProps = {}) {
+  public constructor(scope: Construct, id: string, props: ModelProps = {}) {
     super(scope, id, {
       ...props,
-      kind: 'Stage',
+      kind: 'Model',
       apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
     });
   }
@@ -108,63 +108,21 @@ export class RouteResponse extends ApiObject {
 }
 
 /**
- * IntegrationResponse is the Schema for the IntegrationResponses API
+ * DomainName is the Schema for the DomainNames API
  *
- * @schema IntegrationResponse
+ * @schema DomainName
  */
-export class IntegrationResponse extends ApiObject {
+export class DomainName extends ApiObject {
   /**
-   * Defines a "IntegrationResponse" API object
+   * Defines a "DomainName" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: IntegrationResponseProps = {}) {
+  public constructor(scope: Construct, id: string, props: DomainNameProps = {}) {
     super(scope, id, {
       ...props,
-      kind: 'IntegrationResponse',
-      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * APIMapping is the Schema for the APIMappings API
- *
- * @schema APIMapping
- */
-export class ApiMapping extends ApiObject {
-  /**
-   * Defines a "APIMapping" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ApiMappingProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'APIMapping',
-      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * Model is the Schema for the Models API
- *
- * @schema Model
- */
-export class Model extends ApiObject {
-  /**
-   * Defines a "Model" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ModelProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'Model',
+      kind: 'DomainName',
       apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
     });
   }
@@ -192,42 +150,21 @@ export class Route extends ApiObject {
 }
 
 /**
- * DomainName is the Schema for the DomainNames API
+ * Authorizer is the Schema for the Authorizers API
  *
- * @schema DomainName
+ * @schema Authorizer
  */
-export class DomainName extends ApiObject {
+export class Authorizer extends ApiObject {
   /**
-   * Defines a "DomainName" API object
+   * Defines a "Authorizer" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: DomainNameProps = {}) {
+  public constructor(scope: Construct, id: string, props: AuthorizerProps = {}) {
     super(scope, id, {
       ...props,
-      kind: 'DomainName',
-      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * Integration is the Schema for the Integrations API
- *
- * @schema Integration
- */
-export class Integration extends ApiObject {
-  /**
-   * Defines a "Integration" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: IntegrationProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'Integration',
+      kind: 'Authorizer',
       apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
     });
   }
@@ -255,43 +192,24 @@ export class VpcLink extends ApiObject {
 }
 
 /**
- * Authorizer is the Schema for the Authorizers API
+ * IntegrationResponse is the Schema for the IntegrationResponses API
  *
- * @schema Authorizer
+ * @schema IntegrationResponse
  */
-export interface AuthorizerProps {
+export class IntegrationResponse extends ApiObject {
   /**
-   * @schema Authorizer#metadata
+   * Defines a "IntegrationResponse" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * AuthorizerSpec defines the desired state of Authorizer
-   *
-   * @schema Authorizer#spec
-   */
-  readonly spec?: AuthorizerSpec;
-
-}
-
-/**
- * Deployment is the Schema for the Deployments API
- *
- * @schema Deployment
- */
-export interface DeploymentProps {
-  /**
-   * @schema Deployment#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * DeploymentSpec defines the desired state of Deployment
-   *
-   * @schema Deployment#spec
-   */
-  readonly spec?: DeploymentSpec;
-
+  public constructor(scope: Construct, id: string, props: IntegrationResponseProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'IntegrationResponse',
+      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
+    });
+  }
 }
 
 /**
@@ -299,18 +217,100 @@ export interface DeploymentProps {
  *
  * @schema Stage
  */
-export interface StageProps {
+export class Stage extends ApiObject {
   /**
-   * @schema Stage#metadata
+   * Defines a "Stage" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: StageProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Stage',
+      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * Deployment is the Schema for the Deployments API
+ *
+ * @schema Deployment
+ */
+export class Deployment extends ApiObject {
+  /**
+   * Defines a "Deployment" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: DeploymentProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Deployment',
+      apiVersion: 'apigatewayv2.aws.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * APIMapping is the Schema for the APIMappings API
+ *
+ * @schema APIMapping
+ */
+export interface ApiMappingProps {
+  /**
+   * @schema APIMapping#metadata
    */
   readonly metadata?: any;
 
   /**
-   * StageSpec defines the desired state of Stage
+   * APIMappingSpec defines the desired state of APIMapping
    *
-   * @schema Stage#spec
+   * @schema APIMapping#spec
    */
-  readonly spec?: StageSpec;
+  readonly spec?: ApiMappingSpec;
+
+}
+
+/**
+ * Integration is the Schema for the Integrations API
+ *
+ * @schema Integration
+ */
+export interface IntegrationProps {
+  /**
+   * @schema Integration#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * IntegrationSpec defines the desired state of Integration
+   *
+   * @schema Integration#spec
+   */
+  readonly spec?: IntegrationSpec;
+
+}
+
+/**
+ * Model is the Schema for the Models API
+ *
+ * @schema Model
+ */
+export interface ModelProps {
+  /**
+   * @schema Model#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * ModelSpec defines the desired state of Model
+   *
+   * @schema Model#spec
+   */
+  readonly spec?: ModelSpec;
 
 }
 
@@ -355,62 +355,22 @@ export interface RouteResponseProps {
 }
 
 /**
- * IntegrationResponse is the Schema for the IntegrationResponses API
+ * DomainName is the Schema for the DomainNames API
  *
- * @schema IntegrationResponse
+ * @schema DomainName
  */
-export interface IntegrationResponseProps {
+export interface DomainNameProps {
   /**
-   * @schema IntegrationResponse#metadata
+   * @schema DomainName#metadata
    */
   readonly metadata?: any;
 
   /**
-   * IntegrationResponseSpec defines the desired state of IntegrationResponse
+   * DomainNameSpec defines the desired state of DomainName
    *
-   * @schema IntegrationResponse#spec
+   * @schema DomainName#spec
    */
-  readonly spec?: IntegrationResponseSpec;
-
-}
-
-/**
- * APIMapping is the Schema for the APIMappings API
- *
- * @schema APIMapping
- */
-export interface ApiMappingProps {
-  /**
-   * @schema APIMapping#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * APIMappingSpec defines the desired state of APIMapping
-   *
-   * @schema APIMapping#spec
-   */
-  readonly spec?: ApiMappingSpec;
-
-}
-
-/**
- * Model is the Schema for the Models API
- *
- * @schema Model
- */
-export interface ModelProps {
-  /**
-   * @schema Model#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * ModelSpec defines the desired state of Model
-   *
-   * @schema Model#spec
-   */
-  readonly spec?: ModelSpec;
+  readonly spec?: DomainNameSpec;
 
 }
 
@@ -435,42 +395,22 @@ export interface RouteProps {
 }
 
 /**
- * DomainName is the Schema for the DomainNames API
+ * Authorizer is the Schema for the Authorizers API
  *
- * @schema DomainName
+ * @schema Authorizer
  */
-export interface DomainNameProps {
+export interface AuthorizerProps {
   /**
-   * @schema DomainName#metadata
+   * @schema Authorizer#metadata
    */
   readonly metadata?: any;
 
   /**
-   * DomainNameSpec defines the desired state of DomainName
+   * AuthorizerSpec defines the desired state of Authorizer
    *
-   * @schema DomainName#spec
+   * @schema Authorizer#spec
    */
-  readonly spec?: DomainNameSpec;
-
-}
-
-/**
- * Integration is the Schema for the Integrations API
- *
- * @schema Integration
- */
-export interface IntegrationProps {
-  /**
-   * @schema Integration#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * IntegrationSpec defines the desired state of Integration
-   *
-   * @schema Integration#spec
-   */
-  readonly spec?: IntegrationSpec;
+  readonly spec?: AuthorizerSpec;
 
 }
 
@@ -495,131 +435,191 @@ export interface VpcLinkProps {
 }
 
 /**
- * AuthorizerSpec defines the desired state of Authorizer
+ * IntegrationResponse is the Schema for the IntegrationResponses API
  *
- * @schema AuthorizerSpec
+ * @schema IntegrationResponse
  */
-export interface AuthorizerSpec {
+export interface IntegrationResponseProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema AuthorizerSpec#deletionPolicy
+   * @schema IntegrationResponse#metadata
    */
-  readonly deletionPolicy?: AuthorizerSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * AuthorizerParameters defines the desired state of Authorizer
+   * IntegrationResponseSpec defines the desired state of IntegrationResponse
    *
-   * @schema AuthorizerSpec#forProvider
+   * @schema IntegrationResponse#spec
    */
-  readonly forProvider: AuthorizerSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema AuthorizerSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: AuthorizerSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema AuthorizerSpec#providerRef
-   */
-  readonly providerRef?: AuthorizerSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema AuthorizerSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: AuthorizerSpecWriteConnectionSecretToRef;
+  readonly spec?: IntegrationResponseSpec;
 
 }
 
 /**
- * DeploymentSpec defines the desired state of Deployment
+ * Stage is the Schema for the Stages API
  *
- * @schema DeploymentSpec
+ * @schema Stage
  */
-export interface DeploymentSpec {
+export interface StageProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema DeploymentSpec#deletionPolicy
+   * @schema Stage#metadata
    */
-  readonly deletionPolicy?: DeploymentSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * DeploymentParameters defines the desired state of Deployment
+   * StageSpec defines the desired state of Stage
    *
-   * @schema DeploymentSpec#forProvider
+   * @schema Stage#spec
    */
-  readonly forProvider: DeploymentSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema DeploymentSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: DeploymentSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema DeploymentSpec#providerRef
-   */
-  readonly providerRef?: DeploymentSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema DeploymentSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: DeploymentSpecWriteConnectionSecretToRef;
+  readonly spec?: StageSpec;
 
 }
 
 /**
- * StageSpec defines the desired state of Stage
+ * Deployment is the Schema for the Deployments API
  *
- * @schema StageSpec
+ * @schema Deployment
  */
-export interface StageSpec {
+export interface DeploymentProps {
+  /**
+   * @schema Deployment#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * DeploymentSpec defines the desired state of Deployment
+   *
+   * @schema Deployment#spec
+   */
+  readonly spec?: DeploymentSpec;
+
+}
+
+/**
+ * APIMappingSpec defines the desired state of APIMapping
+ *
+ * @schema ApiMappingSpec
+ */
+export interface ApiMappingSpec {
   /**
    * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema StageSpec#deletionPolicy
+   * @schema ApiMappingSpec#deletionPolicy
    */
-  readonly deletionPolicy?: StageSpecDeletionPolicy;
+  readonly deletionPolicy?: ApiMappingSpecDeletionPolicy;
 
   /**
-   * StageParameters defines the desired state of Stage
+   * APIMappingParameters defines the desired state of APIMapping
    *
-   * @schema StageSpec#forProvider
+   * @schema ApiMappingSpec#forProvider
    */
-  readonly forProvider: StageSpecForProvider;
+  readonly forProvider: ApiMappingSpecForProvider;
 
   /**
    * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema StageSpec#providerConfigRef
+   * @schema ApiMappingSpec#providerConfigRef
    */
-  readonly providerConfigRef?: StageSpecProviderConfigRef;
+  readonly providerConfigRef?: ApiMappingSpecProviderConfigRef;
 
   /**
    * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema StageSpec#providerRef
+   * @schema ApiMappingSpec#providerRef
    */
-  readonly providerRef?: StageSpecProviderRef;
+  readonly providerRef?: ApiMappingSpecProviderRef;
 
   /**
    * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema StageSpec#writeConnectionSecretToRef
+   * @schema ApiMappingSpec#writeConnectionSecretToRef
    */
-  readonly writeConnectionSecretToRef?: StageSpecWriteConnectionSecretToRef;
+  readonly writeConnectionSecretToRef?: ApiMappingSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * IntegrationSpec defines the desired state of Integration
+ *
+ * @schema IntegrationSpec
+ */
+export interface IntegrationSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema IntegrationSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: IntegrationSpecDeletionPolicy;
+
+  /**
+   * IntegrationParameters defines the desired state of Integration
+   *
+   * @schema IntegrationSpec#forProvider
+   */
+  readonly forProvider: IntegrationSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema IntegrationSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: IntegrationSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema IntegrationSpec#providerRef
+   */
+  readonly providerRef?: IntegrationSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IntegrationSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IntegrationSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * ModelSpec defines the desired state of Model
+ *
+ * @schema ModelSpec
+ */
+export interface ModelSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema ModelSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: ModelSpecDeletionPolicy;
+
+  /**
+   * ModelParameters defines the desired state of Model
+   *
+   * @schema ModelSpec#forProvider
+   */
+  readonly forProvider: ModelSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema ModelSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: ModelSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema ModelSpec#providerRef
+   */
+  readonly providerRef?: ModelSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema ModelSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: ModelSpecWriteConnectionSecretToRef;
 
 }
 
@@ -710,131 +710,45 @@ export interface RouteResponseSpec {
 }
 
 /**
- * IntegrationResponseSpec defines the desired state of IntegrationResponse
+ * DomainNameSpec defines the desired state of DomainName
  *
- * @schema IntegrationResponseSpec
+ * @schema DomainNameSpec
  */
-export interface IntegrationResponseSpec {
+export interface DomainNameSpec {
   /**
    * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema IntegrationResponseSpec#deletionPolicy
+   * @schema DomainNameSpec#deletionPolicy
    */
-  readonly deletionPolicy?: IntegrationResponseSpecDeletionPolicy;
+  readonly deletionPolicy?: DomainNameSpecDeletionPolicy;
 
   /**
-   * IntegrationResponseParameters defines the desired state of IntegrationResponse
+   * DomainNameParameters defines the desired state of DomainName
    *
-   * @schema IntegrationResponseSpec#forProvider
+   * @schema DomainNameSpec#forProvider
    */
-  readonly forProvider: IntegrationResponseSpecForProvider;
+  readonly forProvider: DomainNameSpecForProvider;
 
   /**
    * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema IntegrationResponseSpec#providerConfigRef
+   * @schema DomainNameSpec#providerConfigRef
    */
-  readonly providerConfigRef?: IntegrationResponseSpecProviderConfigRef;
+  readonly providerConfigRef?: DomainNameSpecProviderConfigRef;
 
   /**
    * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema IntegrationResponseSpec#providerRef
+   * @schema DomainNameSpec#providerRef
    */
-  readonly providerRef?: IntegrationResponseSpecProviderRef;
+  readonly providerRef?: DomainNameSpecProviderRef;
 
   /**
    * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema IntegrationResponseSpec#writeConnectionSecretToRef
+   * @schema DomainNameSpec#writeConnectionSecretToRef
    */
-  readonly writeConnectionSecretToRef?: IntegrationResponseSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * APIMappingSpec defines the desired state of APIMapping
- *
- * @schema ApiMappingSpec
- */
-export interface ApiMappingSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema ApiMappingSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: ApiMappingSpecDeletionPolicy;
-
-  /**
-   * APIMappingParameters defines the desired state of APIMapping
-   *
-   * @schema ApiMappingSpec#forProvider
-   */
-  readonly forProvider: ApiMappingSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema ApiMappingSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: ApiMappingSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema ApiMappingSpec#providerRef
-   */
-  readonly providerRef?: ApiMappingSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema ApiMappingSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: ApiMappingSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * ModelSpec defines the desired state of Model
- *
- * @schema ModelSpec
- */
-export interface ModelSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema ModelSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: ModelSpecDeletionPolicy;
-
-  /**
-   * ModelParameters defines the desired state of Model
-   *
-   * @schema ModelSpec#forProvider
-   */
-  readonly forProvider: ModelSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema ModelSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: ModelSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema ModelSpec#providerRef
-   */
-  readonly providerRef?: ModelSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema ModelSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: ModelSpecWriteConnectionSecretToRef;
+  readonly writeConnectionSecretToRef?: DomainNameSpecWriteConnectionSecretToRef;
 
 }
 
@@ -882,88 +796,45 @@ export interface RouteSpec {
 }
 
 /**
- * DomainNameSpec defines the desired state of DomainName
+ * AuthorizerSpec defines the desired state of Authorizer
  *
- * @schema DomainNameSpec
+ * @schema AuthorizerSpec
  */
-export interface DomainNameSpec {
+export interface AuthorizerSpec {
   /**
    * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema DomainNameSpec#deletionPolicy
+   * @schema AuthorizerSpec#deletionPolicy
    */
-  readonly deletionPolicy?: DomainNameSpecDeletionPolicy;
+  readonly deletionPolicy?: AuthorizerSpecDeletionPolicy;
 
   /**
-   * DomainNameParameters defines the desired state of DomainName
+   * AuthorizerParameters defines the desired state of Authorizer
    *
-   * @schema DomainNameSpec#forProvider
+   * @schema AuthorizerSpec#forProvider
    */
-  readonly forProvider: DomainNameSpecForProvider;
+  readonly forProvider: AuthorizerSpecForProvider;
 
   /**
    * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema DomainNameSpec#providerConfigRef
+   * @schema AuthorizerSpec#providerConfigRef
    */
-  readonly providerConfigRef?: DomainNameSpecProviderConfigRef;
+  readonly providerConfigRef?: AuthorizerSpecProviderConfigRef;
 
   /**
    * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema DomainNameSpec#providerRef
+   * @schema AuthorizerSpec#providerRef
    */
-  readonly providerRef?: DomainNameSpecProviderRef;
+  readonly providerRef?: AuthorizerSpecProviderRef;
 
   /**
    * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema DomainNameSpec#writeConnectionSecretToRef
+   * @schema AuthorizerSpec#writeConnectionSecretToRef
    */
-  readonly writeConnectionSecretToRef?: DomainNameSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * IntegrationSpec defines the desired state of Integration
- *
- * @schema IntegrationSpec
- */
-export interface IntegrationSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema IntegrationSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: IntegrationSpecDeletionPolicy;
-
-  /**
-   * IntegrationParameters defines the desired state of Integration
-   *
-   * @schema IntegrationSpec#forProvider
-   */
-  readonly forProvider: IntegrationSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema IntegrationSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: IntegrationSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema IntegrationSpec#providerRef
-   */
-  readonly providerRef?: IntegrationSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema IntegrationSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: IntegrationSpecWriteConnectionSecretToRef;
+  readonly writeConnectionSecretToRef?: AuthorizerSpecWriteConnectionSecretToRef;
 
 }
 
@@ -1011,842 +882,131 @@ export interface VpcLinkSpec {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * IntegrationResponseSpec defines the desired state of IntegrationResponse
  *
- * @schema AuthorizerSpecDeletionPolicy
+ * @schema IntegrationResponseSpec
  */
-export enum AuthorizerSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * AuthorizerParameters defines the desired state of Authorizer
- *
- * @schema AuthorizerSpecForProvider
- */
-export interface AuthorizerSpecForProvider {
+export interface IntegrationResponseSpec {
   /**
-   * APIID is the ID for the API.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema AuthorizerSpecForProvider#apiId
+   * @schema IntegrationResponseSpec#deletionPolicy
    */
-  readonly apiId?: string;
+  readonly deletionPolicy?: IntegrationResponseSpecDeletionPolicy;
 
   /**
-   * APIIDRef is a reference to an API used to set the APIID.
+   * IntegrationResponseParameters defines the desired state of IntegrationResponse
    *
-   * @schema AuthorizerSpecForProvider#apiIdRef
+   * @schema IntegrationResponseSpec#forProvider
    */
-  readonly apiIdRef?: AuthorizerSpecForProviderApiIdRef;
+  readonly forProvider: IntegrationResponseSpecForProvider;
 
   /**
-   * APIIDSelector selects references to API used to set the APIID.
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema AuthorizerSpecForProvider#apiIdSelector
+   * @schema IntegrationResponseSpec#providerConfigRef
    */
-  readonly apiIdSelector?: AuthorizerSpecForProviderApiIdSelector;
+  readonly providerConfigRef?: IntegrationResponseSpecProviderConfigRef;
 
   /**
-   * @schema AuthorizerSpecForProvider#authorizerCredentialsARN
-   */
-  readonly authorizerCredentialsARN?: string;
-
-  /**
-   * @schema AuthorizerSpecForProvider#authorizerPayloadFormatVersion
-   */
-  readonly authorizerPayloadFormatVersion?: string;
-
-  /**
-   * @schema AuthorizerSpecForProvider#authorizerResultTtlInSeconds
-   */
-  readonly authorizerResultTtlInSeconds?: number;
-
-  /**
-   * @schema AuthorizerSpecForProvider#authorizerType
-   */
-  readonly authorizerType: string;
-
-  /**
-   * @schema AuthorizerSpecForProvider#authorizerURI
-   */
-  readonly authorizerURI?: string;
-
-  /**
-   * @schema AuthorizerSpecForProvider#enableSimpleResponses
-   */
-  readonly enableSimpleResponses?: boolean;
-
-  /**
-   * @schema AuthorizerSpecForProvider#identitySource
-   */
-  readonly identitySource: string[];
-
-  /**
-   * @schema AuthorizerSpecForProvider#identityValidationExpression
-   */
-  readonly identityValidationExpression?: string;
-
-  /**
-   * @schema AuthorizerSpecForProvider#jwtConfiguration
-   */
-  readonly jwtConfiguration?: AuthorizerSpecForProviderJwtConfiguration;
-
-  /**
-   * Region is which region the Authorizer will be created.
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema AuthorizerSpecForProvider#region
+   * @schema IntegrationResponseSpec#providerRef
    */
-  readonly region: string;
+  readonly providerRef?: IntegrationResponseSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema IntegrationResponseSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: IntegrationResponseSpecWriteConnectionSecretToRef;
 
 }
 
 /**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ * StageSpec defines the desired state of Stage
  *
- * @schema AuthorizerSpecProviderConfigRef
+ * @schema StageSpec
  */
-export interface AuthorizerSpecProviderConfigRef {
+export interface StageSpec {
   /**
-   * Name of the referenced object.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema AuthorizerSpecProviderConfigRef#name
+   * @schema StageSpec#deletionPolicy
    */
-  readonly name: string;
+  readonly deletionPolicy?: StageSpecDeletionPolicy;
+
+  /**
+   * StageParameters defines the desired state of Stage
+   *
+   * @schema StageSpec#forProvider
+   */
+  readonly forProvider: StageSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema StageSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: StageSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema StageSpec#providerRef
+   */
+  readonly providerRef?: StageSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema StageSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: StageSpecWriteConnectionSecretToRef;
 
 }
 
 /**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ * DeploymentSpec defines the desired state of Deployment
  *
- * @schema AuthorizerSpecProviderRef
+ * @schema DeploymentSpec
  */
-export interface AuthorizerSpecProviderRef {
+export interface DeploymentSpec {
   /**
-   * Name of the referenced object.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema AuthorizerSpecProviderRef#name
+   * @schema DeploymentSpec#deletionPolicy
    */
-  readonly name: string;
+  readonly deletionPolicy?: DeploymentSpecDeletionPolicy;
 
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema AuthorizerSpecWriteConnectionSecretToRef
- */
-export interface AuthorizerSpecWriteConnectionSecretToRef {
   /**
-   * Name of the secret.
+   * DeploymentParameters defines the desired state of Deployment
    *
-   * @schema AuthorizerSpecWriteConnectionSecretToRef#name
+   * @schema DeploymentSpec#forProvider
    */
-  readonly name: string;
+  readonly forProvider: DeploymentSpecForProvider;
 
   /**
-   * Namespace of the secret.
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema AuthorizerSpecWriteConnectionSecretToRef#namespace
+   * @schema DeploymentSpec#providerConfigRef
    */
-  readonly namespace: string;
+  readonly providerConfigRef?: DeploymentSpecProviderConfigRef;
 
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema DeploymentSpecDeletionPolicy
- */
-export enum DeploymentSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * DeploymentParameters defines the desired state of Deployment
- *
- * @schema DeploymentSpecForProvider
- */
-export interface DeploymentSpecForProvider {
   /**
-   * APIID is the ID for the API.
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema DeploymentSpecForProvider#apiId
+   * @schema DeploymentSpec#providerRef
    */
-  readonly apiId?: string;
+  readonly providerRef?: DeploymentSpecProviderRef;
 
   /**
-   * APIIDRef is a reference to an API used to set the APIID.
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema DeploymentSpecForProvider#apiIdRef
+   * @schema DeploymentSpec#writeConnectionSecretToRef
    */
-  readonly apiIdRef?: DeploymentSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema DeploymentSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: DeploymentSpecForProviderApiIdSelector;
-
-  /**
-   * @schema DeploymentSpecForProvider#description
-   */
-  readonly description?: string;
-
-  /**
-   * Region is which region the Deployment will be created.
-   *
-   * @schema DeploymentSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema DeploymentSpecForProvider#stageName
-   */
-  readonly stageName?: string;
-
-  /**
-   * StageNameRef is a reference to an Stage used to set the StageName.
-   *
-   * @schema DeploymentSpecForProvider#stageNameRef
-   */
-  readonly stageNameRef?: DeploymentSpecForProviderStageNameRef;
-
-  /**
-   * StageNameSelector selects references to Stage used to set the StageName.
-   *
-   * @schema DeploymentSpecForProvider#stageNameSelector
-   */
-  readonly stageNameSelector?: DeploymentSpecForProviderStageNameSelector;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema DeploymentSpecProviderConfigRef
- */
-export interface DeploymentSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DeploymentSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema DeploymentSpecProviderRef
- */
-export interface DeploymentSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DeploymentSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema DeploymentSpecWriteConnectionSecretToRef
- */
-export interface DeploymentSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema DeploymentSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema DeploymentSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema StageSpecDeletionPolicy
- */
-export enum StageSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * StageParameters defines the desired state of Stage
- *
- * @schema StageSpecForProvider
- */
-export interface StageSpecForProvider {
-  /**
-   * @schema StageSpecForProvider#accessLogSettings
-   */
-  readonly accessLogSettings?: StageSpecForProviderAccessLogSettings;
-
-  /**
-   * APIID is the ID for the API.
-   *
-   * @schema StageSpecForProvider#apiId
-   */
-  readonly apiId?: string;
-
-  /**
-   * APIIDRef is a reference to an API used to set the APIID.
-   *
-   * @schema StageSpecForProvider#apiIdRef
-   */
-  readonly apiIdRef?: StageSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema StageSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: StageSpecForProviderApiIdSelector;
-
-  /**
-   * @schema StageSpecForProvider#autoDeploy
-   */
-  readonly autoDeploy?: boolean;
-
-  /**
-   * @schema StageSpecForProvider#clientCertificateID
-   */
-  readonly clientCertificateID?: string;
-
-  /**
-   * @schema StageSpecForProvider#defaultRouteSettings
-   */
-  readonly defaultRouteSettings?: StageSpecForProviderDefaultRouteSettings;
-
-  /**
-   * @schema StageSpecForProvider#deploymentID
-   */
-  readonly deploymentID?: string;
-
-  /**
-   * @schema StageSpecForProvider#description
-   */
-  readonly description?: string;
-
-  /**
-   * Region is which region the Stage will be created.
-   *
-   * @schema StageSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema StageSpecForProvider#routeSettings
-   */
-  readonly routeSettings?: { [key: string]: StageSpecForProviderRouteSettings };
-
-  /**
-   * @schema StageSpecForProvider#stageVariables
-   */
-  readonly stageVariables?: { [key: string]: string };
-
-  /**
-   * @schema StageSpecForProvider#tags
-   */
-  readonly tags?: { [key: string]: string };
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema StageSpecProviderConfigRef
- */
-export interface StageSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema StageSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema StageSpecProviderRef
- */
-export interface StageSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema StageSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema StageSpecWriteConnectionSecretToRef
- */
-export interface StageSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema StageSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema StageSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema ApiSpecDeletionPolicy
- */
-export enum ApiSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * APIParameters defines the desired state of API
- *
- * @schema ApiSpecForProvider
- */
-export interface ApiSpecForProvider {
-  /**
-   * @schema ApiSpecForProvider#apiKeySelectionExpression
-   */
-  readonly apiKeySelectionExpression?: string;
-
-  /**
-   * @schema ApiSpecForProvider#corsConfiguration
-   */
-  readonly corsConfiguration?: ApiSpecForProviderCorsConfiguration;
-
-  /**
-   * @schema ApiSpecForProvider#credentialsARN
-   */
-  readonly credentialsARN?: string;
-
-  /**
-   * @schema ApiSpecForProvider#description
-   */
-  readonly description?: string;
-
-  /**
-   * @schema ApiSpecForProvider#disableExecuteAPIEndpoint
-   */
-  readonly disableExecuteAPIEndpoint?: boolean;
-
-  /**
-   * @schema ApiSpecForProvider#disableSchemaValidation
-   */
-  readonly disableSchemaValidation?: boolean;
-
-  /**
-   * @schema ApiSpecForProvider#protocolType
-   */
-  readonly protocolType: string;
-
-  /**
-   * Region is which region the API will be created.
-   *
-   * @schema ApiSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema ApiSpecForProvider#routeKey
-   */
-  readonly routeKey?: string;
-
-  /**
-   * @schema ApiSpecForProvider#routeSelectionExpression
-   */
-  readonly routeSelectionExpression?: string;
-
-  /**
-   * @schema ApiSpecForProvider#tags
-   */
-  readonly tags?: { [key: string]: string };
-
-  /**
-   * @schema ApiSpecForProvider#target
-   */
-  readonly target?: string;
-
-  /**
-   * @schema ApiSpecForProvider#version
-   */
-  readonly version?: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema ApiSpecProviderConfigRef
- */
-export interface ApiSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ApiSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema ApiSpecProviderRef
- */
-export interface ApiSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ApiSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema ApiSpecWriteConnectionSecretToRef
- */
-export interface ApiSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema ApiSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema ApiSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema RouteResponseSpecDeletionPolicy
- */
-export enum RouteResponseSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * RouteResponseParameters defines the desired state of RouteResponse
- *
- * @schema RouteResponseSpecForProvider
- */
-export interface RouteResponseSpecForProvider {
-  /**
-   * APIID is the ID for the API.
-   *
-   * @schema RouteResponseSpecForProvider#apiId
-   */
-  readonly apiId?: string;
-
-  /**
-   * APIIDRef is a reference to an API used to set the APIID.
-   *
-   * @schema RouteResponseSpecForProvider#apiIdRef
-   */
-  readonly apiIdRef?: RouteResponseSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema RouteResponseSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: RouteResponseSpecForProviderApiIdSelector;
-
-  /**
-   * @schema RouteResponseSpecForProvider#modelSelectionExpression
-   */
-  readonly modelSelectionExpression?: string;
-
-  /**
-   * Region is which region the RouteResponse will be created.
-   *
-   * @schema RouteResponseSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema RouteResponseSpecForProvider#responseModels
-   */
-  readonly responseModels?: { [key: string]: string };
-
-  /**
-   * @schema RouteResponseSpecForProvider#responseParameters
-   */
-  readonly responseParameters?: { [key: string]: RouteResponseSpecForProviderResponseParameters };
-
-  /**
-   * RouteID is the ID for the Route.
-   *
-   * @schema RouteResponseSpecForProvider#routeId
-   */
-  readonly routeId?: string;
-
-  /**
-   * RouteIDRef is a reference to an Route used to set the RouteID.
-   *
-   * @schema RouteResponseSpecForProvider#routeIdRef
-   */
-  readonly routeIdRef?: RouteResponseSpecForProviderRouteIdRef;
-
-  /**
-   * RouteIDSelector selects references to Route used to set the RouteID.
-   *
-   * @schema RouteResponseSpecForProvider#routeIdSelector
-   */
-  readonly routeIdSelector?: RouteResponseSpecForProviderRouteIdSelector;
-
-  /**
-   * @schema RouteResponseSpecForProvider#routeResponseKey
-   */
-  readonly routeResponseKey: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema RouteResponseSpecProviderConfigRef
- */
-export interface RouteResponseSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema RouteResponseSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema RouteResponseSpecProviderRef
- */
-export interface RouteResponseSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema RouteResponseSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema RouteResponseSpecWriteConnectionSecretToRef
- */
-export interface RouteResponseSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema RouteResponseSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema RouteResponseSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema IntegrationResponseSpecDeletionPolicy
- */
-export enum IntegrationResponseSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * IntegrationResponseParameters defines the desired state of IntegrationResponse
- *
- * @schema IntegrationResponseSpecForProvider
- */
-export interface IntegrationResponseSpecForProvider {
-  /**
-   * APIID is the ID for the API.
-   *
-   * @schema IntegrationResponseSpecForProvider#apiId
-   */
-  readonly apiId?: string;
-
-  /**
-   * APIIDRef is a reference to an API used to set the APIID.
-   *
-   * @schema IntegrationResponseSpecForProvider#apiIdRef
-   */
-  readonly apiIdRef?: IntegrationResponseSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema IntegrationResponseSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: IntegrationResponseSpecForProviderApiIdSelector;
-
-  /**
-   * @schema IntegrationResponseSpecForProvider#contentHandlingStrategy
-   */
-  readonly contentHandlingStrategy?: string;
-
-  /**
-   * IntegrationID is the ID for the Integration.
-   *
-   * @schema IntegrationResponseSpecForProvider#integrationId
-   */
-  readonly integrationId?: string;
-
-  /**
-   * IntegrationIDRef is a reference to an Integration used to set the IntegrationID.
-   *
-   * @schema IntegrationResponseSpecForProvider#integrationIdRef
-   */
-  readonly integrationIdRef?: IntegrationResponseSpecForProviderIntegrationIdRef;
-
-  /**
-   * IntegrationIDSelector selects references to Integration used to set the IntegrationID.
-   *
-   * @schema IntegrationResponseSpecForProvider#integrationIdSelector
-   */
-  readonly integrationIdSelector?: IntegrationResponseSpecForProviderIntegrationIdSelector;
-
-  /**
-   * @schema IntegrationResponseSpecForProvider#integrationResponseKey
-   */
-  readonly integrationResponseKey: string;
-
-  /**
-   * Region is which region the IntegrationResponse will be created.
-   *
-   * @schema IntegrationResponseSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema IntegrationResponseSpecForProvider#responseParameters
-   */
-  readonly responseParameters?: { [key: string]: string };
-
-  /**
-   * @schema IntegrationResponseSpecForProvider#responseTemplates
-   */
-  readonly responseTemplates?: { [key: string]: string };
-
-  /**
-   * @schema IntegrationResponseSpecForProvider#templateSelectionExpression
-   */
-  readonly templateSelectionExpression?: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema IntegrationResponseSpecProviderConfigRef
- */
-export interface IntegrationResponseSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IntegrationResponseSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema IntegrationResponseSpecProviderRef
- */
-export interface IntegrationResponseSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IntegrationResponseSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema IntegrationResponseSpecWriteConnectionSecretToRef
- */
-export interface IntegrationResponseSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema IntegrationResponseSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema IntegrationResponseSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
+  readonly writeConnectionSecretToRef?: DeploymentSpecWriteConnectionSecretToRef;
 
 }
 
@@ -1857,9 +1017,9 @@ export interface IntegrationResponseSpecWriteConnectionSecretToRef {
  */
 export enum ApiMappingSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -2000,391 +1160,13 @@ export interface ApiMappingSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema ModelSpecDeletionPolicy
- */
-export enum ModelSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * ModelParameters defines the desired state of Model
- *
- * @schema ModelSpecForProvider
- */
-export interface ModelSpecForProvider {
-  /**
-   * APIID is the ID for the API.
-   *
-   * @schema ModelSpecForProvider#apiId
-   */
-  readonly apiId?: string;
-
-  /**
-   * APIIDRef is a reference to an API used to set the APIID.
-   *
-   * @schema ModelSpecForProvider#apiIdRef
-   */
-  readonly apiIdRef?: ModelSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema ModelSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: ModelSpecForProviderApiIdSelector;
-
-  /**
-   * @schema ModelSpecForProvider#contentType
-   */
-  readonly contentType?: string;
-
-  /**
-   * @schema ModelSpecForProvider#description
-   */
-  readonly description?: string;
-
-  /**
-   * Region is which region the Model will be created.
-   *
-   * @schema ModelSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema ModelSpecForProvider#schema
-   */
-  readonly schema: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema ModelSpecProviderConfigRef
- */
-export interface ModelSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ModelSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema ModelSpecProviderRef
- */
-export interface ModelSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ModelSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema ModelSpecWriteConnectionSecretToRef
- */
-export interface ModelSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema ModelSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema ModelSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema RouteSpecDeletionPolicy
- */
-export enum RouteSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * RouteParameters defines the desired state of Route
- *
- * @schema RouteSpecForProvider
- */
-export interface RouteSpecForProvider {
-  /**
-   * APIID is the ID for the API.
-   *
-   * @schema RouteSpecForProvider#apiId
-   */
-  readonly apiId?: string;
-
-  /**
-   * APIIDRef is a reference to an API used to set the APIID.
-   *
-   * @schema RouteSpecForProvider#apiIdRef
-   */
-  readonly apiIdRef?: RouteSpecForProviderApiIdRef;
-
-  /**
-   * APIIDSelector selects references to API used to set the APIID.
-   *
-   * @schema RouteSpecForProvider#apiIdSelector
-   */
-  readonly apiIdSelector?: RouteSpecForProviderApiIdSelector;
-
-  /**
-   * @schema RouteSpecForProvider#apiKeyRequired
-   */
-  readonly apiKeyRequired?: boolean;
-
-  /**
-   * @schema RouteSpecForProvider#authorizationScopes
-   */
-  readonly authorizationScopes?: string[];
-
-  /**
-   * @schema RouteSpecForProvider#authorizationType
-   */
-  readonly authorizationType?: string;
-
-  /**
-   * @schema RouteSpecForProvider#authorizerID
-   */
-  readonly authorizerID?: string;
-
-  /**
-   * AuthorizerIDRef is a reference to an Authorizer used to set the AuthorizerID.
-   *
-   * @schema RouteSpecForProvider#authorizerIDRef
-   */
-  readonly authorizerIDRef?: RouteSpecForProviderAuthorizerIdRef;
-
-  /**
-   * AuthorizerIDSelector selects references to Authorizer used to set the AuthorizerID.
-   *
-   * @schema RouteSpecForProvider#authorizerIDSelector
-   */
-  readonly authorizerIDSelector?: RouteSpecForProviderAuthorizerIdSelector;
-
-  /**
-   * @schema RouteSpecForProvider#modelSelectionExpression
-   */
-  readonly modelSelectionExpression?: string;
-
-  /**
-   * @schema RouteSpecForProvider#operationName
-   */
-  readonly operationName?: string;
-
-  /**
-   * Region is which region the Route will be created.
-   *
-   * @schema RouteSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema RouteSpecForProvider#requestModels
-   */
-  readonly requestModels?: { [key: string]: string };
-
-  /**
-   * @schema RouteSpecForProvider#requestParameters
-   */
-  readonly requestParameters?: { [key: string]: RouteSpecForProviderRequestParameters };
-
-  /**
-   * @schema RouteSpecForProvider#routeKey
-   */
-  readonly routeKey: string;
-
-  /**
-   * @schema RouteSpecForProvider#routeResponseSelectionExpression
-   */
-  readonly routeResponseSelectionExpression?: string;
-
-  /**
-   * @schema RouteSpecForProvider#target
-   */
-  readonly target?: string;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema RouteSpecProviderConfigRef
- */
-export interface RouteSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema RouteSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema RouteSpecProviderRef
- */
-export interface RouteSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema RouteSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema RouteSpecWriteConnectionSecretToRef
- */
-export interface RouteSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema RouteSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema RouteSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema DomainNameSpecDeletionPolicy
- */
-export enum DomainNameSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * DomainNameParameters defines the desired state of DomainName
- *
- * @schema DomainNameSpecForProvider
- */
-export interface DomainNameSpecForProvider {
-  /**
-   * @schema DomainNameSpecForProvider#domainNameConfigurations
-   */
-  readonly domainNameConfigurations?: DomainNameSpecForProviderDomainNameConfigurations[];
-
-  /**
-   * @schema DomainNameSpecForProvider#mutualTLSAuthentication
-   */
-  readonly mutualTLSAuthentication?: DomainNameSpecForProviderMutualTlsAuthentication;
-
-  /**
-   * Region is which region the DomainName will be created.
-   *
-   * @schema DomainNameSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * @schema DomainNameSpecForProvider#tags
-   */
-  readonly tags?: { [key: string]: string };
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema DomainNameSpecProviderConfigRef
- */
-export interface DomainNameSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DomainNameSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema DomainNameSpecProviderRef
- */
-export interface DomainNameSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DomainNameSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema DomainNameSpecWriteConnectionSecretToRef
- */
-export interface DomainNameSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema DomainNameSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema DomainNameSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
  * @schema IntegrationSpecDeletionPolicy
  */
 export enum IntegrationSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -2558,13 +1340,816 @@ export interface IntegrationSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
+ * @schema ModelSpecDeletionPolicy
+ */
+export enum ModelSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * ModelParameters defines the desired state of Model
+ *
+ * @schema ModelSpecForProvider
+ */
+export interface ModelSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema ModelSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema ModelSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: ModelSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema ModelSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: ModelSpecForProviderApiIdSelector;
+
+  /**
+   * @schema ModelSpecForProvider#contentType
+   */
+  readonly contentType?: string;
+
+  /**
+   * @schema ModelSpecForProvider#description
+   */
+  readonly description?: string;
+
+  /**
+   * Region is which region the Model will be created.
+   *
+   * @schema ModelSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema ModelSpecForProvider#schema
+   */
+  readonly schema: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema ModelSpecProviderConfigRef
+ */
+export interface ModelSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ModelSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema ModelSpecProviderRef
+ */
+export interface ModelSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ModelSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema ModelSpecWriteConnectionSecretToRef
+ */
+export interface ModelSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema ModelSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ModelSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema ApiSpecDeletionPolicy
+ */
+export enum ApiSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * APIParameters defines the desired state of API
+ *
+ * @schema ApiSpecForProvider
+ */
+export interface ApiSpecForProvider {
+  /**
+   * @schema ApiSpecForProvider#apiKeySelectionExpression
+   */
+  readonly apiKeySelectionExpression?: string;
+
+  /**
+   * @schema ApiSpecForProvider#corsConfiguration
+   */
+  readonly corsConfiguration?: ApiSpecForProviderCorsConfiguration;
+
+  /**
+   * @schema ApiSpecForProvider#credentialsARN
+   */
+  readonly credentialsARN?: string;
+
+  /**
+   * @schema ApiSpecForProvider#description
+   */
+  readonly description?: string;
+
+  /**
+   * @schema ApiSpecForProvider#disableExecuteAPIEndpoint
+   */
+  readonly disableExecuteAPIEndpoint?: boolean;
+
+  /**
+   * @schema ApiSpecForProvider#disableSchemaValidation
+   */
+  readonly disableSchemaValidation?: boolean;
+
+  /**
+   * @schema ApiSpecForProvider#protocolType
+   */
+  readonly protocolType: string;
+
+  /**
+   * Region is which region the API will be created.
+   *
+   * @schema ApiSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema ApiSpecForProvider#routeKey
+   */
+  readonly routeKey?: string;
+
+  /**
+   * @schema ApiSpecForProvider#routeSelectionExpression
+   */
+  readonly routeSelectionExpression?: string;
+
+  /**
+   * @schema ApiSpecForProvider#tags
+   */
+  readonly tags?: { [key: string]: string };
+
+  /**
+   * @schema ApiSpecForProvider#target
+   */
+  readonly target?: string;
+
+  /**
+   * @schema ApiSpecForProvider#version
+   */
+  readonly version?: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema ApiSpecProviderConfigRef
+ */
+export interface ApiSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ApiSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema ApiSpecProviderRef
+ */
+export interface ApiSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ApiSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema ApiSpecWriteConnectionSecretToRef
+ */
+export interface ApiSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema ApiSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ApiSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema RouteResponseSpecDeletionPolicy
+ */
+export enum RouteResponseSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * RouteResponseParameters defines the desired state of RouteResponse
+ *
+ * @schema RouteResponseSpecForProvider
+ */
+export interface RouteResponseSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema RouteResponseSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema RouteResponseSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: RouteResponseSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema RouteResponseSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: RouteResponseSpecForProviderApiIdSelector;
+
+  /**
+   * @schema RouteResponseSpecForProvider#modelSelectionExpression
+   */
+  readonly modelSelectionExpression?: string;
+
+  /**
+   * Region is which region the RouteResponse will be created.
+   *
+   * @schema RouteResponseSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema RouteResponseSpecForProvider#responseModels
+   */
+  readonly responseModels?: { [key: string]: string };
+
+  /**
+   * @schema RouteResponseSpecForProvider#responseParameters
+   */
+  readonly responseParameters?: { [key: string]: RouteResponseSpecForProviderResponseParameters };
+
+  /**
+   * RouteID is the ID for the Route.
+   *
+   * @schema RouteResponseSpecForProvider#routeId
+   */
+  readonly routeId?: string;
+
+  /**
+   * RouteIDRef is a reference to an Route used to set the RouteID.
+   *
+   * @schema RouteResponseSpecForProvider#routeIdRef
+   */
+  readonly routeIdRef?: RouteResponseSpecForProviderRouteIdRef;
+
+  /**
+   * RouteIDSelector selects references to Route used to set the RouteID.
+   *
+   * @schema RouteResponseSpecForProvider#routeIdSelector
+   */
+  readonly routeIdSelector?: RouteResponseSpecForProviderRouteIdSelector;
+
+  /**
+   * @schema RouteResponseSpecForProvider#routeResponseKey
+   */
+  readonly routeResponseKey: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema RouteResponseSpecProviderConfigRef
+ */
+export interface RouteResponseSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema RouteResponseSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema RouteResponseSpecProviderRef
+ */
+export interface RouteResponseSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema RouteResponseSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema RouteResponseSpecWriteConnectionSecretToRef
+ */
+export interface RouteResponseSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema RouteResponseSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema RouteResponseSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema DomainNameSpecDeletionPolicy
+ */
+export enum DomainNameSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * DomainNameParameters defines the desired state of DomainName
+ *
+ * @schema DomainNameSpecForProvider
+ */
+export interface DomainNameSpecForProvider {
+  /**
+   * @schema DomainNameSpecForProvider#domainNameConfigurations
+   */
+  readonly domainNameConfigurations?: DomainNameSpecForProviderDomainNameConfigurations[];
+
+  /**
+   * @schema DomainNameSpecForProvider#mutualTLSAuthentication
+   */
+  readonly mutualTLSAuthentication?: DomainNameSpecForProviderMutualTlsAuthentication;
+
+  /**
+   * Region is which region the DomainName will be created.
+   *
+   * @schema DomainNameSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema DomainNameSpecForProvider#tags
+   */
+  readonly tags?: { [key: string]: string };
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema DomainNameSpecProviderConfigRef
+ */
+export interface DomainNameSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DomainNameSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema DomainNameSpecProviderRef
+ */
+export interface DomainNameSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DomainNameSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema DomainNameSpecWriteConnectionSecretToRef
+ */
+export interface DomainNameSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema DomainNameSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema DomainNameSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema RouteSpecDeletionPolicy
+ */
+export enum RouteSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * RouteParameters defines the desired state of Route
+ *
+ * @schema RouteSpecForProvider
+ */
+export interface RouteSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema RouteSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema RouteSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: RouteSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema RouteSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: RouteSpecForProviderApiIdSelector;
+
+  /**
+   * @schema RouteSpecForProvider#apiKeyRequired
+   */
+  readonly apiKeyRequired?: boolean;
+
+  /**
+   * @schema RouteSpecForProvider#authorizationScopes
+   */
+  readonly authorizationScopes?: string[];
+
+  /**
+   * @schema RouteSpecForProvider#authorizationType
+   */
+  readonly authorizationType?: string;
+
+  /**
+   * @schema RouteSpecForProvider#authorizerID
+   */
+  readonly authorizerID?: string;
+
+  /**
+   * AuthorizerIDRef is a reference to an Authorizer used to set the AuthorizerID.
+   *
+   * @schema RouteSpecForProvider#authorizerIDRef
+   */
+  readonly authorizerIDRef?: RouteSpecForProviderAuthorizerIdRef;
+
+  /**
+   * AuthorizerIDSelector selects references to Authorizer used to set the AuthorizerID.
+   *
+   * @schema RouteSpecForProvider#authorizerIDSelector
+   */
+  readonly authorizerIDSelector?: RouteSpecForProviderAuthorizerIdSelector;
+
+  /**
+   * @schema RouteSpecForProvider#modelSelectionExpression
+   */
+  readonly modelSelectionExpression?: string;
+
+  /**
+   * @schema RouteSpecForProvider#operationName
+   */
+  readonly operationName?: string;
+
+  /**
+   * Region is which region the Route will be created.
+   *
+   * @schema RouteSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema RouteSpecForProvider#requestModels
+   */
+  readonly requestModels?: { [key: string]: string };
+
+  /**
+   * @schema RouteSpecForProvider#requestParameters
+   */
+  readonly requestParameters?: { [key: string]: RouteSpecForProviderRequestParameters };
+
+  /**
+   * @schema RouteSpecForProvider#routeKey
+   */
+  readonly routeKey: string;
+
+  /**
+   * @schema RouteSpecForProvider#routeResponseSelectionExpression
+   */
+  readonly routeResponseSelectionExpression?: string;
+
+  /**
+   * @schema RouteSpecForProvider#target
+   */
+  readonly target?: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema RouteSpecProviderConfigRef
+ */
+export interface RouteSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema RouteSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema RouteSpecProviderRef
+ */
+export interface RouteSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema RouteSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema RouteSpecWriteConnectionSecretToRef
+ */
+export interface RouteSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema RouteSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema RouteSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema AuthorizerSpecDeletionPolicy
+ */
+export enum AuthorizerSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * AuthorizerParameters defines the desired state of Authorizer
+ *
+ * @schema AuthorizerSpecForProvider
+ */
+export interface AuthorizerSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema AuthorizerSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema AuthorizerSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: AuthorizerSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema AuthorizerSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: AuthorizerSpecForProviderApiIdSelector;
+
+  /**
+   * @schema AuthorizerSpecForProvider#authorizerCredentialsARN
+   */
+  readonly authorizerCredentialsARN?: string;
+
+  /**
+   * @schema AuthorizerSpecForProvider#authorizerPayloadFormatVersion
+   */
+  readonly authorizerPayloadFormatVersion?: string;
+
+  /**
+   * @schema AuthorizerSpecForProvider#authorizerResultTtlInSeconds
+   */
+  readonly authorizerResultTtlInSeconds?: number;
+
+  /**
+   * @schema AuthorizerSpecForProvider#authorizerType
+   */
+  readonly authorizerType: string;
+
+  /**
+   * @schema AuthorizerSpecForProvider#authorizerURI
+   */
+  readonly authorizerURI?: string;
+
+  /**
+   * @schema AuthorizerSpecForProvider#enableSimpleResponses
+   */
+  readonly enableSimpleResponses?: boolean;
+
+  /**
+   * @schema AuthorizerSpecForProvider#identitySource
+   */
+  readonly identitySource: string[];
+
+  /**
+   * @schema AuthorizerSpecForProvider#identityValidationExpression
+   */
+  readonly identityValidationExpression?: string;
+
+  /**
+   * @schema AuthorizerSpecForProvider#jwtConfiguration
+   */
+  readonly jwtConfiguration?: AuthorizerSpecForProviderJwtConfiguration;
+
+  /**
+   * Region is which region the Authorizer will be created.
+   *
+   * @schema AuthorizerSpecForProvider#region
+   */
+  readonly region: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema AuthorizerSpecProviderConfigRef
+ */
+export interface AuthorizerSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema AuthorizerSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema AuthorizerSpecProviderRef
+ */
+export interface AuthorizerSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema AuthorizerSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema AuthorizerSpecWriteConnectionSecretToRef
+ */
+export interface AuthorizerSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema AuthorizerSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema AuthorizerSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
  * @schema VpcLinkSpecDeletionPolicy
  */
 export enum VpcLinkSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -2682,15 +2267,430 @@ export interface VpcLinkSpecWriteConnectionSecretToRef {
 }
 
 /**
- * APIIDRef is a reference to an API used to set the APIID.
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema AuthorizerSpecForProviderApiIdRef
+ * @schema IntegrationResponseSpecDeletionPolicy
  */
-export interface AuthorizerSpecForProviderApiIdRef {
+export enum IntegrationResponseSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * IntegrationResponseParameters defines the desired state of IntegrationResponse
+ *
+ * @schema IntegrationResponseSpecForProvider
+ */
+export interface IntegrationResponseSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema IntegrationResponseSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema IntegrationResponseSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: IntegrationResponseSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema IntegrationResponseSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: IntegrationResponseSpecForProviderApiIdSelector;
+
+  /**
+   * @schema IntegrationResponseSpecForProvider#contentHandlingStrategy
+   */
+  readonly contentHandlingStrategy?: string;
+
+  /**
+   * IntegrationID is the ID for the Integration.
+   *
+   * @schema IntegrationResponseSpecForProvider#integrationId
+   */
+  readonly integrationId?: string;
+
+  /**
+   * IntegrationIDRef is a reference to an Integration used to set the IntegrationID.
+   *
+   * @schema IntegrationResponseSpecForProvider#integrationIdRef
+   */
+  readonly integrationIdRef?: IntegrationResponseSpecForProviderIntegrationIdRef;
+
+  /**
+   * IntegrationIDSelector selects references to Integration used to set the IntegrationID.
+   *
+   * @schema IntegrationResponseSpecForProvider#integrationIdSelector
+   */
+  readonly integrationIdSelector?: IntegrationResponseSpecForProviderIntegrationIdSelector;
+
+  /**
+   * @schema IntegrationResponseSpecForProvider#integrationResponseKey
+   */
+  readonly integrationResponseKey: string;
+
+  /**
+   * Region is which region the IntegrationResponse will be created.
+   *
+   * @schema IntegrationResponseSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema IntegrationResponseSpecForProvider#responseParameters
+   */
+  readonly responseParameters?: { [key: string]: string };
+
+  /**
+   * @schema IntegrationResponseSpecForProvider#responseTemplates
+   */
+  readonly responseTemplates?: { [key: string]: string };
+
+  /**
+   * @schema IntegrationResponseSpecForProvider#templateSelectionExpression
+   */
+  readonly templateSelectionExpression?: string;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema IntegrationResponseSpecProviderConfigRef
+ */
+export interface IntegrationResponseSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema AuthorizerSpecForProviderApiIdRef#name
+   * @schema IntegrationResponseSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema IntegrationResponseSpecProviderRef
+ */
+export interface IntegrationResponseSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IntegrationResponseSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema IntegrationResponseSpecWriteConnectionSecretToRef
+ */
+export interface IntegrationResponseSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema IntegrationResponseSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema IntegrationResponseSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema StageSpecDeletionPolicy
+ */
+export enum StageSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * StageParameters defines the desired state of Stage
+ *
+ * @schema StageSpecForProvider
+ */
+export interface StageSpecForProvider {
+  /**
+   * @schema StageSpecForProvider#accessLogSettings
+   */
+  readonly accessLogSettings?: StageSpecForProviderAccessLogSettings;
+
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema StageSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema StageSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: StageSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema StageSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: StageSpecForProviderApiIdSelector;
+
+  /**
+   * @schema StageSpecForProvider#autoDeploy
+   */
+  readonly autoDeploy?: boolean;
+
+  /**
+   * @schema StageSpecForProvider#clientCertificateID
+   */
+  readonly clientCertificateID?: string;
+
+  /**
+   * @schema StageSpecForProvider#defaultRouteSettings
+   */
+  readonly defaultRouteSettings?: StageSpecForProviderDefaultRouteSettings;
+
+  /**
+   * @schema StageSpecForProvider#deploymentID
+   */
+  readonly deploymentID?: string;
+
+  /**
+   * @schema StageSpecForProvider#description
+   */
+  readonly description?: string;
+
+  /**
+   * Region is which region the Stage will be created.
+   *
+   * @schema StageSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema StageSpecForProvider#routeSettings
+   */
+  readonly routeSettings?: { [key: string]: StageSpecForProviderRouteSettings };
+
+  /**
+   * @schema StageSpecForProvider#stageVariables
+   */
+  readonly stageVariables?: { [key: string]: string };
+
+  /**
+   * @schema StageSpecForProvider#tags
+   */
+  readonly tags?: { [key: string]: string };
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema StageSpecProviderConfigRef
+ */
+export interface StageSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema StageSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema StageSpecProviderRef
+ */
+export interface StageSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema StageSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema StageSpecWriteConnectionSecretToRef
+ */
+export interface StageSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema StageSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema StageSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema DeploymentSpecDeletionPolicy
+ */
+export enum DeploymentSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * DeploymentParameters defines the desired state of Deployment
+ *
+ * @schema DeploymentSpecForProvider
+ */
+export interface DeploymentSpecForProvider {
+  /**
+   * APIID is the ID for the API.
+   *
+   * @schema DeploymentSpecForProvider#apiId
+   */
+  readonly apiId?: string;
+
+  /**
+   * APIIDRef is a reference to an API used to set the APIID.
+   *
+   * @schema DeploymentSpecForProvider#apiIdRef
+   */
+  readonly apiIdRef?: DeploymentSpecForProviderApiIdRef;
+
+  /**
+   * APIIDSelector selects references to API used to set the APIID.
+   *
+   * @schema DeploymentSpecForProvider#apiIdSelector
+   */
+  readonly apiIdSelector?: DeploymentSpecForProviderApiIdSelector;
+
+  /**
+   * @schema DeploymentSpecForProvider#description
+   */
+  readonly description?: string;
+
+  /**
+   * Region is which region the Deployment will be created.
+   *
+   * @schema DeploymentSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * @schema DeploymentSpecForProvider#stageName
+   */
+  readonly stageName?: string;
+
+  /**
+   * StageNameRef is a reference to an Stage used to set the StageName.
+   *
+   * @schema DeploymentSpecForProvider#stageNameRef
+   */
+  readonly stageNameRef?: DeploymentSpecForProviderStageNameRef;
+
+  /**
+   * StageNameSelector selects references to Stage used to set the StageName.
+   *
+   * @schema DeploymentSpecForProvider#stageNameSelector
+   */
+  readonly stageNameSelector?: DeploymentSpecForProviderStageNameSelector;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema DeploymentSpecProviderConfigRef
+ */
+export interface DeploymentSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DeploymentSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema DeploymentSpecProviderRef
+ */
+export interface DeploymentSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DeploymentSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema DeploymentSpecWriteConnectionSecretToRef
+ */
+export interface DeploymentSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema DeploymentSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema DeploymentSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * APIIDRef is a reference to an API used to set the APIID.
+ *
+ * @schema ApiMappingSpecForProviderApiIdRef
+ */
+export interface ApiMappingSpecForProviderApiIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ApiMappingSpecForProviderApiIdRef#name
    */
   readonly name: string;
 
@@ -2699,53 +2699,109 @@ export interface AuthorizerSpecForProviderApiIdRef {
 /**
  * APIIDSelector selects references to API used to set the APIID.
  *
- * @schema AuthorizerSpecForProviderApiIdSelector
+ * @schema ApiMappingSpecForProviderApiIdSelector
  */
-export interface AuthorizerSpecForProviderApiIdSelector {
+export interface ApiMappingSpecForProviderApiIdSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema AuthorizerSpecForProviderApiIdSelector#matchControllerRef
+   * @schema ApiMappingSpecForProviderApiIdSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema AuthorizerSpecForProviderApiIdSelector#matchLabels
+   * @schema ApiMappingSpecForProviderApiIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
- * @schema AuthorizerSpecForProviderJwtConfiguration
+ * DomainNameRef is a reference to a DomainName used to set the DomainName.
+ *
+ * @schema ApiMappingSpecForProviderDomainNameRef
  */
-export interface AuthorizerSpecForProviderJwtConfiguration {
+export interface ApiMappingSpecForProviderDomainNameRef {
   /**
-   * @schema AuthorizerSpecForProviderJwtConfiguration#audience
+   * Name of the referenced object.
+   *
+   * @schema ApiMappingSpecForProviderDomainNameRef#name
    */
-  readonly audience?: string[];
+  readonly name: string;
+
+}
+
+/**
+ * DomainNameSelector selects references to DomainName used to set the DomainName.
+ *
+ * @schema ApiMappingSpecForProviderDomainNameSelector
+ */
+export interface ApiMappingSpecForProviderDomainNameSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema ApiMappingSpecForProviderDomainNameSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
 
   /**
-   * A string representation of a URI with a length between [1-2048].
+   * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema AuthorizerSpecForProviderJwtConfiguration#issuer
+   * @schema ApiMappingSpecForProviderDomainNameSelector#matchLabels
    */
-  readonly issuer?: string;
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * StageDRef is a reference to an Stage used to set the Stage.
+ *
+ * @schema ApiMappingSpecForProviderStageRef
+ */
+export interface ApiMappingSpecForProviderStageRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ApiMappingSpecForProviderStageRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * StageSelector selects references to Stage used to set the Stage.
+ *
+ * @schema ApiMappingSpecForProviderStageSelector
+ */
+export interface ApiMappingSpecForProviderStageSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema ApiMappingSpecForProviderStageSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema ApiMappingSpecForProviderStageSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
  * APIIDRef is a reference to an API used to set the APIID.
  *
- * @schema DeploymentSpecForProviderApiIdRef
+ * @schema IntegrationSpecForProviderApiIdRef
  */
-export interface DeploymentSpecForProviderApiIdRef {
+export interface IntegrationSpecForProviderApiIdRef {
   /**
    * Name of the referenced object.
    *
-   * @schema DeploymentSpecForProviderApiIdRef#name
+   * @schema IntegrationSpecForProviderApiIdRef#name
    */
   readonly name: string;
 
@@ -2754,92 +2810,48 @@ export interface DeploymentSpecForProviderApiIdRef {
 /**
  * APIIDSelector selects references to API used to set the APIID.
  *
- * @schema DeploymentSpecForProviderApiIdSelector
+ * @schema IntegrationSpecForProviderApiIdSelector
  */
-export interface DeploymentSpecForProviderApiIdSelector {
+export interface IntegrationSpecForProviderApiIdSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema DeploymentSpecForProviderApiIdSelector#matchControllerRef
+   * @schema IntegrationSpecForProviderApiIdSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema DeploymentSpecForProviderApiIdSelector#matchLabels
+   * @schema IntegrationSpecForProviderApiIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
- * StageNameRef is a reference to an Stage used to set the StageName.
- *
- * @schema DeploymentSpecForProviderStageNameRef
+ * @schema IntegrationSpecForProviderTlsConfig
  */
-export interface DeploymentSpecForProviderStageNameRef {
+export interface IntegrationSpecForProviderTlsConfig {
   /**
-   * Name of the referenced object.
+   * A string with a length between [1-512].
    *
-   * @schema DeploymentSpecForProviderStageNameRef#name
+   * @schema IntegrationSpecForProviderTlsConfig#serverNameToVerify
    */
-  readonly name: string;
-
-}
-
-/**
- * StageNameSelector selects references to Stage used to set the StageName.
- *
- * @schema DeploymentSpecForProviderStageNameSelector
- */
-export interface DeploymentSpecForProviderStageNameSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema DeploymentSpecForProviderStageNameSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema DeploymentSpecForProviderStageNameSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * @schema StageSpecForProviderAccessLogSettings
- */
-export interface StageSpecForProviderAccessLogSettings {
-  /**
-   * Represents an Amazon Resource Name (ARN).
-   *
-   * @schema StageSpecForProviderAccessLogSettings#destinationARN
-   */
-  readonly destinationARN?: string;
-
-  /**
-   * A string with a length between [1-1024].
-   *
-   * @schema StageSpecForProviderAccessLogSettings#format
-   */
-  readonly format?: string;
+  readonly serverNameToVerify?: string;
 
 }
 
 /**
  * APIIDRef is a reference to an API used to set the APIID.
  *
- * @schema StageSpecForProviderApiIdRef
+ * @schema ModelSpecForProviderApiIdRef
  */
-export interface StageSpecForProviderApiIdRef {
+export interface ModelSpecForProviderApiIdRef {
   /**
    * Name of the referenced object.
    *
-   * @schema StageSpecForProviderApiIdRef#name
+   * @schema ModelSpecForProviderApiIdRef#name
    */
   readonly name: string;
 
@@ -2848,88 +2860,22 @@ export interface StageSpecForProviderApiIdRef {
 /**
  * APIIDSelector selects references to API used to set the APIID.
  *
- * @schema StageSpecForProviderApiIdSelector
+ * @schema ModelSpecForProviderApiIdSelector
  */
-export interface StageSpecForProviderApiIdSelector {
+export interface ModelSpecForProviderApiIdSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema StageSpecForProviderApiIdSelector#matchControllerRef
+   * @schema ModelSpecForProviderApiIdSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema StageSpecForProviderApiIdSelector#matchLabels
+   * @schema ModelSpecForProviderApiIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * @schema StageSpecForProviderDefaultRouteSettings
- */
-export interface StageSpecForProviderDefaultRouteSettings {
-  /**
-   * @schema StageSpecForProviderDefaultRouteSettings#dataTraceEnabled
-   */
-  readonly dataTraceEnabled?: boolean;
-
-  /**
-   * @schema StageSpecForProviderDefaultRouteSettings#detailedMetricsEnabled
-   */
-  readonly detailedMetricsEnabled?: boolean;
-
-  /**
-   * The logging level.
-   *
-   * @schema StageSpecForProviderDefaultRouteSettings#loggingLevel
-   */
-  readonly loggingLevel?: string;
-
-  /**
-   * @schema StageSpecForProviderDefaultRouteSettings#throttlingBurstLimit
-   */
-  readonly throttlingBurstLimit?: number;
-
-  /**
-   * @schema StageSpecForProviderDefaultRouteSettings#throttlingRateLimit
-   */
-  readonly throttlingRateLimit?: number;
-
-}
-
-/**
- * @schema StageSpecForProviderRouteSettings
- */
-export interface StageSpecForProviderRouteSettings {
-  /**
-   * @schema StageSpecForProviderRouteSettings#dataTraceEnabled
-   */
-  readonly dataTraceEnabled?: boolean;
-
-  /**
-   * @schema StageSpecForProviderRouteSettings#detailedMetricsEnabled
-   */
-  readonly detailedMetricsEnabled?: boolean;
-
-  /**
-   * The logging level.
-   *
-   * @schema StageSpecForProviderRouteSettings#loggingLevel
-   */
-  readonly loggingLevel?: string;
-
-  /**
-   * @schema StageSpecForProviderRouteSettings#throttlingBurstLimit
-   */
-  readonly throttlingBurstLimit?: number;
-
-  /**
-   * @schema StageSpecForProviderRouteSettings#throttlingRateLimit
-   */
-  readonly throttlingRateLimit?: number;
 
 }
 
@@ -3065,224 +3011,83 @@ export interface RouteResponseSpecForProviderRouteIdSelector {
 }
 
 /**
- * APIIDRef is a reference to an API used to set the APIID.
- *
- * @schema IntegrationResponseSpecForProviderApiIdRef
+ * @schema DomainNameSpecForProviderDomainNameConfigurations
  */
-export interface IntegrationResponseSpecForProviderApiIdRef {
+export interface DomainNameSpecForProviderDomainNameConfigurations {
   /**
-   * Name of the referenced object.
-   *
-   * @schema IntegrationResponseSpecForProviderApiIdRef#name
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#apiGatewayDomainName
    */
-  readonly name: string;
+  readonly apiGatewayDomainName?: string;
+
+  /**
+   * Represents an Amazon Resource Name (ARN).
+   *
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateARN
+   */
+  readonly certificateARN?: string;
+
+  /**
+   * A string with a length between [1-128].
+   *
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateName
+   */
+  readonly certificateName?: string;
+
+  /**
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateUploadDate
+   */
+  readonly certificateUploadDate?: Date;
+
+  /**
+   * The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+   *
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#domainNameStatus
+   */
+  readonly domainNameStatus?: string;
+
+  /**
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#domainNameStatusMessage
+   */
+  readonly domainNameStatusMessage?: string;
+
+  /**
+   * Represents an endpoint type.
+   *
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#endpointType
+   */
+  readonly endpointType?: string;
+
+  /**
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#hostedZoneID
+   */
+  readonly hostedZoneID?: string;
+
+  /**
+   * The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
+   *
+   * @schema DomainNameSpecForProviderDomainNameConfigurations#securityPolicy
+   */
+  readonly securityPolicy?: string;
 
 }
 
 /**
- * APIIDSelector selects references to API used to set the APIID.
- *
- * @schema IntegrationResponseSpecForProviderApiIdSelector
+ * @schema DomainNameSpecForProviderMutualTlsAuthentication
  */
-export interface IntegrationResponseSpecForProviderApiIdSelector {
+export interface DomainNameSpecForProviderMutualTlsAuthentication {
   /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   * A string representation of a URI with a length between [1-2048].
    *
-   * @schema IntegrationResponseSpecForProviderApiIdSelector#matchControllerRef
+   * @schema DomainNameSpecForProviderMutualTlsAuthentication#truststoreURI
    */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema IntegrationResponseSpecForProviderApiIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * IntegrationIDRef is a reference to an Integration used to set the IntegrationID.
- *
- * @schema IntegrationResponseSpecForProviderIntegrationIdRef
- */
-export interface IntegrationResponseSpecForProviderIntegrationIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema IntegrationResponseSpecForProviderIntegrationIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * IntegrationIDSelector selects references to Integration used to set the IntegrationID.
- *
- * @schema IntegrationResponseSpecForProviderIntegrationIdSelector
- */
-export interface IntegrationResponseSpecForProviderIntegrationIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema IntegrationResponseSpecForProviderIntegrationIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
+  readonly truststoreURI?: string;
 
   /**
-   * MatchLabels ensures an object with matching labels is selected.
+   * A string with a length between [1-64].
    *
-   * @schema IntegrationResponseSpecForProviderIntegrationIdSelector#matchLabels
+   * @schema DomainNameSpecForProviderMutualTlsAuthentication#truststoreVersion
    */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * APIIDRef is a reference to an API used to set the APIID.
- *
- * @schema ApiMappingSpecForProviderApiIdRef
- */
-export interface ApiMappingSpecForProviderApiIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ApiMappingSpecForProviderApiIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * APIIDSelector selects references to API used to set the APIID.
- *
- * @schema ApiMappingSpecForProviderApiIdSelector
- */
-export interface ApiMappingSpecForProviderApiIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema ApiMappingSpecForProviderApiIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema ApiMappingSpecForProviderApiIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * DomainNameRef is a reference to a DomainName used to set the DomainName.
- *
- * @schema ApiMappingSpecForProviderDomainNameRef
- */
-export interface ApiMappingSpecForProviderDomainNameRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ApiMappingSpecForProviderDomainNameRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * DomainNameSelector selects references to DomainName used to set the DomainName.
- *
- * @schema ApiMappingSpecForProviderDomainNameSelector
- */
-export interface ApiMappingSpecForProviderDomainNameSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema ApiMappingSpecForProviderDomainNameSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema ApiMappingSpecForProviderDomainNameSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * StageDRef is a reference to an Stage used to set the Stage.
- *
- * @schema ApiMappingSpecForProviderStageRef
- */
-export interface ApiMappingSpecForProviderStageRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ApiMappingSpecForProviderStageRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * StageSelector selects references to Stage used to set the Stage.
- *
- * @schema ApiMappingSpecForProviderStageSelector
- */
-export interface ApiMappingSpecForProviderStageSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema ApiMappingSpecForProviderStageSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema ApiMappingSpecForProviderStageSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * APIIDRef is a reference to an API used to set the APIID.
- *
- * @schema ModelSpecForProviderApiIdRef
- */
-export interface ModelSpecForProviderApiIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ModelSpecForProviderApiIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * APIIDSelector selects references to API used to set the APIID.
- *
- * @schema ModelSpecForProviderApiIdSelector
- */
-export interface ModelSpecForProviderApiIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema ModelSpecForProviderApiIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema ModelSpecForProviderApiIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
+  readonly truststoreVersion?: string;
 
 }
 
@@ -3372,96 +3177,15 @@ export interface RouteSpecForProviderRequestParameters {
 }
 
 /**
- * @schema DomainNameSpecForProviderDomainNameConfigurations
- */
-export interface DomainNameSpecForProviderDomainNameConfigurations {
-  /**
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#apiGatewayDomainName
-   */
-  readonly apiGatewayDomainName?: string;
-
-  /**
-   * Represents an Amazon Resource Name (ARN).
-   *
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateARN
-   */
-  readonly certificateARN?: string;
-
-  /**
-   * A string with a length between [1-128].
-   *
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateName
-   */
-  readonly certificateName?: string;
-
-  /**
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#certificateUploadDate
-   */
-  readonly certificateUploadDate?: Date;
-
-  /**
-   * The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
-   *
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#domainNameStatus
-   */
-  readonly domainNameStatus?: string;
-
-  /**
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#domainNameStatusMessage
-   */
-  readonly domainNameStatusMessage?: string;
-
-  /**
-   * Represents an endpoint type.
-   *
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#endpointType
-   */
-  readonly endpointType?: string;
-
-  /**
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#hostedZoneID
-   */
-  readonly hostedZoneID?: string;
-
-  /**
-   * The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
-   *
-   * @schema DomainNameSpecForProviderDomainNameConfigurations#securityPolicy
-   */
-  readonly securityPolicy?: string;
-
-}
-
-/**
- * @schema DomainNameSpecForProviderMutualTlsAuthentication
- */
-export interface DomainNameSpecForProviderMutualTlsAuthentication {
-  /**
-   * A string representation of a URI with a length between [1-2048].
-   *
-   * @schema DomainNameSpecForProviderMutualTlsAuthentication#truststoreURI
-   */
-  readonly truststoreURI?: string;
-
-  /**
-   * A string with a length between [1-64].
-   *
-   * @schema DomainNameSpecForProviderMutualTlsAuthentication#truststoreVersion
-   */
-  readonly truststoreVersion?: string;
-
-}
-
-/**
  * APIIDRef is a reference to an API used to set the APIID.
  *
- * @schema IntegrationSpecForProviderApiIdRef
+ * @schema AuthorizerSpecForProviderApiIdRef
  */
-export interface IntegrationSpecForProviderApiIdRef {
+export interface AuthorizerSpecForProviderApiIdRef {
   /**
    * Name of the referenced object.
    *
-   * @schema IntegrationSpecForProviderApiIdRef#name
+   * @schema AuthorizerSpecForProviderApiIdRef#name
    */
   readonly name: string;
 
@@ -3470,35 +3194,40 @@ export interface IntegrationSpecForProviderApiIdRef {
 /**
  * APIIDSelector selects references to API used to set the APIID.
  *
- * @schema IntegrationSpecForProviderApiIdSelector
+ * @schema AuthorizerSpecForProviderApiIdSelector
  */
-export interface IntegrationSpecForProviderApiIdSelector {
+export interface AuthorizerSpecForProviderApiIdSelector {
   /**
    * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
    *
-   * @schema IntegrationSpecForProviderApiIdSelector#matchControllerRef
+   * @schema AuthorizerSpecForProviderApiIdSelector#matchControllerRef
    */
   readonly matchControllerRef?: boolean;
 
   /**
    * MatchLabels ensures an object with matching labels is selected.
    *
-   * @schema IntegrationSpecForProviderApiIdSelector#matchLabels
+   * @schema AuthorizerSpecForProviderApiIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 
 }
 
 /**
- * @schema IntegrationSpecForProviderTlsConfig
+ * @schema AuthorizerSpecForProviderJwtConfiguration
  */
-export interface IntegrationSpecForProviderTlsConfig {
+export interface AuthorizerSpecForProviderJwtConfiguration {
   /**
-   * A string with a length between [1-512].
-   *
-   * @schema IntegrationSpecForProviderTlsConfig#serverNameToVerify
+   * @schema AuthorizerSpecForProviderJwtConfiguration#audience
    */
-  readonly serverNameToVerify?: string;
+  readonly audience?: string[];
+
+  /**
+   * A string representation of a URI with a length between [1-2048].
+   *
+   * @schema AuthorizerSpecForProviderJwtConfiguration#issuer
+   */
+  readonly issuer?: string;
 
 }
 
@@ -3571,6 +3300,277 @@ export interface VpcLinkSpecForProviderSubnetIdSelector {
    * MatchLabels ensures an object with matching labels is selected.
    *
    * @schema VpcLinkSpecForProviderSubnetIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * APIIDRef is a reference to an API used to set the APIID.
+ *
+ * @schema IntegrationResponseSpecForProviderApiIdRef
+ */
+export interface IntegrationResponseSpecForProviderApiIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IntegrationResponseSpecForProviderApiIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * APIIDSelector selects references to API used to set the APIID.
+ *
+ * @schema IntegrationResponseSpecForProviderApiIdSelector
+ */
+export interface IntegrationResponseSpecForProviderApiIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema IntegrationResponseSpecForProviderApiIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema IntegrationResponseSpecForProviderApiIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * IntegrationIDRef is a reference to an Integration used to set the IntegrationID.
+ *
+ * @schema IntegrationResponseSpecForProviderIntegrationIdRef
+ */
+export interface IntegrationResponseSpecForProviderIntegrationIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema IntegrationResponseSpecForProviderIntegrationIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * IntegrationIDSelector selects references to Integration used to set the IntegrationID.
+ *
+ * @schema IntegrationResponseSpecForProviderIntegrationIdSelector
+ */
+export interface IntegrationResponseSpecForProviderIntegrationIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema IntegrationResponseSpecForProviderIntegrationIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema IntegrationResponseSpecForProviderIntegrationIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * @schema StageSpecForProviderAccessLogSettings
+ */
+export interface StageSpecForProviderAccessLogSettings {
+  /**
+   * Represents an Amazon Resource Name (ARN).
+   *
+   * @schema StageSpecForProviderAccessLogSettings#destinationARN
+   */
+  readonly destinationARN?: string;
+
+  /**
+   * A string with a length between [1-1024].
+   *
+   * @schema StageSpecForProviderAccessLogSettings#format
+   */
+  readonly format?: string;
+
+}
+
+/**
+ * APIIDRef is a reference to an API used to set the APIID.
+ *
+ * @schema StageSpecForProviderApiIdRef
+ */
+export interface StageSpecForProviderApiIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema StageSpecForProviderApiIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * APIIDSelector selects references to API used to set the APIID.
+ *
+ * @schema StageSpecForProviderApiIdSelector
+ */
+export interface StageSpecForProviderApiIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema StageSpecForProviderApiIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema StageSpecForProviderApiIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * @schema StageSpecForProviderDefaultRouteSettings
+ */
+export interface StageSpecForProviderDefaultRouteSettings {
+  /**
+   * @schema StageSpecForProviderDefaultRouteSettings#dataTraceEnabled
+   */
+  readonly dataTraceEnabled?: boolean;
+
+  /**
+   * @schema StageSpecForProviderDefaultRouteSettings#detailedMetricsEnabled
+   */
+  readonly detailedMetricsEnabled?: boolean;
+
+  /**
+   * The logging level.
+   *
+   * @schema StageSpecForProviderDefaultRouteSettings#loggingLevel
+   */
+  readonly loggingLevel?: string;
+
+  /**
+   * @schema StageSpecForProviderDefaultRouteSettings#throttlingBurstLimit
+   */
+  readonly throttlingBurstLimit?: number;
+
+  /**
+   * @schema StageSpecForProviderDefaultRouteSettings#throttlingRateLimit
+   */
+  readonly throttlingRateLimit?: number;
+
+}
+
+/**
+ * @schema StageSpecForProviderRouteSettings
+ */
+export interface StageSpecForProviderRouteSettings {
+  /**
+   * @schema StageSpecForProviderRouteSettings#dataTraceEnabled
+   */
+  readonly dataTraceEnabled?: boolean;
+
+  /**
+   * @schema StageSpecForProviderRouteSettings#detailedMetricsEnabled
+   */
+  readonly detailedMetricsEnabled?: boolean;
+
+  /**
+   * The logging level.
+   *
+   * @schema StageSpecForProviderRouteSettings#loggingLevel
+   */
+  readonly loggingLevel?: string;
+
+  /**
+   * @schema StageSpecForProviderRouteSettings#throttlingBurstLimit
+   */
+  readonly throttlingBurstLimit?: number;
+
+  /**
+   * @schema StageSpecForProviderRouteSettings#throttlingRateLimit
+   */
+  readonly throttlingRateLimit?: number;
+
+}
+
+/**
+ * APIIDRef is a reference to an API used to set the APIID.
+ *
+ * @schema DeploymentSpecForProviderApiIdRef
+ */
+export interface DeploymentSpecForProviderApiIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DeploymentSpecForProviderApiIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * APIIDSelector selects references to API used to set the APIID.
+ *
+ * @schema DeploymentSpecForProviderApiIdSelector
+ */
+export interface DeploymentSpecForProviderApiIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema DeploymentSpecForProviderApiIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema DeploymentSpecForProviderApiIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * StageNameRef is a reference to an Stage used to set the StageName.
+ *
+ * @schema DeploymentSpecForProviderStageNameRef
+ */
+export interface DeploymentSpecForProviderStageNameRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DeploymentSpecForProviderStageNameRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * StageNameSelector selects references to Stage used to set the StageName.
+ *
+ * @schema DeploymentSpecForProviderStageNameSelector
+ */
+export interface DeploymentSpecForProviderStageNameSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema DeploymentSpecForProviderStageNameSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema DeploymentSpecForProviderStageNameSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
 

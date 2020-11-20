@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * SNSTopic defines a managed resource that represents state of a AWS SNSTopic
- *
- * @schema SNSTopic
- */
-export class SnsTopic extends ApiObject {
-  /**
-   * Defines a "SNSTopic" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: SnsTopicProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'SNSTopic',
-      apiVersion: 'notification.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * SNSSubscription defines a managed resource that represents state of a AWS SNS Subscription
  *
  * @schema SNSSubscription
@@ -49,19 +28,20 @@ export class SnsSubscription extends ApiObject {
  *
  * @schema SNSTopic
  */
-export interface SnsTopicProps {
+export class SnsTopic extends ApiObject {
   /**
-   * @schema SNSTopic#metadata
+   * Defines a "SNSTopic" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * SNSTopicSpec defined the desired state of a AWS SNS Topic
-   *
-   * @schema SNSTopic#spec
-   */
-  readonly spec: SnsTopicSpec;
-
+  public constructor(scope: Construct, id: string, props: SnsTopicProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'SNSTopic',
+      apiVersion: 'notification.aws.crossplane.io/v1alpha1',
+    });
+  }
 }
 
 /**
@@ -85,45 +65,22 @@ export interface SnsSubscriptionProps {
 }
 
 /**
- * SNSTopicSpec defined the desired state of a AWS SNS Topic
+ * SNSTopic defines a managed resource that represents state of a AWS SNSTopic
  *
- * @schema SnsTopicSpec
+ * @schema SNSTopic
  */
-export interface SnsTopicSpec {
+export interface SnsTopicProps {
   /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema SnsTopicSpec#deletionPolicy
+   * @schema SNSTopic#metadata
    */
-  readonly deletionPolicy?: SnsTopicSpecDeletionPolicy;
+  readonly metadata?: any;
 
   /**
-   * SNSTopicParameters define the desired state of a AWS SNS Topic
+   * SNSTopicSpec defined the desired state of a AWS SNS Topic
    *
-   * @schema SnsTopicSpec#forProvider
+   * @schema SNSTopic#spec
    */
-  readonly forProvider: SnsTopicSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema SnsTopicSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: SnsTopicSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema SnsTopicSpec#providerRef
-   */
-  readonly providerRef?: SnsTopicSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema SnsTopicSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: SnsTopicSpecWriteConnectionSecretToRef;
+  readonly spec: SnsTopicSpec;
 
 }
 
@@ -171,124 +128,45 @@ export interface SnsSubscriptionSpec {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * SNSTopicSpec defined the desired state of a AWS SNS Topic
  *
- * @schema SnsTopicSpecDeletionPolicy
+ * @schema SnsTopicSpec
  */
-export enum SnsTopicSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * SNSTopicParameters define the desired state of a AWS SNS Topic
- *
- * @schema SnsTopicSpecForProvider
- */
-export interface SnsTopicSpecForProvider {
+export interface SnsTopicSpec {
   /**
-   * DeliveryRetryPolicy - the JSON serialization of the effective delivery policy, taking system defaults into account
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema SnsTopicSpecForProvider#deliveryPolicy
+   * @schema SnsTopicSpec#deletionPolicy
    */
-  readonly deliveryPolicy?: string;
+  readonly deletionPolicy?: SnsTopicSpecDeletionPolicy;
 
   /**
-   * The display name to use for a topic with SNS subscriptions.
+   * SNSTopicParameters define the desired state of a AWS SNS Topic
    *
-   * @schema SnsTopicSpecForProvider#displayName
+   * @schema SnsTopicSpec#forProvider
    */
-  readonly displayName?: string;
+  readonly forProvider: SnsTopicSpecForProvider;
 
   /**
-   * Setting this enables server side encryption at-rest to your topic. The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK
- For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters) in the AWS Key Management Service API Reference.
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema SnsTopicSpecForProvider#kmsMasterKeyId
+   * @schema SnsTopicSpec#providerConfigRef
    */
-  readonly kmsMasterKeyId?: string;
+  readonly providerConfigRef?: SnsTopicSpecProviderConfigRef;
 
   /**
-   * Name refers to the name of the AWS SNS Topic
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema SnsTopicSpecForProvider#name
+   * @schema SnsTopicSpec#providerRef
    */
-  readonly name: string;
+  readonly providerRef?: SnsTopicSpecProviderRef;
 
   /**
-   * The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema SnsTopicSpecForProvider#policy
+   * @schema SnsTopicSpec#writeConnectionSecretToRef
    */
-  readonly policy?: string;
-
-  /**
-   * Region is the region you'd like your SNSTopic to be created in.
-   *
-   * @schema SnsTopicSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * Tags represetnt a list of user-provided metadata that can be associated with a SNS Topic. For more information about tagging, see Tagging SNS Topics (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the SNS User Guide.
-   *
-   * @schema SnsTopicSpecForProvider#tags
-   */
-  readonly tags?: SnsTopicSpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema SnsTopicSpecProviderConfigRef
- */
-export interface SnsTopicSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema SnsTopicSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema SnsTopicSpecProviderRef
- */
-export interface SnsTopicSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema SnsTopicSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema SnsTopicSpecWriteConnectionSecretToRef
- */
-export interface SnsTopicSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema SnsTopicSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema SnsTopicSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
+  readonly writeConnectionSecretToRef?: SnsTopicSpecWriteConnectionSecretToRef;
 
 }
 
@@ -299,9 +177,9 @@ export interface SnsTopicSpecWriteConnectionSecretToRef {
  */
 export enum SnsSubscriptionSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -435,25 +313,124 @@ export interface SnsSubscriptionSpecWriteConnectionSecretToRef {
 }
 
 /**
- * Tag represent a user-provided metadata that can be associated with a SNS Topic. For more information about tagging, see Tagging SNS Topics (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the SNS User Guide.
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema SnsTopicSpecForProviderTags
+ * @schema SnsTopicSpecDeletionPolicy
  */
-export interface SnsTopicSpecForProviderTags {
+export enum SnsTopicSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * SNSTopicParameters define the desired state of a AWS SNS Topic
+ *
+ * @schema SnsTopicSpecForProvider
+ */
+export interface SnsTopicSpecForProvider {
   /**
-   * The key name that can be used to look up or retrieve the associated value. For example, Department or Cost Center are common choices.
+   * DeliveryRetryPolicy - the JSON serialization of the effective delivery policy, taking system defaults into account
    *
-   * @schema SnsTopicSpecForProviderTags#key
+   * @schema SnsTopicSpecForProvider#deliveryPolicy
    */
-  readonly key: string;
+  readonly deliveryPolicy?: string;
 
   /**
-   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.
- AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
+   * The display name to use for a topic with SNS subscriptions.
    *
-   * @schema SnsTopicSpecForProviderTags#value
+   * @schema SnsTopicSpecForProvider#displayName
    */
-  readonly value?: string;
+  readonly displayName?: string;
+
+  /**
+   * Setting this enables server side encryption at-rest to your topic. The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK 
+ For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters) in the AWS Key Management Service API Reference.
+   *
+   * @schema SnsTopicSpecForProvider#kmsMasterKeyId
+   */
+  readonly kmsMasterKeyId?: string;
+
+  /**
+   * Name refers to the name of the AWS SNS Topic
+   *
+   * @schema SnsTopicSpecForProvider#name
+   */
+  readonly name: string;
+
+  /**
+   * The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.
+   *
+   * @schema SnsTopicSpecForProvider#policy
+   */
+  readonly policy?: string;
+
+  /**
+   * Region is the region you'd like your SNSTopic to be created in.
+   *
+   * @schema SnsTopicSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * Tags represetnt a list of user-provided metadata that can be associated with a SNS Topic. For more information about tagging, see Tagging SNS Topics (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the SNS User Guide.
+   *
+   * @schema SnsTopicSpecForProvider#tags
+   */
+  readonly tags?: SnsTopicSpecForProviderTags[];
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema SnsTopicSpecProviderConfigRef
+ */
+export interface SnsTopicSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema SnsTopicSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema SnsTopicSpecProviderRef
+ */
+export interface SnsTopicSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema SnsTopicSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema SnsTopicSpecWriteConnectionSecretToRef
+ */
+export interface SnsTopicSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema SnsTopicSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema SnsTopicSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
 
 }
 
@@ -491,6 +468,29 @@ export interface SnsSubscriptionSpecForProviderTopicArnSelector {
    * @schema SnsSubscriptionSpecForProviderTopicArnSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Tag represent a user-provided metadata that can be associated with a SNS Topic. For more information about tagging, see Tagging SNS Topics (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the SNS User Guide.
+ *
+ * @schema SnsTopicSpecForProviderTags
+ */
+export interface SnsTopicSpecForProviderTags {
+  /**
+   * The key name that can be used to look up or retrieve the associated value. For example, Department or Cost Center are common choices.
+   *
+   * @schema SnsTopicSpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values. 
+ AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
+   *
+   * @schema SnsTopicSpecForProviderTags#value
+   */
+  readonly value?: string;
 
 }
 

@@ -3,22 +3,22 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * A DynamoTable is a managed resource that represents an AWS DynamoDB Table
+ * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
  *
- * @schema DynamoTable
+ * @schema RDSInstance
  */
-export class DynamoTable extends ApiObject {
+export class RdsInstance extends ApiObject {
   /**
-   * Defines a "DynamoTable" API object
+   * Defines a "RDSInstance" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: DynamoTableProps) {
+  public constructor(scope: Construct, id: string, props: RdsInstanceProps) {
     super(scope, id, {
       ...props,
-      kind: 'DynamoTable',
-      apiVersion: 'database.aws.crossplane.io/v1alpha1',
+      kind: 'RDSInstance',
+      apiVersion: 'database.aws.crossplane.io/v1beta1',
     });
   }
 }
@@ -45,43 +45,43 @@ export class DbSubnetGroup extends ApiObject {
 }
 
 /**
- * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
+ * A DynamoTable is a managed resource that represents an AWS DynamoDB Table
  *
- * @schema RDSInstance
+ * @schema DynamoTable
  */
-export class RdsInstance extends ApiObject {
+export class DynamoTable extends ApiObject {
   /**
-   * Defines a "RDSInstance" API object
+   * Defines a "DynamoTable" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
    * @param props initialiation props
    */
-  public constructor(scope: Construct, id: string, props: RdsInstanceProps) {
+  public constructor(scope: Construct, id: string, props: DynamoTableProps) {
     super(scope, id, {
       ...props,
-      kind: 'RDSInstance',
-      apiVersion: 'database.aws.crossplane.io/v1beta1',
+      kind: 'DynamoTable',
+      apiVersion: 'database.aws.crossplane.io/v1alpha1',
     });
   }
 }
 
 /**
- * A DynamoTable is a managed resource that represents an AWS DynamoDB Table
+ * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
  *
- * @schema DynamoTable
+ * @schema RDSInstance
  */
-export interface DynamoTableProps {
+export interface RdsInstanceProps {
   /**
-   * @schema DynamoTable#metadata
+   * @schema RDSInstance#metadata
    */
   readonly metadata?: any;
 
   /**
-   * A DynamoTableSpec defines the desired state of a DynamoDB Table.
+   * An RDSInstanceSpec defines the desired state of an RDSInstance.
    *
-   * @schema DynamoTable#spec
+   * @schema RDSInstance#spec
    */
-  readonly spec: DynamoTableSpec;
+  readonly spec: RdsInstanceSpec;
 
 }
 
@@ -106,108 +106,22 @@ export interface DbSubnetGroupProps {
 }
 
 /**
- * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
+ * A DynamoTable is a managed resource that represents an AWS DynamoDB Table
  *
- * @schema RDSInstance
+ * @schema DynamoTable
  */
-export interface RdsInstanceProps {
+export interface DynamoTableProps {
   /**
-   * @schema RDSInstance#metadata
+   * @schema DynamoTable#metadata
    */
   readonly metadata?: any;
 
   /**
-   * An RDSInstanceSpec defines the desired state of an RDSInstance.
+   * A DynamoTableSpec defines the desired state of a DynamoDB Table.
    *
-   * @schema RDSInstance#spec
+   * @schema DynamoTable#spec
    */
-  readonly spec: RdsInstanceSpec;
-
-}
-
-/**
- * A DynamoTableSpec defines the desired state of a DynamoDB Table.
- *
- * @schema DynamoTableSpec
- */
-export interface DynamoTableSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema DynamoTableSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: DynamoTableSpecDeletionPolicy;
-
-  /**
-   * DynamoTableParameters define the desired state of an AWS DynomoDBTable
-   *
-   * @schema DynamoTableSpec#forProvider
-   */
-  readonly forProvider: DynamoTableSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema DynamoTableSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: DynamoTableSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema DynamoTableSpec#providerRef
-   */
-  readonly providerRef?: DynamoTableSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema DynamoTableSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: DynamoTableSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * A DBSubnetGroupSpec defines the desired state of a DBSubnetGroup.
- *
- * @schema DbSubnetGroupSpec
- */
-export interface DbSubnetGroupSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema DbSubnetGroupSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: DbSubnetGroupSpecDeletionPolicy;
-
-  /**
-   * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
-   *
-   * @schema DbSubnetGroupSpec#forProvider
-   */
-  readonly forProvider?: DbSubnetGroupSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema DbSubnetGroupSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: DbSubnetGroupSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema DbSubnetGroupSpec#providerRef
-   */
-  readonly providerRef?: DbSubnetGroupSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema DbSubnetGroupSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: DbSubnetGroupSpecWriteConnectionSecretToRef;
+  readonly spec: DynamoTableSpec;
 
 }
 
@@ -255,251 +169,88 @@ export interface RdsInstanceSpec {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ * A DBSubnetGroupSpec defines the desired state of a DBSubnetGroup.
  *
- * @schema DynamoTableSpecDeletionPolicy
+ * @schema DbSubnetGroupSpec
  */
-export enum DynamoTableSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * DynamoTableParameters define the desired state of an AWS DynomoDBTable
- *
- * @schema DynamoTableSpecForProvider
- */
-export interface DynamoTableSpecForProvider {
+export interface DbSubnetGroupSpec {
   /**
-   * An array of attributes that describe the key schema for the table and indexes.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema DynamoTableSpecForProvider#attributeDefinitions
+   * @schema DbSubnetGroupSpec#deletionPolicy
    */
-  readonly attributeDefinitions: DynamoTableSpecForProviderAttributeDefinitions[];
+  readonly deletionPolicy?: DbSubnetGroupSpecDeletionPolicy;
 
   /**
-   * One or more global secondary indexes (the maximum is 20) to be created on the table.
+   * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
    *
-   * @schema DynamoTableSpecForProvider#globalSecondaryIndexes
+   * @schema DbSubnetGroupSpec#forProvider
    */
-  readonly globalSecondaryIndexes?: DynamoTableSpecForProviderGlobalSecondaryIndexes[];
+  readonly forProvider?: DbSubnetGroupSpecForProvider;
 
   /**
-   * KeySchema specifies the attributes that make up the primary key for a table or an index.
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema DynamoTableSpecForProvider#keySchema
+   * @schema DbSubnetGroupSpec#providerConfigRef
    */
-  readonly keySchema: DynamoTableSpecForProviderKeySchema[];
+  readonly providerConfigRef?: DbSubnetGroupSpecProviderConfigRef;
 
   /**
-   * One or more local secondary indexes (the maximum is 5) to be created on the table.
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema DynamoTableSpecForProvider#localSecondaryIndexes
+   * @schema DbSubnetGroupSpec#providerRef
    */
-  readonly localSecondaryIndexes?: DynamoTableSpecForProviderLocalSecondaryIndexes[];
+  readonly providerRef?: DbSubnetGroupSpecProviderRef;
 
   /**
-   * Represents the provisioned throughput settings for a specified table or index.
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema DynamoTableSpecForProvider#provisionedThroughput
+   * @schema DbSubnetGroupSpec#writeConnectionSecretToRef
    */
-  readonly provisionedThroughput?: DynamoTableSpecForProviderProvisionedThroughput;
-
-  /**
-   * Region is the region you'd like your DynamoTable to be created in.
-   *
-   * @schema DynamoTableSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * Represents the settings used to enable server-side encryption.
-   *
-   * @schema DynamoTableSpecForProvider#sseSpecification
-   */
-  readonly sseSpecification?: DynamoTableSpecForProviderSseSpecification;
-
-  /**
-   * The stream settings for DynamoDB Streams on the table. These settings consist of:
-   *
-   * @schema DynamoTableSpecForProvider#streamSpecification
-   */
-  readonly streamSpecification?: DynamoTableSpecForProviderStreamSpecification;
-
-  /**
-   * A list of key-value pairs to label the table.
-   *
-   * @schema DynamoTableSpecForProvider#tag
-   */
-  readonly tag?: DynamoTableSpecForProviderTag[];
+  readonly writeConnectionSecretToRef?: DbSubnetGroupSpecWriteConnectionSecretToRef;
 
 }
 
 /**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ * A DynamoTableSpec defines the desired state of a DynamoDB Table.
  *
- * @schema DynamoTableSpecProviderConfigRef
+ * @schema DynamoTableSpec
  */
-export interface DynamoTableSpecProviderConfigRef {
+export interface DynamoTableSpec {
   /**
-   * Name of the referenced object.
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
    *
-   * @schema DynamoTableSpecProviderConfigRef#name
+   * @schema DynamoTableSpec#deletionPolicy
    */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema DynamoTableSpecProviderRef
- */
-export interface DynamoTableSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DynamoTableSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema DynamoTableSpecWriteConnectionSecretToRef
- */
-export interface DynamoTableSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema DynamoTableSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
+  readonly deletionPolicy?: DynamoTableSpecDeletionPolicy;
 
   /**
-   * Namespace of the secret.
+   * DynamoTableParameters define the desired state of an AWS DynomoDBTable
    *
-   * @schema DynamoTableSpecWriteConnectionSecretToRef#namespace
+   * @schema DynamoTableSpec#forProvider
    */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema DbSubnetGroupSpecDeletionPolicy
- */
-export enum DbSubnetGroupSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
- *
- * @schema DbSubnetGroupSpecForProvider
- */
-export interface DbSubnetGroupSpecForProvider {
-  /**
-   * The description for the DB subnet group.
-   *
-   * @schema DbSubnetGroupSpecForProvider#description
-   */
-  readonly description: string;
+  readonly forProvider: DynamoTableSpecForProvider;
 
   /**
-   * Region is the region you'd like your DBSubnetGroup to be created in.
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
    *
-   * @schema DbSubnetGroupSpecForProvider#region
+   * @schema DynamoTableSpec#providerConfigRef
    */
-  readonly region?: string;
+  readonly providerConfigRef?: DynamoTableSpecProviderConfigRef;
 
   /**
-   * SubnetIDRefs is a set of references that each retrieve the subnetID from the referenced Subnet
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
    *
-   * @schema DbSubnetGroupSpecForProvider#subnetIdRefs
+   * @schema DynamoTableSpec#providerRef
    */
-  readonly subnetIdRefs?: DbSubnetGroupSpecForProviderSubnetIdRefs[];
+  readonly providerRef?: DynamoTableSpecProviderRef;
 
   /**
-   * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
    *
-   * @schema DbSubnetGroupSpecForProvider#subnetIdSelector
+   * @schema DynamoTableSpec#writeConnectionSecretToRef
    */
-  readonly subnetIdSelector?: DbSubnetGroupSpecForProviderSubnetIdSelector;
-
-  /**
-   * The EC2 Subnet IDs for the DB subnet group.
-   *
-   * @schema DbSubnetGroupSpecForProvider#subnetIds
-   */
-  readonly subnetIds?: string[];
-
-  /**
-   * A list of tags. For more information, see Tagging Amazon RDS Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the Amazon RDS User Guide.
-   *
-   * @schema DbSubnetGroupSpecForProvider#tags
-   */
-  readonly tags?: DbSubnetGroupSpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema DbSubnetGroupSpecProviderConfigRef
- */
-export interface DbSubnetGroupSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DbSubnetGroupSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema DbSubnetGroupSpecProviderRef
- */
-export interface DbSubnetGroupSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DbSubnetGroupSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema DbSubnetGroupSpecWriteConnectionSecretToRef
- */
-export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
+  readonly writeConnectionSecretToRef?: DynamoTableSpecWriteConnectionSecretToRef;
 
 }
 
@@ -510,9 +261,9 @@ export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
  */
 export enum RdsInstanceSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = 'Orphan',
+  ORPHAN = "Orphan",
   /** Delete */
-  DELETE = 'Delete',
+  DELETE = "Delete",
 }
 
 /**
@@ -989,268 +740,251 @@ export interface RdsInstanceSpecWriteConnectionSecretToRef {
 }
 
 /**
- * AttributeDefinition  represents an attribute for describing the key schema for the table and indexes.
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema DynamoTableSpecForProviderAttributeDefinitions
+ * @schema DbSubnetGroupSpecDeletionPolicy
  */
-export interface DynamoTableSpecForProviderAttributeDefinitions {
+export enum DbSubnetGroupSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
+ *
+ * @schema DbSubnetGroupSpecForProvider
+ */
+export interface DbSubnetGroupSpecForProvider {
   /**
-   * A name for the attribute.
+   * The description for the DB subnet group.
    *
-   * @schema DynamoTableSpecForProviderAttributeDefinitions#attributeName
+   * @schema DbSubnetGroupSpecForProvider#description
    */
-  readonly attributeName: string;
+  readonly description: string;
 
   /**
-   * The data type for the attribute, where:
-    * S - the attribute is of type String
-    * N - the attribute is of type Number
-    * B - the attribute is of type Binary
+   * Region is the region you'd like your DBSubnetGroup to be created in.
    *
-   * @schema DynamoTableSpecForProviderAttributeDefinitions#attributeType
+   * @schema DbSubnetGroupSpecForProvider#region
    */
-  readonly attributeType: string;
+  readonly region?: string;
+
+  /**
+   * SubnetIDRefs is a set of references that each retrieve the subnetID from the referenced Subnet
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIdRefs
+   */
+  readonly subnetIdRefs?: DbSubnetGroupSpecForProviderSubnetIdRefs[];
+
+  /**
+   * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIdSelector
+   */
+  readonly subnetIdSelector?: DbSubnetGroupSpecForProviderSubnetIdSelector;
+
+  /**
+   * The EC2 Subnet IDs for the DB subnet group.
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIds
+   */
+  readonly subnetIds?: string[];
+
+  /**
+   * A list of tags. For more information, see Tagging Amazon RDS Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the Amazon RDS User Guide.
+   *
+   * @schema DbSubnetGroupSpecForProvider#tags
+   */
+  readonly tags?: DbSubnetGroupSpecForProviderTags[];
 
 }
 
 /**
- * GlobalSecondaryIndex represents the properties of a global secondary index.
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
  *
- * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes
+ * @schema DbSubnetGroupSpecProviderConfigRef
  */
-export interface DynamoTableSpecForProviderGlobalSecondaryIndexes {
-  /**
-   * The name of the global secondary index. The name must be unique among all
-   *
-   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#indexName
-   */
-  readonly indexName?: string;
-
-  /**
-   * The complete key schema for a global secondary index, which consists of one
-   *
-   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#keySchema
-   */
-  readonly keySchema?: DynamoTableSpecForProviderGlobalSecondaryIndexesKeySchema[];
-
-  /**
-   * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.
-   *
-   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#projection
-   */
-  readonly projection?: DynamoTableSpecForProviderGlobalSecondaryIndexesProjection;
-
-  /**
-   * Represents the provisioned throughput settings for the specified global secondary index.
-   *
-   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#provisionedThroughput
-   */
-  readonly provisionedThroughput?: DynamoTableSpecForProviderGlobalSecondaryIndexesProvisionedThroughput;
-
-}
-
-/**
- * KeySchemaElement represents a single element of a key schema which make up the primary key.
- *
- * @schema DynamoTableSpecForProviderKeySchema
- */
-export interface DynamoTableSpecForProviderKeySchema {
-  /**
-   * The name of a key attribute.
-   *
-   * @schema DynamoTableSpecForProviderKeySchema#attributeName
-   */
-  readonly attributeName: string;
-
-  /**
-   * The role that this key attribute will assume:
-   *
-   * @schema DynamoTableSpecForProviderKeySchema#keyType
-   */
-  readonly keyType: string;
-
-}
-
-/**
- * LocalSecondaryIndex represents the properties of a local secondary index.
- *
- * @schema DynamoTableSpecForProviderLocalSecondaryIndexes
- */
-export interface DynamoTableSpecForProviderLocalSecondaryIndexes {
-  /**
-   * The name of the local secondary index. The name must be unique among all other indexes on this table.
-   *
-   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#indexName
-   */
-  readonly indexName?: string;
-
-  /**
-   * The complete key schema for the local secondary index, consisting of one
-   *
-   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#keySchema
-   */
-  readonly keySchema?: DynamoTableSpecForProviderLocalSecondaryIndexesKeySchema[];
-
-  /**
-   * Represents attributes that are copied (projected) from the table into the local secondary index.
-   *
-   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#projection
-   */
-  readonly projection?: DynamoTableSpecForProviderLocalSecondaryIndexesProjection;
-
-}
-
-/**
- * Represents the provisioned throughput settings for a specified table or index.
- *
- * @schema DynamoTableSpecForProviderProvisionedThroughput
- */
-export interface DynamoTableSpecForProviderProvisionedThroughput {
-  /**
-   * The maximum number of strongly consistent reads consumed per second before
-   *
-   * @schema DynamoTableSpecForProviderProvisionedThroughput#readCapacityUnits
-   */
-  readonly readCapacityUnits?: number;
-
-  /**
-   * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
-   *
-   * @schema DynamoTableSpecForProviderProvisionedThroughput#writeCapacityUnits
-   */
-  readonly writeCapacityUnits?: number;
-
-}
-
-/**
- * Represents the settings used to enable server-side encryption.
- *
- * @schema DynamoTableSpecForProviderSseSpecification
- */
-export interface DynamoTableSpecForProviderSseSpecification {
-  /**
-   * Server-side encryption type.
-   *
-   * @schema DynamoTableSpecForProviderSseSpecification#SSEType
-   */
-  readonly sseType?: string;
-
-  /**
-   * Indicates whether server-side encryption is done using an AWS managed CMK or an AWS owned CMK.
-   *
-   * @schema DynamoTableSpecForProviderSseSpecification#enabled
-   */
-  readonly enabled?: boolean;
-
-  /**
-   * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption.
-   *
-   * @schema DynamoTableSpecForProviderSseSpecification#kmsMasterKeyId
-   */
-  readonly kmsMasterKeyId?: string;
-
-}
-
-/**
- * The stream settings for DynamoDB Streams on the table. These settings consist of:
- *
- * @schema DynamoTableSpecForProviderStreamSpecification
- */
-export interface DynamoTableSpecForProviderStreamSpecification {
-  /**
-   * When an item in the table is modified, StreamViewType determines what information is written to the stream for this table.
-   *
-   * @schema DynamoTableSpecForProviderStreamSpecification#StreamViewType
-   */
-  readonly streamViewType?: string;
-
-  /**
-   * Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the table.
-   *
-   * @schema DynamoTableSpecForProviderStreamSpecification#streamEnabled
-   */
-  readonly streamEnabled?: boolean;
-
-}
-
-/**
- * Tag represetnt a key-pair metadata assigned to a DynamoDB Table
- *
- * @schema DynamoTableSpecForProviderTag
- */
-export interface DynamoTableSpecForProviderTag {
-  /**
-   * The key of the tag.
-   *
-   * @schema DynamoTableSpecForProviderTag#tag
-   */
-  readonly tag: string;
-
-  /**
-   * The value of the tag.
-   *
-   * @schema DynamoTableSpecForProviderTag#value
-   */
-  readonly value: string;
-
-}
-
-/**
- * A Reference to a named object.
- *
- * @schema DbSubnetGroupSpecForProviderSubnetIdRefs
- */
-export interface DbSubnetGroupSpecForProviderSubnetIdRefs {
+export interface DbSubnetGroupSpecProviderConfigRef {
   /**
    * Name of the referenced object.
    *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdRefs#name
+   * @schema DbSubnetGroupSpecProviderConfigRef#name
    */
   readonly name: string;
 
 }
 
 /**
- * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
  *
- * @schema DbSubnetGroupSpecForProviderSubnetIdSelector
+ * @schema DbSubnetGroupSpecProviderRef
  */
-export interface DbSubnetGroupSpecForProviderSubnetIdSelector {
+export interface DbSubnetGroupSpecProviderRef {
   /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   * Name of the referenced object.
    *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchControllerRef
+   * @schema DbSubnetGroupSpecProviderRef#name
    */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
+  readonly name: string;
 
 }
 
 /**
- * Tag is a metadata assigned to an Amazon RDS resource consisting of a key-value pair. Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
  *
- * @schema DbSubnetGroupSpecForProviderTags
+ * @schema DbSubnetGroupSpecWriteConnectionSecretToRef
  */
-export interface DbSubnetGroupSpecForProviderTags {
+export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
   /**
-   * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   * Name of the secret.
    *
-   * @schema DbSubnetGroupSpecForProviderTags#key
+   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#name
    */
-  readonly key?: string;
+  readonly name: string;
 
   /**
-   * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   * Namespace of the secret.
    *
-   * @schema DbSubnetGroupSpecForProviderTags#value
+   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#namespace
    */
-  readonly value?: string;
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema DynamoTableSpecDeletionPolicy
+ */
+export enum DynamoTableSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = "Orphan",
+  /** Delete */
+  DELETE = "Delete",
+}
+
+/**
+ * DynamoTableParameters define the desired state of an AWS DynomoDBTable
+ *
+ * @schema DynamoTableSpecForProvider
+ */
+export interface DynamoTableSpecForProvider {
+  /**
+   * An array of attributes that describe the key schema for the table and indexes.
+   *
+   * @schema DynamoTableSpecForProvider#attributeDefinitions
+   */
+  readonly attributeDefinitions: DynamoTableSpecForProviderAttributeDefinitions[];
+
+  /**
+   * One or more global secondary indexes (the maximum is 20) to be created on the table.
+   *
+   * @schema DynamoTableSpecForProvider#globalSecondaryIndexes
+   */
+  readonly globalSecondaryIndexes?: DynamoTableSpecForProviderGlobalSecondaryIndexes[];
+
+  /**
+   * KeySchema specifies the attributes that make up the primary key for a table or an index.
+   *
+   * @schema DynamoTableSpecForProvider#keySchema
+   */
+  readonly keySchema: DynamoTableSpecForProviderKeySchema[];
+
+  /**
+   * One or more local secondary indexes (the maximum is 5) to be created on the table.
+   *
+   * @schema DynamoTableSpecForProvider#localSecondaryIndexes
+   */
+  readonly localSecondaryIndexes?: DynamoTableSpecForProviderLocalSecondaryIndexes[];
+
+  /**
+   * Represents the provisioned throughput settings for a specified table or index.
+   *
+   * @schema DynamoTableSpecForProvider#provisionedThroughput
+   */
+  readonly provisionedThroughput?: DynamoTableSpecForProviderProvisionedThroughput;
+
+  /**
+   * Region is the region you'd like your DynamoTable to be created in.
+   *
+   * @schema DynamoTableSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * Represents the settings used to enable server-side encryption.
+   *
+   * @schema DynamoTableSpecForProvider#sseSpecification
+   */
+  readonly sseSpecification?: DynamoTableSpecForProviderSseSpecification;
+
+  /**
+   * The stream settings for DynamoDB Streams on the table. These settings consist of:
+   *
+   * @schema DynamoTableSpecForProvider#streamSpecification
+   */
+  readonly streamSpecification?: DynamoTableSpecForProviderStreamSpecification;
+
+  /**
+   * A list of key-value pairs to label the table.
+   *
+   * @schema DynamoTableSpecForProvider#tag
+   */
+  readonly tag?: DynamoTableSpecForProviderTag[];
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema DynamoTableSpecProviderConfigRef
+ */
+export interface DynamoTableSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DynamoTableSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema DynamoTableSpecProviderRef
+ */
+export interface DynamoTableSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DynamoTableSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema DynamoTableSpecWriteConnectionSecretToRef
+ */
+export interface DynamoTableSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema DynamoTableSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema DynamoTableSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
 
 }
 
@@ -1530,6 +1264,272 @@ export interface RdsInstanceSpecForProviderVpcSecurityGroupIdSelector {
    * @schema RdsInstanceSpecForProviderVpcSecurityGroupIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * A Reference to a named object.
+ *
+ * @schema DbSubnetGroupSpecForProviderSubnetIdRefs
+ */
+export interface DbSubnetGroupSpecForProviderSubnetIdRefs {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdRefs#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+ *
+ * @schema DbSubnetGroupSpecForProviderSubnetIdSelector
+ */
+export interface DbSubnetGroupSpecForProviderSubnetIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Tag is a metadata assigned to an Amazon RDS resource consisting of a key-value pair. Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
+ *
+ * @schema DbSubnetGroupSpecForProviderTags
+ */
+export interface DbSubnetGroupSpecForProviderTags {
+  /**
+   * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   *
+   * @schema DbSubnetGroupSpecForProviderTags#key
+   */
+  readonly key?: string;
+
+  /**
+   * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   *
+   * @schema DbSubnetGroupSpecForProviderTags#value
+   */
+  readonly value?: string;
+
+}
+
+/**
+ * AttributeDefinition  represents an attribute for describing the key schema for the table and indexes.
+ *
+ * @schema DynamoTableSpecForProviderAttributeDefinitions
+ */
+export interface DynamoTableSpecForProviderAttributeDefinitions {
+  /**
+   * A name for the attribute.
+   *
+   * @schema DynamoTableSpecForProviderAttributeDefinitions#attributeName
+   */
+  readonly attributeName: string;
+
+  /**
+   * The data type for the attribute, where: 
+    * S - the attribute is of type String 
+    * N - the attribute is of type Number 
+    * B - the attribute is of type Binary
+   *
+   * @schema DynamoTableSpecForProviderAttributeDefinitions#attributeType
+   */
+  readonly attributeType: string;
+
+}
+
+/**
+ * GlobalSecondaryIndex represents the properties of a global secondary index.
+ *
+ * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes
+ */
+export interface DynamoTableSpecForProviderGlobalSecondaryIndexes {
+  /**
+   * The name of the global secondary index. The name must be unique among all
+   *
+   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#indexName
+   */
+  readonly indexName?: string;
+
+  /**
+   * The complete key schema for a global secondary index, which consists of one
+   *
+   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#keySchema
+   */
+  readonly keySchema?: DynamoTableSpecForProviderGlobalSecondaryIndexesKeySchema[];
+
+  /**
+   * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.
+   *
+   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#projection
+   */
+  readonly projection?: DynamoTableSpecForProviderGlobalSecondaryIndexesProjection;
+
+  /**
+   * Represents the provisioned throughput settings for the specified global secondary index.
+   *
+   * @schema DynamoTableSpecForProviderGlobalSecondaryIndexes#provisionedThroughput
+   */
+  readonly provisionedThroughput?: DynamoTableSpecForProviderGlobalSecondaryIndexesProvisionedThroughput;
+
+}
+
+/**
+ * KeySchemaElement represents a single element of a key schema which make up the primary key.
+ *
+ * @schema DynamoTableSpecForProviderKeySchema
+ */
+export interface DynamoTableSpecForProviderKeySchema {
+  /**
+   * The name of a key attribute.
+   *
+   * @schema DynamoTableSpecForProviderKeySchema#attributeName
+   */
+  readonly attributeName: string;
+
+  /**
+   * The role that this key attribute will assume:
+   *
+   * @schema DynamoTableSpecForProviderKeySchema#keyType
+   */
+  readonly keyType: string;
+
+}
+
+/**
+ * LocalSecondaryIndex represents the properties of a local secondary index.
+ *
+ * @schema DynamoTableSpecForProviderLocalSecondaryIndexes
+ */
+export interface DynamoTableSpecForProviderLocalSecondaryIndexes {
+  /**
+   * The name of the local secondary index. The name must be unique among all other indexes on this table.
+   *
+   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#indexName
+   */
+  readonly indexName?: string;
+
+  /**
+   * The complete key schema for the local secondary index, consisting of one
+   *
+   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#keySchema
+   */
+  readonly keySchema?: DynamoTableSpecForProviderLocalSecondaryIndexesKeySchema[];
+
+  /**
+   * Represents attributes that are copied (projected) from the table into the local secondary index.
+   *
+   * @schema DynamoTableSpecForProviderLocalSecondaryIndexes#projection
+   */
+  readonly projection?: DynamoTableSpecForProviderLocalSecondaryIndexesProjection;
+
+}
+
+/**
+ * Represents the provisioned throughput settings for a specified table or index.
+ *
+ * @schema DynamoTableSpecForProviderProvisionedThroughput
+ */
+export interface DynamoTableSpecForProviderProvisionedThroughput {
+  /**
+   * The maximum number of strongly consistent reads consumed per second before
+   *
+   * @schema DynamoTableSpecForProviderProvisionedThroughput#readCapacityUnits
+   */
+  readonly readCapacityUnits?: number;
+
+  /**
+   * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
+   *
+   * @schema DynamoTableSpecForProviderProvisionedThroughput#writeCapacityUnits
+   */
+  readonly writeCapacityUnits?: number;
+
+}
+
+/**
+ * Represents the settings used to enable server-side encryption.
+ *
+ * @schema DynamoTableSpecForProviderSseSpecification
+ */
+export interface DynamoTableSpecForProviderSseSpecification {
+  /**
+   * Server-side encryption type.
+   *
+   * @schema DynamoTableSpecForProviderSseSpecification#SSEType
+   */
+  readonly sseType?: string;
+
+  /**
+   * Indicates whether server-side encryption is done using an AWS managed CMK or an AWS owned CMK.
+   *
+   * @schema DynamoTableSpecForProviderSseSpecification#enabled
+   */
+  readonly enabled?: boolean;
+
+  /**
+   * The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption.
+   *
+   * @schema DynamoTableSpecForProviderSseSpecification#kmsMasterKeyId
+   */
+  readonly kmsMasterKeyId?: string;
+
+}
+
+/**
+ * The stream settings for DynamoDB Streams on the table. These settings consist of:
+ *
+ * @schema DynamoTableSpecForProviderStreamSpecification
+ */
+export interface DynamoTableSpecForProviderStreamSpecification {
+  /**
+   * When an item in the table is modified, StreamViewType determines what information is written to the stream for this table.
+   *
+   * @schema DynamoTableSpecForProviderStreamSpecification#StreamViewType
+   */
+  readonly streamViewType?: string;
+
+  /**
+   * Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the table.
+   *
+   * @schema DynamoTableSpecForProviderStreamSpecification#streamEnabled
+   */
+  readonly streamEnabled?: boolean;
+
+}
+
+/**
+ * Tag represetnt a key-pair metadata assigned to a DynamoDB Table
+ *
+ * @schema DynamoTableSpecForProviderTag
+ */
+export interface DynamoTableSpecForProviderTag {
+  /**
+   * The key of the tag.
+   *
+   * @schema DynamoTableSpecForProviderTag#tag
+   */
+  readonly tag: string;
+
+  /**
+   * The value of the tag.
+   *
+   * @schema DynamoTableSpecForProviderTag#value
+   */
+  readonly value: string;
 
 }
 
