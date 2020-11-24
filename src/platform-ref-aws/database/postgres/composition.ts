@@ -1,52 +1,52 @@
 import { App, Chart } from 'cdk8s';
 import { Composition } from '../../../crossplane/imports/apiextensions.crossplane.io';
 
-export default function generate(crossplanePackage: App){
+export default function generate(crossplanePackage: App) {
 
-    const compositionYaml = new Chart(crossplanePackage, 'database-postgres-composition');
+  const compositionYaml = new Chart(crossplanePackage, 'database-postgres-composition');
 
-    new Composition(compositionYaml, 'compositepostgresqlinstances.aws.platformref.crossplane.io', {
+  new Composition(compositionYaml, 'compositepostgresqlinstances.aws.platformref.crossplane.io', {
     metadata: {
-        name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
-        labels: {
+      name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+      labels: {
         provider: 'aws',
-        },
+      },
     },
     spec: {
-        writeConnectionSecretsToNamespace: 'crossplane-system',
-        compositeTypeRef: {
+      writeConnectionSecretsToNamespace: 'crossplane-system',
+      compositeTypeRef: {
         apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
         kind: 'CompositePostgreSQLInstance',
-        },
-        resources: [
+      },
+      resources: [
         {
-            base: {
+          base: {
             apiVersion: 'database.aws.crossplane.io/v1beta1',
             kind: 'DBSubnetGroup',
             spec: {
-                forProvider: {
+              forProvider: {
                 region: 'us-west-2',
                 description: 'An excellent formation of subnetworks.',
-                },
-                reclaimPolicy: 'Delete',
+              },
+              reclaimPolicy: 'Delete',
             },
-            },
-            patches: [
+          },
+          patches: [
             {
-                fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+              fromFieldPath: 'spec.parameters.networkRef.id',
+              toFieldPath: 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
             },
-            ],
+          ],
         },
         {
-            base: {
+          base: {
             apiVersion: 'database.aws.crossplane.io/v1beta1',
             kind: 'RDSInstance',
             spec: {
-                forProvider: {
+              forProvider: {
                 region: 'us-west-2',
                 dbSubnetGroupNameSelector: {
-                    matchControllerRef: true,
+                  matchControllerRef: true,
                 },
                 dbInstanceClass: 'db.t2.small',
                 masterUsername: 'masteruser',
@@ -54,51 +54,51 @@ export default function generate(crossplanePackage: App){
                 engineVersion: '9.6',
                 skipFinalSnapshotBeforeDeletion: true,
                 publiclyAccessible: false,
-                },
-                writeConnectionSecretToRef: {
+              },
+              writeConnectionSecretToRef: {
                 namespace: 'crossplane-system',
-                },
-                reclaimPolicy: 'Delete',
+              },
+              reclaimPolicy: 'Delete',
             },
-            },
-            patches: [
+          },
+          patches: [
             {
-                fromFieldPath: 'metadata.uid',
-                toFieldPath: 'spec.writeConnectionSecretToRef.name',
-                transforms: [
+              fromFieldPath: 'metadata.uid',
+              toFieldPath: 'spec.writeConnectionSecretToRef.name',
+              transforms: [
                 {
-                    type: 'string',
-                    string: {
+                  type: 'string',
+                  string: {
                     fmt: '%s-postgresql',
-                    },
+                  },
                 },
-                ],
+              ],
             },
             {
-                fromFieldPath: 'spec.parameters.storageGB',
-                toFieldPath: 'spec.forProvider.allocatedStorage',
+              fromFieldPath: 'spec.parameters.storageGB',
+              toFieldPath: 'spec.forProvider.allocatedStorage',
             },
             {
-                fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+              fromFieldPath: 'spec.parameters.networkRef.id',
+              toFieldPath: 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
             },
-            ],
-            connectionDetails: [
+          ],
+          connectionDetails: [
             {
-                fromConnectionSecretKey: 'username',
-            },
-            {
-                fromConnectionSecretKey: 'password',
+              fromConnectionSecretKey: 'username',
             },
             {
-                fromConnectionSecretKey: 'endpoint',
+              fromConnectionSecretKey: 'password',
             },
             {
-                fromConnectionSecretKey: 'port',
+              fromConnectionSecretKey: 'endpoint',
             },
-            ],
+            {
+              fromConnectionSecretKey: 'port',
+            },
+          ],
         },
-        ],
+      ],
     },
-    });
+  });
 }

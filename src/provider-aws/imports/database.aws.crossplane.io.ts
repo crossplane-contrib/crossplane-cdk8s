@@ -261,9 +261,9 @@ export interface DynamoTableSpec {
  */
 export enum RdsInstanceSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -746,9 +746,9 @@ export interface RdsInstanceSpecWriteConnectionSecretToRef {
  */
 export enum DbSubnetGroupSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -860,9 +860,9 @@ export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
  */
 export enum DynamoTableSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1340,9 +1340,9 @@ export interface DynamoTableSpecForProviderAttributeDefinitions {
   readonly attributeName: string;
 
   /**
-   * The data type for the attribute, where: 
-    * S - the attribute is of type String 
-    * N - the attribute is of type Number 
+   * The data type for the attribute, where:
+    * S - the attribute is of type String
+    * N - the attribute is of type Number
     * B - the attribute is of type Binary
    *
    * @schema DynamoTableSpecForProviderAttributeDefinitions#attributeType

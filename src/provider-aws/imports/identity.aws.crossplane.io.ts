@@ -765,9 +765,9 @@ export interface IamRolePolicyAttachmentSpec {
  */
 export enum IamRoleSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -879,9 +879,9 @@ export interface IamRoleSpecWriteConnectionSecretToRef {
  */
 export enum IamAccessKeySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -979,9 +979,9 @@ export interface IamAccessKeySpecWriteConnectionSecretToRef {
  */
 export enum IamGroupSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1058,9 +1058,9 @@ export interface IamGroupSpecWriteConnectionSecretToRef {
  */
 export enum IamGroupPolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1172,9 +1172,9 @@ export interface IamGroupPolicyAttachmentSpecWriteConnectionSecretToRef {
  */
 export enum IamUserPolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1286,9 +1286,9 @@ export interface IamUserPolicyAttachmentSpecWriteConnectionSecretToRef {
  */
 export enum IamUserSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1379,9 +1379,9 @@ export interface IamUserSpecWriteConnectionSecretToRef {
  */
 export enum IamGroupUserMembershipSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1493,9 +1493,9 @@ export interface IamGroupUserMembershipSpecWriteConnectionSecretToRef {
  */
 export enum IamPolicySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1593,9 +1593,9 @@ export interface IamPolicySpecWriteConnectionSecretToRef {
  */
 export enum IamRolePolicyAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1714,7 +1714,7 @@ export interface IamRoleSpecForProviderTags {
   readonly key: string;
 
   /**
-   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values. 
+   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.
  AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
    *
    * @schema IamRoleSpecForProviderTags#value
@@ -1730,9 +1730,9 @@ export interface IamRoleSpecForProviderTags {
  */
 export enum IamAccessKeySpecForProviderAccessKeyStatus {
   /** Active */
-  ACTIVE = "Active",
+  ACTIVE = 'Active',
   /** Inactive */
-  INACTIVE = "Inactive",
+  INACTIVE = 'Inactive',
 }
 
 /**

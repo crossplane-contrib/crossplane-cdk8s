@@ -177,9 +177,9 @@ export interface BucketPolicySpec {
  */
 export enum BucketSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -382,9 +382,9 @@ export interface BucketSpecWriteConnectionSecretToRef {
  */
 export enum BucketPolicySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -518,13 +518,13 @@ export interface BucketSpecForProviderAccelerateConfiguration {
  */
 export enum BucketSpecForProviderAcl {
   /** private */
-  PRIVATE = "private",
+  PRIVATE = 'private',
   /** public-read */
-  PUBLIC_READ = "public-read",
+  PUBLIC_READ = 'public-read',
   /** public-read-write */
-  PUBLIC_READ_WRITE = "public-read-write",
+  PUBLIC_READ_WRITE = 'public-read-write',
   /** authenticated-read */
-  AUTHENTICATED_READ = "authenticated-read",
+  AUTHENTICATED_READ = 'authenticated-read',
 }
 
 /**
@@ -549,7 +549,7 @@ export interface BucketSpecForProviderCorsConfiguration {
  */
 export interface BucketSpecForProviderLifecycleConfiguration {
   /**
-   * A lifecycle rule for individual objects in an Amazon S3 bucket. 
+   * A lifecycle rule for individual objects in an Amazon S3 bucket.
  Rules is a required field
    *
    * @schema BucketSpecForProviderLifecycleConfiguration#rules
@@ -652,7 +652,7 @@ export interface BucketSpecForProviderPaymentConfiguration {
  */
 export interface BucketSpecForProviderReplicationConfiguration {
   /**
-   * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects. For more information, see How to Set Up Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the Amazon Simple Storage Service Developer Guide. 
+   * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects. For more information, see How to Set Up Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the Amazon Simple Storage Service Developer Guide.
  At least one of role, roleRef or roleSelector fields is required.
    *
    * @schema BucketSpecForProviderReplicationConfiguration#role
@@ -674,7 +674,7 @@ export interface BucketSpecForProviderReplicationConfiguration {
   readonly roleSelector?: BucketSpecForProviderReplicationConfigurationRoleSelector;
 
   /**
-   * A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules. 
+   * A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.
  Rules is a required field
    *
    * @schema BucketSpecForProviderReplicationConfiguration#rules
@@ -886,9 +886,9 @@ export interface BucketPolicySpecForProviderStatements {
  */
 export enum BucketSpecForProviderAccelerateConfigurationStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Suspended */
-  SUSPENDED = "Suspended",
+  SUSPENDED = 'Suspended',
 }
 
 /**
@@ -983,7 +983,7 @@ export interface BucketSpecForProviderLifecycleConfigurationRules {
   readonly noncurrentVersionTransitions?: BucketSpecForProviderLifecycleConfigurationRulesNoncurrentVersionTransitions[];
 
   /**
-   * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied. 
+   * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
  Status is a required field, valid values are Enabled or Disabled
    *
    * @schema BucketSpecForProviderLifecycleConfigurationRules#status
@@ -1072,7 +1072,7 @@ export interface BucketSpecForProviderNotificationConfigurationLambdaFunctionCon
   readonly id?: string;
 
   /**
-   * The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. 
+   * The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide.
  Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations
    *
    * @schema BucketSpecForProviderNotificationConfigurationLambdaFunctionConfigurations#events
@@ -1087,7 +1087,7 @@ export interface BucketSpecForProviderNotificationConfigurationLambdaFunctionCon
   readonly filter?: BucketSpecForProviderNotificationConfigurationLambdaFunctionConfigurationsFilter;
 
   /**
-   * The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs. 
+   * The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.
  LambdaFunctionArn is a required field
    *
    * @schema BucketSpecForProviderNotificationConfigurationLambdaFunctionConfigurations#lambdaFunctionArn
@@ -1110,7 +1110,7 @@ export interface BucketSpecForProviderNotificationConfigurationQueueConfiguratio
   readonly id?: string;
 
   /**
-   * A collection of bucket events for which to send notifications 
+   * A collection of bucket events for which to send notifications
  Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations
    *
    * @schema BucketSpecForProviderNotificationConfigurationQueueConfigurations#events
@@ -1125,7 +1125,7 @@ export interface BucketSpecForProviderNotificationConfigurationQueueConfiguratio
   readonly filter?: BucketSpecForProviderNotificationConfigurationQueueConfigurationsFilter;
 
   /**
-   * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type. 
+   * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.
  QueueArn is a required field
    *
    * @schema BucketSpecForProviderNotificationConfigurationQueueConfigurations#queueArn
@@ -1148,7 +1148,7 @@ export interface BucketSpecForProviderNotificationConfigurationTopicConfiguratio
   readonly id?: string;
 
   /**
-   * The Amazon S3 bucket event about which to send notifications. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide. 
+   * The Amazon S3 bucket event about which to send notifications. For more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the Amazon Simple Storage Service Developer Guide.
  Events is a required field A full list of valid events can be found in the Amazon S3 Developer guide https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations
    *
    * @schema BucketSpecForProviderNotificationConfigurationTopicConfigurations#events
@@ -1192,9 +1192,9 @@ export interface BucketSpecForProviderNotificationConfigurationTopicConfiguratio
  */
 export enum BucketSpecForProviderPaymentConfigurationPayer {
   /** Requester */
-  REQUESTER = "Requester",
+  REQUESTER = 'Requester',
   /** BucketOwner */
-  BUCKET_OWNER = "BucketOwner",
+  BUCKET_OWNER = 'BucketOwner',
 }
 
 /**
@@ -1241,7 +1241,7 @@ export interface BucketSpecForProviderReplicationConfigurationRoleSelector {
  */
 export interface BucketSpecForProviderReplicationConfigurationRules {
   /**
-   * Specifies whether Amazon S3 replicates the delete markers. If you specify a Filter, you must specify this element. However, in the latest version of replication configuration (when Filter is specified), Amazon S3 doesn't replicate delete markers. Therefore, the DeleteMarkerReplication element can contain only <Status>Disabled</Status>. For an example configuration, see Basic Rule Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). 
+   * Specifies whether Amazon S3 replicates the delete markers. If you specify a Filter, you must specify this element. However, in the latest version of replication configuration (when Filter is specified), Amazon S3 doesn't replicate delete markers. Therefore, the DeleteMarkerReplication element can contain only <Status>Disabled</Status>. For an example configuration, see Basic Rule Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
  If you don't specify the Filter element, Amazon S3 assumes that the replication configuration is the earlier version, V1. In the earlier version, Amazon S3 handled replication of delete markers differently. For more information, see Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
    *
    * @schema BucketSpecForProviderReplicationConfigurationRules#deleteMarkerReplication
@@ -1249,7 +1249,7 @@ export interface BucketSpecForProviderReplicationConfigurationRules {
   readonly deleteMarkerReplication?: BucketSpecForProviderReplicationConfigurationRulesDeleteMarkerReplication;
 
   /**
-   * A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC). 
+   * A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).
  Destination is a required field
    *
    * @schema BucketSpecForProviderReplicationConfigurationRules#destination
@@ -1278,9 +1278,9 @@ export interface BucketSpecForProviderReplicationConfigurationRules {
   readonly id?: string;
 
   /**
-   * The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example: 
-    * Same object quality prefix-based filter criteria if prefixes you specified    in multiple rules overlap 
-    * Same object qualify tag-based filter criteria specified in multiple    rules 
+   * The priority associated with the rule. If you specify multiple rules in a replication configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering. If two or more rules identify the same object based on a specified filter, the rule with higher priority takes precedence. For example:
+    * Same object quality prefix-based filter criteria if prefixes you specified    in multiple rules overlap
+    * Same object qualify tag-based filter criteria specified in multiple    rules
  For more information, see Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon Simple Storage Service Developer Guide.
    *
    * @schema BucketSpecForProviderReplicationConfigurationRules#priority
@@ -1295,7 +1295,7 @@ export interface BucketSpecForProviderReplicationConfigurationRules {
   readonly sourceSelectionCriteria?: BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCriteria;
 
   /**
-   * Specifies whether the rule is enabled. 
+   * Specifies whether the rule is enabled.
  Status is a required field Valid values are "Enabled" or "Disabled"
    *
    * @schema BucketSpecForProviderReplicationConfigurationRules#status
@@ -1348,9 +1348,9 @@ export interface BucketSpecForProviderTaggingTagSet {
  */
 export enum BucketSpecForProviderVersioningConfigurationMfaDelete {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -1360,9 +1360,9 @@ export enum BucketSpecForProviderVersioningConfigurationMfaDelete {
  */
 export enum BucketSpecForProviderVersioningConfigurationStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Suspended */
-  SUSPENDED = "Suspended",
+  SUSPENDED = 'Suspended',
 }
 
 /**
@@ -1489,9 +1489,9 @@ export interface BucketPolicySpecForProviderStatementsCondition {
  */
 export enum BucketPolicySpecForProviderStatementsEffect {
   /** Allow */
-  ALLOW = "Allow",
+  ALLOW = 'Allow',
   /** Deny */
-  DENY = "Deny",
+  DENY = 'Deny',
 }
 
 /**
@@ -1677,16 +1677,16 @@ export interface BucketSpecForProviderLifecycleConfigurationRulesNoncurrentVersi
 }
 
 /**
- * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied. 
+ * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
  Status is a required field, valid values are Enabled or Disabled
  *
  * @schema BucketSpecForProviderLifecycleConfigurationRulesStatus
  */
 export enum BucketSpecForProviderLifecycleConfigurationRulesStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -1725,11 +1725,11 @@ export interface BucketSpecForProviderLifecycleConfigurationRulesTransitions {
  */
 export enum BucketSpecForProviderLoggingConfigurationTargetGrantsBucketLogsPermission {
   /** FULL_CONTROL */
-  FULL_CONTROL = "FULL_CONTROL",
+  FULL_CONTROL = 'FULL_CONTROL',
   /** READ */
-  READ = "READ",
+  READ = 'READ',
   /** WRITE */
-  WRITE = "WRITE",
+  WRITE = 'WRITE',
 }
 
 /**
@@ -1858,7 +1858,7 @@ export interface BucketSpecForProviderNotificationConfigurationTopicConfiguratio
 }
 
 /**
- * Specifies whether Amazon S3 replicates the delete markers. If you specify a Filter, you must specify this element. However, in the latest version of replication configuration (when Filter is specified), Amazon S3 doesn't replicate delete markers. Therefore, the DeleteMarkerReplication element can contain only <Status>Disabled</Status>. For an example configuration, see Basic Rule Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). 
+ * Specifies whether Amazon S3 replicates the delete markers. If you specify a Filter, you must specify this element. However, in the latest version of replication configuration (when Filter is specified), Amazon S3 doesn't replicate delete markers. Therefore, the DeleteMarkerReplication element can contain only <Status>Disabled</Status>. For an example configuration, see Basic Rule Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
  If you don't specify the Filter element, Amazon S3 assumes that the replication configuration is the earlier version, V1. In the earlier version, Amazon S3 handled replication of delete markers differently. For more information, see Backward Compatibility (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesDeleteMarkerReplication
@@ -1874,7 +1874,7 @@ export interface BucketSpecForProviderReplicationConfigurationRulesDeleteMarkerR
 }
 
 /**
- * A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC). 
+ * A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).
  Destination is a required field
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesDestination
@@ -1967,8 +1967,8 @@ export interface BucketSpecForProviderReplicationConfigurationRulesExistingObjec
  */
 export interface BucketSpecForProviderReplicationConfigurationRulesFilter {
   /**
-   * A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: 
-    * If you specify both a Prefix and a Tag filter, wrap these filters in    an And tag. 
+   * A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example:
+    * If you specify both a Prefix and a Tag filter, wrap these filters in    an And tag.
     * If you specify a filter based on multiple tags, wrap the Tag elements    in an And tag.
    *
    * @schema BucketSpecForProviderReplicationConfigurationRulesFilter#and
@@ -2007,16 +2007,16 @@ export interface BucketSpecForProviderReplicationConfigurationRulesSourceSelecti
 }
 
 /**
- * Specifies whether the rule is enabled. 
+ * Specifies whether the rule is enabled.
  Status is a required field Valid values are "Enabled" or "Disabled"
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesStatus
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -2026,11 +2026,11 @@ export enum BucketSpecForProviderReplicationConfigurationRulesStatus {
  */
 export interface BucketSpecForProviderServerSideEncryptionConfigurationRulesApplyServerSideEncryptionByDefault {
   /**
-   * AWS Key Management Service (KMS) customer master key ID to use for the default encryption. This parameter is allowed if and only if SSEAlgorithm is set to aws:kms. 
- You can specify the key ID or the Amazon Resource Name (ARN) of the CMK. However, if you are using encryption with cross-account operations, you must use a fully qualified CMK ARN. For more information, see Using encryption for cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy). 
- For example: 
-    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab 
-    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab 
+   * AWS Key Management Service (KMS) customer master key ID to use for the default encryption. This parameter is allowed if and only if SSEAlgorithm is set to aws:kms.
+ You can specify the key ID or the Amazon Resource Name (ARN) of the CMK. However, if you are using encryption with cross-account operations, you must use a fully qualified CMK ARN. For more information, see Using encryption for cross-account operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).
+ For example:
+    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
  Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For more information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the AWS Key Management Service Developer Guide.
    *
    * @schema BucketSpecForProviderServerSideEncryptionConfigurationRulesApplyServerSideEncryptionByDefault#kmsMasterKeyId
@@ -2053,9 +2053,9 @@ export interface BucketSpecForProviderServerSideEncryptionConfigurationRulesAppl
  */
 export enum BucketSpecForProviderWebsiteConfigurationRedirectAllRequestsToProtocol {
   /** http */
-  HTTP = "http",
+  HTTP = 'http',
   /** https */
-  HTTPS = "https",
+  HTTPS = 'https',
 }
 
 /**
@@ -2288,15 +2288,15 @@ export interface BucketSpecForProviderLifecycleConfigurationRulesFilterTag {
  */
 export enum BucketSpecForProviderLifecycleConfigurationRulesNoncurrentVersionTransitionsStorageClass {
   /** GLACIER */
-  GLACIER = "GLACIER",
+  GLACIER = 'GLACIER',
   /** STANDARD_IA */
-  STANDARD_IA = "STANDARD_IA",
+  STANDARD_IA = 'STANDARD_IA',
   /** ONEZONE_IA */
-  ONEZONE_IA = "ONEZONE_IA",
+  ONEZONE_IA = 'ONEZONE_IA',
   /** INTELLIGENT_TIERING */
-  INTELLIGENT_TIERING = "INTELLIGENT_TIERING",
+  INTELLIGENT_TIERING = 'INTELLIGENT_TIERING',
   /** DEEP_ARCHIVE */
-  DEEP_ARCHIVE = "DEEP_ARCHIVE",
+  DEEP_ARCHIVE = 'DEEP_ARCHIVE',
 }
 
 /**
@@ -2306,15 +2306,15 @@ export enum BucketSpecForProviderLifecycleConfigurationRulesNoncurrentVersionTra
  */
 export enum BucketSpecForProviderLifecycleConfigurationRulesTransitionsStorageClass {
   /** GLACIER */
-  GLACIER = "GLACIER",
+  GLACIER = 'GLACIER',
   /** STANDARD_IA */
-  STANDARD_IA = "STANDARD_IA",
+  STANDARD_IA = 'STANDARD_IA',
   /** ONEZONE_IA */
-  ONEZONE_IA = "ONEZONE_IA",
+  ONEZONE_IA = 'ONEZONE_IA',
   /** INTELLIGENT_TIERING */
-  INTELLIGENT_TIERING = "INTELLIGENT_TIERING",
+  INTELLIGENT_TIERING = 'INTELLIGENT_TIERING',
   /** DEEP_ARCHIVE */
-  DEEP_ARCHIVE = "DEEP_ARCHIVE",
+  DEEP_ARCHIVE = 'DEEP_ARCHIVE',
 }
 
 /**
@@ -2324,11 +2324,11 @@ export enum BucketSpecForProviderLifecycleConfigurationRulesTransitionsStorageCl
  */
 export enum BucketSpecForProviderLoggingConfigurationTargetGrantsTargetGranteeType {
   /** CanonicalUser */
-  CANONICAL_USER = "CanonicalUser",
+  CANONICAL_USER = 'CanonicalUser',
   /** AmazonCustomerByEmail */
-  AMAZON_CUSTOMER_BY_EMAIL = "AmazonCustomerByEmail",
+  AMAZON_CUSTOMER_BY_EMAIL = 'AmazonCustomerByEmail',
   /** Group */
-  GROUP = "Group",
+  GROUP = 'Group',
 }
 
 /**
@@ -2383,7 +2383,7 @@ export interface BucketSpecForProviderNotificationConfigurationTopicConfiguratio
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesDeleteMarkerReplicationStatus {
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -2467,7 +2467,7 @@ export interface BucketSpecForProviderReplicationConfigurationRulesDestinationMe
   readonly eventThreshold: BucketSpecForProviderReplicationConfigurationRulesDestinationMetricsEventThreshold;
 
   /**
-   * Specifies whether the replication metrics are enabled. 
+   * Specifies whether the replication metrics are enabled.
  Status is a required field, valid values are "Enabled" and "Disabled"
    *
    * @schema BucketSpecForProviderReplicationConfigurationRulesDestinationMetrics#status
@@ -2505,15 +2505,15 @@ export interface BucketSpecForProviderReplicationConfigurationRulesDestinationRe
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesDestinationStorageClass {
   /** GLACIER */
-  GLACIER = "GLACIER",
+  GLACIER = 'GLACIER',
   /** STANDARD_IA */
-  STANDARD_IA = "STANDARD_IA",
+  STANDARD_IA = 'STANDARD_IA',
   /** ONEZONE_IA */
-  ONEZONE_IA = "ONEZONE_IA",
+  ONEZONE_IA = 'ONEZONE_IA',
   /** INTELLIGENT_TIERING */
-  INTELLIGENT_TIERING = "INTELLIGENT_TIERING",
+  INTELLIGENT_TIERING = 'INTELLIGENT_TIERING',
   /** DEEP_ARCHIVE */
-  DEEP_ARCHIVE = "DEEP_ARCHIVE",
+  DEEP_ARCHIVE = 'DEEP_ARCHIVE',
 }
 
 /**
@@ -2523,14 +2523,14 @@ export enum BucketSpecForProviderReplicationConfigurationRulesDestinationStorage
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesExistingObjectReplicationStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
- * A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: 
-    * If you specify both a Prefix and a Tag filter, wrap these filters in    an And tag. 
+ * A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example:
+    * If you specify both a Prefix and a Tag filter, wrap these filters in    an And tag.
     * If you specify a filter based on multiple tags, wrap the Tag elements    in an And tag.
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesFilterAnd
@@ -2581,7 +2581,7 @@ export interface BucketSpecForProviderReplicationConfigurationRulesFilterTag {
  */
 export interface BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCriteriaSseKmsEncryptedObjects {
   /**
-   * Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service. 
+   * Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.
  Status is a required field Valid values are "Enabled" or "Disabled"
    *
    * @schema BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCriteriaSseKmsEncryptedObjects#status
@@ -2833,7 +2833,7 @@ export interface BucketSpecForProviderNotificationConfigurationTopicConfiguratio
  */
 export interface BucketSpecForProviderReplicationConfigurationRulesDestinationMetricsEventThreshold {
   /**
-   * Contains an integer specifying time in minutes. 
+   * Contains an integer specifying time in minutes.
  Valid values: 15 minutes.
    *
    * @schema BucketSpecForProviderReplicationConfigurationRulesDestinationMetricsEventThreshold#minutes
@@ -2843,16 +2843,16 @@ export interface BucketSpecForProviderReplicationConfigurationRulesDestinationMe
 }
 
 /**
- * Specifies whether the replication metrics are enabled. 
+ * Specifies whether the replication metrics are enabled.
  Status is a required field, valid values are "Enabled" and "Disabled"
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesDestinationMetricsStatus
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesDestinationMetricsStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -2862,9 +2862,9 @@ export enum BucketSpecForProviderReplicationConfigurationRulesDestinationMetrics
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesDestinationReplicationTimeStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -2874,7 +2874,7 @@ export enum BucketSpecForProviderReplicationConfigurationRulesDestinationReplica
  */
 export interface BucketSpecForProviderReplicationConfigurationRulesDestinationReplicationTimeTime {
   /**
-   * Contains an integer specifying time in minutes. 
+   * Contains an integer specifying time in minutes.
  Valid values: 15 minutes.
    *
    * @schema BucketSpecForProviderReplicationConfigurationRulesDestinationReplicationTimeTime#minutes
@@ -2906,16 +2906,16 @@ export interface BucketSpecForProviderReplicationConfigurationRulesFilterAndTag 
 }
 
 /**
- * Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service. 
+ * Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.
  Status is a required field Valid values are "Enabled" or "Disabled"
  *
  * @schema BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCriteriaSseKmsEncryptedObjectsStatus
  */
 export enum BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCriteriaSseKmsEncryptedObjectsStatus {
   /** Enabled */
-  ENABLED = "Enabled",
+  ENABLED = 'Enabled',
   /** Disabled */
-  DISABLED = "Disabled",
+  DISABLED = 'Disabled',
 }
 
 /**
@@ -2925,9 +2925,9 @@ export enum BucketSpecForProviderReplicationConfigurationRulesSourceSelectionCri
  */
 export enum BucketSpecForProviderNotificationConfigurationLambdaFunctionConfigurationsFilterKeyFilterRulesName {
   /** prefix */
-  PREFIX = "prefix",
+  PREFIX = 'prefix',
   /** suffix */
-  SUFFIX = "suffix",
+  SUFFIX = 'suffix',
 }
 
 /**
@@ -2937,9 +2937,9 @@ export enum BucketSpecForProviderNotificationConfigurationLambdaFunctionConfigur
  */
 export enum BucketSpecForProviderNotificationConfigurationQueueConfigurationsFilterKeyFilterRulesName {
   /** prefix */
-  PREFIX = "prefix",
+  PREFIX = 'prefix',
   /** suffix */
-  SUFFIX = "suffix",
+  SUFFIX = 'suffix',
 }
 
 /**
@@ -2949,8 +2949,8 @@ export enum BucketSpecForProviderNotificationConfigurationQueueConfigurationsFil
  */
 export enum BucketSpecForProviderNotificationConfigurationTopicConfigurationsFilterKeyFilterRulesName {
   /** prefix */
-  PREFIX = "prefix",
+  PREFIX = 'prefix',
   /** suffix */
-  SUFFIX = "suffix",
+  SUFFIX = 'suffix',
 }
 

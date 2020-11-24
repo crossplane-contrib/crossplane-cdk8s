@@ -597,9 +597,9 @@ export interface SubnetSpec {
  */
 export enum NatGatewaySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -725,9 +725,9 @@ export interface NatGatewaySpecWriteConnectionSecretToRef {
  */
 export enum ElasticIpSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -758,9 +758,9 @@ export interface ElasticIpSpecForProvider {
   readonly domain?: ElasticIpSpecForProviderDomain;
 
   /**
-   * The location from which the IP address is advertised. Use this parameter to limit the address to this location. 
- A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises IP addresses and limits the addresses to the group. IP addresses cannot move between network border groups. 
- Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups. 
+   * The location from which the IP address is advertised. Use this parameter to limit the address to this location.
+ A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises IP addresses and limits the addresses to the group. IP addresses cannot move between network border groups.
+ Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups.
  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
    *
    * @schema ElasticIpSpecForProvider#networkBorderGroup
@@ -849,9 +849,9 @@ export interface ElasticIpSpecWriteConnectionSecretToRef {
  */
 export enum RouteTableSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -970,9 +970,9 @@ export interface RouteTableSpecWriteConnectionSecretToRef {
  */
 export enum InternetGatewaySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1077,9 +1077,9 @@ export interface InternetGatewaySpecWriteConnectionSecretToRef {
  */
 export enum SecurityGroupSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1212,9 +1212,9 @@ export interface SecurityGroupSpecWriteConnectionSecretToRef {
  */
 export enum VpcSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1326,9 +1326,9 @@ export interface VpcSpecWriteConnectionSecretToRef {
  */
 export enum SubnetSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1571,9 +1571,9 @@ export interface NatGatewaySpecForProviderTags {
  */
 export enum ElasticIpSpecForProviderDomain {
   /** vpc */
-  VPC = "vpc",
+  VPC = 'vpc',
   /** standard */
-  STANDARD = "standard",
+  STANDARD = 'standard',
 }
 
 /**
@@ -1795,7 +1795,7 @@ export interface SecurityGroupSpecForProviderEgress {
   readonly fromPort?: number;
 
   /**
-   * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). 
+   * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
  [VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.
    *
    * @schema SecurityGroupSpecForProviderEgress#ipProtocol
@@ -1810,7 +1810,7 @@ export interface SecurityGroupSpecForProviderEgress {
   readonly ipRanges?: SecurityGroupSpecForProviderEgressIpRanges[];
 
   /**
-   * The IPv6 ranges. 
+   * The IPv6 ranges.
  [VPC only]
    *
    * @schema SecurityGroupSpecForProviderEgress#ipv6Ranges
@@ -1818,7 +1818,7 @@ export interface SecurityGroupSpecForProviderEgress {
   readonly ipv6Ranges?: SecurityGroupSpecForProviderEgressIpv6Ranges[];
 
   /**
-   * PrefixListIDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group. 
+   * PrefixListIDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
  [VPC only]
    *
    * @schema SecurityGroupSpecForProviderEgress#prefixListIds
@@ -1855,7 +1855,7 @@ export interface SecurityGroupSpecForProviderIngress {
   readonly fromPort?: number;
 
   /**
-   * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). 
+   * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
  [VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.
    *
    * @schema SecurityGroupSpecForProviderIngress#ipProtocol
@@ -1870,7 +1870,7 @@ export interface SecurityGroupSpecForProviderIngress {
   readonly ipRanges?: SecurityGroupSpecForProviderIngressIpRanges[];
 
   /**
-   * The IPv6 ranges. 
+   * The IPv6 ranges.
  [VPC only]
    *
    * @schema SecurityGroupSpecForProviderIngress#ipv6Ranges
@@ -1878,7 +1878,7 @@ export interface SecurityGroupSpecForProviderIngress {
   readonly ipv6Ranges?: SecurityGroupSpecForProviderIngressIpv6Ranges[];
 
   /**
-   * PrefixListIDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group. 
+   * PrefixListIDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
  [VPC only]
    *
    * @schema SecurityGroupSpecForProviderIngress#prefixListIds
@@ -2129,7 +2129,7 @@ export interface SecurityGroupSpecForProviderEgressIpRanges {
   readonly cidrIp: string;
 
   /**
-   * A description for the security group rule that references this IPv4 address range. 
+   * A description for the security group rule that references this IPv4 address range.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
    *
    * @schema SecurityGroupSpecForProviderEgressIpRanges#description
@@ -2152,7 +2152,7 @@ export interface SecurityGroupSpecForProviderEgressIpv6Ranges {
   readonly cidrIPv6: string;
 
   /**
-   * A description for the security group rule that references this IPv6 address range. 
+   * A description for the security group rule that references this IPv6 address range.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
    *
    * @schema SecurityGroupSpecForProviderEgressIpv6Ranges#description
@@ -2168,7 +2168,7 @@ export interface SecurityGroupSpecForProviderEgressIpv6Ranges {
  */
 export interface SecurityGroupSpecForProviderEgressPrefixListIds {
   /**
-   * A description for the security group rule that references this prefix list ID. 
+   * A description for the security group rule that references this prefix list ID.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
    *
    * @schema SecurityGroupSpecForProviderEgressPrefixListIds#description
@@ -2191,7 +2191,7 @@ export interface SecurityGroupSpecForProviderEgressPrefixListIds {
  */
 export interface SecurityGroupSpecForProviderEgressUserIdGroupPairs {
   /**
-   * A description for the security group rule that references this user ID group pair. 
+   * A description for the security group rule that references this user ID group pair.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
    *
    * @schema SecurityGroupSpecForProviderEgressUserIdGroupPairs#description
@@ -2206,7 +2206,7 @@ export interface SecurityGroupSpecForProviderEgressUserIdGroupPairs {
   readonly groupId?: string;
 
   /**
-   * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID. 
+   * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.
  For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.
    *
    * @schema SecurityGroupSpecForProviderEgressUserIdGroupPairs#groupName
@@ -2214,8 +2214,8 @@ export interface SecurityGroupSpecForProviderEgressUserIdGroupPairs {
   readonly groupName?: string;
 
   /**
-   * The ID of an AWS account. 
- For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. 
+   * The ID of an AWS account.
+ For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.
  [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
    *
    * @schema SecurityGroupSpecForProviderEgressUserIdGroupPairs#userId
@@ -2252,7 +2252,7 @@ export interface SecurityGroupSpecForProviderIngressIpRanges {
   readonly cidrIp: string;
 
   /**
-   * A description for the security group rule that references this IPv4 address range. 
+   * A description for the security group rule that references this IPv4 address range.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
    *
    * @schema SecurityGroupSpecForProviderIngressIpRanges#description
@@ -2275,7 +2275,7 @@ export interface SecurityGroupSpecForProviderIngressIpv6Ranges {
   readonly cidrIPv6: string;
 
   /**
-   * A description for the security group rule that references this IPv6 address range. 
+   * A description for the security group rule that references this IPv6 address range.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
    *
    * @schema SecurityGroupSpecForProviderIngressIpv6Ranges#description
@@ -2291,7 +2291,7 @@ export interface SecurityGroupSpecForProviderIngressIpv6Ranges {
  */
 export interface SecurityGroupSpecForProviderIngressPrefixListIds {
   /**
-   * A description for the security group rule that references this prefix list ID. 
+   * A description for the security group rule that references this prefix list ID.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
    *
    * @schema SecurityGroupSpecForProviderIngressPrefixListIds#description
@@ -2314,7 +2314,7 @@ export interface SecurityGroupSpecForProviderIngressPrefixListIds {
  */
 export interface SecurityGroupSpecForProviderIngressUserIdGroupPairs {
   /**
-   * A description for the security group rule that references this user ID group pair. 
+   * A description for the security group rule that references this user ID group pair.
  Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
    *
    * @schema SecurityGroupSpecForProviderIngressUserIdGroupPairs#description
@@ -2329,7 +2329,7 @@ export interface SecurityGroupSpecForProviderIngressUserIdGroupPairs {
   readonly groupId?: string;
 
   /**
-   * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID. 
+   * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.
  For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.
    *
    * @schema SecurityGroupSpecForProviderIngressUserIdGroupPairs#groupName
@@ -2337,8 +2337,8 @@ export interface SecurityGroupSpecForProviderIngressUserIdGroupPairs {
   readonly groupName?: string;
 
   /**
-   * The ID of an AWS account. 
- For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. 
+   * The ID of an AWS account.
+ For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.
  [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
    *
    * @schema SecurityGroupSpecForProviderIngressUserIdGroupPairs#userId

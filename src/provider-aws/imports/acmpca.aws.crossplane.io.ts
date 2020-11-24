@@ -177,9 +177,9 @@ export interface CertificateAuthorityPermissionSpec {
  */
 export enum CertificateAuthoritySpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -298,9 +298,9 @@ export interface CertificateAuthoritySpecWriteConnectionSecretToRef {
  */
 export enum CertificateAuthorityPermissionSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -484,9 +484,9 @@ export interface CertificateAuthoritySpecForProviderRevocationConfiguration {
  */
 export enum CertificateAuthoritySpecForProviderStatus {
   /** ACTIVE */
-  ACTIVE = "ACTIVE",
+  ACTIVE = 'ACTIVE',
   /** DISABLED */
-  DISABLED = "DISABLED",
+  DISABLED = 'DISABLED',
 }
 
 /**
@@ -518,9 +518,9 @@ export interface CertificateAuthoritySpecForProviderTags {
  */
 export enum CertificateAuthoritySpecForProviderType {
   /** ROOT */
-  ROOT = "ROOT",
+  ROOT = 'ROOT',
   /** SUBORINATE */
-  SUBORINATE = "SUBORINATE",
+  SUBORINATE = 'SUBORINATE',
 }
 
 /**
@@ -567,13 +567,13 @@ export interface CertificateAuthorityPermissionSpecForProviderCertificateAuthori
  */
 export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfigurationKeyAlgorithm {
   /** RSA_2048 */
-  RSA_2048 = "RSA_2048",
+  RSA_2048 = 'RSA_2048',
   /** EC_secp384r1 */
-  EC_SECP384R1 = "EC_secp384r1",
+  EC_SECP384R1 = 'EC_secp384r1',
   /** EC_prime256v1 */
-  EC_PRIME256V1 = "EC_prime256v1",
+  EC_PRIME256V1 = 'EC_prime256v1',
   /** RSA_4096 */
-  RSA_4096 = "RSA_4096",
+  RSA_4096 = 'RSA_4096',
 }
 
 /**
@@ -583,17 +583,17 @@ export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfiguration
  */
 export enum CertificateAuthoritySpecForProviderCertificateAuthorityConfigurationSigningAlgorithm {
   /** SHA512WITHECDSA */
-  SHA512_WITHECDSA = "SHA512WITHECDSA",
+  SHA512_WITHECDSA = 'SHA512WITHECDSA',
   /** SHA256WITHECDSA */
-  SHA256_WITHECDSA = "SHA256WITHECDSA",
+  SHA256_WITHECDSA = 'SHA256WITHECDSA',
   /** SHA384WITHECDSA */
-  SHA384_WITHECDSA = "SHA384WITHECDSA",
+  SHA384_WITHECDSA = 'SHA384WITHECDSA',
   /** SHA512WITHRSA */
-  SHA512_WITHRSA = "SHA512WITHRSA",
+  SHA512_WITHRSA = 'SHA512WITHRSA',
   /** SHA256WITHRSA */
-  SHA256_WITHRSA = "SHA256WITHRSA",
+  SHA256_WITHRSA = 'SHA256WITHRSA',
   /** SHA384WITHRSA */
-  SHA384_WITHRSA = "SHA384WITHRSA",
+  SHA384_WITHRSA = 'SHA384WITHRSA',
 }
 
 /**

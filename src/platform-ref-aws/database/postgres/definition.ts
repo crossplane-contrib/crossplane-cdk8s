@@ -1,7 +1,7 @@
 import { App, Chart } from 'cdk8s';
 import { CompositeResourceDefinition } from '../../../crossplane/imports/apiextensions.crossplane.io';
 
-export default function generate(crossplanePackage: App){
+export default function generate(crossplanePackage: App) {
 
   const definitionYaml = new Chart(crossplanePackage, 'database-postgres-definition');
 

@@ -219,7 +219,7 @@ export interface ProviderSpec {
   readonly region: string;
 
   /**
-   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html 
+   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
  If set to true, credentialsSecretRef will be ignored.
    *
    * @schema ProviderSpec#useServiceAccount
@@ -315,10 +315,10 @@ export interface ProviderConfigSpecCredentialsSecretRef {
  */
 export enum ProviderConfigSpecCredentialsSource {
   /** None */
-  NONE = "None",
+  NONE = 'None',
   /** Secret */
-  SECRET = "Secret",
+  SECRET = 'Secret',
   /** InjectedIdentity */
-  INJECTED_IDENTITY = "InjectedIdentity",
+  INJECTED_IDENTITY = 'InjectedIdentity',
 }
 

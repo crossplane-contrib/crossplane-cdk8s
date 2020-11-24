@@ -607,13 +607,13 @@ export interface CompositionSpecResourcesPatchesTransforms {
  */
 export enum CompositionSpecResourcesReadinessChecksType {
   /** MatchString */
-  MATCH_STRING = "MatchString",
+  MATCH_STRING = 'MatchString',
   /** MatchInteger */
-  MATCH_INTEGER = "MatchInteger",
+  MATCH_INTEGER = 'MatchInteger',
   /** NonEmpty */
-  NON_EMPTY = "NonEmpty",
+  NON_EMPTY = 'NonEmpty',
   /** None */
-  NONE = "None",
+  NONE = 'None',
 }
 
 /**

@@ -261,9 +261,9 @@ export interface ReplicationGroupSpec {
  */
 export enum CacheClusterSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -536,9 +536,9 @@ export interface CacheClusterSpecWriteConnectionSecretToRef {
  */
 export enum CacheSubnetGroupSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -643,9 +643,9 @@ export interface CacheSubnetGroupSpecWriteConnectionSecretToRef {
  */
 export enum ReplicationGroupSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -655,7 +655,7 @@ export enum ReplicationGroupSpecDeletionPolicy {
  */
 export interface ReplicationGroupSpecForProvider {
   /**
-   * If true, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow setting for the replication group. 
+   * If true, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow setting for the replication group.
  If false, changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first.
    *
    * @schema ReplicationGroupSpecForProvider#applyModificationsImmediately
@@ -663,8 +663,8 @@ export interface ReplicationGroupSpecForProvider {
   readonly applyModificationsImmediately: boolean;
 
   /**
-   * AtRestEncryptionEnabled enables encryption at rest when set to true. 
- You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group. 
+   * AtRestEncryptionEnabled enables encryption at rest when set to true.
+ You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.
  Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x.
    *
    * @schema ReplicationGroupSpecForProvider#atRestEncryptionEnabled
@@ -672,7 +672,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly atRestEncryptionEnabled?: boolean;
 
   /**
-   * AuthEnabled enables mandatory authentication when connecting to the managed replication group. AuthEnabled requires TransitEncryptionEnabled to be true. 
+   * AuthEnabled enables mandatory authentication when connecting to the managed replication group. AuthEnabled requires TransitEncryptionEnabled to be true.
  While ReplicationGroupSpec mirrors the fields of the upstream replication group object as closely as possible, we expose a boolean here rather than requiring the operator pass in a string authentication token. Crossplane will generate a token automatically and expose it via a Secret.
    *
    * @schema ReplicationGroupSpecForProvider#authEnabled
@@ -680,8 +680,8 @@ export interface ReplicationGroupSpecForProvider {
   readonly authEnabled?: boolean;
 
   /**
-   * AutomaticFailoverEnabled specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. If true, Multi-AZ is enabled for this replication group. If false, Multi-AZ is disabled for this replication group. 
- AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups. 
+   * AutomaticFailoverEnabled specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. If true, Multi-AZ is enabled for this replication group. If false, Multi-AZ is disabled for this replication group.
+ AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups.
  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on: * Redis versions earlier than 2.8.6. * Redis (cluster mode disabled): T1 and T2 cache node types. * Redis (cluster mode enabled): T1 node types.
    *
    * @schema ReplicationGroupSpecForProvider#automaticFailoverEnabled
@@ -696,7 +696,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly cacheNodeType: string;
 
   /**
-   * CacheParameterGroupName specifies the name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. 
+   * CacheParameterGroupName specifies the name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used.
  If you are running Redis version 3.2.4 or later, only one node group (shard), and want to use a default parameter group, we recommend that you specify the parameter group by name. * To create a Redis (cluster mode disabled) replication group, use CacheParameterGroupName=default.redis3.2. * To create a Redis (cluster mode enabled) replication group, use CacheParameterGroupName=default.redis3.2.cluster.on.
    *
    * @schema ReplicationGroupSpecForProvider#cacheParameterGroupName
@@ -753,7 +753,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly engine: string;
 
   /**
-   * EngineVersion specifies the version number of the cache engine to be used for the clusters in this replication group. To view the supported cache engine versions, use the DescribeCacheEngineVersions operation. 
+   * EngineVersion specifies the version number of the cache engine to be used for the clusters in this replication group. To view the supported cache engine versions, use the DescribeCacheEngineVersions operation.
  Important: You can upgrade to a newer engine version (see Selecting a Cache Engine and Version (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)) in the ElastiCache User Guide, but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster or replication group and create it anew with the earlier engine version.
    *
    * @schema ReplicationGroupSpecForProvider#engineVersion
@@ -761,7 +761,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly engineVersion?: string;
 
   /**
-   * NodeGroupConfigurationSpec specifies a list of node group (shard) configuration options. 
+   * NodeGroupConfigurationSpec specifies a list of node group (shard) configuration options.
  If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure each node group (shard) using this parameter because you must specify the slots for each node group.
    *
    * @schema ReplicationGroupSpecForProvider#nodeGroupConfiguration
@@ -776,7 +776,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly notificationTopicArn?: string;
 
   /**
-   * NotificationTopicStatus is the status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is active. 
+   * NotificationTopicStatus is the status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is active.
  Valid values: active | inactive
    *
    * @schema ReplicationGroupSpecForProvider#notificationTopicStatus
@@ -784,8 +784,8 @@ export interface ReplicationGroupSpecForProvider {
   readonly notificationTopicStatus?: string;
 
   /**
-   * NumCacheClusters specifies the number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. 
- If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. 
+   * NumCacheClusters specifies the number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead.
+ If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.
  The maximum permitted value for NumCacheClusters is 6 (1 primary plus 5 replicas).
    *
    * @schema ReplicationGroupSpecForProvider#numCacheClusters
@@ -793,7 +793,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly numCacheClusters?: number;
 
   /**
-   * NumNodeGroups specifies the number of node groups (shards) for this Redis (cluster mode enabled) replication group. For Redis (cluster mode disabled) either omit this parameter or set it to 1. 
+   * NumNodeGroups specifies the number of node groups (shards) for this Redis (cluster mode enabled) replication group. For Redis (cluster mode disabled) either omit this parameter or set it to 1.
  Default: 1
    *
    * @schema ReplicationGroupSpecForProvider#numNodeGroups
@@ -808,10 +808,10 @@ export interface ReplicationGroupSpecForProvider {
   readonly port?: number;
 
   /**
-   * PreferredCacheClusterAZs specifies a list of EC2 Availability Zones in which the replication group's clusters are created. The order of the Availability Zones in the list is the order in which clusters are allocated. The primary cluster is created in the first AZ in the list. 
- This parameter is not used if there is more than one node group (shard). You should use NodeGroupConfigurationSpec instead. 
- If you are creating your replication group in an Amazon VPC (recommended), you can only locate clusters in Availability Zones associated with the subnets in the selected subnet group. 
- The number of Availability Zones listed must equal the value of NumCacheClusters. 
+   * PreferredCacheClusterAZs specifies a list of EC2 Availability Zones in which the replication group's clusters are created. The order of the Availability Zones in the list is the order in which clusters are allocated. The primary cluster is created in the first AZ in the list.
+ This parameter is not used if there is more than one node group (shard). You should use NodeGroupConfigurationSpec instead.
+ If you are creating your replication group in an Amazon VPC (recommended), you can only locate clusters in Availability Zones associated with the subnets in the selected subnet group.
+ The number of Availability Zones listed must equal the value of NumCacheClusters.
  Default: system chosen Availability Zones.
    *
    * @schema ReplicationGroupSpecForProvider#preferredCacheClusterAzs
@@ -819,7 +819,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly preferredCacheClusterAzs?: string[];
 
   /**
-   * PreferredMaintenanceWindow specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. 
+   * PreferredMaintenanceWindow specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
  Example: sun:23:00-mon:01:30
    *
    * @schema ReplicationGroupSpecForProvider#preferredMaintenanceWindow
@@ -827,7 +827,7 @@ export interface ReplicationGroupSpecForProvider {
   readonly preferredMaintenanceWindow?: string;
 
   /**
-   * PrimaryClusterId is the identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available. 
+   * PrimaryClusterId is the identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available.
  This parameter is not required if NumCacheClusters, NumNodeGroups or ReplicasPerNodeGroup is specified.
    *
    * @schema ReplicationGroupSpecForProvider#primaryClusterId
@@ -898,8 +898,8 @@ export interface ReplicationGroupSpecForProvider {
   readonly snapshotRetentionLimit?: number;
 
   /**
-   * SnapshotWindow specifies the daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard). 
- Example: 05:00-09:00 
+   * SnapshotWindow specifies the daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).
+ Example: 05:00-09:00
  If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.
    *
    * @schema ReplicationGroupSpecForProvider#snapshotWindow
@@ -921,12 +921,12 @@ export interface ReplicationGroupSpecForProvider {
   readonly tags?: ReplicationGroupSpecForProviderTags[];
 
   /**
-   * TransitEncryptionEnabled enables in-transit encryption when set to true. 
- You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must TransitEncryptionEnabled to true when you create a cluster. 
- This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6 or 4.x, and the cluster is being created in an Amazon VPC. 
- If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup. 
- Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x. 
- Default: false 
+   * TransitEncryptionEnabled enables in-transit encryption when set to true.
+ You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must TransitEncryptionEnabled to true when you create a cluster.
+ This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6 or 4.x, and the cluster is being created in an Amazon VPC.
+ If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.
+ Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6 or 4.x.
+ Default: false
  For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.
    *
    * @schema ReplicationGroupSpecForProvider#transitEncryptionEnabled
@@ -1222,7 +1222,7 @@ export interface ReplicationGroupSpecForProviderNodeGroupConfiguration {
   readonly replicaCount?: number;
 
   /**
-   * Slots specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey. 
+   * Slots specifies the keyspace for a particular node group. Keyspaces range from 0 to 16,383. The string is in the format startkey-endkey.
  Example: "0-3999"
    *
    * @schema ReplicationGroupSpecForProviderNodeGroupConfiguration#slots

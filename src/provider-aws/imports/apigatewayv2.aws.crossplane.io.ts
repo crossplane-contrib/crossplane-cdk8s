@@ -1017,9 +1017,9 @@ export interface DeploymentSpec {
  */
 export enum ApiMappingSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1164,9 +1164,9 @@ export interface ApiMappingSpecWriteConnectionSecretToRef {
  */
 export enum IntegrationSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1344,9 +1344,9 @@ export interface IntegrationSpecWriteConnectionSecretToRef {
  */
 export enum ModelSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1459,9 +1459,9 @@ export interface ModelSpecWriteConnectionSecretToRef {
  */
 export enum ApiSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1598,9 +1598,9 @@ export interface ApiSpecWriteConnectionSecretToRef {
  */
 export enum RouteResponseSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1739,9 +1739,9 @@ export interface RouteResponseSpecWriteConnectionSecretToRef {
  */
 export enum DomainNameSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -1833,9 +1833,9 @@ export interface DomainNameSpecWriteConnectionSecretToRef {
  */
 export enum RouteSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -2002,9 +2002,9 @@ export interface RouteSpecWriteConnectionSecretToRef {
  */
 export enum AuthorizerSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -2147,9 +2147,9 @@ export interface AuthorizerSpecWriteConnectionSecretToRef {
  */
 export enum VpcLinkSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -2273,9 +2273,9 @@ export interface VpcLinkSpecWriteConnectionSecretToRef {
  */
 export enum IntegrationResponseSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -2419,9 +2419,9 @@ export interface IntegrationResponseSpecWriteConnectionSecretToRef {
  */
 export enum StageSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -2564,9 +2564,9 @@ export interface StageSpecWriteConnectionSecretToRef {
  */
 export enum DeploymentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**

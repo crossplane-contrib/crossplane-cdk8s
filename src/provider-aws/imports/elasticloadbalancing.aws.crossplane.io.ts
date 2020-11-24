@@ -177,9 +177,9 @@ export interface ElbSpec {
  */
 export enum ElbAttachmentSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -284,9 +284,9 @@ export interface ElbAttachmentSpecWriteConnectionSecretToRef {
  */
 export enum ElbSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**

@@ -177,9 +177,9 @@ export interface SnsTopicSpec {
  */
 export enum SnsSubscriptionSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -319,9 +319,9 @@ export interface SnsSubscriptionSpecWriteConnectionSecretToRef {
  */
 export enum SnsTopicSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -345,7 +345,7 @@ export interface SnsTopicSpecForProvider {
   readonly displayName?: string;
 
   /**
-   * Setting this enables server side encryption at-rest to your topic. The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK 
+   * Setting this enables server side encryption at-rest to your topic. The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK
  For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters) in the AWS Key Management Service API Reference.
    *
    * @schema SnsTopicSpecForProvider#kmsMasterKeyId
@@ -485,7 +485,7 @@ export interface SnsTopicSpecForProviderTags {
   readonly key: string;
 
   /**
-   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values. 
+   * The value associated with this tag. For example, tags with a key name of Department could have values such as Human Resources, Accounting, and Support. Tags with a key name of Cost Center might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.
  AWS always interprets the tag Value as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.
    *
    * @schema SnsTopicSpecForProviderTags#value

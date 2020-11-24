@@ -45,7 +45,7 @@ export interface IConfiguration extends IResource {
 
 }
 
-export class Configuration extends Resource implements IConfiguration{
+export class Configuration extends Resource implements IConfiguration {
   /**
    * @see base.Resource.apiObject
    */

@@ -255,9 +255,9 @@ export interface ProviderConfigSpec {
  */
 export enum ReleaseSpecDeletionPolicy {
   /** Orphan */
-  ORPHAN = "Orphan",
+  ORPHAN = 'Orphan',
   /** Delete */
-  DELETE = "Delete",
+  DELETE = 'Delete',
 }
 
 /**
@@ -509,11 +509,11 @@ export interface ProviderConfigSpecCredentialsSecretRef {
  */
 export enum ProviderConfigSpecCredentialsSource {
   /** None */
-  NONE = "None",
+  NONE = 'None',
   /** Secret */
-  SECRET = "Secret",
+  SECRET = 'Secret',
   /** InjectedIdentity */
-  INJECTED_IDENTITY = "InjectedIdentity",
+  INJECTED_IDENTITY = 'InjectedIdentity',
 }
 
 /**

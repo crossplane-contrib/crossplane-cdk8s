@@ -10,6 +10,7 @@ Array [
         "company": "Upbound",
         "keywords": "aws, cloud-native, kubernetes, example, platform, reference",
       },
+      "name": "my-config",
     },
     "spec": Object {
       "crossplane": Object {
