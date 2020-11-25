@@ -69,6 +69,7 @@ export class Configuration extends Resource implements IConfiguration {
     if (props.descriptionShort) { annotations.descriptionShort = props.descriptionShort; }
     if (props.description) { annotations.description = props.description; }
     if (props.readme) { annotations.readme = props.readme; }
+    if (props.maintainer) { annotations.maintainer = props.maintainer; }
 
     // merge extra annotations
     if (props.metadata?.annotations) { annotations = { ...props.metadata.annotations, ...annotations }; }
