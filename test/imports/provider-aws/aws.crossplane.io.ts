@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
- *
- * @schema ProviderConfigUsage
- */
-export class ProviderConfigUsage extends ApiObject {
-  /**
-   * Defines a "ProviderConfigUsage" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderConfigUsageProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ProviderConfigUsage',
-      apiVersion: 'aws.crossplane.io/v1beta1',
-    });
-  }
-}
-
-/**
  * A ProviderConfig configures how AWS controllers will connect to AWS API.
  *
  * @schema ProviderConfig
@@ -70,26 +49,20 @@ export class Provider extends ApiObject {
  *
  * @schema ProviderConfigUsage
  */
-export interface ProviderConfigUsageProps {
+export class ProviderConfigUsage extends ApiObject {
   /**
-   * @schema ProviderConfigUsage#metadata
+   * Defines a "ProviderConfigUsage" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
    */
-  readonly metadata?: any;
-
-  /**
-   * ProviderConfigReference to the provider config being used.
-   *
-   * @schema ProviderConfigUsage#providerConfigRef
-   */
-  readonly providerConfigRef: ProviderConfigUsageProviderConfigRef;
-
-  /**
-   * ResourceReference to the managed resource using the provider config.
-   *
-   * @schema ProviderConfigUsage#resourceRef
-   */
-  readonly resourceRef: ProviderConfigUsageResourceRef;
-
+  public constructor(scope: Construct, id: string, props: ProviderConfigUsageProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ProviderConfigUsage',
+      apiVersion: 'aws.crossplane.io/v1beta1',
+    });
+  }
 }
 
 /**
@@ -129,6 +102,78 @@ export interface ProviderProps {
    * @schema Provider#spec
    */
   readonly spec: ProviderSpec;
+
+}
+
+/**
+ * A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
+ *
+ * @schema ProviderConfigUsage
+ */
+export interface ProviderConfigUsageProps {
+  /**
+   * @schema ProviderConfigUsage#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * ProviderConfigReference to the provider config being used.
+   *
+   * @schema ProviderConfigUsage#providerConfigRef
+   */
+  readonly providerConfigRef: ProviderConfigUsageProviderConfigRef;
+
+  /**
+   * ResourceReference to the managed resource using the provider config.
+   *
+   * @schema ProviderConfigUsage#resourceRef
+   */
+  readonly resourceRef: ProviderConfigUsageResourceRef;
+
+}
+
+/**
+ * A ProviderConfigSpec defines the desired state of a ProviderConfig.
+ *
+ * @schema ProviderConfigSpec
+ */
+export interface ProviderConfigSpec {
+  /**
+   * Credentials required to authenticate to this provider.
+   *
+   * @schema ProviderConfigSpec#credentials
+   */
+  readonly credentials: ProviderConfigSpecCredentials;
+
+}
+
+/**
+ * A ProviderSpec defines the desired state of a Provider.
+ *
+ * @schema ProviderSpec
+ */
+export interface ProviderSpec {
+  /**
+   * CredentialsSecretRef references a specific secret's key that contains the credentials that are used to connect to the provider.
+   *
+   * @schema ProviderSpec#credentialsSecretRef
+   */
+  readonly credentialsSecretRef?: ProviderSpecCredentialsSecretRef;
+
+  /**
+   * Region for managed resources created using this AWS provider.
+   *
+   * @schema ProviderSpec#region
+   */
+  readonly region: string;
+
+  /**
+   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+ If set to true, credentialsSecretRef will be ignored.
+   *
+   * @schema ProviderSpec#useServiceAccount
+   */
+  readonly useServiceAccount?: boolean;
 
 }
 
@@ -180,51 +225,6 @@ export interface ProviderConfigUsageResourceRef {
    * @schema ProviderConfigUsageResourceRef#uid
    */
   readonly uid?: string;
-
-}
-
-/**
- * A ProviderConfigSpec defines the desired state of a ProviderConfig.
- *
- * @schema ProviderConfigSpec
- */
-export interface ProviderConfigSpec {
-  /**
-   * Credentials required to authenticate to this provider.
-   *
-   * @schema ProviderConfigSpec#credentials
-   */
-  readonly credentials: ProviderConfigSpecCredentials;
-
-}
-
-/**
- * A ProviderSpec defines the desired state of a Provider.
- *
- * @schema ProviderSpec
- */
-export interface ProviderSpec {
-  /**
-   * CredentialsSecretRef references a specific secret's key that contains the credentials that are used to connect to the provider.
-   *
-   * @schema ProviderSpec#credentialsSecretRef
-   */
-  readonly credentialsSecretRef?: ProviderSpecCredentialsSecretRef;
-
-  /**
-   * Region for managed resources created using this AWS provider.
-   *
-   * @schema ProviderSpec#region
-   */
-  readonly region: string;
-
-  /**
-   * UseServiceAccount indicates to use an IAM Role associated Kubernetes ServiceAccount for authentication instead of a credentials Secret. https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
- If set to true, credentialsSecretRef will be ignored.
-   *
-   * @schema ProviderSpec#useServiceAccount
-   */
-  readonly useServiceAccount?: boolean;
 
 }
 

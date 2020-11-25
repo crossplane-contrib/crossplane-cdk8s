@@ -1,5 +1,5 @@
 import { App, Chart } from 'cdk8s';
-import { Composition } from '../../../crossplane/imports/apiextensions.crossplane.io';
+import { Composition } from '../../../../src/imports/apiextensions.crossplane.io';
 
 export default function generate(crossplanePackage: App) {
 

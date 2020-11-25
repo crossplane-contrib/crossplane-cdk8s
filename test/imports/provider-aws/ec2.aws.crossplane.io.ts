@@ -3,48 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * A NATGateway is a managed resource that represents an AWS VPC NAT Gateway.
- *
- * @schema NATGateway
- */
-export class NatGateway extends ApiObject {
-  /**
-   * Defines a "NATGateway" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: NatGatewayProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'NATGateway',
-      apiVersion: 'ec2.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * A ElasticIP is a managed resource that represents an AWS VPC Security Group.
- *
- * @schema ElasticIP
- */
-export class ElasticIp extends ApiObject {
-  /**
-   * Defines a "ElasticIP" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ElasticIpProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ElasticIP',
-      apiVersion: 'ec2.aws.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * A RouteTable is a managed resource that represents an AWS VPC Route Table.
  *
  * @schema RouteTable
@@ -82,6 +40,69 @@ export class InternetGateway extends ApiObject {
       ...props,
       kind: 'InternetGateway',
       apiVersion: 'ec2.aws.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * A NATGateway is a managed resource that represents an AWS VPC NAT Gateway.
+ *
+ * @schema NATGateway
+ */
+export class NatGateway extends ApiObject {
+  /**
+   * Defines a "NATGateway" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: NatGatewayProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'NATGateway',
+      apiVersion: 'ec2.aws.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * A Subnet is a managed resource that represents an AWS VPC Subnet.
+ *
+ * @schema Subnet
+ */
+export class Subnet extends ApiObject {
+  /**
+   * Defines a "Subnet" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: SubnetProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'Subnet',
+      apiVersion: 'ec2.aws.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * A ElasticIP is a managed resource that represents an AWS VPC Security Group.
+ *
+ * @schema ElasticIP
+ */
+export class ElasticIp extends ApiObject {
+  /**
+   * Defines a "ElasticIP" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ElasticIpProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ElasticIP',
+      apiVersion: 'ec2.aws.crossplane.io/v1alpha1',
     });
   }
 }
@@ -129,67 +150,6 @@ export class Vpc extends ApiObject {
 }
 
 /**
- * A Subnet is a managed resource that represents an AWS VPC Subnet.
- *
- * @schema Subnet
- */
-export class Subnet extends ApiObject {
-  /**
-   * Defines a "Subnet" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: SubnetProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'Subnet',
-      apiVersion: 'ec2.aws.crossplane.io/v1beta1',
-    });
-  }
-}
-
-/**
- * A NATGateway is a managed resource that represents an AWS VPC NAT Gateway.
- *
- * @schema NATGateway
- */
-export interface NatGatewayProps {
-  /**
-   * @schema NATGateway#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * NATGatewaySpec defines the desired state of a NAT Gateway
-   *
-   * @schema NATGateway#spec
-   */
-  readonly spec: NatGatewaySpec;
-
-}
-
-/**
- * A ElasticIP is a managed resource that represents an AWS VPC Security Group.
- *
- * @schema ElasticIP
- */
-export interface ElasticIpProps {
-  /**
-   * @schema ElasticIP#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * A ElasticIPSpec defines the desired state of a ElasticIP.
-   *
-   * @schema ElasticIP#spec
-   */
-  readonly spec: ElasticIpSpec;
-
-}
-
-/**
  * A RouteTable is a managed resource that represents an AWS VPC Route Table.
  *
  * @schema RouteTable
@@ -230,6 +190,66 @@ export interface InternetGatewayProps {
 }
 
 /**
+ * A NATGateway is a managed resource that represents an AWS VPC NAT Gateway.
+ *
+ * @schema NATGateway
+ */
+export interface NatGatewayProps {
+  /**
+   * @schema NATGateway#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * NATGatewaySpec defines the desired state of a NAT Gateway
+   *
+   * @schema NATGateway#spec
+   */
+  readonly spec: NatGatewaySpec;
+
+}
+
+/**
+ * A Subnet is a managed resource that represents an AWS VPC Subnet.
+ *
+ * @schema Subnet
+ */
+export interface SubnetProps {
+  /**
+   * @schema Subnet#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * A SubnetSpec defines the desired state of a Subnet.
+   *
+   * @schema Subnet#spec
+   */
+  readonly spec: SubnetSpec;
+
+}
+
+/**
+ * A ElasticIP is a managed resource that represents an AWS VPC Security Group.
+ *
+ * @schema ElasticIP
+ */
+export interface ElasticIpProps {
+  /**
+   * @schema ElasticIP#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * A ElasticIPSpec defines the desired state of a ElasticIP.
+   *
+   * @schema ElasticIP#spec
+   */
+  readonly spec: ElasticIpSpec;
+
+}
+
+/**
  * A SecurityGroup is a managed resource that represents an AWS VPC Security Group.
  *
  * @schema SecurityGroup
@@ -266,112 +286,6 @@ export interface VpcProps {
    * @schema VPC#spec
    */
   readonly spec: VpcSpec;
-
-}
-
-/**
- * A Subnet is a managed resource that represents an AWS VPC Subnet.
- *
- * @schema Subnet
- */
-export interface SubnetProps {
-  /**
-   * @schema Subnet#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * A SubnetSpec defines the desired state of a Subnet.
-   *
-   * @schema Subnet#spec
-   */
-  readonly spec: SubnetSpec;
-
-}
-
-/**
- * NATGatewaySpec defines the desired state of a NAT Gateway
- *
- * @schema NatGatewaySpec
- */
-export interface NatGatewaySpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema NatGatewaySpec#deletionPolicy
-   */
-  readonly deletionPolicy?: NatGatewaySpecDeletionPolicy;
-
-  /**
-   * NATGatewayParameters defined the desired state of an AWS VPC NAT Gateway
-   *
-   * @schema NatGatewaySpec#forProvider
-   */
-  readonly forProvider: NatGatewaySpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema NatGatewaySpec#providerConfigRef
-   */
-  readonly providerConfigRef?: NatGatewaySpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema NatGatewaySpec#providerRef
-   */
-  readonly providerRef?: NatGatewaySpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema NatGatewaySpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: NatGatewaySpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * A ElasticIPSpec defines the desired state of a ElasticIP.
- *
- * @schema ElasticIpSpec
- */
-export interface ElasticIpSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema ElasticIpSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: ElasticIpSpecDeletionPolicy;
-
-  /**
-   * ElasticIPParameters define the desired state of an AWS Elastic IP
-   *
-   * @schema ElasticIpSpec#forProvider
-   */
-  readonly forProvider: ElasticIpSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema ElasticIpSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: ElasticIpSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema ElasticIpSpec#providerRef
-   */
-  readonly providerRef?: ElasticIpSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema ElasticIpSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: ElasticIpSpecWriteConnectionSecretToRef;
 
 }
 
@@ -462,6 +376,135 @@ export interface InternetGatewaySpec {
 }
 
 /**
+ * NATGatewaySpec defines the desired state of a NAT Gateway
+ *
+ * @schema NatGatewaySpec
+ */
+export interface NatGatewaySpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema NatGatewaySpec#deletionPolicy
+   */
+  readonly deletionPolicy?: NatGatewaySpecDeletionPolicy;
+
+  /**
+   * NATGatewayParameters defined the desired state of an AWS VPC NAT Gateway
+   *
+   * @schema NatGatewaySpec#forProvider
+   */
+  readonly forProvider: NatGatewaySpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema NatGatewaySpec#providerConfigRef
+   */
+  readonly providerConfigRef?: NatGatewaySpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema NatGatewaySpec#providerRef
+   */
+  readonly providerRef?: NatGatewaySpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema NatGatewaySpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: NatGatewaySpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * A SubnetSpec defines the desired state of a Subnet.
+ *
+ * @schema SubnetSpec
+ */
+export interface SubnetSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema SubnetSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: SubnetSpecDeletionPolicy;
+
+  /**
+   * SubnetParameters define the desired state of an AWS VPC Subnet.
+   *
+   * @schema SubnetSpec#forProvider
+   */
+  readonly forProvider: SubnetSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema SubnetSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: SubnetSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema SubnetSpec#providerRef
+   */
+  readonly providerRef?: SubnetSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema SubnetSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: SubnetSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * A ElasticIPSpec defines the desired state of a ElasticIP.
+ *
+ * @schema ElasticIpSpec
+ */
+export interface ElasticIpSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema ElasticIpSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: ElasticIpSpecDeletionPolicy;
+
+  /**
+   * ElasticIPParameters define the desired state of an AWS Elastic IP
+   *
+   * @schema ElasticIpSpec#forProvider
+   */
+  readonly forProvider: ElasticIpSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema ElasticIpSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: ElasticIpSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema ElasticIpSpec#providerRef
+   */
+  readonly providerRef?: ElasticIpSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema ElasticIpSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: ElasticIpSpecWriteConnectionSecretToRef;
+
+}
+
+/**
  * A SecurityGroupSpec defines the desired state of a SecurityGroup.
  *
  * @schema SecurityGroupSpec
@@ -544,301 +587,6 @@ export interface VpcSpec {
    * @schema VpcSpec#writeConnectionSecretToRef
    */
   readonly writeConnectionSecretToRef?: VpcSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * A SubnetSpec defines the desired state of a Subnet.
- *
- * @schema SubnetSpec
- */
-export interface SubnetSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema SubnetSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: SubnetSpecDeletionPolicy;
-
-  /**
-   * SubnetParameters define the desired state of an AWS VPC Subnet.
-   *
-   * @schema SubnetSpec#forProvider
-   */
-  readonly forProvider: SubnetSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema SubnetSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: SubnetSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema SubnetSpec#providerRef
-   */
-  readonly providerRef?: SubnetSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema SubnetSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: SubnetSpecWriteConnectionSecretToRef;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema NatGatewaySpecDeletionPolicy
- */
-export enum NatGatewaySpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * NATGatewayParameters defined the desired state of an AWS VPC NAT Gateway
- *
- * @schema NatGatewaySpecForProvider
- */
-export interface NatGatewaySpecForProvider {
-  /**
-   * AllocationID is the Elastic IP allocation ID
-   *
-   * @schema NatGatewaySpecForProvider#allocationId
-   */
-  readonly allocationId?: string;
-
-  /**
-   * AllocationIDRef references an EIP and retrieves it's allocation id
-   *
-   * @schema NatGatewaySpecForProvider#allocationIdRef
-   */
-  readonly allocationIdRef?: NatGatewaySpecForProviderAllocationIdRef;
-
-  /**
-   * AllocationIDSelector references an EIP by selector and retrieves it's allocation id
-   *
-   * @schema NatGatewaySpecForProvider#allocationIdSelector
-   */
-  readonly allocationIdSelector?: NatGatewaySpecForProviderAllocationIdSelector;
-
-  /**
-   * Region is the region you'd like your NATGateway to be created in.
-   *
-   * @schema NatGatewaySpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * SubnetID is the subnet the NAT gateways needs to be associated to
-   *
-   * @schema NatGatewaySpecForProvider#subnetId
-   */
-  readonly subnetId?: string;
-
-  /**
-   * SubnetIDRef references a subnet and retrives it's subnet id
-   *
-   * @schema NatGatewaySpecForProvider#subnetIdRef
-   */
-  readonly subnetIdRef?: NatGatewaySpecForProviderSubnetIdRef;
-
-  /**
-   * SubnetIDSelector references a subnet by selector and retrives it's subnet id
-   *
-   * @schema NatGatewaySpecForProvider#subnetIdSelector
-   */
-  readonly subnetIdSelector?: NatGatewaySpecForProviderSubnetIdSelector;
-
-  /**
-   * Tags represents to current ec2 tags.
-   *
-   * @schema NatGatewaySpecForProvider#tags
-   */
-  readonly tags?: NatGatewaySpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema NatGatewaySpecProviderConfigRef
- */
-export interface NatGatewaySpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema NatGatewaySpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema NatGatewaySpecProviderRef
- */
-export interface NatGatewaySpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema NatGatewaySpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema NatGatewaySpecWriteConnectionSecretToRef
- */
-export interface NatGatewaySpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema NatGatewaySpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema NatGatewaySpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema ElasticIpSpecDeletionPolicy
- */
-export enum ElasticIpSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * ElasticIPParameters define the desired state of an AWS Elastic IP
- *
- * @schema ElasticIpSpecForProvider
- */
-export interface ElasticIpSpecForProvider {
-  /**
-   * [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.
-   *
-   * @schema ElasticIpSpecForProvider#address
-   */
-  readonly address?: string;
-
-  /**
-   * The ID of a customer-owned address pool. Use this parameter to let Amazon EC2 select an address from the address pool. Alternatively, specify a specific address from the address pool
-   *
-   * @schema ElasticIpSpecForProvider#customerOwnedIPv4Pool
-   */
-  readonly customerOwnedIPv4Pool?: string;
-
-  /**
-   * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
-   *
-   * @schema ElasticIpSpecForProvider#domain
-   */
-  readonly domain?: ElasticIpSpecForProviderDomain;
-
-  /**
-   * The location from which the IP address is advertised. Use this parameter to limit the address to this location.
- A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises IP addresses and limits the addresses to the group. IP addresses cannot move between network border groups.
- Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups.
- You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
-   *
-   * @schema ElasticIpSpecForProvider#networkBorderGroup
-   */
-  readonly networkBorderGroup?: string;
-
-  /**
-   * The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the Address parameter instead.
-   *
-   * @schema ElasticIpSpecForProvider#publicIpv4Pool
-   */
-  readonly publicIpv4Pool?: string;
-
-  /**
-   * Region is the region you'd like your VPC to be created in.
-   *
-   * @schema ElasticIpSpecForProvider#region
-   */
-  readonly region: string;
-
-  /**
-   * Tags represents to current ec2 tags.
-   *
-   * @schema ElasticIpSpecForProvider#tags
-   */
-  readonly tags?: ElasticIpSpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema ElasticIpSpecProviderConfigRef
- */
-export interface ElasticIpSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ElasticIpSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema ElasticIpSpecProviderRef
- */
-export interface ElasticIpSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ElasticIpSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema ElasticIpSpecWriteConnectionSecretToRef
- */
-export interface ElasticIpSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema ElasticIpSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema ElasticIpSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
 
 }
 
@@ -1065,6 +813,407 @@ export interface InternetGatewaySpecWriteConnectionSecretToRef {
    * Namespace of the secret.
    *
    * @schema InternetGatewaySpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema NatGatewaySpecDeletionPolicy
+ */
+export enum NatGatewaySpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = 'Orphan',
+  /** Delete */
+  DELETE = 'Delete',
+}
+
+/**
+ * NATGatewayParameters defined the desired state of an AWS VPC NAT Gateway
+ *
+ * @schema NatGatewaySpecForProvider
+ */
+export interface NatGatewaySpecForProvider {
+  /**
+   * AllocationID is the Elastic IP allocation ID
+   *
+   * @schema NatGatewaySpecForProvider#allocationId
+   */
+  readonly allocationId?: string;
+
+  /**
+   * AllocationIDRef references an EIP and retrieves it's allocation id
+   *
+   * @schema NatGatewaySpecForProvider#allocationIdRef
+   */
+  readonly allocationIdRef?: NatGatewaySpecForProviderAllocationIdRef;
+
+  /**
+   * AllocationIDSelector references an EIP by selector and retrieves it's allocation id
+   *
+   * @schema NatGatewaySpecForProvider#allocationIdSelector
+   */
+  readonly allocationIdSelector?: NatGatewaySpecForProviderAllocationIdSelector;
+
+  /**
+   * Region is the region you'd like your NATGateway to be created in.
+   *
+   * @schema NatGatewaySpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * SubnetID is the subnet the NAT gateways needs to be associated to
+   *
+   * @schema NatGatewaySpecForProvider#subnetId
+   */
+  readonly subnetId?: string;
+
+  /**
+   * SubnetIDRef references a subnet and retrives it's subnet id
+   *
+   * @schema NatGatewaySpecForProvider#subnetIdRef
+   */
+  readonly subnetIdRef?: NatGatewaySpecForProviderSubnetIdRef;
+
+  /**
+   * SubnetIDSelector references a subnet by selector and retrives it's subnet id
+   *
+   * @schema NatGatewaySpecForProvider#subnetIdSelector
+   */
+  readonly subnetIdSelector?: NatGatewaySpecForProviderSubnetIdSelector;
+
+  /**
+   * Tags represents to current ec2 tags.
+   *
+   * @schema NatGatewaySpecForProvider#tags
+   */
+  readonly tags?: NatGatewaySpecForProviderTags[];
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema NatGatewaySpecProviderConfigRef
+ */
+export interface NatGatewaySpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema NatGatewaySpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema NatGatewaySpecProviderRef
+ */
+export interface NatGatewaySpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema NatGatewaySpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema NatGatewaySpecWriteConnectionSecretToRef
+ */
+export interface NatGatewaySpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema NatGatewaySpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema NatGatewaySpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema SubnetSpecDeletionPolicy
+ */
+export enum SubnetSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = 'Orphan',
+  /** Delete */
+  DELETE = 'Delete',
+}
+
+/**
+ * SubnetParameters define the desired state of an AWS VPC Subnet.
+ *
+ * @schema SubnetSpecForProvider
+ */
+export interface SubnetSpecForProvider {
+  /**
+   * Indicates whether a network interface created in this subnet (including a network interface created by RunInstances) receives an IPv6 address.
+   *
+   * @schema SubnetSpecForProvider#assignIpv6AddressOnCreation
+   */
+  readonly assignIpv6AddressOnCreation?: boolean;
+
+  /**
+   * The Availability Zone for the subnet. Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet.
+   *
+   * @schema SubnetSpecForProvider#availabilityZone
+   */
+  readonly availabilityZone?: string;
+
+  /**
+   * The AZ ID or the Local Zone ID of the subnet.
+   *
+   * @schema SubnetSpecForProvider#availabilityZoneId
+   */
+  readonly availabilityZoneId?: string;
+
+  /**
+   * CIDRBlock is the IPv4 network range for the Subnet, in CIDR notation. For example, 10.0.0.0/18.
+   *
+   * @schema SubnetSpecForProvider#cidrBlock
+   */
+  readonly cidrBlock: string;
+
+  /**
+   * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
+   *
+   * @schema SubnetSpecForProvider#ipv6CIDRBlock
+   */
+  readonly ipv6CIDRBlock?: string;
+
+  /**
+   * Indicates whether instances launched in this subnet receive a public IPv4 address.
+   *
+   * @schema SubnetSpecForProvider#mapPublicIPOnLaunch
+   */
+  readonly mapPublicIPOnLaunch?: boolean;
+
+  /**
+   * Region is the region you'd like your Subnet to be created in.
+   *
+   * @schema SubnetSpecForProvider#region
+   */
+  readonly region?: string;
+
+  /**
+   * Tags represents to current ec2 tags.
+   *
+   * @schema SubnetSpecForProvider#tags
+   */
+  readonly tags?: SubnetSpecForProviderTags[];
+
+  /**
+   * VPCID is the ID of the VPC.
+   *
+   * @schema SubnetSpecForProvider#vpcId
+   */
+  readonly vpcId?: string;
+
+  /**
+   * VPCIDRef reference a VPC to retrieve its vpcId
+   *
+   * @schema SubnetSpecForProvider#vpcIdRef
+   */
+  readonly vpcIdRef?: SubnetSpecForProviderVpcIdRef;
+
+  /**
+   * VPCIDSelector selects reference to a VPC to retrieve its vpcId
+   *
+   * @schema SubnetSpecForProvider#vpcIdSelector
+   */
+  readonly vpcIdSelector?: SubnetSpecForProviderVpcIdSelector;
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema SubnetSpecProviderConfigRef
+ */
+export interface SubnetSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema SubnetSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema SubnetSpecProviderRef
+ */
+export interface SubnetSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema SubnetSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema SubnetSpecWriteConnectionSecretToRef
+ */
+export interface SubnetSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema SubnetSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema SubnetSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema ElasticIpSpecDeletionPolicy
+ */
+export enum ElasticIpSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = 'Orphan',
+  /** Delete */
+  DELETE = 'Delete',
+}
+
+/**
+ * ElasticIPParameters define the desired state of an AWS Elastic IP
+ *
+ * @schema ElasticIpSpecForProvider
+ */
+export interface ElasticIpSpecForProvider {
+  /**
+   * [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.
+   *
+   * @schema ElasticIpSpecForProvider#address
+   */
+  readonly address?: string;
+
+  /**
+   * The ID of a customer-owned address pool. Use this parameter to let Amazon EC2 select an address from the address pool. Alternatively, specify a specific address from the address pool
+   *
+   * @schema ElasticIpSpecForProvider#customerOwnedIPv4Pool
+   */
+  readonly customerOwnedIPv4Pool?: string;
+
+  /**
+   * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
+   *
+   * @schema ElasticIpSpecForProvider#domain
+   */
+  readonly domain?: ElasticIpSpecForProviderDomain;
+
+  /**
+   * The location from which the IP address is advertised. Use this parameter to limit the address to this location.
+ A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises IP addresses and limits the addresses to the group. IP addresses cannot move between network border groups.
+ Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups.
+ You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
+   *
+   * @schema ElasticIpSpecForProvider#networkBorderGroup
+   */
+  readonly networkBorderGroup?: string;
+
+  /**
+   * The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the Address parameter instead.
+   *
+   * @schema ElasticIpSpecForProvider#publicIpv4Pool
+   */
+  readonly publicIpv4Pool?: string;
+
+  /**
+   * Region is the region you'd like your VPC to be created in.
+   *
+   * @schema ElasticIpSpecForProvider#region
+   */
+  readonly region: string;
+
+  /**
+   * Tags represents to current ec2 tags.
+   *
+   * @schema ElasticIpSpecForProvider#tags
+   */
+  readonly tags?: ElasticIpSpecForProviderTags[];
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema ElasticIpSpecProviderConfigRef
+ */
+export interface ElasticIpSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ElasticIpSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema ElasticIpSpecProviderRef
+ */
+export interface ElasticIpSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ElasticIpSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema ElasticIpSpecWriteConnectionSecretToRef
+ */
+export interface ElasticIpSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema ElasticIpSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ElasticIpSpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
 
@@ -1320,285 +1469,6 @@ export interface VpcSpecWriteConnectionSecretToRef {
 }
 
 /**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
- * @schema SubnetSpecDeletionPolicy
- */
-export enum SubnetSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * SubnetParameters define the desired state of an AWS VPC Subnet.
- *
- * @schema SubnetSpecForProvider
- */
-export interface SubnetSpecForProvider {
-  /**
-   * Indicates whether a network interface created in this subnet (including a network interface created by RunInstances) receives an IPv6 address.
-   *
-   * @schema SubnetSpecForProvider#assignIpv6AddressOnCreation
-   */
-  readonly assignIpv6AddressOnCreation?: boolean;
-
-  /**
-   * The Availability Zone for the subnet. Default: AWS selects one for you. If you create more than one subnet in your VPC, we may not necessarily select a different zone for each subnet.
-   *
-   * @schema SubnetSpecForProvider#availabilityZone
-   */
-  readonly availabilityZone?: string;
-
-  /**
-   * The AZ ID or the Local Zone ID of the subnet.
-   *
-   * @schema SubnetSpecForProvider#availabilityZoneId
-   */
-  readonly availabilityZoneId?: string;
-
-  /**
-   * CIDRBlock is the IPv4 network range for the Subnet, in CIDR notation. For example, 10.0.0.0/18.
-   *
-   * @schema SubnetSpecForProvider#cidrBlock
-   */
-  readonly cidrBlock: string;
-
-  /**
-   * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.
-   *
-   * @schema SubnetSpecForProvider#ipv6CIDRBlock
-   */
-  readonly ipv6CIDRBlock?: string;
-
-  /**
-   * Indicates whether instances launched in this subnet receive a public IPv4 address.
-   *
-   * @schema SubnetSpecForProvider#mapPublicIPOnLaunch
-   */
-  readonly mapPublicIPOnLaunch?: boolean;
-
-  /**
-   * Region is the region you'd like your Subnet to be created in.
-   *
-   * @schema SubnetSpecForProvider#region
-   */
-  readonly region?: string;
-
-  /**
-   * Tags represents to current ec2 tags.
-   *
-   * @schema SubnetSpecForProvider#tags
-   */
-  readonly tags?: SubnetSpecForProviderTags[];
-
-  /**
-   * VPCID is the ID of the VPC.
-   *
-   * @schema SubnetSpecForProvider#vpcId
-   */
-  readonly vpcId?: string;
-
-  /**
-   * VPCIDRef reference a VPC to retrieve its vpcId
-   *
-   * @schema SubnetSpecForProvider#vpcIdRef
-   */
-  readonly vpcIdRef?: SubnetSpecForProviderVpcIdRef;
-
-  /**
-   * VPCIDSelector selects reference to a VPC to retrieve its vpcId
-   *
-   * @schema SubnetSpecForProvider#vpcIdSelector
-   */
-  readonly vpcIdSelector?: SubnetSpecForProviderVpcIdSelector;
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema SubnetSpecProviderConfigRef
- */
-export interface SubnetSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema SubnetSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema SubnetSpecProviderRef
- */
-export interface SubnetSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema SubnetSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema SubnetSpecWriteConnectionSecretToRef
- */
-export interface SubnetSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema SubnetSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema SubnetSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * AllocationIDRef references an EIP and retrieves it's allocation id
- *
- * @schema NatGatewaySpecForProviderAllocationIdRef
- */
-export interface NatGatewaySpecForProviderAllocationIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema NatGatewaySpecForProviderAllocationIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * AllocationIDSelector references an EIP by selector and retrieves it's allocation id
- *
- * @schema NatGatewaySpecForProviderAllocationIdSelector
- */
-export interface NatGatewaySpecForProviderAllocationIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema NatGatewaySpecForProviderAllocationIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema NatGatewaySpecForProviderAllocationIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * SubnetIDRef references a subnet and retrives it's subnet id
- *
- * @schema NatGatewaySpecForProviderSubnetIdRef
- */
-export interface NatGatewaySpecForProviderSubnetIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema NatGatewaySpecForProviderSubnetIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * SubnetIDSelector references a subnet by selector and retrives it's subnet id
- *
- * @schema NatGatewaySpecForProviderSubnetIdSelector
- */
-export interface NatGatewaySpecForProviderSubnetIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema NatGatewaySpecForProviderSubnetIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema NatGatewaySpecForProviderSubnetIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * Tag defines a tag
- *
- * @schema NatGatewaySpecForProviderTags
- */
-export interface NatGatewaySpecForProviderTags {
-  /**
-   * Key is the name of the tag.
-   *
-   * @schema NatGatewaySpecForProviderTags#key
-   */
-  readonly key: string;
-
-  /**
-   * Value is the value of the tag.
-   *
-   * @schema NatGatewaySpecForProviderTags#value
-   */
-  readonly value: string;
-
-}
-
-/**
- * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
- *
- * @schema ElasticIpSpecForProviderDomain
- */
-export enum ElasticIpSpecForProviderDomain {
-  /** vpc */
-  VPC = 'vpc',
-  /** standard */
-  STANDARD = 'standard',
-}
-
-/**
- * Tag defines a tag
- *
- * @schema ElasticIpSpecForProviderTags
- */
-export interface ElasticIpSpecForProviderTags {
-  /**
-   * Key is the name of the tag.
-   *
-   * @schema ElasticIpSpecForProviderTags#key
-   */
-  readonly key: string;
-
-  /**
-   * Value is the value of the tag.
-   *
-   * @schema ElasticIpSpecForProviderTags#value
-   */
-  readonly value: string;
-
-}
-
-/**
  * Association describes an association between a route table and a subnet.
  *
  * @schema RouteTableSpecForProviderAssociations
@@ -1778,6 +1648,195 @@ export interface InternetGatewaySpecForProviderVpcIdSelector {
    * @schema InternetGatewaySpecForProviderVpcIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * AllocationIDRef references an EIP and retrieves it's allocation id
+ *
+ * @schema NatGatewaySpecForProviderAllocationIdRef
+ */
+export interface NatGatewaySpecForProviderAllocationIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema NatGatewaySpecForProviderAllocationIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * AllocationIDSelector references an EIP by selector and retrieves it's allocation id
+ *
+ * @schema NatGatewaySpecForProviderAllocationIdSelector
+ */
+export interface NatGatewaySpecForProviderAllocationIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema NatGatewaySpecForProviderAllocationIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema NatGatewaySpecForProviderAllocationIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * SubnetIDRef references a subnet and retrives it's subnet id
+ *
+ * @schema NatGatewaySpecForProviderSubnetIdRef
+ */
+export interface NatGatewaySpecForProviderSubnetIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema NatGatewaySpecForProviderSubnetIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * SubnetIDSelector references a subnet by selector and retrives it's subnet id
+ *
+ * @schema NatGatewaySpecForProviderSubnetIdSelector
+ */
+export interface NatGatewaySpecForProviderSubnetIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema NatGatewaySpecForProviderSubnetIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema NatGatewaySpecForProviderSubnetIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Tag defines a tag
+ *
+ * @schema NatGatewaySpecForProviderTags
+ */
+export interface NatGatewaySpecForProviderTags {
+  /**
+   * Key is the name of the tag.
+   *
+   * @schema NatGatewaySpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * Value is the value of the tag.
+   *
+   * @schema NatGatewaySpecForProviderTags#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * Tag defines a tag
+ *
+ * @schema SubnetSpecForProviderTags
+ */
+export interface SubnetSpecForProviderTags {
+  /**
+   * Key is the name of the tag.
+   *
+   * @schema SubnetSpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * Value is the value of the tag.
+   *
+   * @schema SubnetSpecForProviderTags#value
+   */
+  readonly value: string;
+
+}
+
+/**
+ * VPCIDRef reference a VPC to retrieve its vpcId
+ *
+ * @schema SubnetSpecForProviderVpcIdRef
+ */
+export interface SubnetSpecForProviderVpcIdRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema SubnetSpecForProviderVpcIdRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * VPCIDSelector selects reference to a VPC to retrieve its vpcId
+ *
+ * @schema SubnetSpecForProviderVpcIdSelector
+ */
+export interface SubnetSpecForProviderVpcIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema SubnetSpecForProviderVpcIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema SubnetSpecForProviderVpcIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
+ *
+ * @schema ElasticIpSpecForProviderDomain
+ */
+export enum ElasticIpSpecForProviderDomain {
+  /** vpc */
+  VPC = 'vpc',
+  /** standard */
+  STANDARD = 'standard',
+}
+
+/**
+ * Tag defines a tag
+ *
+ * @schema ElasticIpSpecForProviderTags
+ */
+export interface ElasticIpSpecForProviderTags {
+  /**
+   * Key is the name of the tag.
+   *
+   * @schema ElasticIpSpecForProviderTags#key
+   */
+  readonly key: string;
+
+  /**
+   * Value is the value of the tag.
+   *
+   * @schema ElasticIpSpecForProviderTags#value
+   */
+  readonly value: string;
 
 }
 
@@ -1979,65 +2038,6 @@ export interface VpcSpecForProviderTags {
    * @schema VpcSpecForProviderTags#value
    */
   readonly value: string;
-
-}
-
-/**
- * Tag defines a tag
- *
- * @schema SubnetSpecForProviderTags
- */
-export interface SubnetSpecForProviderTags {
-  /**
-   * Key is the name of the tag.
-   *
-   * @schema SubnetSpecForProviderTags#key
-   */
-  readonly key: string;
-
-  /**
-   * Value is the value of the tag.
-   *
-   * @schema SubnetSpecForProviderTags#value
-   */
-  readonly value: string;
-
-}
-
-/**
- * VPCIDRef reference a VPC to retrieve its vpcId
- *
- * @schema SubnetSpecForProviderVpcIdRef
- */
-export interface SubnetSpecForProviderVpcIdRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema SubnetSpecForProviderVpcIdRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * VPCIDSelector selects reference to a VPC to retrieve its vpcId
- *
- * @schema SubnetSpecForProviderVpcIdSelector
- */
-export interface SubnetSpecForProviderVpcIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema SubnetSpecForProviderVpcIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema SubnetSpecForProviderVpcIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
 
 }
 

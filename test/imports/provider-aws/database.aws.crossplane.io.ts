@@ -3,27 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
- *
- * @schema RDSInstance
- */
-export class RdsInstance extends ApiObject {
-  /**
-   * Defines a "RDSInstance" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: RdsInstanceProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'RDSInstance',
-      apiVersion: 'database.aws.crossplane.io/v1beta1',
-    });
-  }
-}
-
-/**
  * A DBSubnetGroup is a managed resource that represents an AWS VPC Database Subnet Group.
  *
  * @schema DBSubnetGroup
@@ -39,6 +18,27 @@ export class DbSubnetGroup extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'DBSubnetGroup',
+      apiVersion: 'database.aws.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
+ *
+ * @schema RDSInstance
+ */
+export class RdsInstance extends ApiObject {
+  /**
+   * Defines a "RDSInstance" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: RdsInstanceProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'RDSInstance',
       apiVersion: 'database.aws.crossplane.io/v1beta1',
     });
   }
@@ -66,26 +66,6 @@ export class DynamoTable extends ApiObject {
 }
 
 /**
- * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
- *
- * @schema RDSInstance
- */
-export interface RdsInstanceProps {
-  /**
-   * @schema RDSInstance#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * An RDSInstanceSpec defines the desired state of an RDSInstance.
-   *
-   * @schema RDSInstance#spec
-   */
-  readonly spec: RdsInstanceSpec;
-
-}
-
-/**
  * A DBSubnetGroup is a managed resource that represents an AWS VPC Database Subnet Group.
  *
  * @schema DBSubnetGroup
@@ -106,6 +86,26 @@ export interface DbSubnetGroupProps {
 }
 
 /**
+ * An RDSInstance is a managed resource that represents an AWS Relational Database Service instance.
+ *
+ * @schema RDSInstance
+ */
+export interface RdsInstanceProps {
+  /**
+   * @schema RDSInstance#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * An RDSInstanceSpec defines the desired state of an RDSInstance.
+   *
+   * @schema RDSInstance#spec
+   */
+  readonly spec: RdsInstanceSpec;
+
+}
+
+/**
  * A DynamoTable is a managed resource that represents an AWS DynamoDB Table
  *
  * @schema DynamoTable
@@ -122,49 +122,6 @@ export interface DynamoTableProps {
    * @schema DynamoTable#spec
    */
   readonly spec: DynamoTableSpec;
-
-}
-
-/**
- * An RDSInstanceSpec defines the desired state of an RDSInstance.
- *
- * @schema RdsInstanceSpec
- */
-export interface RdsInstanceSpec {
-  /**
-   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
-   *
-   * @schema RdsInstanceSpec#deletionPolicy
-   */
-  readonly deletionPolicy?: RdsInstanceSpecDeletionPolicy;
-
-  /**
-   * RDSInstanceParameters define the desired state of an AWS Relational Database Service instance.
-   *
-   * @schema RdsInstanceSpec#forProvider
-   */
-  readonly forProvider: RdsInstanceSpecForProvider;
-
-  /**
-   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
-   *
-   * @schema RdsInstanceSpec#providerConfigRef
-   */
-  readonly providerConfigRef?: RdsInstanceSpecProviderConfigRef;
-
-  /**
-   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
-   *
-   * @schema RdsInstanceSpec#providerRef
-   */
-  readonly providerRef?: RdsInstanceSpecProviderRef;
-
-  /**
-   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
-   *
-   * @schema RdsInstanceSpec#writeConnectionSecretToRef
-   */
-  readonly writeConnectionSecretToRef?: RdsInstanceSpecWriteConnectionSecretToRef;
 
 }
 
@@ -212,6 +169,49 @@ export interface DbSubnetGroupSpec {
 }
 
 /**
+ * An RDSInstanceSpec defines the desired state of an RDSInstance.
+ *
+ * @schema RdsInstanceSpec
+ */
+export interface RdsInstanceSpec {
+  /**
+   * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+   *
+   * @schema RdsInstanceSpec#deletionPolicy
+   */
+  readonly deletionPolicy?: RdsInstanceSpecDeletionPolicy;
+
+  /**
+   * RDSInstanceParameters define the desired state of an AWS Relational Database Service instance.
+   *
+   * @schema RdsInstanceSpec#forProvider
+   */
+  readonly forProvider: RdsInstanceSpecForProvider;
+
+  /**
+   * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+   *
+   * @schema RdsInstanceSpec#providerConfigRef
+   */
+  readonly providerConfigRef?: RdsInstanceSpecProviderConfigRef;
+
+  /**
+   * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+   *
+   * @schema RdsInstanceSpec#providerRef
+   */
+  readonly providerRef?: RdsInstanceSpecProviderRef;
+
+  /**
+   * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+   *
+   * @schema RdsInstanceSpec#writeConnectionSecretToRef
+   */
+  readonly writeConnectionSecretToRef?: RdsInstanceSpecWriteConnectionSecretToRef;
+
+}
+
+/**
  * A DynamoTableSpec defines the desired state of a DynamoDB Table.
  *
  * @schema DynamoTableSpec
@@ -251,6 +251,120 @@ export interface DynamoTableSpec {
    * @schema DynamoTableSpec#writeConnectionSecretToRef
    */
   readonly writeConnectionSecretToRef?: DynamoTableSpecWriteConnectionSecretToRef;
+
+}
+
+/**
+ * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
+ *
+ * @schema DbSubnetGroupSpecDeletionPolicy
+ */
+export enum DbSubnetGroupSpecDeletionPolicy {
+  /** Orphan */
+  ORPHAN = 'Orphan',
+  /** Delete */
+  DELETE = 'Delete',
+}
+
+/**
+ * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
+ *
+ * @schema DbSubnetGroupSpecForProvider
+ */
+export interface DbSubnetGroupSpecForProvider {
+  /**
+   * The description for the DB subnet group.
+   *
+   * @schema DbSubnetGroupSpecForProvider#description
+   */
+  readonly description: string;
+
+  /**
+   * Region is the region you'd like your DBSubnetGroup to be created in.
+   *
+   * @schema DbSubnetGroupSpecForProvider#region
+   */
+  readonly region?: string;
+
+  /**
+   * SubnetIDRefs is a set of references that each retrieve the subnetID from the referenced Subnet
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIdRefs
+   */
+  readonly subnetIdRefs?: DbSubnetGroupSpecForProviderSubnetIdRefs[];
+
+  /**
+   * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIdSelector
+   */
+  readonly subnetIdSelector?: DbSubnetGroupSpecForProviderSubnetIdSelector;
+
+  /**
+   * The EC2 Subnet IDs for the DB subnet group.
+   *
+   * @schema DbSubnetGroupSpecForProvider#subnetIds
+   */
+  readonly subnetIds?: string[];
+
+  /**
+   * A list of tags. For more information, see Tagging Amazon RDS Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the Amazon RDS User Guide.
+   *
+   * @schema DbSubnetGroupSpecForProvider#tags
+   */
+  readonly tags?: DbSubnetGroupSpecForProviderTags[];
+
+}
+
+/**
+ * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
+ *
+ * @schema DbSubnetGroupSpecProviderConfigRef
+ */
+export interface DbSubnetGroupSpecProviderConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DbSubnetGroupSpecProviderConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
+ *
+ * @schema DbSubnetGroupSpecProviderRef
+ */
+export interface DbSubnetGroupSpecProviderRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DbSubnetGroupSpecProviderRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
+ *
+ * @schema DbSubnetGroupSpecWriteConnectionSecretToRef
+ */
+export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
+  /**
+   * Name of the secret.
+   *
+   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace of the secret.
+   *
+   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#namespace
+   */
+  readonly namespace: string;
 
 }
 
@@ -742,120 +856,6 @@ export interface RdsInstanceSpecWriteConnectionSecretToRef {
 /**
  * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
  *
- * @schema DbSubnetGroupSpecDeletionPolicy
- */
-export enum DbSubnetGroupSpecDeletionPolicy {
-  /** Orphan */
-  ORPHAN = 'Orphan',
-  /** Delete */
-  DELETE = 'Delete',
-}
-
-/**
- * DBSubnetGroupParameters define the desired state of an AWS VPC Database Subnet Group.
- *
- * @schema DbSubnetGroupSpecForProvider
- */
-export interface DbSubnetGroupSpecForProvider {
-  /**
-   * The description for the DB subnet group.
-   *
-   * @schema DbSubnetGroupSpecForProvider#description
-   */
-  readonly description: string;
-
-  /**
-   * Region is the region you'd like your DBSubnetGroup to be created in.
-   *
-   * @schema DbSubnetGroupSpecForProvider#region
-   */
-  readonly region?: string;
-
-  /**
-   * SubnetIDRefs is a set of references that each retrieve the subnetID from the referenced Subnet
-   *
-   * @schema DbSubnetGroupSpecForProvider#subnetIdRefs
-   */
-  readonly subnetIdRefs?: DbSubnetGroupSpecForProviderSubnetIdRefs[];
-
-  /**
-   * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
-   *
-   * @schema DbSubnetGroupSpecForProvider#subnetIdSelector
-   */
-  readonly subnetIdSelector?: DbSubnetGroupSpecForProviderSubnetIdSelector;
-
-  /**
-   * The EC2 Subnet IDs for the DB subnet group.
-   *
-   * @schema DbSubnetGroupSpecForProvider#subnetIds
-   */
-  readonly subnetIds?: string[];
-
-  /**
-   * A list of tags. For more information, see Tagging Amazon RDS Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the Amazon RDS User Guide.
-   *
-   * @schema DbSubnetGroupSpecForProvider#tags
-   */
-  readonly tags?: DbSubnetGroupSpecForProviderTags[];
-
-}
-
-/**
- * ProviderConfigReference specifies how the provider that will be used to create, observe, update, and delete this managed resource should be configured.
- *
- * @schema DbSubnetGroupSpecProviderConfigRef
- */
-export interface DbSubnetGroupSpecProviderConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DbSubnetGroupSpecProviderConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * ProviderReference specifies the provider that will be used to create, observe, update, and delete this managed resource. Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`
- *
- * @schema DbSubnetGroupSpecProviderRef
- */
-export interface DbSubnetGroupSpecProviderRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DbSubnetGroupSpecProviderRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * WriteConnectionSecretToReference specifies the namespace and name of a Secret to which any connection details for this managed resource should be written. Connection details frequently include the endpoint, username, and password required to connect to the managed resource.
- *
- * @schema DbSubnetGroupSpecWriteConnectionSecretToRef
- */
-export interface DbSubnetGroupSpecWriteConnectionSecretToRef {
-  /**
-   * Name of the secret.
-   *
-   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema DbSubnetGroupSpecWriteConnectionSecretToRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * DeletionPolicy specifies what will happen to the underlying external when this managed resource is deleted - either "Delete" or "Orphan" the external resource. The "Delete" policy is the default when no policy is specified.
- *
  * @schema DynamoTableSpecDeletionPolicy
  */
 export enum DynamoTableSpecDeletionPolicy {
@@ -985,6 +985,65 @@ export interface DynamoTableSpecWriteConnectionSecretToRef {
    * @schema DynamoTableSpecWriteConnectionSecretToRef#namespace
    */
   readonly namespace: string;
+
+}
+
+/**
+ * A Reference to a named object.
+ *
+ * @schema DbSubnetGroupSpecForProviderSubnetIdRefs
+ */
+export interface DbSubnetGroupSpecForProviderSubnetIdRefs {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdRefs#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
+ *
+ * @schema DbSubnetGroupSpecForProviderSubnetIdSelector
+ */
+export interface DbSubnetGroupSpecForProviderSubnetIdSelector {
+  /**
+   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchControllerRef
+   */
+  readonly matchControllerRef?: boolean;
+
+  /**
+   * MatchLabels ensures an object with matching labels is selected.
+   *
+   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Tag is a metadata assigned to an Amazon RDS resource consisting of a key-value pair. Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
+ *
+ * @schema DbSubnetGroupSpecForProviderTags
+ */
+export interface DbSubnetGroupSpecForProviderTags {
+  /**
+   * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   *
+   * @schema DbSubnetGroupSpecForProviderTags#key
+   */
+  readonly key?: string;
+
+  /**
+   * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+   *
+   * @schema DbSubnetGroupSpecForProviderTags#value
+   */
+  readonly value?: string;
 
 }
 
@@ -1264,65 +1323,6 @@ export interface RdsInstanceSpecForProviderVpcSecurityGroupIdSelector {
    * @schema RdsInstanceSpecForProviderVpcSecurityGroupIdSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * A Reference to a named object.
- *
- * @schema DbSubnetGroupSpecForProviderSubnetIdRefs
- */
-export interface DbSubnetGroupSpecForProviderSubnetIdRefs {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdRefs#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * SubnetIDSelector selects a set of references that each retrieve the subnetID from the referenced Subnet
- *
- * @schema DbSubnetGroupSpecForProviderSubnetIdSelector
- */
-export interface DbSubnetGroupSpecForProviderSubnetIdSelector {
-  /**
-   * MatchControllerRef ensures an object with the same controller reference as the selecting object is selected.
-   *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchControllerRef
-   */
-  readonly matchControllerRef?: boolean;
-
-  /**
-   * MatchLabels ensures an object with matching labels is selected.
-   *
-   * @schema DbSubnetGroupSpecForProviderSubnetIdSelector#matchLabels
-   */
-  readonly matchLabels?: { [key: string]: string };
-
-}
-
-/**
- * Tag is a metadata assigned to an Amazon RDS resource consisting of a key-value pair. Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
- *
- * @schema DbSubnetGroupSpecForProviderTags
- */
-export interface DbSubnetGroupSpecForProviderTags {
-  /**
-   * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-   *
-   * @schema DbSubnetGroupSpecForProviderTags#key
-   */
-  readonly key?: string;
-
-  /**
-   * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
-   *
-   * @schema DbSubnetGroupSpecForProviderTags#value
-   */
-  readonly value?: string;
 
 }
 

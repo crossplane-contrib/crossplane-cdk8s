@@ -3,6 +3,27 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
+ * A ProviderConfig configures a Helm 'provider', i.e. a connection to a particular
+ *
+ * @schema ProviderConfig
+ */
+export class ProviderConfig extends ApiObject {
+  /**
+   * Defines a "ProviderConfig" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'ProviderConfig',
+      apiVersion: 'helm.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
  * A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
  *
  * @schema ProviderConfigUsage
@@ -49,20 +70,19 @@ export class Release extends ApiObject {
  *
  * @schema ProviderConfig
  */
-export class ProviderConfig extends ApiObject {
+export interface ProviderConfigProps {
   /**
-   * Defines a "ProviderConfig" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @schema ProviderConfig#metadata
    */
-  public constructor(scope: Construct, id: string, props: ProviderConfigProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'ProviderConfig',
-      apiVersion: 'helm.crossplane.io/v1alpha1',
-    });
-  }
+  readonly metadata?: any;
+
+  /**
+   * A ProviderConfigSpec defines the desired state of a Provider.
+   *
+   * @schema ProviderConfig#spec
+   */
+  readonly spec: ProviderConfigSpec;
+
 }
 
 /**
@@ -113,22 +133,17 @@ export interface ReleaseProps {
 }
 
 /**
- * A ProviderConfig configures a Helm 'provider', i.e. a connection to a particular
+ * A ProviderConfigSpec defines the desired state of a Provider.
  *
- * @schema ProviderConfig
+ * @schema ProviderConfigSpec
  */
-export interface ProviderConfigProps {
+export interface ProviderConfigSpec {
   /**
-   * @schema ProviderConfig#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * A ProviderConfigSpec defines the desired state of a Provider.
+   * Credentials required to authenticate to this provider.
    *
-   * @schema ProviderConfig#spec
+   * @schema ProviderConfigSpec#credentials
    */
-  readonly spec: ProviderConfigSpec;
+  readonly credentials: ProviderConfigSpecCredentials;
 
 }
 
@@ -234,17 +249,24 @@ export interface ReleaseSpec {
 }
 
 /**
- * A ProviderConfigSpec defines the desired state of a Provider.
+ * Credentials required to authenticate to this provider.
  *
- * @schema ProviderConfigSpec
+ * @schema ProviderConfigSpecCredentials
  */
-export interface ProviderConfigSpec {
+export interface ProviderConfigSpecCredentials {
   /**
-   * Credentials required to authenticate to this provider.
+   * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
    *
-   * @schema ProviderConfigSpec#credentials
+   * @schema ProviderConfigSpecCredentials#secretRef
    */
-  readonly credentials: ProviderConfigSpecCredentials;
+  readonly secretRef?: ProviderConfigSpecCredentialsSecretRef;
+
+  /**
+   * Source of the provider credentials.
+   *
+   * @schema ProviderConfigSpecCredentials#source
+   */
+  readonly source: ProviderConfigSpecCredentialsSource;
 
 }
 
@@ -353,25 +375,46 @@ export interface ReleaseSpecWriteConnectionSecretToRef {
 }
 
 /**
- * Credentials required to authenticate to this provider.
+ * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
  *
- * @schema ProviderConfigSpecCredentials
+ * @schema ProviderConfigSpecCredentialsSecretRef
  */
-export interface ProviderConfigSpecCredentials {
+export interface ProviderConfigSpecCredentialsSecretRef {
   /**
-   * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
+   * The key to select.
    *
-   * @schema ProviderConfigSpecCredentials#secretRef
+   * @schema ProviderConfigSpecCredentialsSecretRef#key
    */
-  readonly secretRef?: ProviderConfigSpecCredentialsSecretRef;
+  readonly key: string;
 
   /**
-   * Source of the provider credentials.
+   * Name of the secret.
    *
-   * @schema ProviderConfigSpecCredentials#source
+   * @schema ProviderConfigSpecCredentialsSecretRef#name
    */
-  readonly source: ProviderConfigSpecCredentialsSource;
+  readonly name: string;
 
+  /**
+   * Namespace of the secret.
+   *
+   * @schema ProviderConfigSpecCredentialsSecretRef#namespace
+   */
+  readonly namespace: string;
+
+}
+
+/**
+ * Source of the provider credentials.
+ *
+ * @schema ProviderConfigSpecCredentialsSource
+ */
+export enum ProviderConfigSpecCredentialsSource {
+  /** None */
+  NONE = 'None',
+  /** Secret */
+  SECRET = 'Secret',
+  /** InjectedIdentity */
+  INJECTED_IDENTITY = 'InjectedIdentity',
 }
 
 /**
@@ -471,49 +514,6 @@ export interface ReleaseSpecForProviderValuesFrom {
    */
   readonly secretKeyRef?: ReleaseSpecForProviderValuesFromSecretKeyRef;
 
-}
-
-/**
- * A CredentialsSecretRef is a reference to a secret key that contains the credentials that must be used to connect to the provider.
- *
- * @schema ProviderConfigSpecCredentialsSecretRef
- */
-export interface ProviderConfigSpecCredentialsSecretRef {
-  /**
-   * The key to select.
-   *
-   * @schema ProviderConfigSpecCredentialsSecretRef#key
-   */
-  readonly key: string;
-
-  /**
-   * Name of the secret.
-   *
-   * @schema ProviderConfigSpecCredentialsSecretRef#name
-   */
-  readonly name: string;
-
-  /**
-   * Namespace of the secret.
-   *
-   * @schema ProviderConfigSpecCredentialsSecretRef#namespace
-   */
-  readonly namespace: string;
-
-}
-
-/**
- * Source of the provider credentials.
- *
- * @schema ProviderConfigSpecCredentialsSource
- */
-export enum ProviderConfigSpecCredentialsSource {
-  /** None */
-  NONE = 'None',
-  /** Secret */
-  SECRET = 'Secret',
-  /** InjectedIdentity */
-  INJECTED_IDENTITY = 'InjectedIdentity',
 }
 
 /**

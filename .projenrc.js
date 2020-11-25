@@ -9,7 +9,7 @@ const project = new ConstructLibraryCdk8s({
   repository: "https://github.com/eladb/crossplane-cdk.git",
   defaultReleaseBranch: "main",
   peerDeps: [
-    'constructs@^3.2.37',
+    'constructs@^3.2.42',
     'cdk8s-plus-17@^1.0.0-beta.3',
   ]
 });

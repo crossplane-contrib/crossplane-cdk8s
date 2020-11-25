@@ -1,6 +1,6 @@
 import { Testing } from 'cdk8s';
-import { Configuration } from '../src/crossplane';
-import { CompositeResourceDefinition } from '../src/crossplane/imports/apiextensions.crossplane.io';
+import { Configuration } from '../src';
+import { CompositeResourceDefinition } from '../src/imports/apiextensions.crossplane.io';
 
 test('hello', () => {
   const chart = Testing.chart();
