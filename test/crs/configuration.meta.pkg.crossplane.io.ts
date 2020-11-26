@@ -2,7 +2,7 @@
 import { Chart, ApiObject } from 'cdk8s';
 import * as group from '../../src/imports/meta.pkg.crossplane.io';
 
-export function platformRefAwsConfiguration(chart: Chart, name: string = 'configuration') : ApiObject {
+export function platformRefAws(chart: Chart, name: string = 'platform-ref-aws/configuration/meta.pkg.crossplane.io') : ApiObject {
   return new group.Configuration(chart, name,
     {
       metadata: {
