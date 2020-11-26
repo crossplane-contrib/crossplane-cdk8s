@@ -1,13 +1,12 @@
 import { Testing } from 'cdk8s';
-//import * as l2 from '../src';
-import * as crs from './crs/xrd.apiextensions.crossplane.io';
-import * as group from '../src/imports/apiextensions.crossplane.io';
+import * as L1 from '../src/imports/apiextensions.crossplane.io';
+import * as xrds from './crs/xrd.apiextensions.crossplane.io';
 
 test('compositeClusters', () => {
   const chart = Testing.chart();
 
   //TODO: convert into L2 resource test
-  new group.CompositeResourceDefinition(chart, 'xrd', {
+  new L1.CompositeResourceDefinition(chart, 'xrd', {
     metadata: {
       name: 'compositeclusters.aws.platformref.crossplane.io',
       annotations: {
@@ -129,7 +128,7 @@ test('compositeClusters', () => {
   expect(s1).toMatchSnapshot();
 
   const chart2 = Testing.chart();
-  crs.compositeclustersAwsPlatformrefCrossplaneIo(chart2);
+  xrds.compositeclustersAwsPlatformrefCrossplaneIo(chart2);
   const s2 = Testing.synth(chart2);
   expect(s2).toMatchSnapshot();
 

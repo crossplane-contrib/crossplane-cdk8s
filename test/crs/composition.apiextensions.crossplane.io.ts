@@ -354,7 +354,7 @@ export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.
             ],
             readinessChecks: [
               {
-                type: 'None',
+                type: group.CompositionSpecResourcesReadinessChecksType.NONE,
               },
             ],
           },
