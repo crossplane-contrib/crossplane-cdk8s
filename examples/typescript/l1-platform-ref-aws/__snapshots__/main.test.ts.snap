@@ -1,0 +1,1490 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`platform-ref-aws 1`] = `
+Array [
+  Object {
+    "apiVersion": "meta.pkg.crossplane.io/v1alpha1",
+    "kind": "Configuration",
+    "metadata": Object {
+      "annotations": Object {
+        "company": "Upbound",
+        "description": "This reference platform Configuration for Kubernetes and Data Services
+is a starting point to build, run, and operate your own internal cloud
+platform and offer a self-service console and API to your internal teams.
+",
+        "descriptionShort": "The AWS reference platform for Kubernetes and Data Services.
+",
+        "keywords": "aws, cloud-native, kubernetes, example, platform, reference",
+        "license": "Apache-2.0",
+        "maintainer": "Jared Watts <jared@upbound.io>",
+        "readme": "This reference platform \`Configuration\` for Kubernetes and Data Services
+is a starting point to build, run, and operate your own internal cloud
+platform and offer a self-service console and API to your internal teams.
+It provides platform APIs to provision fully configured EKS clusters,
+with secure networking, and stateful cloud services (RDS) designed to
+securely connect to the nodes in each EKS cluster -- all composed using
+cloud service primitives from the [Crossplane AWS
+Provider](https://doc.crds.dev/github.com/crossplane/provider-aws). App
+deployments can securely connect to the infrastructure they need using
+secrets distributed directly to the app namespace.
+
+[Quickstart
+Guide](https://github.com/upbound/platform-ref-aws/#quick-start)
+
+[APIs in this
+Configuration](https://github.com/upbound/platform-ref-aws/#apis-in-this-configuration)
+
+To learn more checkout the [GitHub
+repo](https://github.com/upbound/platform-ref-aws/) that you can copy and
+customize to meet the exact needs of your organization!
+",
+        "source": "github.com/upbound/platform-ref-aws",
+      },
+      "name": "platform-ref-aws",
+    },
+    "spec": Object {
+      "crossplane": Object {
+        "version": ">=v0.14.0-0",
+      },
+      "dependsOn": Array [
+        Object {
+          "provider": "crossplane/provider-aws",
+          "version": ">=v0.14.0-0",
+        },
+      ],
+    },
+  },
+]
+`;
+
+exports[`platform-ref-aws 2`] = `
+Array [
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "CompositeResourceDefinition",
+    "metadata": Object {
+      "annotations": Object {
+        "upbound.io/ui-schema": "---
+configSections:
+- title: Database Size
+  description: Enter information to size your database
+  items:
+  - name: storageGB
+    controlType: singleInput
+    type: integer
+    path: \\".spec.parameters.storageGB\\"
+    title: Storage (GB)
+    description: The size in GB for database storage
+    default: 5
+    validation:
+    - minimum: 1
+    - maximum: 500
+    - required: true
+  - name: networkRef
+    controlType: singleInput
+    type: string
+    path: \\".spec.parameters.networkRef.id\\"
+    title: Network Ref
+    description: Network fabric to connect the database to
+    default: platform-ref-aws-network
+    validation:
+    - required: true
+      customError: Network ref is required and should match the network ref of the app cluster.
+  - name: writeSecretRef
+    controlType: singleInput
+    type: string
+    path: \\".spec.writeConnectionSecretToRef.name\\"
+    title: Connection Secret Ref
+    description: name of the secret to write to this namespace
+    default: db-conn
+    validation:
+    - required: true",
+      },
+      "name": "compositepostgresqlinstances.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "claimNames": Object {
+        "kind": "PostgreSQLInstance",
+        "plural": "postgresqlinstances",
+      },
+      "connectionSecretKeys": Array [
+        "username",
+        "password",
+        "endpoint",
+        "port",
+      ],
+      "group": "aws.platformref.crossplane.io",
+      "names": Object {
+        "kind": "CompositePostgreSQLInstance",
+        "plural": "compositepostgresqlinstances",
+      },
+      "versions": Array [
+        Object {
+          "name": "v1alpha1",
+          "referenceable": true,
+          "schema": Object {
+            "openAPIV3Schema": Object {
+              "properties": Object {
+                "spec": Object {
+                  "properties": Object {
+                    "parameters": Object {
+                      "properties": Object {
+                        "networkRef": Object {
+                          "description": "A reference to the Network object that this postgres should be connected to.",
+                          "properties": Object {
+                            "id": Object {
+                              "description": "ID of the Network object this ref points to.",
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "id",
+                          ],
+                          "type": "object",
+                        },
+                        "storageGB": Object {
+                          "type": "integer",
+                        },
+                      },
+                      "required": Array [
+                        "storageGB",
+                        "networkRef",
+                      ],
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "parameters",
+                  ],
+                  "type": "object",
+                },
+              },
+              "type": "object",
+            },
+          },
+          "served": true,
+        },
+      ],
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "Composition",
+    "metadata": Object {
+      "labels": Object {
+        "provider": "aws",
+      },
+      "name": "compositepostgresqlinstances.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "compositeTypeRef": Object {
+        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "kind": "CompositePostgreSQLInstance",
+      },
+      "resources": Array [
+        Object {
+          "base": Object {
+            "apiVersion": "database.aws.crossplane.io/v1beta1",
+            "kind": "DBSubnetGroup",
+            "spec": Object {
+              "forProvider": Object {
+                "description": "An excellent formation of subnetworks.",
+                "region": "us-west-2",
+              },
+              "reclaimPolicy": "Delete",
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "database.aws.crossplane.io/v1beta1",
+            "kind": "RDSInstance",
+            "spec": Object {
+              "forProvider": Object {
+                "dbInstanceClass": "db.t2.small",
+                "dbSubnetGroupNameSelector": Object {
+                  "matchControllerRef": true,
+                },
+                "engine": "postgres",
+                "engineVersion": "9.6",
+                "masterUsername": "masteruser",
+                "publiclyAccessible": false,
+                "region": "us-west-2",
+                "skipFinalSnapshotBeforeDeletion": true,
+              },
+              "reclaimPolicy": "Delete",
+              "writeConnectionSecretToRef": Object {
+                "namespace": "crossplane-system",
+              },
+            },
+          },
+          "connectionDetails": Array [
+            Object {
+              "fromConnectionSecretKey": "username",
+            },
+            Object {
+              "fromConnectionSecretKey": "password",
+            },
+            Object {
+              "fromConnectionSecretKey": "endpoint",
+            },
+            Object {
+              "fromConnectionSecretKey": "port",
+            },
+          ],
+          "patches": Array [
+            Object {
+              "fromFieldPath": "metadata.uid",
+              "toFieldPath": "spec.writeConnectionSecretToRef.name",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "%s-postgresql",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.storageGB",
+              "toFieldPath": "spec.forProvider.allocatedStorage",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+      ],
+      "writeConnectionSecretsToNamespace": "crossplane-system",
+    },
+  },
+]
+`;
+
+exports[`platform-ref-aws 3`] = `
+Array [
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "CompositeResourceDefinition",
+    "metadata": Object {
+      "annotations": Object {
+        "upbound.io/ui-schema": "---
+configSections:
+- title: Network Info
+  description: Information about this network fabric
+  items:
+  - name: id
+    controlType: singleInput
+    type: string
+    path: \\".spec.id\\"
+    title: Network ID
+    description: Network ID that other objects will use to refer (and connect) to this network fabric
+    default: platform-ref-aws-network
+    validation:
+    - required: true
+      customError: Network ID is required.
+- title: Cluster Info
+  description: The cluster used with this network fabric
+  items:
+  - name: clusterRef
+    controlType: singleInput
+    type: string
+    path: \\".spec.clusterRef.id\\"
+    title: Cluster Ref
+    description: ID of the Cluster object that will use this network fabric
+    default: platform-ref-aws-cluster
+    validation:
+    - required: true
+      customError: Cluster ref is required.",
+      },
+      "name": "compositenetworks.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "claimNames": Object {
+        "kind": "Network",
+        "plural": "networks",
+      },
+      "group": "aws.platformref.crossplane.io",
+      "names": Object {
+        "kind": "CompositeNetwork",
+        "plural": "compositenetworks",
+      },
+      "versions": Array [
+        Object {
+          "name": "v1alpha1",
+          "referenceable": true,
+          "schema": Object {
+            "openAPIV3Schema": Object {
+              "properties": Object {
+                "spec": Object {
+                  "properties": Object {
+                    "clusterRef": Object {
+                      "description": "A reference to the Cluster object that this network will be used for.",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "ID of the Cluster object this ref points to.",
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "id",
+                      ],
+                      "type": "object",
+                    },
+                    "id": Object {
+                      "description": "ID of this Network that other objects will use to refer to it.",
+                      "type": "string",
+                    },
+                  },
+                  "required": Array [
+                    "id",
+                    "clusterRef",
+                  ],
+                  "type": "object",
+                },
+              },
+              "type": "object",
+            },
+          },
+          "served": true,
+        },
+      ],
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "Composition",
+    "metadata": Object {
+      "labels": Object {
+        "provider": "aws",
+      },
+      "name": "compositenetworks.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "compositeTypeRef": Object {
+        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "kind": "CompositeNetwork",
+      },
+      "resources": Array [
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "VPC",
+            "spec": Object {
+              "forProvider": Object {
+                "cidrBlock": "192.168.0.0/16",
+                "enableDnsHostNames": true,
+                "enableDnsSupport": true,
+                "region": "us-west-2",
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "InternetGateway",
+            "spec": Object {
+              "forProvider": Object {
+                "region": "us-west-2",
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "Subnet",
+            "metadata": Object {
+              "labels": Object {
+                "access": "public",
+                "zone": "us-west-2a",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "availabilityZone": "us-west-2a",
+                "cidrBlock": "192.168.0.0/18",
+                "mapPublicIPOnLaunch": true,
+                "region": "us-west-2",
+                "tags": Array [
+                  Object {
+                    "key": "kubernetes.io/role/elb",
+                    "value": "1",
+                  },
+                ],
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "Subnet",
+            "metadata": Object {
+              "labels": Object {
+                "access": "public",
+                "zone": "us-west-2b",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "availabilityZone": "us-west-2b",
+                "cidrBlock": "192.168.64.0/18",
+                "mapPublicIPOnLaunch": true,
+                "region": "us-west-2",
+                "tags": Array [
+                  Object {
+                    "key": "kubernetes.io/role/elb",
+                    "value": "1",
+                  },
+                ],
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "Subnet",
+            "metadata": Object {
+              "labels": Object {
+                "access": "private",
+                "zone": "us-west-2a",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "availabilityZone": "us-west-2a",
+                "cidrBlock": "192.168.128.0/18",
+                "region": "us-west-2",
+                "tags": Array [
+                  Object {
+                    "key": "",
+                    "value": "shared",
+                  },
+                  Object {
+                    "key": "kubernetes.io/role/internal-elb",
+                    "value": "1",
+                  },
+                ],
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+            Object {
+              "fromFieldPath": "spec.clusterRef.id",
+              "toFieldPath": "spec.forProvider.tags[0].key",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "kubernetes.io/cluster/%s",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "Subnet",
+            "metadata": Object {
+              "labels": Object {
+                "access": "private",
+                "zone": "us-west-2b",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "availabilityZone": "us-west-2b",
+                "cidrBlock": "192.168.192.0/18",
+                "region": "us-west-2",
+                "tags": Array [
+                  Object {
+                    "key": "",
+                    "value": "shared",
+                  },
+                  Object {
+                    "key": "kubernetes.io/role/internal-elb",
+                    "value": "1",
+                  },
+                ],
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+            Object {
+              "fromFieldPath": "spec.clusterRef.id",
+              "toFieldPath": "spec.forProvider.tags[0].key",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "kubernetes.io/cluster/%s",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1alpha4",
+            "kind": "RouteTable",
+            "spec": Object {
+              "forProvider": Object {
+                "associations": Array [
+                  Object {
+                    "subnetIdSelector": Object {
+                      "matchControllerRef": true,
+                      "matchLabels": Object {
+                        "access": "public",
+                        "zone": "us-west-2a",
+                      },
+                    },
+                  },
+                  Object {
+                    "subnetIdSelector": Object {
+                      "matchControllerRef": true,
+                      "matchLabels": Object {
+                        "access": "public",
+                        "zone": "us-west-2b",
+                      },
+                    },
+                  },
+                  Object {
+                    "subnetIdSelector": Object {
+                      "matchControllerRef": true,
+                      "matchLabels": Object {
+                        "access": "private",
+                        "zone": "us-west-2a",
+                      },
+                    },
+                  },
+                  Object {
+                    "subnetIdSelector": Object {
+                      "matchControllerRef": true,
+                      "matchLabels": Object {
+                        "access": "private",
+                        "zone": "us-west-2b",
+                      },
+                    },
+                  },
+                ],
+                "region": "us-west-2",
+                "routes": Array [
+                  Object {
+                    "destinationCidrBlock": "0.0.0.0/0",
+                    "gatewayIdSelector": Object {
+                      "matchControllerRef": true,
+                    },
+                  },
+                ],
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "ec2.aws.crossplane.io/v1beta1",
+            "kind": "SecurityGroup",
+            "spec": Object {
+              "forProvider": Object {
+                "description": "Allow access to PostgreSQL",
+                "groupName": "platform-ref-aws-cluster",
+                "ingress": Array [
+                  Object {
+                    "fromPort": 5432,
+                    "ipProtocol": "tcp",
+                    "ipRanges": Array [
+                      Object {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Everywhere",
+                      },
+                    ],
+                    "toPort": 5432,
+                  },
+                ],
+                "region": "us-west-2",
+                "vpcIdSelector": Object {
+                  "matchControllerRef": true,
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+      ],
+      "writeConnectionSecretsToNamespace": "crossplane-system",
+    },
+  },
+]
+`;
+
+exports[`platform-ref-aws 4`] = `
+Array [
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "CompositeResourceDefinition",
+    "metadata": Object {
+      "annotations": Object {
+        "upbound.io/ui-schema": "---
+configSections:
+- title: Cluster Info
+  description: Information about this cluster
+  items:
+  - name: id
+    controlType: singleInput
+    type: string
+    path: \\".spec.id\\"
+    title: Cluster ID
+    description: Cluster ID that other objects will use to refer to this cluster
+    default: platform-ref-aws-cluster
+    validation:
+    - required: true
+      customError: Cluster ID is required.
+  - name: writeSecretRef
+    controlType: singleInput
+    type: string
+    path: \\".spec.writeConnectionSecretToRef.name\\"
+    title: Connection Secret Ref
+    description: name of the secret to write to this namespace
+    default: cluster-conn
+    validation:
+    - required: true
+- title: Cluster Nodes
+  description: Enter information to size your cluster
+  items:
+  - name: clusterNodeCount
+    controlType: singleInput
+    type: integer
+    path: \\".spec.parameters.nodes.count\\"
+    title: Node Count
+    description: Number of nodes in the cluster
+    default: 1
+    validation:
+    - minimum: 1
+    - maximum: 100
+    - required: true
+      customError: Node count is required.
+  - name: clusterNodeSize
+    controlType: singleSelect
+    path: \\".spec.parameters.nodes.size\\"
+    title: Node Size
+    description: Desired node count, from 1 to 100.
+    default: small
+    enum:
+    - small
+    - medium
+    - large
+    validation:
+    - required: true
+      customError: Node size is required.
+- title: Cluster Networking
+  description: Select a network fabric for your cluster
+  items:
+  - name: networkRef
+    controlType: singleInput
+    type: string
+    path: \\".spec.parameters.networkRef.id\\"
+    title: Network Ref
+    description: Network fabric to connect the database to
+    default: platform-ref-aws-network
+    validation:
+    - required: true
+      customError: Network ref is required.
+- title: Cluster Services
+  description: Configure cluster services and operators
+  items:
+  - name: promVersion
+    controlType: singleInput
+    type: string
+    path: \\".spec.parameters.services.operators.prometheus.version\\"
+    title: Prometheus Chart Version
+    description: The version of kube-prometheus-stack chart to install
+    default: 10.1.0
+    validation:
+    - required: false",
+      },
+      "name": "compositeclusters.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "claimNames": Object {
+        "kind": "Cluster",
+        "plural": "clusters",
+      },
+      "connectionSecretKeys": Array [
+        "kubeconfig",
+      ],
+      "group": "aws.platformref.crossplane.io",
+      "names": Object {
+        "kind": "CompositeCluster",
+        "plural": "compositeclusters",
+      },
+      "versions": Array [
+        Object {
+          "name": "v1alpha1",
+          "referenceable": true,
+          "schema": Object {
+            "openAPIV3Schema": Object {
+              "properties": Object {
+                "spec": Object {
+                  "properties": Object {
+                    "id": Object {
+                      "description": "ID of this Cluster that other objects will use to refer to it.",
+                      "type": "string",
+                    },
+                    "parameters": Object {
+                      "description": "Cluster configuration parameters.",
+                      "properties": Object {
+                        "networkRef": Object {
+                          "description": "A reference to the Network object that this cluster should be connected to.",
+                          "properties": Object {
+                            "id": Object {
+                              "description": "ID of the Network object this ref points to.",
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "id",
+                          ],
+                          "type": "object",
+                        },
+                        "nodes": Object {
+                          "description": "Cluster node configuration parameters.",
+                          "properties": Object {
+                            "count": Object {
+                              "description": "Desired node count, from 1 to 100.",
+                              "type": "integer",
+                            },
+                            "size": Object {
+                              "description": "Size of node.",
+                              "enum": Array [
+                                "small",
+                                "medium",
+                                "large",
+                              ],
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "count",
+                            "size",
+                          ],
+                          "type": "object",
+                        },
+                        "services": Object {
+                          "description": "Services configuration parameters.",
+                          "properties": Object {
+                            "operators": Object {
+                              "description": "Configuration for operators.",
+                              "properties": Object {
+                                "prometheus": Object {
+                                  "description": "Configuration for the Prometheus operator.",
+                                  "properties": Object {
+                                    "version": Object {
+                                      "description": "Prometheus operator version to run.",
+                                      "type": "string",
+                                    },
+                                  },
+                                  "type": "object",
+                                },
+                              },
+                              "type": "object",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
+                      "required": Array [
+                        "nodes",
+                        "networkRef",
+                      ],
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "name",
+                    "parameters",
+                  ],
+                  "type": "object",
+                },
+              },
+              "type": "object",
+            },
+          },
+          "served": true,
+        },
+      ],
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "Composition",
+    "metadata": Object {
+      "name": "compositeclusters.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "compositeTypeRef": Object {
+        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "kind": "CompositeCluster",
+      },
+      "resources": Array [
+        Object {
+          "base": Object {
+            "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+            "kind": "EKS",
+          },
+          "connectionDetails": Array [
+            Object {
+              "fromConnectionSecretKey": "kubeconfig",
+            },
+          ],
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "spec.id",
+            },
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.annotations[crossplane.io/external-name]",
+            },
+            Object {
+              "fromFieldPath": "metadata.uid",
+              "toFieldPath": "spec.writeConnectionSecretToRef.name",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "%s-eks",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+            Object {
+              "fromFieldPath": "spec.writeConnectionSecretToRef.namespace",
+              "toFieldPath": "spec.writeConnectionSecretToRef.namespace",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.nodes.count",
+              "toFieldPath": "spec.parameters.nodes.count",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.nodes.size",
+              "toFieldPath": "spec.parameters.nodes.size",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.parameters.networkRef.id",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+            "kind": "Services",
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "spec.providerConfigRef.name",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.services.operators.prometheus.version",
+              "toFieldPath": "spec.operators.prometheus.version",
+            },
+          ],
+        },
+      ],
+      "writeConnectionSecretsToNamespace": "crossplane-system",
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "CompositeResourceDefinition",
+    "metadata": Object {
+      "name": "eks.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "connectionSecretKeys": Array [
+        "kubeconfig",
+      ],
+      "group": "aws.platformref.crossplane.io",
+      "names": Object {
+        "kind": "EKS",
+        "plural": "eks",
+      },
+      "versions": Array [
+        Object {
+          "name": "v1alpha1",
+          "referenceable": true,
+          "schema": Object {
+            "openAPIV3Schema": Object {
+              "properties": Object {
+                "spec": Object {
+                  "properties": Object {
+                    "id": Object {
+                      "description": "ID of this Cluster that other objects will use to refer to it.",
+                      "type": "string",
+                    },
+                    "parameters": Object {
+                      "description": "EKS configuration parameters.",
+                      "properties": Object {
+                        "networkRef": Object {
+                          "description": "A reference to the Network object that this postgres should be connected to.",
+                          "properties": Object {
+                            "id": Object {
+                              "description": "ID of the Network object this ref points to.",
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "id",
+                          ],
+                          "type": "object",
+                        },
+                        "nodes": Object {
+                          "description": "EKS node configuration parameters.",
+                          "properties": Object {
+                            "count": Object {
+                              "description": "Desired node count, from 1 to 100.",
+                              "type": "integer",
+                            },
+                            "size": Object {
+                              "description": "Size of node.",
+                              "enum": Array [
+                                "small",
+                                "medium",
+                                "large",
+                              ],
+                              "type": "string",
+                            },
+                          },
+                          "required": Array [
+                            "count",
+                            "size",
+                          ],
+                          "type": "object",
+                        },
+                      },
+                      "required": Array [
+                        "nodes",
+                        "networkRef",
+                      ],
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "parameters",
+                  ],
+                  "type": "object",
+                },
+              },
+              "type": "object",
+            },
+          },
+          "served": true,
+        },
+      ],
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "Composition",
+    "metadata": Object {
+      "labels": Object {
+        "provider": "aws",
+      },
+      "name": "eks.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "compositeTypeRef": Object {
+        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "kind": "EKS",
+      },
+      "resources": Array [
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRole",
+            "metadata": Object {
+              "labels": Object {
+                "role": "controlplane",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "assumeRolePolicyDocument": "{
+  \\"Version\\": \\"2012-10-17\\",
+  \\"Statement\\": [
+      {
+          \\"Effect\\": \\"Allow\\",
+          \\"Principal\\": {
+              \\"Service\\": [
+                  \\"eks.amazonaws.com\\"
+              ]
+          },
+          \\"Action\\": [
+              \\"sts:AssumeRole\\"
+          ]
+      }
+  ]
+}
+",
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRolePolicyAttachment",
+            "spec": Object {
+              "forProvider": Object {
+                "policyArn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+                "roleNameSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "controlplane",
+                  },
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "eks.aws.crossplane.io/v1beta1",
+            "kind": "Cluster",
+            "spec": Object {
+              "forProvider": Object {
+                "region": "us-west-2",
+                "resourcesVpcConfig": Object {
+                  "endpointPrivateAccess": true,
+                  "endpointPublicAccess": true,
+                },
+                "roleArnSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "controlplane",
+                  },
+                },
+                "version": "1.16",
+              },
+            },
+          },
+          "connectionDetails": Array [
+            Object {
+              "fromConnectionSecretKey": "kubeconfig",
+            },
+          ],
+          "patches": Array [
+            Object {
+              "fromFieldPath": "metadata.annotations[crossplane.io/external-name]",
+              "toFieldPath": "metadata.annotations[crossplane.io/external-name]",
+            },
+            Object {
+              "fromFieldPath": "metadata.uid",
+              "toFieldPath": "spec.writeConnectionSecretToRef.name",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "%s-ekscluster",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+            Object {
+              "fromFieldPath": "spec.writeConnectionSecretToRef.namespace",
+              "toFieldPath": "spec.writeConnectionSecretToRef.namespace",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRole",
+            "metadata": Object {
+              "labels": Object {
+                "role": "nodegroup",
+              },
+            },
+            "spec": Object {
+              "forProvider": Object {
+                "assumeRolePolicyDocument": "{
+  \\"Version\\": \\"2012-10-17\\",
+  \\"Statement\\": [
+      {
+          \\"Effect\\": \\"Allow\\",
+          \\"Principal\\": {
+              \\"Service\\": [
+                  \\"ec2.amazonaws.com\\"
+              ]
+          },
+          \\"Action\\": [
+              \\"sts:AssumeRole\\"
+          ]
+      }
+  ]
+}
+",
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRolePolicyAttachment",
+            "spec": Object {
+              "forProvider": Object {
+                "policyArn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+                "roleNameSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "nodegroup",
+                  },
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRolePolicyAttachment",
+            "spec": Object {
+              "forProvider": Object {
+                "policyArn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+                "roleNameSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "nodegroup",
+                  },
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "identity.aws.crossplane.io/v1beta1",
+            "kind": "IAMRolePolicyAttachment",
+            "spec": Object {
+              "forProvider": Object {
+                "policyArn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+                "roleNameSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "nodegroup",
+                  },
+                },
+              },
+            },
+          },
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "eks.aws.crossplane.io/v1alpha1",
+            "kind": "NodeGroup",
+            "spec": Object {
+              "forProvider": Object {
+                "clusterNameSelector": Object {
+                  "matchControllerRef": true,
+                },
+                "instanceTypes": Array [
+                  "t3.medium",
+                ],
+                "nodeRoleSelector": Object {
+                  "matchControllerRef": true,
+                  "matchLabels": Object {
+                    "role": "nodegroup",
+                  },
+                },
+                "region": "us-west-2",
+                "scalingConfig": Object {
+                  "desiredSize": 1,
+                  "maxSize": 100,
+                  "minSize": 1,
+                },
+                "subnetSelector": Object {
+                  "matchLabels": Object {
+                    "access": "public",
+                  },
+                },
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "metadata.annotations[crossplane.io/external-name]",
+              "toFieldPath": "metadata.annotations[crossplane.io/external-name]",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.nodes.count",
+              "toFieldPath": "spec.forProvider.scalingConfig.desiredSize",
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.nodes.size",
+              "toFieldPath": "spec.forProvider.instanceTypes[0]",
+              "transforms": Array [
+                Object {
+                  "map": Object {
+                    "large": "t3.large",
+                    "medium": "t3.medium",
+                    "small": "t3.small",
+                  },
+                  "type": "map",
+                },
+              ],
+            },
+            Object {
+              "fromFieldPath": "spec.parameters.networkRef.id",
+              "toFieldPath": "spec.forProvider.subnetSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+            },
+          ],
+        },
+        Object {
+          "base": Object {
+            "apiVersion": "helm.crossplane.io/v1alpha1",
+            "kind": "ProviderConfig",
+            "spec": Object {
+              "credentials": Object {
+                "secretRef": Object {
+                  "key": "kubeconfig",
+                  "namespace": "crossplane-system",
+                },
+                "source": "Secret",
+              },
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "spec.id",
+              "toFieldPath": "metadata.name",
+            },
+            Object {
+              "fromFieldPath": "metadata.uid",
+              "toFieldPath": "spec.credentials.secretRef.name",
+              "transforms": Array [
+                Object {
+                  "string": Object {
+                    "fmt": "%s-ekscluster",
+                  },
+                  "type": "string",
+                },
+              ],
+            },
+          ],
+          "readinessChecks": Array [
+            Object {
+              "type": "None",
+            },
+          ],
+        },
+      ],
+      "writeConnectionSecretsToNamespace": "crossplane-system",
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "CompositeResourceDefinition",
+    "metadata": Object {
+      "name": "services.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "group": "aws.platformref.crossplane.io",
+      "names": Object {
+        "kind": "Services",
+        "plural": "services",
+      },
+      "versions": Array [
+        Object {
+          "name": "v1alpha1",
+          "referenceable": true,
+          "schema": Object {
+            "openAPIV3Schema": Object {
+              "properties": Object {
+                "spec": Object {
+                  "properties": Object {
+                    "operators": Object {
+                      "description": "Configuration for operators.",
+                      "properties": Object {
+                        "prometheus": Object {
+                          "description": "Configuration for the Prometheus operator.",
+                          "properties": Object {
+                            "version": Object {
+                              "description": "Prometheus operator version to run.",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "providerConfigRef": Object {
+                      "description": "A reference to the ProviderConfig of the cluster that services should be deployed to.",
+                      "properties": Object {
+                        "name": Object {
+                          "description": "Name of the Kubernetes provider configuration. This will typically be the name of the cluster with a five character suffix appended.",
+                          "type": "string",
+                        },
+                      },
+                      "required": Array [
+                        "name",
+                      ],
+                      "type": "object",
+                    },
+                  },
+                  "required": Array [
+                    "providerConfigRef",
+                  ],
+                  "type": "object",
+                },
+              },
+              "type": "object",
+            },
+          },
+          "served": true,
+        },
+      ],
+    },
+  },
+  Object {
+    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "kind": "Composition",
+    "metadata": Object {
+      "labels": Object {
+        "plan": "full",
+        "provider": "helm",
+      },
+      "name": "services.aws.platformref.crossplane.io",
+    },
+    "spec": Object {
+      "compositeTypeRef": Object {
+        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "kind": "Services",
+      },
+      "resources": Array [
+        Object {
+          "base": Object {
+            "apiVersion": "helm.crossplane.io/v1alpha1",
+            "kind": "Release",
+            "spec": Object {
+              "forProvider": Object {
+                "chart": Object {
+                  "name": "kube-prometheus-stack",
+                  "repository": "https://prometheus-community.github.io/helm-charts",
+                  "version": "10.1.0",
+                },
+                "namespace": "operators",
+                "values": Object {},
+              },
+              "rollbackLimit": 3,
+            },
+          },
+          "patches": Array [
+            Object {
+              "fromFieldPath": "metadata.labels",
+              "toFieldPath": "metadata.labels",
+            },
+            Object {
+              "fromFieldPath": "metadata.annotations",
+              "toFieldPath": "metadata.annotations",
+            },
+            Object {
+              "fromFieldPath": "spec.providerConfigRef.name",
+              "toFieldPath": "spec.providerConfigRef.name",
+            },
+            Object {
+              "fromFieldPath": "spec.operators.prometheus.version",
+              "toFieldPath": "spec.forProvider.chart.version",
+            },
+          ],
+        },
+      ],
+      "writeConnectionSecretsToNamespace": "crossplane-system",
+    },
+  },
+]
+`;
