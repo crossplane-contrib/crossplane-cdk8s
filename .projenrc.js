@@ -1,5 +1,5 @@
 const { readdirSync, statSync } = require('fs');
-const { join } = require('path');
+const { join, relative } = require('path');
 const { ConstructLibraryCdk8s } = require('projen');
 
 const project = new ConstructLibraryCdk8s({
@@ -32,7 +32,7 @@ project.eslint.addRules(
 
 const compileExamples = project.addTask('compile-examples');
 
-const base = join(__dirname, 'examples', 'typescript');
+const base = join('examples', 'typescript');
 for (const dir of readdirSync(base)) {
   const dirpath = join(base, dir);
   if (!statSync(dirpath).isDirectory()) {
@@ -40,7 +40,7 @@ for (const dir of readdirSync(base)) {
   }
 
   compileExamples.exec(`(cd ${dirpath} && mkdir -p node_modules && cd node_modules && rm -f crossplane-cdk && ln -s ../../../../ crossplane-cdk)`);
-  compileExamples.exec(`(cd ${dirpath} && ${require.resolve('typescript/bin/tsc')})`);
+  compileExamples.exec(`(cd ${dirpath} && ${relative(dirpath, require.resolve('typescript/bin/tsc'))})`);
 }
 
 project.compileTask.spawn(compileExamples);
