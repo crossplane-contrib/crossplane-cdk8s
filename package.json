@@ -4,7 +4,7 @@
   "description": "CDK for Crossplane",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eladb/crossplane-cdk.git"
+    "url": "https://github.com/crossplane-contrib/crossplane-cdk.git"
   },
   "bin": {},
   "scripts": {
@@ -12,7 +12,7 @@
     "projen": "node .projenrc.js",
     "no-changes": "(git log --oneline -1 | grep -q \"chore(release):\") && echo \"No changes to release.\"",
     "bump": "yarn run --silent no-changes || standard-version",
-    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin main)",
+    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin master)",
     "test": "rm -fr lib/ && jest --passWithNoTests --updateSnapshot && yarn run eslint",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot",
@@ -26,8 +26,8 @@
     "docgen": "jsii-docgen"
   },
   "author": {
-    "name": "Elad Ben-Israel",
-    "email": "benisrae@amazon.com",
+    "name": "Phil Prasek",
+    "email": "prasek@gmail.com",
     "organization": false
   },
   "devDependencies": {
@@ -83,7 +83,7 @@
       "category": 2
     },
     "release": {
-      "desc": "Bumps version & push to main",
+      "desc": "Bumps version & push to master",
       "command": "yarn run release",
       "category": 2
     },
