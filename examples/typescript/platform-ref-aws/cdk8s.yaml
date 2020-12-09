@@ -1,4 +1,4 @@
 language: typescript
-app: node main.js
+app: node crossplane.js
 imports:
   - k8s

@@ -30,6 +30,8 @@ project.eslint.addRules(
   },
 );
 
+project.gitignore.exclude('.vscode/');
+
 const compileExamples = project.addTask('compile-examples');
 
 const base = join('examples', 'typescript');

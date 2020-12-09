@@ -1,8 +1,8 @@
 import { App, Chart, Testing } from 'cdk8s';
 
-import * as comp from './crs/composition.apiextensions.crossplane.io';
-import * as xrds from './crs/xrd.apiextensions.crossplane.io';
-import * as config from './crs/configuration.meta.pkg.crossplane.io';
+import * as comp from '../crs/composition.apiextensions.crossplane.io';
+import * as xrds from '../crs/xrd.apiextensions.crossplane.io';
+import * as config from '../crs/configuration.meta.pkg.crossplane.io';
 
 test('platform-ref-aws', () => {
 
