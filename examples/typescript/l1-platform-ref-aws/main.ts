@@ -4,6 +4,8 @@ import * as comp from './crs/composition.apiextensions.crossplane.io';
 import * as xrds from './crs/xrd.apiextensions.crossplane.io';
 import * as config from './crs/configuration.meta.pkg.crossplane.io';
 
+// import { Configuration } from 'crossplane-cdk';
+
 const crossplanePackage = new App();
 
 const crossplaneYaml = new Chart(crossplanePackage, 'crossplane');
