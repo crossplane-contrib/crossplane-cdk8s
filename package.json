@@ -21,7 +21,8 @@
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "docgen": "npx projen docgen",
+    "compile-examples": "npx projen compile-examples"
   },
   "author": {
     "name": "Phil Prasek",

@@ -10,6 +10,9 @@
         },
         {
           "spawn": "docgen"
+        },
+        {
+          "spawn": "compile-examples"
         }
       ]
     },
@@ -150,6 +153,17 @@
       "steps": [
         {
           "exec": "jsii-docgen"
+        }
+      ]
+    },
+    "compile-examples": {
+      "name": "compile-examples",
+      "steps": [
+        {
+          "exec": "(cd /Users/benisrae/code/crossplane-cdk/examples/typescript/l1-platform-ref-aws && mkdir -p node_modules && cd node_modules && rm -f crossplane-cdk && ln -s ../../../../ crossplane-cdk)"
+        },
+        {
+          "exec": "(cd /Users/benisrae/code/crossplane-cdk/examples/typescript/l1-platform-ref-aws && /Users/benisrae/code/crossplane-cdk/node_modules/typescript/bin/tsc)"
         }
       ]
     }
