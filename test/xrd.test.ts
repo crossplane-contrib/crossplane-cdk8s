@@ -112,7 +112,7 @@ test('compositeClusters', () => {
                     },
                   },
                   required: [
-                    'name',
+                    'id',
                     'parameters',
                   ],
                 },

@@ -18,7 +18,7 @@ export class Configuration extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'Configuration',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
     });
   }
 }
@@ -95,6 +95,14 @@ export interface ConfigurationSpec {
    */
   readonly revisionHistoryLimit?: number;
 
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ConfigurationSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
 }
 
 /**
@@ -128,7 +136,7 @@ export class ConfigurationRevision extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'ConfigurationRevision',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
     });
   }
 }
@@ -209,6 +217,14 @@ export interface ConfigurationRevisionSpec {
    * @schema ConfigurationRevisionSpec#revision
    */
   readonly revision: number;
+
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ConfigurationRevisionSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
 
 }
 
@@ -316,6 +332,13 @@ export interface ControllerConfigSpec {
    * @schema ControllerConfigSpec#envFrom
    */
   readonly envFrom?: ControllerConfigSpecEnvFrom[];
+
+  /**
+   * Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema ControllerConfigSpec#image
+   */
+  readonly image?: string;
 
   /**
    * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
@@ -1775,6 +1798,117 @@ export interface ControllerConfigSpecAffinityPodAntiAffinityPreferredDuringSched
 }
 
 /**
+ * Lock is the CRD type that tracks package dependencies.
+ *
+ * @schema Lock
+ */
+export class Lock extends ApiObject {
+  /**
+   * Defines a "Lock" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: LockProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Lock',
+      apiVersion: 'pkg.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * Lock is the CRD type that tracks package dependencies.
+ *
+ * @schema Lock
+ */
+export interface LockProps {
+  /**
+   * @schema Lock#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * @schema Lock#packages
+   */
+  readonly packages?: LockPackages[];
+
+}
+
+/**
+ * LockPackage is a package that is in the lock.
+ *
+ * @schema LockPackages
+ */
+export interface LockPackages {
+  /**
+   * Dependencies are the list of dependencies of this package. The order of the dependencies will dictate the order in which they are resolved.
+   *
+   * @schema LockPackages#dependencies
+   */
+  readonly dependencies: LockPackagesDependencies[];
+
+  /**
+   * Name corresponds to the name of the package revision for this package.
+   *
+   * @schema LockPackages#name
+   */
+  readonly name: string;
+
+  /**
+   * Source is the OCI image name without a tag or digest.
+   *
+   * @schema LockPackages#source
+   */
+  readonly source: string;
+
+  /**
+   * Type is the type of package. Can be either Configuration or Provider.
+   *
+   * @schema LockPackages#type
+   */
+  readonly type: string;
+
+  /**
+   * Version is the tag or digest of the OCI image.
+   *
+   * @schema LockPackages#version
+   */
+  readonly version: string;
+
+}
+
+/**
+ * A Dependency is a dependency of a package in the lock.
+ *
+ * @schema LockPackagesDependencies
+ */
+export interface LockPackagesDependencies {
+  /**
+   * Constraints is a valid semver range, which will be used to select a valid dependency version.
+   *
+   * @schema LockPackagesDependencies#constraints
+   */
+  readonly constraints: string;
+
+  /**
+   * Package is the OCI image name without a tag or digest.
+   *
+   * @schema LockPackagesDependencies#package
+   */
+  readonly package: string;
+
+  /**
+   * Type is the type of package. Can be either Configuration or Provider.
+   *
+   * @schema LockPackagesDependencies#type
+   */
+  readonly type: string;
+
+}
+
+/**
  * Provider is the CRD type for a request to add a provider to Crossplane.
  *
  * @schema Provider
@@ -1790,7 +1924,7 @@ export class Provider extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'Provider',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
     });
   }
 }
@@ -1874,6 +2008,14 @@ export interface ProviderSpec {
    */
   readonly revisionHistoryLimit?: number;
 
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ProviderSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
 }
 
 /**
@@ -1922,7 +2064,7 @@ export class ProviderRevision extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'ProviderRevision',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
     });
   }
 }
@@ -2003,6 +2145,14 @@ export interface ProviderRevisionSpec {
    * @schema ProviderRevisionSpec#revision
    */
   readonly revision: number;
+
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ProviderRevisionSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
 
 }
 

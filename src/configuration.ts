@@ -25,8 +25,10 @@ export interface ConfigurationProps extends ResourceProps {
   readonly description?: string;
   readonly readme?: string;
 
+  readonly iconData?: string;
+
   /**
-   * @default ">=v0.14.0-0"
+   * @default ">=v1.0.0-0"
    */
   readonly crossplaneVersion?: string;
 
@@ -70,6 +72,7 @@ export class Configuration extends Resource implements IConfiguration {
     if (props.description) { annotations.description = props.description; }
     if (props.readme) { annotations.readme = props.readme; }
     if (props.maintainer) { annotations.maintainer = props.maintainer; }
+    if (props.iconData) { annotations.iconData = props.iconData; }
 
     // merge extra annotations
     if (props.metadata?.annotations) { annotations = { ...props.metadata.annotations, ...annotations }; }

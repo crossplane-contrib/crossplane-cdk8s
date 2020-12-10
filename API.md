@@ -47,9 +47,10 @@ new Configuration(scope: Construct, id: string, props?: ConfigurationProps)
 * **props** (<code>[ConfigurationProps](#crossplane-cdk-configurationprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **company** (<code>string</code>)  *No description* __*Optional*__
-  * **crossplaneVersion** (<code>string</code>)  *No description* __*Default*__: ">=v0.14.0-0"
+  * **crossplaneVersion** (<code>string</code>)  *No description* __*Default*__: ">=v1.0.0-0"
   * **description** (<code>string</code>)  *No description* __*Optional*__
   * **descriptionShort** (<code>string</code>)  *No description* __*Optional*__
+  * **iconData** (<code>string</code>)  *No description* __*Optional*__
   * **keywords** (<code>Array<string></code>)  *No description* __*Optional*__
   * **license** (<code>string</code>)  *No description* __*Optional*__
   * **maintainer** (<code>string</code>)  *No description* __*Optional*__
@@ -133,9 +134,10 @@ Properties for initialization of `Configuration`.
 Name | Type | Description 
 -----|------|-------------
 **company**? | <code>string</code> | __*Optional*__
-**crossplaneVersion**? | <code>string</code> | __*Default*__: ">=v0.14.0-0"
+**crossplaneVersion**? | <code>string</code> | __*Default*__: ">=v1.0.0-0"
 **description**? | <code>string</code> | __*Optional*__
 **descriptionShort**? | <code>string</code> | __*Optional*__
+**iconData**? | <code>string</code> | __*Optional*__
 **keywords**? | <code>Array<string></code> | __*Optional*__
 **license**? | <code>string</code> | __*Optional*__
 **maintainer**? | <code>string</code> | __*Optional*__

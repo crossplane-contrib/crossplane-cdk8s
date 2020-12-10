@@ -18,28 +18,7 @@ export class CompositeResourceDefinition extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'CompositeResourceDefinition',
-      apiVersion: 'apiextensions.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
- *
- * @schema Composition
- */
-export class Composition extends ApiObject {
-  /**
-   * Defines a "Composition" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: CompositionProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'Composition',
-      apiVersion: 'apiextensions.crossplane.io/v1alpha1',
+      apiVersion: 'apiextensions.crossplane.io/v1beta1',
     });
   }
 }
@@ -61,26 +40,6 @@ export interface CompositeResourceDefinitionProps {
    * @schema CompositeResourceDefinition#spec
    */
   readonly spec?: CompositeResourceDefinitionSpec;
-
-}
-
-/**
- * Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
- *
- * @schema Composition
- */
-export interface CompositionProps {
-  /**
-   * @schema Composition#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * CompositionSpec specifies the desired state of the definition.
-   *
-   * @schema Composition#spec
-   */
-  readonly spec?: CompositionSpec;
 
 }
 
@@ -138,35 +97,6 @@ export interface CompositeResourceDefinitionSpec {
    * @schema CompositeResourceDefinitionSpec#versions
    */
   readonly versions: CompositeResourceDefinitionSpecVersions[];
-
-}
-
-/**
- * CompositionSpec specifies the desired state of the definition.
- *
- * @schema CompositionSpec
- */
-export interface CompositionSpec {
-  /**
-   * CompositeTypeRef specifies the type of composite resource that this composition is compatible with.
-   *
-   * @schema CompositionSpec#compositeTypeRef
-   */
-  readonly compositeTypeRef: CompositionSpecCompositeTypeRef;
-
-  /**
-   * Resources is the list of resource templates that will be used when a composite resource referring to this composition is created.
-   *
-   * @schema CompositionSpec#resources
-   */
-  readonly resources: CompositionSpecResources[];
-
-  /**
-   * WriteConnectionSecretsToNamespace specifies the namespace in which the connection secrets of composite resource dynamically provisioned using this composition will be created.
-   *
-   * @schema CompositionSpec#writeConnectionSecretsToNamespace
-   */
-  readonly writeConnectionSecretsToNamespace?: string;
 
 }
 
@@ -348,64 +278,6 @@ export interface CompositeResourceDefinitionSpecVersions {
 }
 
 /**
- * CompositeTypeRef specifies the type of composite resource that this composition is compatible with.
- *
- * @schema CompositionSpecCompositeTypeRef
- */
-export interface CompositionSpecCompositeTypeRef {
-  /**
-   * APIVersion of the type.
-   *
-   * @schema CompositionSpecCompositeTypeRef#apiVersion
-   */
-  readonly apiVersion: string;
-
-  /**
-   * Kind of the type.
-   *
-   * @schema CompositionSpecCompositeTypeRef#kind
-   */
-  readonly kind: string;
-
-}
-
-/**
- * ComposedTemplate is used to provide information about how the composed resource should be processed.
- *
- * @schema CompositionSpecResources
- */
-export interface CompositionSpecResources {
-  /**
-   * Base is the target resource that the patches will be applied on.
-   *
-   * @schema CompositionSpecResources#base
-   */
-  readonly base: any;
-
-  /**
-   * ConnectionDetails lists the propagation secret keys from this target resource to the composition instance connection secret.
-   *
-   * @schema CompositionSpecResources#connectionDetails
-   */
-  readonly connectionDetails?: CompositionSpecResourcesConnectionDetails[];
-
-  /**
-   * Patches will be applied as overlay to the base resource.
-   *
-   * @schema CompositionSpecResources#patches
-   */
-  readonly patches?: CompositionSpecResourcesPatches[];
-
-  /**
-   * ReadinessChecks allows users to define custom readiness checks. All checks have to return true in order for resource to be considered ready. The default readiness check is to have the "Ready" condition to be "True".
-   *
-   * @schema CompositionSpecResources#readinessChecks
-   */
-  readonly readinessChecks?: CompositionSpecResourcesReadinessChecks[];
-
-}
-
-/**
  * CustomResourceColumnDefinition specifies a column for server side printing.
  *
  * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns
@@ -471,6 +343,206 @@ export interface CompositeResourceDefinitionSpecVersionsSchema {
 }
 
 /**
+ * Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+ *
+ * @schema Composition
+ */
+export class Composition extends ApiObject {
+  /**
+   * Defines a "Composition" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: CompositionProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Composition',
+      apiVersion: 'apiextensions.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+ *
+ * @schema Composition
+ */
+export interface CompositionProps {
+  /**
+   * @schema Composition#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * CompositionSpec specifies the desired state of the definition.
+   *
+   * @schema Composition#spec
+   */
+  readonly spec?: CompositionSpec;
+
+}
+
+/**
+ * CompositionSpec specifies the desired state of the definition.
+ *
+ * @schema CompositionSpec
+ */
+export interface CompositionSpec {
+  /**
+   * CompositeTypeRef specifies the type of composite resource that this composition is compatible with.
+   *
+   * @schema CompositionSpec#compositeTypeRef
+   */
+  readonly compositeTypeRef: CompositionSpecCompositeTypeRef;
+
+  /**
+   * PatchSets define a named set of patches that may be included by any resource in this Composition. PatchSets cannot themselves refer to other PatchSets.
+   *
+   * @schema CompositionSpec#patchSets
+   */
+  readonly patchSets?: CompositionSpecPatchSets[];
+
+  /**
+   * Resources is the list of resource templates that will be used when a composite resource referring to this composition is created.
+   *
+   * @schema CompositionSpec#resources
+   */
+  readonly resources: CompositionSpecResources[];
+
+  /**
+   * WriteConnectionSecretsToNamespace specifies the namespace in which the connection secrets of composite resource dynamically provisioned using this composition will be created.
+   *
+   * @schema CompositionSpec#writeConnectionSecretsToNamespace
+   */
+  readonly writeConnectionSecretsToNamespace?: string;
+
+}
+
+/**
+ * CompositeTypeRef specifies the type of composite resource that this composition is compatible with.
+ *
+ * @schema CompositionSpecCompositeTypeRef
+ */
+export interface CompositionSpecCompositeTypeRef {
+  /**
+   * APIVersion of the type.
+   *
+   * @schema CompositionSpecCompositeTypeRef#apiVersion
+   */
+  readonly apiVersion: string;
+
+  /**
+   * Kind of the type.
+   *
+   * @schema CompositionSpecCompositeTypeRef#kind
+   */
+  readonly kind: string;
+
+}
+
+/**
+ * A PatchSet is a set of patches that can be reused from all resources within a Composition.
+ *
+ * @schema CompositionSpecPatchSets
+ */
+export interface CompositionSpecPatchSets {
+  /**
+   * Name of this PatchSet.
+   *
+   * @schema CompositionSpecPatchSets#name
+   */
+  readonly name: string;
+
+  /**
+   * Patches will be applied as an overlay to the base resource.
+   *
+   * @schema CompositionSpecPatchSets#patches
+   */
+  readonly patches: CompositionSpecPatchSetsPatches[];
+
+}
+
+/**
+ * ComposedTemplate is used to provide information about how the composed resource should be processed.
+ *
+ * @schema CompositionSpecResources
+ */
+export interface CompositionSpecResources {
+  /**
+   * Base is the target resource that the patches will be applied on.
+   *
+   * @schema CompositionSpecResources#base
+   */
+  readonly base: any;
+
+  /**
+   * ConnectionDetails lists the propagation secret keys from this target resource to the composition instance connection secret.
+   *
+   * @schema CompositionSpecResources#connectionDetails
+   */
+  readonly connectionDetails?: CompositionSpecResourcesConnectionDetails[];
+
+  /**
+   * Patches will be applied as overlay to the base resource.
+   *
+   * @schema CompositionSpecResources#patches
+   */
+  readonly patches?: CompositionSpecResourcesPatches[];
+
+  /**
+   * ReadinessChecks allows users to define custom readiness checks. All checks have to return true in order for resource to be considered ready. The default readiness check is to have the "Ready" condition to be "True".
+   *
+   * @schema CompositionSpecResources#readinessChecks
+   */
+  readonly readinessChecks?: CompositionSpecResourcesReadinessChecks[];
+
+}
+
+/**
+ * Patch objects are applied between composite and composed resources. Their behaviour depends on the Type selected. The default Type, FromCompositeFieldPath, copies a value from the composite resource to the composed resource, applying any defined transformers.
+ *
+ * @schema CompositionSpecPatchSetsPatches
+ */
+export interface CompositionSpecPatchSetsPatches {
+  /**
+   * FromFieldPath is the path of the field on the upstream resource whose value to be used as input. Required when type is FromCompositeFieldPath.
+   *
+   * @schema CompositionSpecPatchSetsPatches#fromFieldPath
+   */
+  readonly fromFieldPath?: string;
+
+  /**
+   * PatchSetName to include patches from. Required when type is PatchSet.
+   *
+   * @schema CompositionSpecPatchSetsPatches#patchSetName
+   */
+  readonly patchSetName?: string;
+
+  /**
+   * ToFieldPath is the path of the field on the base resource whose value will be changed with the result of transforms. Leave empty if you'd like to propagate to the same path on the target resource.
+   *
+   * @schema CompositionSpecPatchSetsPatches#toFieldPath
+   */
+  readonly toFieldPath?: string;
+
+  /**
+   * Transforms are the list of functions that are used as a FIFO pipe for the input to be transformed.
+   *
+   * @schema CompositionSpecPatchSetsPatches#transforms
+   */
+  readonly transforms?: CompositionSpecPatchSetsPatchesTransforms[];
+
+  /**
+   * Type sets the patching behaviour to be used. Each patch type may require its' own fields to be set on the Patch object.
+   *
+   * @schema CompositionSpecPatchSetsPatches#type
+   */
+  readonly type?: CompositionSpecPatchSetsPatchesType;
+
+}
+
+/**
  * ConnectionDetail includes the information about the propagation of the connection information from one secret to another.
  *
  * @schema CompositionSpecResourcesConnectionDetails
@@ -500,17 +572,24 @@ export interface CompositionSpecResourcesConnectionDetails {
 }
 
 /**
- * Patch is used to patch the field on the base resource at ToFieldPath after piping the value that is at FromFieldPath of the target resource through transformers.
+ * Patch objects are applied between composite and composed resources. Their behaviour depends on the Type selected. The default Type, FromCompositeFieldPath, copies a value from the composite resource to the composed resource, applying any defined transformers.
  *
  * @schema CompositionSpecResourcesPatches
  */
 export interface CompositionSpecResourcesPatches {
   /**
-   * FromFieldPath is the path of the field on the upstream resource whose value to be used as input.
+   * FromFieldPath is the path of the field on the upstream resource whose value to be used as input. Required when type is FromCompositeFieldPath.
    *
    * @schema CompositionSpecResourcesPatches#fromFieldPath
    */
-  readonly fromFieldPath: string;
+  readonly fromFieldPath?: string;
+
+  /**
+   * PatchSetName to include patches from. Required when type is PatchSet.
+   *
+   * @schema CompositionSpecResourcesPatches#patchSetName
+   */
+  readonly patchSetName?: string;
 
   /**
    * ToFieldPath is the path of the field on the base resource whose value will be changed with the result of transforms. Leave empty if you'd like to propagate to the same path on the target resource.
@@ -525,6 +604,13 @@ export interface CompositionSpecResourcesPatches {
    * @schema CompositionSpecResourcesPatches#transforms
    */
   readonly transforms?: CompositionSpecResourcesPatchesTransforms[];
+
+  /**
+   * Type sets the patching behaviour to be used. Each patch type may require its' own fields to be set on the Patch object.
+   *
+   * @schema CompositionSpecResourcesPatches#type
+   */
+  readonly type?: CompositionSpecResourcesPatchesType;
 
 }
 
@@ -567,9 +653,71 @@ export interface CompositionSpecResourcesReadinessChecks {
 /**
  * Transform is a unit of process whose input is transformed into an output with the supplied configuration.
  *
+ * @schema CompositionSpecPatchSetsPatchesTransforms
+ */
+export interface CompositionSpecPatchSetsPatchesTransforms {
+  /**
+   * Convert is used to cast the input into the given output type.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransforms#convert
+   */
+  readonly convert?: CompositionSpecPatchSetsPatchesTransformsConvert;
+
+  /**
+   * Map uses the input as a key in the given map and returns the value.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransforms#map
+   */
+  readonly map?: { [key: string]: string };
+
+  /**
+   * Math is used to transform the input via mathematical operations such as multiplication.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransforms#math
+   */
+  readonly math?: CompositionSpecPatchSetsPatchesTransformsMath;
+
+  /**
+   * String is used to transform the input into a string or a different kind of string. Note that the input does not necessarily need to be a string.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransforms#string
+   */
+  readonly string?: CompositionSpecPatchSetsPatchesTransformsString;
+
+  /**
+   * Type of the transform to be run.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransforms#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Type sets the patching behaviour to be used. Each patch type may require its' own fields to be set on the Patch object.
+ *
+ * @schema CompositionSpecPatchSetsPatchesType
+ */
+export enum CompositionSpecPatchSetsPatchesType {
+  /** FromCompositeFieldPath */
+  FROM_COMPOSITE_FIELD_PATH = 'FromCompositeFieldPath',
+  /** PatchSet */
+  PATCH_SET = 'PatchSet',
+}
+
+/**
+ * Transform is a unit of process whose input is transformed into an output with the supplied configuration.
+ *
  * @schema CompositionSpecResourcesPatchesTransforms
  */
 export interface CompositionSpecResourcesPatchesTransforms {
+  /**
+   * Convert is used to cast the input into the given output type.
+   *
+   * @schema CompositionSpecResourcesPatchesTransforms#convert
+   */
+  readonly convert?: CompositionSpecResourcesPatchesTransformsConvert;
+
   /**
    * Map uses the input as a key in the given map and returns the value.
    *
@@ -601,6 +749,18 @@ export interface CompositionSpecResourcesPatchesTransforms {
 }
 
 /**
+ * Type sets the patching behaviour to be used. Each patch type may require its' own fields to be set on the Patch object.
+ *
+ * @schema CompositionSpecResourcesPatchesType
+ */
+export enum CompositionSpecResourcesPatchesType {
+  /** FromCompositeFieldPath */
+  FROM_COMPOSITE_FIELD_PATH = 'FromCompositeFieldPath',
+  /** PatchSet */
+  PATCH_SET = 'PatchSet',
+}
+
+/**
  * Type indicates the type of probe you'd like to use.
  *
  * @schema CompositionSpecResourcesReadinessChecksType
@@ -614,6 +774,66 @@ export enum CompositionSpecResourcesReadinessChecksType {
   NON_EMPTY = 'NonEmpty',
   /** None */
   NONE = 'None',
+}
+
+/**
+ * Convert is used to cast the input into the given output type.
+ *
+ * @schema CompositionSpecPatchSetsPatchesTransformsConvert
+ */
+export interface CompositionSpecPatchSetsPatchesTransformsConvert {
+  /**
+   * ToType is the type of the output of this transform.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransformsConvert#toType
+   */
+  readonly toType: CompositionSpecPatchSetsPatchesTransformsConvertToType;
+
+}
+
+/**
+ * Math is used to transform the input via mathematical operations such as multiplication.
+ *
+ * @schema CompositionSpecPatchSetsPatchesTransformsMath
+ */
+export interface CompositionSpecPatchSetsPatchesTransformsMath {
+  /**
+   * Multiply the value.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransformsMath#multiply
+   */
+  readonly multiply?: number;
+
+}
+
+/**
+ * String is used to transform the input into a string or a different kind of string. Note that the input does not necessarily need to be a string.
+ *
+ * @schema CompositionSpecPatchSetsPatchesTransformsString
+ */
+export interface CompositionSpecPatchSetsPatchesTransformsString {
+  /**
+   * Format the input using a Go format string. See https://golang.org/pkg/fmt/ for details.
+   *
+   * @schema CompositionSpecPatchSetsPatchesTransformsString#fmt
+   */
+  readonly fmt: string;
+
+}
+
+/**
+ * Convert is used to cast the input into the given output type.
+ *
+ * @schema CompositionSpecResourcesPatchesTransformsConvert
+ */
+export interface CompositionSpecResourcesPatchesTransformsConvert {
+  /**
+   * ToType is the type of the output of this transform.
+   *
+   * @schema CompositionSpecResourcesPatchesTransformsConvert#toType
+   */
+  readonly toType: CompositionSpecResourcesPatchesTransformsConvertToType;
+
 }
 
 /**
@@ -644,5 +864,37 @@ export interface CompositionSpecResourcesPatchesTransformsString {
    */
   readonly fmt: string;
 
+}
+
+/**
+ * ToType is the type of the output of this transform.
+ *
+ * @schema CompositionSpecPatchSetsPatchesTransformsConvertToType
+ */
+export enum CompositionSpecPatchSetsPatchesTransformsConvertToType {
+  /** string */
+  STRING = 'string',
+  /** int */
+  INT = 'int',
+  /** bool */
+  BOOL = 'bool',
+  /** float64 */
+  FLOAT64 = 'float64',
+}
+
+/**
+ * ToType is the type of the output of this transform.
+ *
+ * @schema CompositionSpecResourcesPatchesTransformsConvertToType
+ */
+export enum CompositionSpecResourcesPatchesTransformsConvertToType {
+  /** string */
+  STRING = 'string',
+  /** int */
+  INT = 'int',
+  /** bool */
+  BOOL = 'bool',
+  /** float64 */
+  FLOAT64 = 'float64',
 }
 

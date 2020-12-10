@@ -24,27 +24,6 @@ export class Configuration extends ApiObject {
 }
 
 /**
- * A Provider is the description of a Crossplane Provider package.
- *
- * @schema Provider
- */
-export class Provider extends ApiObject {
-  /**
-   * Defines a "Provider" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderProps) {
-    super(scope, id, {
-      ...props,
-      kind: 'Provider',
-      apiVersion: 'meta.pkg.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * A Configuration is the description of a Crossplane Configuration package.
  *
  * @schema Configuration
@@ -61,26 +40,6 @@ export interface ConfigurationProps {
    * @schema Configuration#spec
    */
   readonly spec: ConfigurationSpec;
-
-}
-
-/**
- * A Provider is the description of a Crossplane Provider package.
- *
- * @schema Provider
- */
-export interface ProviderProps {
-  /**
-   * @schema Provider#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * ProviderSpec specifies the configuration of a Provider.
-   *
-   * @schema Provider#spec
-   */
-  readonly spec: ProviderSpec;
 
 }
 
@@ -103,35 +62,6 @@ export interface ConfigurationSpec {
    * @schema ConfigurationSpec#dependsOn
    */
   readonly dependsOn?: ConfigurationSpecDependsOn[];
-
-}
-
-/**
- * ProviderSpec specifies the configuration of a Provider.
- *
- * @schema ProviderSpec
- */
-export interface ProviderSpec {
-  /**
-   * Configuration for the packaged Provider's controller.
-   *
-   * @schema ProviderSpec#controller
-   */
-  readonly controller: ProviderSpecController;
-
-  /**
-   * Semantic version constraints of Crossplane that package is compatible with.
-   *
-   * @schema ProviderSpec#crossplane
-   */
-  readonly crossplane?: ProviderSpecCrossplane;
-
-  /**
-   * Dependencies on other packages.
-   *
-   * @schema ProviderSpec#dependsOn
-   */
-  readonly dependsOn?: ProviderSpecDependsOn[];
 
 }
 
@@ -176,6 +106,76 @@ export interface ConfigurationSpecDependsOn {
    * @schema ConfigurationSpecDependsOn#version
    */
   readonly version: string;
+
+}
+
+/**
+ * A Provider is the description of a Crossplane Provider package.
+ *
+ * @schema Provider
+ */
+export class Provider extends ApiObject {
+  /**
+   * Defines a "Provider" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ProviderProps) {
+    super(scope, id, {
+      ...props,
+      kind: 'Provider',
+      apiVersion: 'meta.pkg.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * A Provider is the description of a Crossplane Provider package.
+ *
+ * @schema Provider
+ */
+export interface ProviderProps {
+  /**
+   * @schema Provider#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * ProviderSpec specifies the configuration of a Provider.
+   *
+   * @schema Provider#spec
+   */
+  readonly spec: ProviderSpec;
+
+}
+
+/**
+ * ProviderSpec specifies the configuration of a Provider.
+ *
+ * @schema ProviderSpec
+ */
+export interface ProviderSpec {
+  /**
+   * Configuration for the packaged Provider's controller.
+   *
+   * @schema ProviderSpec#controller
+   */
+  readonly controller: ProviderSpecController;
+
+  /**
+   * Semantic version constraints of Crossplane that package is compatible with.
+   *
+   * @schema ProviderSpec#crossplane
+   */
+  readonly crossplane?: ProviderSpecCrossplane;
+
+  /**
+   * Dependencies on other packages.
+   *
+   * @schema ProviderSpec#dependsOn
+   */
+  readonly dependsOn?: ProviderSpecDependsOn[];
 
 }
 

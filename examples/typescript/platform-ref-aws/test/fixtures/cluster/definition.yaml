@@ -1,4 +1,4 @@
-apiVersion: apiextensions.crossplane.io/v1alpha1
+apiVersion: apiextensions.crossplane.io/v1beta1
 kind: CompositeResourceDefinition
 metadata:
   name: compositeclusters.aws.platformref.crossplane.io
@@ -155,5 +155,5 @@ spec:
                 - nodes
                 - networkRef
             required:
-            - name
+            - id
             - parameters

@@ -44,16 +44,16 @@ customize to meet the exact needs of your organization!
     },
     "spec": Object {
       "crossplane": Object {
-        "version": ">=v0.14.0-0",
+        "version": ">=v1.0.0-0",
       },
       "dependsOn": Array [
         Object {
           "provider": "crossplane/provider-aws",
-          "version": ">=v0.15.0-0",
+          "version": ">=v0.14.0-0",
         },
         Object {
           "provider": "crossplane/provider-helm",
-          "version": ">=v0.3.7-0",
+          "version": ">=v0.3.6-0",
         },
       ],
     },
@@ -64,7 +64,7 @@ customize to meet the exact needs of your organization!
 exports[`compositeClusters 2`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -172,7 +172,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -275,7 +275,7 @@ configSections:
 exports[`compositeClusters 3`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -363,7 +363,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -698,7 +698,7 @@ configSections:
 exports[`compositeClusters 4`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -878,7 +878,7 @@ configSections:
                     },
                   },
                   "required": Array [
-                    "name",
+                    "id",
                     "parameters",
                   ],
                   "type": "object",
@@ -893,7 +893,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "Composition",
     "metadata": Object {
       "name": "compositeclusters.aws.platformref.crossplane.io",
@@ -974,7 +974,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "name": "eks.aws.platformref.crossplane.io",
@@ -1063,7 +1063,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -1370,7 +1370,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "name": "services.aws.platformref.crossplane.io",
@@ -1435,7 +1435,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1beta1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {

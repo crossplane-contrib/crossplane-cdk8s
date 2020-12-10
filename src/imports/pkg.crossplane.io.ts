@@ -3,48 +3,6 @@ import { ApiObject } from 'cdk8s';
 import { Construct } from 'constructs';
 
 /**
- * Provider is the CRD type for a request to add a provider to Crossplane.
- *
- * @schema Provider
- */
-export class Provider extends ApiObject {
-  /**
-   * Defines a "Provider" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'Provider',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * A ConfigurationRevision that has been added to Crossplane.
- *
- * @schema ConfigurationRevision
- */
-export class ConfigurationRevision extends ApiObject {
-  /**
-   * Defines a "ConfigurationRevision" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ConfigurationRevisionProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'ConfigurationRevision',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
  * Configuration is the CRD type for a request to add a configuration to Crossplane.
  *
  * @schema Configuration
@@ -60,91 +18,9 @@ export class Configuration extends ApiObject {
     super(scope, id, {
       ...props,
       kind: 'Configuration',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
     });
   }
-}
-
-/**
- * ControllerConfig is the CRD type for a packaged controller configuration.
- *
- * @schema ControllerConfig
- */
-export class ControllerConfig extends ApiObject {
-  /**
-   * Defines a "ControllerConfig" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ControllerConfigProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'ControllerConfig',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * A ProviderRevision that has been added to Crossplane.
- *
- * @schema ProviderRevision
- */
-export class ProviderRevision extends ApiObject {
-  /**
-   * Defines a "ProviderRevision" API object
-   * @param scope the scope in which to define this object
-   * @param id a scope-local name for the object
-   * @param props initialiation props
-   */
-  public constructor(scope: Construct, id: string, props: ProviderRevisionProps = {}) {
-    super(scope, id, {
-      ...props,
-      kind: 'ProviderRevision',
-      apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
-  }
-}
-
-/**
- * Provider is the CRD type for a request to add a provider to Crossplane.
- *
- * @schema Provider
- */
-export interface ProviderProps {
-  /**
-   * @schema Provider#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * ProviderSpec specifies details about a request to install a provider to Crossplane.
-   *
-   * @schema Provider#spec
-   */
-  readonly spec?: ProviderSpec;
-
-}
-
-/**
- * A ConfigurationRevision that has been added to Crossplane.
- *
- * @schema ConfigurationRevision
- */
-export interface ConfigurationRevisionProps {
-  /**
-   * @schema ConfigurationRevision#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * PackageRevisionSpec specifies the desired state of a PackageRevision.
-   *
-   * @schema ConfigurationRevision#spec
-   */
-  readonly spec?: ConfigurationRevisionSpec;
-
 }
 
 /**
@@ -168,70 +44,23 @@ export interface ConfigurationProps {
 }
 
 /**
- * ControllerConfig is the CRD type for a packaged controller configuration.
+ * ConfigurationSpec specifies details about a request to install a configuration to Crossplane.
  *
- * @schema ControllerConfig
+ * @schema ConfigurationSpec
  */
-export interface ControllerConfigProps {
-  /**
-   * @schema ControllerConfig#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * ControllerConfigSpec specifies the configuration for a packaged controller. Values provided will override package manager defaults. Labels and annotations are passed to both the controller Deployment and ServiceAccount.
-   *
-   * @schema ControllerConfig#spec
-   */
-  readonly spec?: ControllerConfigSpec;
-
-}
-
-/**
- * A ProviderRevision that has been added to Crossplane.
- *
- * @schema ProviderRevision
- */
-export interface ProviderRevisionProps {
-  /**
-   * @schema ProviderRevision#metadata
-   */
-  readonly metadata?: any;
-
-  /**
-   * PackageRevisionSpec specifies the desired state of a PackageRevision.
-   *
-   * @schema ProviderRevision#spec
-   */
-  readonly spec?: ProviderRevisionSpec;
-
-}
-
-/**
- * ProviderSpec specifies details about a request to install a provider to Crossplane.
- *
- * @schema ProviderSpec
- */
-export interface ProviderSpec {
-  /**
-   * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
-   *
-   * @schema ProviderSpec#controllerConfigRef
-   */
-  readonly controllerConfigRef?: ProviderSpecControllerConfigRef;
-
+export interface ConfigurationSpec {
   /**
    * IgnoreCrossplaneConstraints indicates to the package manager whether to honor Crossplane version constrains specified by the package. Default is false.
    *
    * @default false.
-   * @schema ProviderSpec#ignoreCrossplaneConstraints
+   * @schema ConfigurationSpec#ignoreCrossplaneConstraints
    */
   readonly ignoreCrossplaneConstraints?: boolean;
 
   /**
    * Package is the name of the package that is being requested.
    *
-   * @schema ProviderSpec#package
+   * @schema ConfigurationSpec#package
    */
   readonly package: string;
 
@@ -239,22 +68,22 @@ export interface ProviderSpec {
    * PackagePullPolicy defines the pull policy for the package. Default is IfNotPresent.
    *
    * @default IfNotPresent.
-   * @schema ProviderSpec#packagePullPolicy
+   * @schema ConfigurationSpec#packagePullPolicy
    */
   readonly packagePullPolicy?: string;
 
   /**
    * PackagePullSecrets are named secrets in the same namespace that can be used to fetch packages from private registries.
    *
-   * @schema ProviderSpec#packagePullSecrets
+   * @schema ConfigurationSpec#packagePullSecrets
    */
-  readonly packagePullSecrets?: ProviderSpecPackagePullSecrets[];
+  readonly packagePullSecrets?: ConfigurationSpecPackagePullSecrets[];
 
   /**
    * RevisionActivationPolicy specifies how the package controller should update from one revision to the next. Options are Automatic or Manual. Default is Automatic.
    *
    * @default Automatic.
-   * @schema ProviderSpec#revisionActivationPolicy
+   * @schema ConfigurationSpec#revisionActivationPolicy
    */
   readonly revisionActivationPolicy?: string;
 
@@ -262,9 +91,73 @@ export interface ProviderSpec {
    * RevisionHistoryLimit dictates how the package controller cleans up old inactive package revisions. Defaults to 1. Can be disabled by explicitly setting to 0.
    *
    * @default 1. Can be disabled by explicitly setting to 0.
-   * @schema ProviderSpec#revisionHistoryLimit
+   * @schema ConfigurationSpec#revisionHistoryLimit
    */
   readonly revisionHistoryLimit?: number;
+
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ConfigurationSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
+}
+
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ *
+ * @schema ConfigurationSpecPackagePullSecrets
+ */
+export interface ConfigurationSpecPackagePullSecrets {
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ConfigurationSpecPackagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * A ConfigurationRevision that has been added to Crossplane.
+ *
+ * @schema ConfigurationRevision
+ */
+export class ConfigurationRevision extends ApiObject {
+  /**
+   * Defines a "ConfigurationRevision" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ConfigurationRevisionProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'ConfigurationRevision',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * A ConfigurationRevision that has been added to Crossplane.
+ *
+ * @schema ConfigurationRevision
+ */
+export interface ConfigurationRevisionProps {
+  /**
+   * @schema ConfigurationRevision#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * PackageRevisionSpec specifies the desired state of a PackageRevision.
+   *
+   * @schema ConfigurationRevision#spec
+   */
+  readonly spec?: ConfigurationRevisionSpec;
 
 }
 
@@ -325,59 +218,84 @@ export interface ConfigurationRevisionSpec {
    */
   readonly revision: number;
 
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ConfigurationRevisionSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
 }
 
 /**
- * ConfigurationSpec specifies details about a request to install a configuration to Crossplane.
+ * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
  *
- * @schema ConfigurationSpec
+ * @schema ConfigurationRevisionSpecControllerConfigRef
  */
-export interface ConfigurationSpec {
+export interface ConfigurationRevisionSpecControllerConfigRef {
   /**
-   * IgnoreCrossplaneConstraints indicates to the package manager whether to honor Crossplane version constrains specified by the package. Default is false.
+   * Name of the referenced object.
    *
-   * @default false.
-   * @schema ConfigurationSpec#ignoreCrossplaneConstraints
+   * @schema ConfigurationRevisionSpecControllerConfigRef#name
    */
-  readonly ignoreCrossplaneConstraints?: boolean;
+  readonly name: string;
+
+}
+
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ *
+ * @schema ConfigurationRevisionSpecPackagePullSecrets
+ */
+export interface ConfigurationRevisionSpecPackagePullSecrets {
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ConfigurationRevisionSpecPackagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * ControllerConfig is the CRD type for a packaged controller configuration.
+ *
+ * @schema ControllerConfig
+ */
+export class ControllerConfig extends ApiObject {
+  /**
+   * Defines a "ControllerConfig" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ControllerConfigProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'ControllerConfig',
+      apiVersion: 'pkg.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * ControllerConfig is the CRD type for a packaged controller configuration.
+ *
+ * @schema ControllerConfig
+ */
+export interface ControllerConfigProps {
+  /**
+   * @schema ControllerConfig#metadata
+   */
+  readonly metadata?: any;
 
   /**
-   * Package is the name of the package that is being requested.
+   * ControllerConfigSpec specifies the configuration for a packaged controller. Values provided will override package manager defaults. Labels and annotations are passed to both the controller Deployment and ServiceAccount.
    *
-   * @schema ConfigurationSpec#package
+   * @schema ControllerConfig#spec
    */
-  readonly package: string;
-
-  /**
-   * PackagePullPolicy defines the pull policy for the package. Default is IfNotPresent.
-   *
-   * @default IfNotPresent.
-   * @schema ConfigurationSpec#packagePullPolicy
-   */
-  readonly packagePullPolicy?: string;
-
-  /**
-   * PackagePullSecrets are named secrets in the same namespace that can be used to fetch packages from private registries.
-   *
-   * @schema ConfigurationSpec#packagePullSecrets
-   */
-  readonly packagePullSecrets?: ConfigurationSpecPackagePullSecrets[];
-
-  /**
-   * RevisionActivationPolicy specifies how the package controller should update from one revision to the next. Options are Automatic or Manual. Default is Automatic.
-   *
-   * @default Automatic.
-   * @schema ConfigurationSpec#revisionActivationPolicy
-   */
-  readonly revisionActivationPolicy?: string;
-
-  /**
-   * RevisionHistoryLimit dictates how the package controller cleans up old inactive package revisions. Defaults to 1. Can be disabled by explicitly setting to 0.
-   *
-   * @default 1. Can be disabled by explicitly setting to 0.
-   * @schema ConfigurationSpec#revisionHistoryLimit
-   */
-  readonly revisionHistoryLimit?: number;
+  readonly spec?: ControllerConfigSpec;
 
 }
 
@@ -414,6 +332,13 @@ export interface ControllerConfigSpec {
    * @schema ControllerConfigSpec#envFrom
    */
   readonly envFrom?: ControllerConfigSpecEnvFrom[];
+
+  /**
+   * Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images This field is optional to allow higher level config management to default or override container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema ControllerConfigSpec#image
+   */
+  readonly image?: string;
 
   /**
    * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
@@ -502,140 +427,6 @@ export interface ControllerConfigSpec {
    * @schema ControllerConfigSpec#tolerations
    */
   readonly tolerations?: ControllerConfigSpecTolerations[];
-
-}
-
-/**
- * PackageRevisionSpec specifies the desired state of a PackageRevision.
- *
- * @schema ProviderRevisionSpec
- */
-export interface ProviderRevisionSpec {
-  /**
-   * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
-   *
-   * @schema ProviderRevisionSpec#controllerConfigRef
-   */
-  readonly controllerConfigRef?: ProviderRevisionSpecControllerConfigRef;
-
-  /**
-   * DesiredState of the PackageRevision. Can be either Active or Inactive.
-   *
-   * @schema ProviderRevisionSpec#desiredState
-   */
-  readonly desiredState: string;
-
-  /**
-   * IgnoreCrossplaneConstraints indicates to the package manager whether to honor Crossplane version constrains specified by the package. Default is false.
-   *
-   * @default false.
-   * @schema ProviderRevisionSpec#ignoreCrossplaneConstraints
-   */
-  readonly ignoreCrossplaneConstraints?: boolean;
-
-  /**
-   * Package image used by install Pod to extract package contents.
-   *
-   * @schema ProviderRevisionSpec#image
-   */
-  readonly image: string;
-
-  /**
-   * PackagePullPolicy defines the pull policy for the package. It is also applied to any images pulled for the package, such as a provider's controller image. Default is IfNotPresent.
-   *
-   * @default IfNotPresent.
-   * @schema ProviderRevisionSpec#packagePullPolicy
-   */
-  readonly packagePullPolicy?: string;
-
-  /**
-   * PackagePullSecrets are named secrets in the same namespace that can be used to fetch packages from private registries. They are also applied to any images pulled for the package, such as a provider's controller image.
-   *
-   * @schema ProviderRevisionSpec#packagePullSecrets
-   */
-  readonly packagePullSecrets?: ProviderRevisionSpecPackagePullSecrets[];
-
-  /**
-   * Revision number. Indicates when the revision will be garbage collected based on the parent's RevisionHistoryLimit.
-   *
-   * @schema ProviderRevisionSpec#revision
-   */
-  readonly revision: number;
-
-}
-
-/**
- * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
- *
- * @schema ProviderSpecControllerConfigRef
- */
-export interface ProviderSpecControllerConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ProviderSpecControllerConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
- *
- * @schema ProviderSpecPackagePullSecrets
- */
-export interface ProviderSpecPackagePullSecrets {
-  /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
-   *
-   * @schema ProviderSpecPackagePullSecrets#name
-   */
-  readonly name?: string;
-
-}
-
-/**
- * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
- *
- * @schema ConfigurationRevisionSpecControllerConfigRef
- */
-export interface ConfigurationRevisionSpecControllerConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ConfigurationRevisionSpecControllerConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
- *
- * @schema ConfigurationRevisionSpecPackagePullSecrets
- */
-export interface ConfigurationRevisionSpecPackagePullSecrets {
-  /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
-   *
-   * @schema ConfigurationRevisionSpecPackagePullSecrets#name
-   */
-  readonly name?: string;
-
-}
-
-/**
- * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
- *
- * @schema ConfigurationSpecPackagePullSecrets
- */
-export interface ConfigurationSpecPackagePullSecrets {
-  /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
-   *
-   * @schema ConfigurationSpecPackagePullSecrets#name
-   */
-  readonly name?: string;
 
 }
 
@@ -963,36 +754,6 @@ export interface ControllerConfigSpecTolerations {
    * @schema ControllerConfigSpecTolerations#value
    */
   readonly value?: string;
-
-}
-
-/**
- * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
- *
- * @schema ProviderRevisionSpecControllerConfigRef
- */
-export interface ProviderRevisionSpecControllerConfigRef {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema ProviderRevisionSpecControllerConfigRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
- *
- * @schema ProviderRevisionSpecPackagePullSecrets
- */
-export interface ProviderRevisionSpecPackagePullSecrets {
-  /**
-   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
-   *
-   * @schema ProviderRevisionSpecPackagePullSecrets#name
-   */
-  readonly name?: string;
 
 }
 
@@ -2033,6 +1794,395 @@ export interface ControllerConfigSpecAffinityPodAntiAffinityPreferredDuringSched
    * @schema ControllerConfigSpecAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
+}
+
+/**
+ * Lock is the CRD type that tracks package dependencies.
+ *
+ * @schema Lock
+ */
+export class Lock extends ApiObject {
+  /**
+   * Defines a "Lock" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: LockProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Lock',
+      apiVersion: 'pkg.crossplane.io/v1alpha1',
+    });
+  }
+}
+
+/**
+ * Lock is the CRD type that tracks package dependencies.
+ *
+ * @schema Lock
+ */
+export interface LockProps {
+  /**
+   * @schema Lock#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * @schema Lock#packages
+   */
+  readonly packages?: LockPackages[];
+
+}
+
+/**
+ * LockPackage is a package that is in the lock.
+ *
+ * @schema LockPackages
+ */
+export interface LockPackages {
+  /**
+   * Dependencies are the list of dependencies of this package. The order of the dependencies will dictate the order in which they are resolved.
+   *
+   * @schema LockPackages#dependencies
+   */
+  readonly dependencies: LockPackagesDependencies[];
+
+  /**
+   * Name corresponds to the name of the package revision for this package.
+   *
+   * @schema LockPackages#name
+   */
+  readonly name: string;
+
+  /**
+   * Source is the OCI image name without a tag or digest.
+   *
+   * @schema LockPackages#source
+   */
+  readonly source: string;
+
+  /**
+   * Type is the type of package. Can be either Configuration or Provider.
+   *
+   * @schema LockPackages#type
+   */
+  readonly type: string;
+
+  /**
+   * Version is the tag or digest of the OCI image.
+   *
+   * @schema LockPackages#version
+   */
+  readonly version: string;
+
+}
+
+/**
+ * A Dependency is a dependency of a package in the lock.
+ *
+ * @schema LockPackagesDependencies
+ */
+export interface LockPackagesDependencies {
+  /**
+   * Constraints is a valid semver range, which will be used to select a valid dependency version.
+   *
+   * @schema LockPackagesDependencies#constraints
+   */
+  readonly constraints: string;
+
+  /**
+   * Package is the OCI image name without a tag or digest.
+   *
+   * @schema LockPackagesDependencies#package
+   */
+  readonly package: string;
+
+  /**
+   * Type is the type of package. Can be either Configuration or Provider.
+   *
+   * @schema LockPackagesDependencies#type
+   */
+  readonly type: string;
+
+}
+
+/**
+ * Provider is the CRD type for a request to add a provider to Crossplane.
+ *
+ * @schema Provider
+ */
+export class Provider extends ApiObject {
+  /**
+   * Defines a "Provider" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ProviderProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'Provider',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * Provider is the CRD type for a request to add a provider to Crossplane.
+ *
+ * @schema Provider
+ */
+export interface ProviderProps {
+  /**
+   * @schema Provider#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * ProviderSpec specifies details about a request to install a provider to Crossplane.
+   *
+   * @schema Provider#spec
+   */
+  readonly spec?: ProviderSpec;
+
+}
+
+/**
+ * ProviderSpec specifies details about a request to install a provider to Crossplane.
+ *
+ * @schema ProviderSpec
+ */
+export interface ProviderSpec {
+  /**
+   * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
+   *
+   * @schema ProviderSpec#controllerConfigRef
+   */
+  readonly controllerConfigRef?: ProviderSpecControllerConfigRef;
+
+  /**
+   * IgnoreCrossplaneConstraints indicates to the package manager whether to honor Crossplane version constrains specified by the package. Default is false.
+   *
+   * @default false.
+   * @schema ProviderSpec#ignoreCrossplaneConstraints
+   */
+  readonly ignoreCrossplaneConstraints?: boolean;
+
+  /**
+   * Package is the name of the package that is being requested.
+   *
+   * @schema ProviderSpec#package
+   */
+  readonly package: string;
+
+  /**
+   * PackagePullPolicy defines the pull policy for the package. Default is IfNotPresent.
+   *
+   * @default IfNotPresent.
+   * @schema ProviderSpec#packagePullPolicy
+   */
+  readonly packagePullPolicy?: string;
+
+  /**
+   * PackagePullSecrets are named secrets in the same namespace that can be used to fetch packages from private registries.
+   *
+   * @schema ProviderSpec#packagePullSecrets
+   */
+  readonly packagePullSecrets?: ProviderSpecPackagePullSecrets[];
+
+  /**
+   * RevisionActivationPolicy specifies how the package controller should update from one revision to the next. Options are Automatic or Manual. Default is Automatic.
+   *
+   * @default Automatic.
+   * @schema ProviderSpec#revisionActivationPolicy
+   */
+  readonly revisionActivationPolicy?: string;
+
+  /**
+   * RevisionHistoryLimit dictates how the package controller cleans up old inactive package revisions. Defaults to 1. Can be disabled by explicitly setting to 0.
+   *
+   * @default 1. Can be disabled by explicitly setting to 0.
+   * @schema ProviderSpec#revisionHistoryLimit
+   */
+  readonly revisionHistoryLimit?: number;
+
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ProviderSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
+}
+
+/**
+ * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
+ *
+ * @schema ProviderSpecControllerConfigRef
+ */
+export interface ProviderSpecControllerConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ProviderSpecControllerConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ *
+ * @schema ProviderSpecPackagePullSecrets
+ */
+export interface ProviderSpecPackagePullSecrets {
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ProviderSpecPackagePullSecrets#name
+   */
+  readonly name?: string;
+
+}
+
+/**
+ * A ProviderRevision that has been added to Crossplane.
+ *
+ * @schema ProviderRevision
+ */
+export class ProviderRevision extends ApiObject {
+  /**
+   * Defines a "ProviderRevision" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialiation props
+   */
+  public constructor(scope: Construct, id: string, props: ProviderRevisionProps = {}) {
+    super(scope, id, {
+      ...props,
+      kind: 'ProviderRevision',
+      apiVersion: 'pkg.crossplane.io/v1beta1',
+    });
+  }
+}
+
+/**
+ * A ProviderRevision that has been added to Crossplane.
+ *
+ * @schema ProviderRevision
+ */
+export interface ProviderRevisionProps {
+  /**
+   * @schema ProviderRevision#metadata
+   */
+  readonly metadata?: any;
+
+  /**
+   * PackageRevisionSpec specifies the desired state of a PackageRevision.
+   *
+   * @schema ProviderRevision#spec
+   */
+  readonly spec?: ProviderRevisionSpec;
+
+}
+
+/**
+ * PackageRevisionSpec specifies the desired state of a PackageRevision.
+ *
+ * @schema ProviderRevisionSpec
+ */
+export interface ProviderRevisionSpec {
+  /**
+   * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
+   *
+   * @schema ProviderRevisionSpec#controllerConfigRef
+   */
+  readonly controllerConfigRef?: ProviderRevisionSpecControllerConfigRef;
+
+  /**
+   * DesiredState of the PackageRevision. Can be either Active or Inactive.
+   *
+   * @schema ProviderRevisionSpec#desiredState
+   */
+  readonly desiredState: string;
+
+  /**
+   * IgnoreCrossplaneConstraints indicates to the package manager whether to honor Crossplane version constrains specified by the package. Default is false.
+   *
+   * @default false.
+   * @schema ProviderRevisionSpec#ignoreCrossplaneConstraints
+   */
+  readonly ignoreCrossplaneConstraints?: boolean;
+
+  /**
+   * Package image used by install Pod to extract package contents.
+   *
+   * @schema ProviderRevisionSpec#image
+   */
+  readonly image: string;
+
+  /**
+   * PackagePullPolicy defines the pull policy for the package. It is also applied to any images pulled for the package, such as a provider's controller image. Default is IfNotPresent.
+   *
+   * @default IfNotPresent.
+   * @schema ProviderRevisionSpec#packagePullPolicy
+   */
+  readonly packagePullPolicy?: string;
+
+  /**
+   * PackagePullSecrets are named secrets in the same namespace that can be used to fetch packages from private registries. They are also applied to any images pulled for the package, such as a provider's controller image.
+   *
+   * @schema ProviderRevisionSpec#packagePullSecrets
+   */
+  readonly packagePullSecrets?: ProviderRevisionSpecPackagePullSecrets[];
+
+  /**
+   * Revision number. Indicates when the revision will be garbage collected based on the parent's RevisionHistoryLimit.
+   *
+   * @schema ProviderRevisionSpec#revision
+   */
+  readonly revision: number;
+
+  /**
+   * SkipDependencyResolution indicates to the package manager whether to skip resolving dependencies for a package. Setting this value to true may have unintended consequences. Default is false.
+   *
+   * @default false.
+   * @schema ProviderRevisionSpec#skipDependencyResolution
+   */
+  readonly skipDependencyResolution?: boolean;
+
+}
+
+/**
+ * ControllerConfigRef references a ControllerConfig resource that will be used to configure the packaged controller Deployment.
+ *
+ * @schema ProviderRevisionSpecControllerConfigRef
+ */
+export interface ProviderRevisionSpecControllerConfigRef {
+  /**
+   * Name of the referenced object.
+   *
+   * @schema ProviderRevisionSpecControllerConfigRef#name
+   */
+  readonly name: string;
+
+}
+
+/**
+ * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
+ *
+ * @schema ProviderRevisionSpecPackagePullSecrets
+ */
+export interface ProviderRevisionSpecPackagePullSecrets {
+  /**
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?
+   *
+   * @schema ProviderRevisionSpecPackagePullSecrets#name
+   */
+  readonly name?: string;
 
 }
 

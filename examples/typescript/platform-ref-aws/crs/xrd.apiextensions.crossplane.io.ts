@@ -110,7 +110,7 @@ export function compositeclustersAwsPlatformrefCrossplaneIo(chart: Chart, name: 
                       },
                     },
                     required: [
-                      'name',
+                      'id',
                       'parameters',
                     ],
                   },
