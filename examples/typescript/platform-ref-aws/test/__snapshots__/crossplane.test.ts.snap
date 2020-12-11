@@ -152,8 +152,8 @@ configSections:
                         },
                       },
                       "required": Array [
-                        "storageGB",
                         "networkRef",
+                        "storageGB",
                       ],
                       "type": "object",
                     },

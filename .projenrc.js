@@ -31,7 +31,14 @@ project.eslint.addRules(
 );
 
 project.gitignore.exclude('.vscode/');
+project.gitignore.exclude('*.d.ts');
+project.gitignore.exclude('*.js');
 
+project.npmignore.exclude('!*.js');
+project.npmignore.exclude('*.ts');
+project.npmignore.exclude('!*.d.ts');
+
+/*
 const compileExamples = project.addTask('compile-examples');
 
 const base = join('examples', 'typescript');
@@ -47,5 +54,6 @@ for (const dir of readdirSync(base)) {
 
 project.compileTask.spawn(compileExamples);
 
+*/
 
 project.synth();
