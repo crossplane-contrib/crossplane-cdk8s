@@ -596,6 +596,11 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
+"@types/js-yaml@^3.12.5":
+  version "3.12.5"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.5.tgz#136d5e6a57a931e1cce6f9d8126aa98a9c92a6bb"
+  integrity sha512-JCcp6J0GV66Y4ZMDAQCXot4xprYB+Zfd3meK9+INSJeVZwJmHAW30BBEEkPzXswMXuiyReUGOP3GxrADc9wPww==
+
 "@types/json-schema@^7.0.3":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
@@ -1176,17 +1181,17 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cdk8s-plus-17@1.0.0-beta.3:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/cdk8s-plus-17/-/cdk8s-plus-17-1.0.0-beta.3.tgz#00daf6cfa4b47fce837ea627e28d3c674b2812a7"
-  integrity sha512-0VJQYHNT4yS8y29qwq4w1Ht7mORWnrGWIklGJYc11/sn6sUk8vDJ2w8hUKjImYfB56fU4oFlk0glD/jIVaO6Bg==
+cdk8s-plus-17@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/cdk8s-plus-17/-/cdk8s-plus-17-1.0.0-beta.4.tgz#0344a1ac3b73ec749dfeaf12cf644069d7fcbfc6"
+  integrity sha512-oJlol0Wk2hj50qVnuqz5iZ7j0vTSkBy3jwAVbgYuZLfhDpEoUIaz7pI7f3i3PfEojq3U5xcNKjIdj8RQXb5/0A==
   dependencies:
     minimatch "^3.0.4"
 
-cdk8s@1.0.0-beta.3:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/cdk8s/-/cdk8s-1.0.0-beta.3.tgz#4de75c0d2ae8817e36cde4296cbef6de96a017c0"
-  integrity sha512-qK7j0GVD3wwggIoMjke3x/wjPBAUk51dFQnjJEmz/rjlubHNSABr69S0pX03XGgCvisgw94E5xlQeTrdbO1Xyw==
+cdk8s@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/cdk8s/-/cdk8s-1.0.0-beta.4.tgz#2ebe1dd6cc2f1ccc74421a6832106b7f555f81a6"
+  integrity sha512-N7Q+vDvY+Pwla7/OVxnNgtQiR3zPmO8c15Huu2RT13vcpjbRN+TmZYbLsnSdKIHx06Povj9uKat0OJu3I2JjNg==
   dependencies:
     fast-json-patch "^3.0.0-1"
     follow-redirects "^1.11.0"
@@ -1284,6 +1289,15 @@ codemaker@^1.14.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/codemaker/-/codemaker-1.14.1.tgz#c2938d5fb76ca0cce306990c82b5fe0e934feb96"
   integrity sha512-km8Aqf1ZioiM9Xm4Tj9pbIyFLoRV9l3ssw073C1AePt76TDqWFmJ83LrXkm+dSgdysoKVqY3Svn3BoPnN5bFKQ==
+  dependencies:
+    camelcase "^6.2.0"
+    decamelize "^4.0.0"
+    fs-extra "^9.0.1"
+
+codemaker@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/codemaker/-/codemaker-1.16.0.tgz#4cd74c1ec091035e1bf45d9abf67439ba1b74c8d"
+  integrity sha512-kC53r6ACRGYcSAKeOcbcUhWZYWynIuBIQ50oLOYUygShjrqF0NO303eSvOzT0Qxaz2TQWI2deUwJBMm3s8HoZg==
   dependencies:
     camelcase "^6.2.0"
     decamelize "^4.0.0"
@@ -3562,6 +3576,14 @@ js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+js-yaml@^3.1.3:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
+  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
 
 js-yaml@^3.13.1:
   version "3.14.0"

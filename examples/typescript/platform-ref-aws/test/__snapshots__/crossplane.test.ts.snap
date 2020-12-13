@@ -77,9 +77,9 @@ configSections:
   - name: storageGB
     controlType: singleInput
     type: integer
-    path: \\".spec.parameters.storageGB\\"
+    path: .spec.parameters.storageGB
     title: Storage (GB)
-    description: The size in GB for database storage
+    description: GB of storage for your database
     default: 5
     validation:
     - minimum: 1
@@ -88,22 +88,25 @@ configSections:
   - name: networkRef
     controlType: singleInput
     type: string
-    path: \\".spec.parameters.networkRef.id\\"
+    path: .spec.parameters.networkRef.id
     title: Network Ref
-    description: Network fabric to connect the database to
+    description: ID of the Network object this ref points to.
     default: platform-ref-aws-network
     validation:
     - required: true
-      customError: Network ref is required and should match the network ref of the app cluster.
+    - customError: >-
+        Network ref is required and should match the network ref of the app
+        cluster.
   - name: writeSecretRef
     controlType: singleInput
     type: string
-    path: \\".spec.writeConnectionSecretToRef.name\\"
+    path: .spec.writeConnectionSecretToRef.name
     title: Connection Secret Ref
     description: name of the secret to write to this namespace
     default: db-conn
     validation:
-    - required: true",
+    - required: true
+",
       },
       "name": "compositepostgresqlinstances.aws.platformref.crossplane.io",
     },
@@ -148,12 +151,13 @@ configSections:
                           "type": "object",
                         },
                         "storageGB": Object {
+                          "description": "GB of storage for your database",
                           "type": "integer",
                         },
                       },
                       "required": Array [
-                        "networkRef",
                         "storageGB",
+                        "networkRef",
                       ],
                       "type": "object",
                     },

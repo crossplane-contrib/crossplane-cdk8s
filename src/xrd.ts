@@ -1,11 +1,15 @@
 import * as cdk8s from 'cdk8s';
+import { toCamelCase } from 'codemaker';
 import { Construct } from 'constructs';
+import * as yaml from 'js-yaml';
 import { Resource } from './base';
 import * as l1 from './imports/apiextensions.crossplane.io';
 import { undefinedIfEmpty } from './utils';
 
 /**
- * An CompositeResourceDefinition defines a new kind of composite infrastructure resource. The new resource is composed of other composite or managed infrastructure resources.
+ * An CompositeResourceDefinition defines a new kind of composite
+ * infrastructure resource. The new resource is composed of other composite or
+ * managed infrastructure resources.
  *
  * @schema CompositeResourceDefinition
  */
@@ -14,7 +18,7 @@ export class CompositeResourceDefinition extends Resource {
    * Defines a "CompositeResourceDefinition" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialiation props - note: currently only .name and .metadata are processed
    */
 
   /**
@@ -27,6 +31,7 @@ export class CompositeResourceDefinition extends Resource {
   private _names?: Names;
   private _connectionSecret?: ConnectionSecret;
   private _versions: Version[] = [];
+  private _metaUI?: MetaUI;
 
   public constructor(scope: Construct, id: string, props: CompositeResourceDefinitionProps = {} ) {
     super(scope, id, { metadata: props.metadata });
@@ -34,67 +39,10 @@ export class CompositeResourceDefinition extends Resource {
     const name = props.name ?? id;
 
     let annotations: any = { };
-    /*
-    if (props.uiSchema) { annotations['upbound.io/ui-schema'] = props.uiSchema; }
-      metadata: {
-        name: 'compositeclusters.aws.platformref.crossplane.io',
-        annotations: {
-          'upbound.io/ui-schema': '---\nconfigSections:\n- title: Cluster Info\n  description: Information about this cluster\n  items:\n  - name: id\n    controlType: singleInput\n    type: string\n    path: ".spec.id"\n    title: Cluster ID\n    description: Cluster ID that other objects will use to refer to this cluster\n    default: platform-ref-aws-cluster\n    validation:\n    - required: true\n      customError: Cluster ID is required.\n  - name: writeSecretRef\n    controlType: singleInput\n    type: string\n    path: ".spec.writeConnectionSecretToRef.name"\n    title: Connection Secret Ref\n    description: name of the secret to write to this namespace\n    default: cluster-conn\n    validation:\n    - required: true\n- title: Cluster Nodes\n  description: Enter information to size your cluster\n  items:\n  - name: clusterNodeCount\n    controlType: singleInput\n    type: integer\n    path: ".spec.parameters.nodes.count"\n    title: Node Count\n    description: Number of nodes in the cluster\n    default: 1\n    validation:\n    - minimum: 1\n    - maximum: 100\n    - required: true\n      customError: Node count is required.\n  - name: clusterNodeSize\n    controlType: singleSelect\n    path: ".spec.parameters.nodes.size"\n    title: Node Size\n    description: Desired node count, from 1 to 100.\n    default: small\n    enum:\n    - small\n    - medium\n    - large\n    validation:\n    - required: true\n      customError: Node size is required.\n- title: Cluster Networking\n  description: Select a network fabric for your cluster\n  items:\n  - name: networkRef\n    controlType: singleInput\n    type: string\n    path: ".spec.parameters.networkRef.id"\n    title: Network Ref\n    description: Network fabric to connect the database to\n    default: platform-ref-aws-network\n    validation:\n    - required: true\n      customError: Network ref is required.\n- title: Cluster Services\n  description: Configure cluster services and operators\n  items:\n  - name: promVersion\n    controlType: singleInput\n    type: string\n    path: ".spec.parameters.services.operators.prometheus.version"\n    title: Prometheus Chart Version\n    description: The version of kube-prometheus-stack chart to install\n    default: 10.1.0\n    validation:\n    - required: false',
-        },
-      },
-    */
-    /*
-      xrd.name = 'compositepostgresqlinstances.aws.platformref.crossplane.io';
-      xrd.uiSchema = {
-        configSections: [
-          { title: 'Database Size',
-            description: 'Enter information to size your database',
-            items: [ {
-              name: 'storageGB',
-              controlType: 'singleInput',
-              type: 'integer',
-              path: '.spec.parameters.storageGB',
-              title: 'Storage (GB)',
-              description: 'The size in GB for database storage',
-              default: 5,
-              validation: {
-                minimum: 1,
-                maximum: 500,
-                required: true
-              },
-            },
-            {
-              name: 'networkRef',
-              controlType: 'singleInput',
-              type: 'string',
-              path: '.spec.parameters.networkRef.id',
-              title: 'Network Ref',
-              description: 'Network fabric to connect the database to',
-              default: 'platform-ref-aws-network',
-              validation: {
-                required: true,
-                customError: 'Network ref is required and should match the network ref of the app cluster.'
-              },
-            },
-            {
-              name: 'writeSecretRef',
-              controlType: 'singleInput',
-              type: 'string',
-              path: '.spec.writeConnectionSecretToRef.name',
-              title: 'Connection Secret Ref',
-              description: 'name of the secret to write to this namespace',
-              default: 'db-conn',
-              validation: {
-                required: true
-              }
-            } ]
-          }
-        ]
-      }
-      */
-
-    // patch over props annotations
     if (props.metadata?.annotations) { annotations = { ...props.metadata.annotations, ...annotations }; }
+    annotations['upbound.io/ui-schema'] = cdk8s.Lazy.any({ produce: () => this._metaUI?._toL1() });
+
+    //TODO: load prop.spec for those not using fluent API
 
     this.apiObject = new l1.CompositeResourceDefinition(this, name, {
       metadata: {
@@ -145,7 +93,7 @@ export class CompositeResourceDefinition extends Resource {
   }
 
   public version(name: string): Version {
-    let version = this._versions.find(v => v._name == name);
+    let version = this._versions.find(v => v.name == name);
     if (version === undefined) {
       version = new Version(this, name);
       this._versions.push(version);
@@ -167,6 +115,193 @@ export class CompositeResourceDefinition extends Resource {
     this._connectionSecret = this._connectionSecret ?? new ConnectionSecret();
     return this._connectionSecret;
   }
+
+  public get ui(): MetaUI {
+    this._metaUI = this._metaUI ?? new MetaUI();
+    return this._metaUI;
+  }
+}
+
+export class MetaUI {
+  private _sections: MetaUISection[] = [];
+  private _activeSection?: MetaUISection;
+
+  /**
+   * use CompositeResourceDefinition.ui instead
+   *
+   * @internal
+   */
+  public constructor() {
+
+  }
+
+  public get activeSection(): MetaUISection {
+    this._activeSection = this._activeSection ?? this.addSection({
+      title: 'PLACEHOLDER TITLE: add a section',
+      description: 'PLACEHOLDER DESCRIPTION: add a descriptions',
+    });
+    return this._activeSection;
+  }
+
+  public addSection(props: MetaUISectionProps): MetaUISection {
+    const s = new MetaUISection(props);
+    this._sections.push(s);
+    this._activeSection = s;
+    return s;
+  }
+
+  /**
+   * @internal
+   */
+  public _toL1(): any {
+    const sections = new Array();
+    for (const s of this._sections) {
+      sections.push(s._toL1());
+    }
+
+    if (sections.length == 0) {
+      return undefined;
+    }
+
+    const result = {
+      configSections: sections,
+    };
+    return `---\n${yaml.safeDump(result, { indent: 2, noArrayIndent: true, condenseFlow: false })}`;
+  }
+}
+
+export class MetaUISection {
+  private _fields: MetaUIInput[] = [];
+  private _props: MetaUISectionProps;
+
+  /**
+   * Use CompositeResourceDefinition.ui.addSection() instead
+   * @param props
+   *
+   * @internal
+   */
+  public constructor(props: MetaUISectionProps) {
+    this._props = props;
+  }
+
+  public addInput(field: MetaUIInputProps): MetaUIInput {
+    const f = new MetaUIInput(field);
+    this._fields.push(f);
+    return f;
+  }
+
+  /**
+   * @internal
+   */
+  public _toL1(): any {
+    const result = new Array();
+    for (const s of this._fields) {
+      result.push(s._toL1());
+    }
+    const items = undefinedIfEmpty(result);
+    return {
+      title: this._props.title,
+      description: this._props.description,
+      items: items,
+    };
+  }
+}
+
+export class MetaUIInput {
+  private _props: MetaUIInputProps;
+
+  /**
+   * Use CompositeResourceDefinition.ui.activeSection.addInput() instead
+   * @param props
+   *
+   * @internal
+   */
+  public constructor(props: MetaUIInputProps) {
+    this._props = props;
+  }
+
+  /**
+   * @internal
+   */
+  public _toL1(): any {
+    const props = this._props;
+    const base: any = {
+      name: props.name,
+      controlType: props.inputType,
+      type: props.type,
+      path: props.path,
+      title: props.title,
+      description: props.description,
+    };
+
+    const specific: any = {};
+
+    switch (this._props.type) {
+      case PropType.INTEGER:
+        const intProps = this._props as MetaUIInputIntegerProps;
+        if (intProps.default) { specific.default = intProps.default; }
+        if (intProps.required || intProps.min || intProps.max || intProps.customError) {
+
+          const validation: any[] = [];
+          if (intProps.min) { validation.push({ minimum: intProps.min }); }
+          if (intProps.max) { validation.push({ maximum: intProps.max }); }
+          if (intProps.required) { validation.push({ required: intProps.required }); }
+          if (intProps.customError) { validation.push({ customError: intProps.customError }); }
+
+          specific.validation = validation;
+        }
+        break;
+
+      case PropType.STRING:
+        const strProps = this._props as MetaUIInputIntegerProps;
+        if (strProps.default) { specific.default = strProps.default; }
+        if (strProps.required || strProps.customError) {
+
+          const validation: any[] = [];
+          if (strProps.required) { validation.push({ required: strProps.required }); }
+          if (strProps.customError) { validation.push({ customError: strProps.customError }); }
+
+          specific.validation = validation;
+        }
+        break;
+
+      default:
+        throw new Error(`unsupported MetaUI type '${this._props.type}'`);
+    }
+
+    return {
+      ...base,
+      ...specific,
+    };
+  }
+}
+
+export interface MetaUISectionProps{
+  readonly title: string;
+  readonly description: string;
+}
+
+export interface MetaUIInputProps {
+  readonly type: PropType;
+  readonly inputType: InputType;
+  readonly path: string;
+  readonly name: string;
+  readonly title: string;
+  readonly description?: string;
+  readonly required: boolean;
+  readonly customError?: string;
+  readonly [key: string]: any;
+}
+
+export interface MetaUIInputIntegerProps extends MetaUIInputProps {
+
+  readonly default?: number;
+  readonly min?: number;
+  readonly max?: number;
+}
+
+export interface MetaUIInputStringProps extends MetaUIInputProps {
+  readonly default?: string;
 }
 
 export class Names {
@@ -225,6 +360,15 @@ export class ConnectionSecret {
   private _keys: string[] = [];
 
   /**
+   * use CompositeResourceDefinition.connectionSecret() instead
+   *
+   * @internal
+   */
+  public constructor() {
+
+  }
+
+  /**
    * @internal
    */
   public _toL1(): string[] | undefined {
@@ -239,17 +383,25 @@ export class ConnectionSecret {
 
 export class Version {
   private _xrd: CompositeResourceDefinition;
-  /**
-   * @internal
-   */
-  public _name: string;
+  private _name: string;
   private _served?: boolean;
   private _referencable?: boolean;
   private _spec?: SchemaPropObject;
 
+  /**
+   * use CompositeResourceDefinition.version() instead
+   * @param xrd
+   * @param name
+   *
+   * @internal
+   */
   public constructor(xrd: CompositeResourceDefinition, name: string) {
     this._xrd = xrd;
     this._name = name;
+  }
+
+  public get name(): string {
+    return this._name;
   }
 
   public served(val: boolean = true): Version {
@@ -263,7 +415,7 @@ export class Version {
   }
 
   public spec(): SchemaPropObject {
-    this._spec = this._spec ?? new SchemaPropObject(this._xrd, '.', 'spec');
+    this._spec = this._spec ?? new SchemaPropObject(this._xrd, '', 'spec');
     return this._spec;
   }
 
@@ -304,7 +456,51 @@ export class Version {
 }
 
 /**
- * JSII callback class/interface
+ * Schema Props
+ */
+export interface ISchemaProp {
+  readonly meta: ISchemaPropMeta;
+
+  /**
+   * @internal
+   */
+  _toL1(): any;
+}
+
+export interface ISchemaPropMeta {
+  readonly type: PropType;
+
+  readonly name: string;
+
+  readonly description?: string;
+
+  readonly path: string;
+
+  readonly required: boolean;
+
+  readonly implicit: boolean;
+
+  readonly uiSection?: MetaUISectionProps;
+
+  readonly uiInput?: MetaUIInputProps;
+
+  /**
+   * Additional metadata attributes.
+   */
+  readonly [key: string]: any;
+}
+
+export interface ISchemaPropMetaInteger extends ISchemaPropMeta {
+  readonly min?: number;
+  readonly max?: number;
+}
+
+export interface ISchemaPropMetaString extends ISchemaPropMeta {
+
+}
+
+/**
+ * JSII callback class/interface for SchemaProp.with()
  */
 export class Prop {
   public static for(doer: IAnyProp): any {
@@ -323,36 +519,28 @@ export interface IAnyProp {
 }
 
 /**
- * Schema Props
+ * openAPIv3Schema Object with MetaUI
  */
-export interface ISchemaPropMeta {
-  readonly name: string;
-
-  readonly required: boolean;
-
-  /**
-   * Additional attributes.
-   */
-  readonly [key: string]: any;
-}
-
-export interface ISchemaProp {
-  readonly meta: ISchemaPropMeta;
-
-  /**
-   * @internal
-   */
-  _toL1(): any;
-}
-
 export class SchemaPropObject implements ISchemaProp {
   private _xrd: CompositeResourceDefinition;
+  private _type: PropType = PropType.OBJECT;
   private _path: string;
   private _name: string;
   private _children: ISchemaProp[] = [];
   private _description?: string;
   private _required: boolean = false;
+  private _implicit: boolean = false;
+  private _uiSection?: MetaUISectionProps;
 
+  /**
+   * use SchemaPropObject.propObject() instead
+   * e.g. CompositeResourceDefinition.version().spec().propObject()
+   * @param xrd
+   * @param parentPath
+   * @param name
+   *
+   * @internal
+   */
   public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
     this._xrd = xrd;
     this._name = name;
@@ -361,8 +549,12 @@ export class SchemaPropObject implements ISchemaProp {
 
   public get meta(): ISchemaPropMeta {
     return {
+      type: this._type,
       name: this._name,
+      path: this._path,
       required: this._required,
+      implicit: this._implicit,
+      uiSection: this._uiSection,
     };
   }
 
@@ -394,6 +586,27 @@ export class SchemaPropObject implements ISchemaProp {
     return this;
   }
 
+  /**
+   * field is implicitly added by Crossplane.
+   * used for UI only fields and to suppress
+   * adding this field to XRD schema props
+   * during synth.
+   *
+   * defaults to false if not set
+   *
+   * @param val boolean - default true
+   */
+  public implicit(val: boolean = true): SchemaPropObject {
+    this._implicit = val;
+    return this;
+  }
+
+  public uiSection(options: MetaUISectionProps): SchemaPropObject {
+    this._uiSection = options;
+    this._xrd.ui.addSection(options);
+    return this;
+  }
+
   public with( prop: Prop): SchemaPropObject {
     prop.object(this);
     return this;
@@ -406,6 +619,9 @@ export class SchemaPropObject implements ISchemaProp {
     const required: string[] = [];
     const children: any = {};
     for (const child of this._children) {
+      if (child.meta.implicit) {
+        continue;
+      }
       children[child.meta.name] = child._toL1();
       if (child.meta.required) {
         required.push(child.meta.name);
@@ -416,51 +632,53 @@ export class SchemaPropObject implements ISchemaProp {
       description: this._description,
       properties: children,
       required: undefinedIfEmpty(required),
-      type: 'object',
+      type: this._type,
     };
   }
 }
 
-/**
- * UI Input Control Style
- */
-export enum InputType {
-  /**
-   * Single input
-   */
-  SINGLE_INPUT = 'singleInput',
-}
-
 export class SchemaPropInteger implements ISchemaProp {
-  //private _xrd: CompositeResourceDefinition;
-  //private _path: string;
+  private _xrd: CompositeResourceDefinition;
+  private _type: PropType = PropType.INTEGER;
+  private _path: string;
   private _name: string;
   private _description?: string;
   private _required: boolean = false;
   private _min?: number;
   private _max?: number;
-  private _uiInputType?: InputType;
-  private _uiName?: string;
-  private _uiDescription?: string;
-  private _uiDefault?: number;
+  private _implicit: boolean = false;
+  private _uiInput?: MetaUIInputIntegerProps;
 
-  public constructor(_xrd: CompositeResourceDefinition, _parentPath: string, name: string) {
-    //this._xrd = xrd;
+  /**
+   * use SchemaPropObject.propInteger() instead
+   * e.g. CompositeResourceDefinition.version().spec().propInteger()
+   * @param xrd
+   * @param parentPath
+   * @param name
+   */
+  public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
+    this._xrd = xrd;
     this._name = name;
-    //this._path = `${parentPath}.${name}`;
+    this._path = `${parentPath}.${name}`;
   }
 
   public get meta(): ISchemaPropMeta {
     return {
+      path: this._path,
+      type: this._type,
       name: this._name,
+      description: this._description,
       required: this._required,
       min: this._min,
       max: this._max,
-      uiInputType: this._uiInputType,
-      uiName: this._uiName,
-      uiDescription: this._uiDescription,
-      uiDefault: this._uiDefault,
+      implicit: this._implicit,
+      uiInput: this._uiInput,
     };
+  }
+
+  public path(val: string): SchemaPropInteger {
+    this._path = val;
+    return this;
   }
 
   public description(val: string): SchemaPropInteger {
@@ -483,23 +701,50 @@ export class SchemaPropInteger implements ISchemaProp {
     return this;
   }
 
-  public uiInputSingle(): SchemaPropInteger {
-    this._uiInputType = InputType.SINGLE_INPUT;
+  /**
+   * field is implicitly added by Crossplane.
+   * used for UI only fields and to suppress
+   * adding this field to XRD schema props
+   * during synth.
+   *
+   * commonly used for writeConnectionSecretRef
+   *
+   * defaults to false if not set
+   *
+   * @param val boolean - default true
+   */
+  public implicit(val: boolean = true): SchemaPropInteger {
+    this._implicit = val;
     return this;
   }
 
-  public uiName(val: string): SchemaPropInteger {
-    this._uiName = val;
-    return this;
-  }
+  public uiInput(options: MetaUIInputIntegerPropOverrides = {}): SchemaPropInteger {
+    const inputType = options.inputType ?? InputType.SINGLE_INPUT;
+    const path = options.path ?? this._path;
+    const name = options.name ?? toCamelCase(this._path);
+    const title = options.title ?? this._name;
+    const description = options.description ?? this._description;
+    const min = options.min ?? this._min;
+    const max = options.max ?? this._max;
+    const required = options.required ?? this._required;
+    const customError = options.customError;
+    const def = options.default;
 
-  public uiDescription(val: string): SchemaPropInteger {
-    this._uiDescription = val;
-    return this;
-  }
+    this._uiInput = {
+      type: this._type,
+      inputType,
+      path,
+      name,
+      title,
+      description,
+      min,
+      max,
+      required,
+      customError,
+      default: def,
+    };
 
-  public uiDefault(val: number): SchemaPropInteger {
-    this._uiDefault = val;
+    this._xrd.ui.activeSection.addInput(this._uiInput);
     return this;
   }
 
@@ -509,28 +754,57 @@ export class SchemaPropInteger implements ISchemaProp {
   public _toL1(): any {
     return {
       description: this._description,
-      type: 'integer',
+      type: this._type,
     };
   }
 }
 
 export class SchemaPropString implements ISchemaProp {
-  //private _xrd: CompositeResourceDefinition;
-  //private _path: string;
+  private _xrd: CompositeResourceDefinition;
+  private _type: PropType = PropType.STRING;
+  private _path: string;
   private _name: string;
   private _description?: string;
   private _required: boolean = false;
+  private _implicit: boolean = false;
+  private _uiInput?: MetaUIInputStringProps;
 
-  public constructor(_xrd: CompositeResourceDefinition, _parentPath: string, name: string) {
-    //this._xrd = xrd;
+  /**
+   * use SchemaPropObject.propString() instead
+   * e.g. CompositeResourceDefinition.version().spec().propString()
+   * @param xrd
+   * @param parentPath
+   * @param name
+   */
+  public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
+    this._xrd = xrd;
     this._name = name;
-    //this._path = `${parentPath}.${name}`;
+    this._path = `${parentPath}.${name}`;
+  }
+
+  /**
+   * field is implicitly added by Crossplane.
+   * used for UI only fields and to suppress
+   * adding this field to XRD schema props
+   * during synth.
+   *
+   * defaults to false if not set
+   *
+   * @param val boolean - default true
+   */
+  public implicit(val: boolean = true): SchemaPropString {
+    this._implicit = val;
+    return this;
   }
 
   public get meta(): ISchemaPropMeta {
     return {
+      type: this._type,
       name: this._name,
+      path: this._path,
       required: this._required,
+      implicit: this._implicit,
+      uiInput: this._uiInput,
     };
   }
 
@@ -544,23 +818,125 @@ export class SchemaPropString implements ISchemaProp {
     return this;
   }
 
+  public uiInput(options: MetaUIInputStringPropOverrides = {}): SchemaPropString {
+    const inputType = options.inputType ?? InputType.SINGLE_INPUT;
+    const path = options.path ?? this._path;
+    const name = options.name ?? toCamelCase(this._path);
+    const title = options.title ?? this._name;
+    const required = options.required ?? this._required;
+    const description = options.description ?? this._description;
+    const customError = options.customError;
+    const def = options.default;
+
+    this._uiInput = {
+      type: this._type,
+      inputType,
+      path,
+      name,
+      title,
+      description,
+      required,
+      customError,
+      default: def,
+    };
+    this._xrd.ui.activeSection.addInput(this._uiInput);
+    return this;
+  }
+
   /**
    * @internal
    */
   public _toL1(): any {
     return {
       description: this._description,
-      type: 'string',
+      type: this._type,
     };
   }
 }
 
 /**
- * XRD Props
+ * Overrides with optional inputs for fluent API with reasonable defaults
+ */
+export interface MetaUIInputPropOverrides {
+
+  /**
+   * defaults to InputType.SINGLE_INPUT
+   */
+  readonly inputType?: InputType;
+
+  /**
+   * defaults to ISchemaPropMeta.path if not specified
+   */
+  readonly path?: string;
+
+  /**
+   * defaults to camel case ISchemaPropMeta.path if not specified
+   */
+  readonly name?: string;
+
+  /**
+   * defaults to ISchemaPropMeta.name if not specified
+   */
+  readonly title?: string;
+
+  /**
+   * defaults to ISchemaPropMeta.required if not specified
+   */
+  readonly required?: boolean;
+
+  /**
+   * defaults to ISchemaPropMeta.description if not specified
+   */
+  readonly description?: string;
+
+  readonly customError?: string;
+
+  readonly [key: string]: any;
+}
+
+export interface MetaUIInputIntegerPropOverrides extends MetaUIInputPropOverrides {
+
+  readonly default?: number;
+
+  /**
+   * defaults to ISchemaPropMetaInteger.min if not specified
+   */
+  readonly min?: number;
+
+  /**
+   * defaults to ISchemaPropMetaInteger.max if not specified
+   */
+  readonly max?: number;
+}
+
+export interface MetaUIInputStringPropOverrides extends MetaUIInputPropOverrides {
+  readonly default?: string;
+}
+
+
+export enum PropType {
+  OBJECT = 'object',
+  INTEGER = 'integer',
+  STRING = 'string',
+}
+
+export enum InputType {
+  SINGLE_INPUT = 'singleInput',
+}
+
+
+/**
+ * CompositeResourceDefinition Props for those not using the fluent API
  */
 
 /**
- * An CompositeResourceDefinition defines a new kind of composite infrastructure resource. The new resource is composed of other composite or managed infrastructure resources.
+ * An CompositeResourceDefinition defines a new kind of composite
+ * infrastructure resource. The new resource is composed of other composite or
+ * managed infrastructure resources.
+ *
+ * TODO: Support all available props in fluent API.
+ * TODO: Process props.spec in CompositeResourceDefinition so you can init with
+ * static spec fields instead of using the fluent API.
  *
  * @schema CompositeResourceDefinition
  */

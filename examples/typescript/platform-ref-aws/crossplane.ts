@@ -1,8 +1,6 @@
 import { App, Chart } from 'cdk8s';
 
-//import * as config from './crs/configuration.meta.pkg.crossplane.io';
-//import { Configuration } from 'crossplane-cdk';
-import { Configuration, CompositeResourceDefinition, Prop } from '../../../src';
+import { Configuration, CompositeResourceDefinition, Prop, InputType } from '../../../src';
 
 import * as xrds from './crs/xrd.apiextensions.crossplane.io';
 import * as comp from './crs/composition.apiextensions.crossplane.io';
@@ -10,9 +8,6 @@ import * as comp from './crs/composition.apiextensions.crossplane.io';
 export function configYaml(crossplanePackage: App): Chart {
 
   const yaml = new Chart(crossplanePackage, 'crossplane');
-  /*
-  config.platformRefAws(yaml, 'platform-ref-aws')
-  */
 
   const config = new Configuration(yaml, 'platform-ref-aws', {
     name: 'platform-ref-aws',
@@ -36,14 +31,8 @@ export function configYaml(crossplanePackage: App): Chart {
 
 export function postgresYaml(crossplanePackage: App): Chart {
   const yaml = new Chart(crossplanePackage, 'postgres-api');
-  //xrds.compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(yaml, 'postgres-xrd');
   const xrd = new CompositeResourceDefinition(yaml, 'postgres-xrd', {
     name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
-    metadata: {
-      annotations: {
-        'upbound.io/ui-schema': '---\nconfigSections:\n- title: Database Size\n  description: Enter information to size your database\n  items:\n  - name: storageGB\n    controlType: singleInput\n    type: integer\n    path: ".spec.parameters.storageGB"\n    title: Storage (GB)\n    description: The size in GB for database storage\n    default: 5\n    validation:\n    - minimum: 1\n    - maximum: 500\n    - required: true\n  - name: networkRef\n    controlType: singleInput\n    type: string\n    path: ".spec.parameters.networkRef.id"\n    title: Network Ref\n    description: Network fabric to connect the database to\n    default: platform-ref-aws-network\n    validation:\n    - required: true\n      customError: Network ref is required and should match the network ref of the app cluster.\n  - name: writeSecretRef\n    controlType: singleInput\n    type: string\n    path: ".spec.writeConnectionSecretToRef.name"\n    title: Connection Secret Ref\n    description: name of the secret to write to this namespace\n    default: db-conn\n    validation:\n    - required: true',
-      },
-    },
   });
 
   xrd.group('aws.platformref.crossplane.io');
@@ -53,67 +42,48 @@ export function postgresYaml(crossplanePackage: App): Chart {
   xrd.version('v1alpha1').served().referencable()
     .spec().with(Prop.for({ object: (spec) => {
       spec.propObject('parameters').required().with(Prop.for({ object: (params) => {
-        params.propObject('networkRef')
+        params.uiSection( { 
+          title: 'Database Size', 
+          description: 'Enter information to size your database'});
+
+        params.propInteger('storageGB').required().min(1).max(500)
+          .description('GB of storage for your database')
+          .uiInput({
+            name: 'storageGB',
+            inputType: InputType.SINGLE_INPUT,
+            title: 'Storage (GB)',
+            default: 5
+          })
+
+        params.propObject('networkRef').required()
           .description('A reference to the Network object that this postgres should be connected to.')
-          .required()
           .with(Prop.for({ object: (networkRef) => {
 
             networkRef.propString('id')
               .description('ID of the Network object this ref points to.')
               .required()
+              .uiInput({
+                name: 'networkRef',
+                inputType: InputType.SINGLE_INPUT,
+                title: 'Network Ref',
+                default:'platform-ref-aws-network',
+                customError: 'Network ref is required and should match the network ref of the app cluster.'
+              })
 
           }}));
 
-        params.propInteger('storageGB').required()
-
+          params.propString('writeSecretRef').implicit().required()
+          .uiInput({
+            name: 'writeSecretRef',
+            inputType: InputType.SINGLE_INPUT,
+            title: 'Connection Secret Ref',
+            description: 'name of the secret to write to this namespace',
+            default: 'db-conn',
+            path: '.spec.writeConnectionSecretToRef.name'
+          })
       }}));
 
     }}));
-
-  /*
-  xrd.version('v1alpha1').served().referencable().with(v1alpha1 => {
-    v1alpha1.spec().propObject('parameters').required().with(params => {
-      params.uiConfigSection('Database Size', 'Enter information to size your database');
-
-      params.propInteger('storageGB')
-        .required()
-        .min(1)
-        .max(500)
-        .description('GB of storage')
-        .uiInputSingle()
-        .uiName('storageGB')
-        .uiTitle('Storage (GB)')
-        .uiDescription('Enter information to size your database')
-        .uiDefault(5);
-
-      params.propObject('networkRef')
-        .required()
-        .description('A reference to the Network object that this postgres should be connected to')
-        .with(netRef => {
-
-          netRef.propString('id')
-            .required()
-            .description('ID of the Network object this ref points to')
-            .uiInputSingle()
-            .uiName('networkRef')
-            .uiTitle('Network Ref')
-            .uiDescription('Network fabric to connect the database to')
-            .uiDefault('platform-ref-aws-network')
-            .uiCustomError('Network ref is required and should match the network ref of the app cluster.')
-
-        });
-
-      params.propString('writeSecretRef').uiOnly()
-        .required()
-        .uiInputSingle()
-        .uiName('writeSecretRef')
-        .uiTitle('Connection Secret Ref')
-        .uiDescription('name of the secret to write to this namespace')
-        .uiDefault('db-conn')
-        .uiPath('.spec.writeConnectionSecretToRef.name')
-    })
-  })
-  */
 
   comp.compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(yaml, 'postgres-composition');
 
