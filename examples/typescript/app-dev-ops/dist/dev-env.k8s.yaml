@@ -1,0 +1,39 @@
+apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+kind: "Cluster"
+metadata:
+  name: "eks-cluster"
+spec:
+  id: "platform-ref-aws-cluster"
+  parameters:
+    networkRef:
+      id: "platform-ref-aws-network"
+    nodes:
+      count: 3
+      size: "small"
+    services:
+      operators:
+        prometheus:
+          version: "10.0.2"
+  writeConnectionSecretToRef:
+    name: "platform-ref-aws-cluster"
+---
+apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+kind: "Network"
+metadata:
+  name: "network-fabric"
+spec:
+  clusterRef:
+    id: "platform-ref-aws-cluster"
+  id: "platform-ref-aws-network"
+---
+apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+kind: "PostgreSQLInstance"
+metadata:
+  name: "postgres-instance"
+spec:
+  parameters:
+    networkRef:
+      id: "platform-ref-aws-network"
+    storageGB: 20
+  writeConnectionSecretToRef:
+    name: "my-db-conn"

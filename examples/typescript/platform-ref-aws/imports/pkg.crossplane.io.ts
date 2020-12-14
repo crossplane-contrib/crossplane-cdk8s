@@ -12,14 +12,22 @@ export class Configuration extends ApiObject {
    * Defines a "Configuration" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ConfigurationProps = {}) {
-    super(scope, id, {
+    super(scope, id, Configuration.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Configuration" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ConfigurationProps = {}): any {
+    return {
       ...props,
       kind: 'Configuration',
-      apiVersion: 'pkg.crossplane.io/v1beta1',
-    });
+      apiVersion: 'pkg.crossplane.io/v1',
+    };
   }
 }
 
@@ -130,14 +138,22 @@ export class ConfigurationRevision extends ApiObject {
    * Defines a "ConfigurationRevision" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ConfigurationRevisionProps = {}) {
-    super(scope, id, {
+    super(scope, id, ConfigurationRevision.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "ConfigurationRevision" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ConfigurationRevisionProps = {}): any {
+    return {
       ...props,
       kind: 'ConfigurationRevision',
-      apiVersion: 'pkg.crossplane.io/v1beta1',
-    });
+      apiVersion: 'pkg.crossplane.io/v1',
+    };
   }
 }
 
@@ -268,14 +284,22 @@ export class ControllerConfig extends ApiObject {
    * Defines a "ControllerConfig" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ControllerConfigProps = {}) {
-    super(scope, id, {
+    super(scope, id, ControllerConfig.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "ControllerConfig" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ControllerConfigProps = {}): any {
+    return {
       ...props,
       kind: 'ControllerConfig',
       apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
+    };
   }
 }
 
@@ -1807,14 +1831,22 @@ export class Lock extends ApiObject {
    * Defines a "Lock" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: LockProps = {}) {
-    super(scope, id, {
+    super(scope, id, Lock.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Lock" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: LockProps = {}): any {
+    return {
       ...props,
       kind: 'Lock',
       apiVersion: 'pkg.crossplane.io/v1alpha1',
-    });
+    };
   }
 }
 
@@ -1918,14 +1950,22 @@ export class Provider extends ApiObject {
    * Defines a "Provider" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ProviderProps = {}) {
-    super(scope, id, {
+    super(scope, id, Provider.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Provider" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ProviderProps = {}): any {
+    return {
       ...props,
       kind: 'Provider',
-      apiVersion: 'pkg.crossplane.io/v1beta1',
-    });
+      apiVersion: 'pkg.crossplane.io/v1',
+    };
   }
 }
 
@@ -2058,14 +2098,22 @@ export class ProviderRevision extends ApiObject {
    * Defines a "ProviderRevision" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ProviderRevisionProps = {}) {
-    super(scope, id, {
+    super(scope, id, ProviderRevision.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "ProviderRevision" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ProviderRevisionProps = {}): any {
+    return {
       ...props,
       kind: 'ProviderRevision',
-      apiVersion: 'pkg.crossplane.io/v1beta1',
-    });
+      apiVersion: 'pkg.crossplane.io/v1',
+    };
   }
 }
 

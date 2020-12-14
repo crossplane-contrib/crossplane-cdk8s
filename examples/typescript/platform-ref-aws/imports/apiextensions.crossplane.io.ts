@@ -12,14 +12,22 @@ export class CompositeResourceDefinition extends ApiObject {
    * Defines a "CompositeResourceDefinition" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: CompositeResourceDefinitionProps = {}) {
-    super(scope, id, {
+    super(scope, id, CompositeResourceDefinition.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "CompositeResourceDefinition" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: CompositeResourceDefinitionProps = {}): any {
+    return {
       ...props,
       kind: 'CompositeResourceDefinition',
-      apiVersion: 'apiextensions.crossplane.io/v1beta1',
-    });
+      apiVersion: 'apiextensions.crossplane.io/v1',
+    };
   }
 }
 
@@ -352,14 +360,22 @@ export class Composition extends ApiObject {
    * Defines a "Composition" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: CompositionProps = {}) {
-    super(scope, id, {
+    super(scope, id, Composition.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Composition" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: CompositionProps = {}): any {
+    return {
       ...props,
       kind: 'Composition',
-      apiVersion: 'apiextensions.crossplane.io/v1beta1',
-    });
+      apiVersion: 'apiextensions.crossplane.io/v1',
+    };
   }
 }
 

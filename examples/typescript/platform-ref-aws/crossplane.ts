@@ -44,6 +44,7 @@ export function postgresYaml(crossplanePackage: App): Chart {
 
   let xrdNetRef: SchemaPropString;
   let xrdStorageGB: SchemaPropInteger;
+
   xrd.version('v1alpha1').served().referencable()
     .spec().with(Prop.for({ object: (spec) => {
       spec.propObject('parameters').required().with(Prop.for({ object: (params) => {

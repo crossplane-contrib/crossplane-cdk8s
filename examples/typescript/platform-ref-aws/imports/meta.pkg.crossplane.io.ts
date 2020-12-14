@@ -12,14 +12,22 @@ export class Configuration extends ApiObject {
    * Defines a "Configuration" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ConfigurationProps) {
-    super(scope, id, {
+    super(scope, id, Configuration.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Configuration" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ConfigurationProps): any {
+    return {
       ...props,
       kind: 'Configuration',
-      apiVersion: 'meta.pkg.crossplane.io/v1alpha1',
-    });
+      apiVersion: 'meta.pkg.crossplane.io/v1',
+    };
   }
 }
 
@@ -119,14 +127,22 @@ export class Provider extends ApiObject {
    * Defines a "Provider" API object
    * @param scope the scope in which to define this object
    * @param id a scope-local name for the object
-   * @param props initialiation props
+   * @param props initialization props
    */
   public constructor(scope: Construct, id: string, props: ProviderProps) {
-    super(scope, id, {
+    super(scope, id, Provider.propsWithGVK(props));
+  }
+
+  /**
+   * Adds "Provider" kind and apiVersion to props
+   * @param props initialization props
+   */
+  public static propsWithGVK(props: ProviderProps): any {
+    return {
       ...props,
       kind: 'Provider',
-      apiVersion: 'meta.pkg.crossplane.io/v1alpha1',
-    });
+      apiVersion: 'meta.pkg.crossplane.io/v1',
+    };
   }
 }
 
@@ -192,6 +208,13 @@ export interface ProviderSpecController {
    */
   readonly image: string;
 
+  /**
+   * PermissionRequests for RBAC rules required for this provider's controller to function. The RBAC manager is responsible for assessing the requested permissions.
+   *
+   * @schema ProviderSpecController#permissionRequests
+   */
+  readonly permissionRequests?: ProviderSpecControllerPermissionRequests[];
+
 }
 
 /**
@@ -235,6 +258,49 @@ export interface ProviderSpecDependsOn {
    * @schema ProviderSpecDependsOn#version
    */
   readonly version: string;
+
+}
+
+/**
+ * PolicyRule holds information that describes a policy rule, but does not contain information about who the rule applies to or which namespace the rule applies to.
+ *
+ * @schema ProviderSpecControllerPermissionRequests
+ */
+export interface ProviderSpecControllerPermissionRequests {
+  /**
+   * APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed.
+   *
+   * @schema ProviderSpecControllerPermissionRequests#apiGroups
+   */
+  readonly apiGroups?: string[];
+
+  /**
+   * NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full, final step in the path Since non-resource URLs are not namespaced, this field is only applicable for ClusterRoles referenced from a ClusterRoleBinding. Rules can either apply to API resources (such as "pods" or "secrets") or non-resource URL paths (such as "/api"),  but not both.
+   *
+   * @schema ProviderSpecControllerPermissionRequests#nonResourceURLs
+   */
+  readonly nonResourceURLs?: string[];
+
+  /**
+   * ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
+   *
+   * @schema ProviderSpecControllerPermissionRequests#resourceNames
+   */
+  readonly resourceNames?: string[];
+
+  /**
+   * Resources is a list of resources this rule applies to.  ResourceAll represents all resources.
+   *
+   * @schema ProviderSpecControllerPermissionRequests#resources
+   */
+  readonly resources?: string[];
+
+  /**
+   * Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule.  VerbAll represents all kinds.
+   *
+   * @schema ProviderSpecControllerPermissionRequests#verbs
+   */
+  readonly verbs: string[];
 
 }
 

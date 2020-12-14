@@ -1,5 +1,6 @@
 # crossplane-cdk
 
+![Overview](docs/media/overview.png)
 ### notes
 - npx projen new
 - cdk8s import github:crossplane/crossplane@0.14.0

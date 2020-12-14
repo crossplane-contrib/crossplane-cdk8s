@@ -64,7 +64,7 @@ customize to meet the exact needs of your organization!
 exports[`compositeClusters 2`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -172,7 +172,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -275,7 +275,7 @@ configSections:
 exports[`compositeClusters 3`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -363,7 +363,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -698,7 +698,7 @@ configSections:
 exports[`compositeClusters 4`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -893,7 +893,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
       "name": "compositeclusters.aws.platformref.crossplane.io",
@@ -974,7 +974,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "name": "eks.aws.platformref.crossplane.io",
@@ -1063,7 +1063,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
@@ -1370,7 +1370,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "name": "services.aws.platformref.crossplane.io",
@@ -1435,7 +1435,7 @@ configSections:
     },
   },
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1beta1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
       "labels": Object {
