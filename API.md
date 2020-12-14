@@ -5,6 +5,8 @@
 Name|Description
 ----|-----------
 [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
+[Composition](#crossplane-cdk-composition)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+[CompositionSpecResource](#crossplane-cdk-compositionspecresource)|*No description*
 [Configuration](#crossplane-cdk-configuration)|*No description*
 [ConnectionSecret](#crossplane-cdk-connectionsecret)|*No description*
 [MetaUI](#crossplane-cdk-metaui)|*No description*
@@ -24,14 +26,7 @@ Name|Description
 Name|Description
 ----|-----------
 [CompositeResourceDefinitionProps](#crossplane-cdk-compositeresourcedefinitionprops)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
-[CompositeResourceDefinitionSpecClaimNamesProps](#crossplane-cdk-compositeresourcedefinitionspecclaimnamesprops)|ClaimNames specifies the names of an optional composite resource claim.
-[CompositeResourceDefinitionSpecDefaultCompositionRefProps](#crossplane-cdk-compositeresourcedefinitionspecdefaultcompositionrefprops)|DefaultCompositionRef refers to the Composition resource that will be used in case no composition selector is given.
-[CompositeResourceDefinitionSpecEnforcedCompositionRefProps](#crossplane-cdk-compositeresourcedefinitionspecenforcedcompositionrefprops)|EnforcedCompositionRef refers to the Composition resource that will be used by all composite instances whose schema is defined by this definition.
-[CompositeResourceDefinitionSpecNamesProps](#crossplane-cdk-compositeresourcedefinitionspecnamesprops)|Names specifies the resource and kind names of the defined composite resource.
-[CompositeResourceDefinitionSpecProps](#crossplane-cdk-compositeresourcedefinitionspecprops)|CompositeResourceDefinitionSpec specifies the desired state of the definition.
-[CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumnsProps](#crossplane-cdk-compositeresourcedefinitionspecversionsadditionalprintercolumnsprops)|CustomResourceColumnDefinition specifies a column for server side printing.
-[CompositeResourceDefinitionSpecVersionsProps](#crossplane-cdk-compositeresourcedefinitionspecversionsprops)|CompositeResourceDefinitionVersion describes a version of an XR.
-[CompositeResourceDefinitionSpecVersionsSchemaProps](#crossplane-cdk-compositeresourcedefinitionspecversionsschemaprops)|Schema describes the schema used for validation, pruning, and defaulting of this version of the defined composite resource.
+[CompositionProps](#crossplane-cdk-compositionprops)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
 [ConfigurationProps](#crossplane-cdk-configurationprops)|Properties for initialization of `Configuration`.
 [MetaUIInputIntegerPropOverrides](#crossplane-cdk-metauiinputintegerpropoverrides)|*No description*
 [MetaUIInputIntegerProps](#crossplane-cdk-metauiinputintegerprops)|*No description*
@@ -49,12 +44,16 @@ Name|Description
 Name|Description
 ----|-----------
 [IAnyProp](#crossplane-cdk-ianyprop)|*No description*
+[ICompositeResourceDefinitionMeta](#crossplane-cdk-icompositeresourcedefinitionmeta)|*No description*
 [IConfiguration](#crossplane-cdk-iconfiguration)|Represents a Crossplane Configuration package.
+[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)|*No description*
+[INamesMeta](#crossplane-cdk-inamesmeta)|*No description*
 [IResource](#crossplane-cdk-iresource)|Represents a resource.
 [ISchemaProp](#crossplane-cdk-ischemaprop)|Schema Props.
 [ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)|*No description*
 [ISchemaPropMetaInteger](#crossplane-cdk-ischemapropmetainteger)|*No description*
 [ISchemaPropMetaString](#crossplane-cdk-ischemapropmetastring)|*No description*
+[IVersionMeta](#crossplane-cdk-iversionmeta)|*No description*
 
 
 **Enums**
@@ -88,9 +87,8 @@ new CompositeResourceDefinition(scope: Construct, id: string, props?: CompositeR
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[CompositeResourceDefinitionProps](#crossplane-cdk-compositeresourcedefinitionprops)</code>)  *No description*
-  * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  *No description* __*Optional*__
+  * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **name** (<code>string</code>)  *No description* __*Optional*__
-  * **spec** (<code>[CompositeResourceDefinitionSpecProps](#crossplane-cdk-compositeresourcedefinitionspecprops)</code>)  CompositeResourceDefinitionSpec specifies the desired state of the definition. __*Optional*__
 
 
 
@@ -100,6 +98,8 @@ new CompositeResourceDefinition(scope: Construct, id: string, props?: CompositeR
 Name | Type | Description 
 -----|------|-------------
 **apiObject** | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
+**fqn** | <code>string</code> | <span></span>
+**meta** | <code>[ICompositeResourceDefinitionMeta](#crossplane-cdk-icompositeresourcedefinitionmeta)</code> | <span></span>
 **ui** | <code>[MetaUI](#crossplane-cdk-metaui)</code> | <span></span>
 
 ### Methods
@@ -171,6 +171,121 @@ __Returns__:
 
 
 
+## class Composition  <a id="crossplane-cdk-composition"></a>
+
+Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+
+__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource)
+__Extends__: [Resource](#crossplane-cdk-resource)
+
+### Initializer
+
+
+
+
+```ts
+new Composition(scope: Construct, id: string, xrd: CompositeResourceDefinition, props?: CompositionProps)
+```
+
+* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **id** (<code>string</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **props** (<code>[CompositionProps](#crossplane-cdk-compositionprops)</code>)  *No description*
+  * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
+  * **name** (<code>string</code>)  *No description* __*Optional*__
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**apiObject** | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
+
+### Methods
+
+
+#### addResource(base) <a id="crossplane-cdk-composition-addresource"></a>
+
+
+
+```ts
+addResource(base: any): CompositionSpecResource
+```
+
+* **base** (<code>any</code>)  *No description*
+
+__Returns__:
+* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+
+
+
+## class CompositionSpecResource  <a id="crossplane-cdk-compositionspecresource"></a>
+
+
+
+
+### Initializer
+
+
+use Composition.addResource() instead.
+
+```ts
+new CompositionSpecResource(xrd: CompositeResourceDefinition, base: any)
+```
+
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **base** (<code>any</code>)  *No description*
+
+
+### Methods
+
+
+#### connectionDetailsFromXrd(xrd?) <a id="crossplane-cdk-compositionspecresource-connectiondetailsfromxrd"></a>
+
+
+
+```ts
+connectionDetailsFromXrd(xrd?: CompositeResourceDefinition): CompositionSpecResource
+```
+
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+
+__Returns__:
+* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+
+#### mapFieldPath(from, to) <a id="crossplane-cdk-compositionspecresource-mapfieldpath"></a>
+
+
+
+```ts
+mapFieldPath(from: string, to: string): CompositionSpecResource
+```
+
+* **from** (<code>string</code>)  *No description*
+* **to** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+
+#### mapFieldPathXFormStringFormat(from, format, to) <a id="crossplane-cdk-compositionspecresource-mapfieldpathxformstringformat"></a>
+
+
+
+```ts
+mapFieldPathXFormStringFormat(from: string, format: string, to: string): CompositionSpecResource
+```
+
+* **from** (<code>string</code>)  *No description*
+* **format** (<code>string</code>)  e.g. "%s-suffix".
+* **to** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+
+
+
 ## class Configuration  <a id="crossplane-cdk-configuration"></a>
 
 
@@ -191,6 +306,7 @@ new Configuration(scope: Construct, id: string, props?: ConfigurationProps)
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[ConfigurationProps](#crossplane-cdk-configurationprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
+  * **name** (<code>string</code>)  *No description* __*Optional*__
   * **company** (<code>string</code>)  *No description* __*Optional*__
   * **crossplaneVersion** (<code>string</code>)  *No description* __*Default*__: ">=v1.0.0-0"
   * **description** (<code>string</code>)  *No description* __*Optional*__
@@ -199,7 +315,6 @@ new Configuration(scope: Construct, id: string, props?: ConfigurationProps)
   * **keywords** (<code>Array<string></code>)  *No description* __*Optional*__
   * **license** (<code>string</code>)  *No description* __*Optional*__
   * **maintainer** (<code>string</code>)  *No description* __*Optional*__
-  * **name** (<code>string</code>)  *No description* __*Optional*__
   * **providers** (<code>Array<[ProviderDep](#crossplane-cdk-providerdep)></code>)  *No description* __*Optional*__
   * **readme** (<code>string</code>)  *No description* __*Optional*__
   * **source** (<code>string</code>)  *No description* __*Optional*__
@@ -248,8 +363,29 @@ new ConnectionSecret()
 
 
 
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**meta** | <code>[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)</code> | <span></span>
+
 ### Methods
 
+
+#### defaultNamespace(val) <a id="crossplane-cdk-connectionsecret-defaultnamespace"></a>
+
+
+
+```ts
+defaultNamespace(val: string): ConnectionSecret
+```
+
+* **val** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[ConnectionSecret](#crossplane-cdk-connectionsecret)</code>
 
 #### key(val) <a id="crossplane-cdk-connectionsecret-key"></a>
 
@@ -400,6 +536,14 @@ new Names(xrd: CompositeResourceDefinition, kind: string)
 * **kind** (<code>string</code>)  *No description*
 
 
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**meta** | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | <span></span>
+
 ### Methods
 
 
@@ -514,7 +658,7 @@ Represents a single resource.
 
 __Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource)
 __Extends__: [Construct](#constructs-construct)
-__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Configuration](#crossplane-cdk-configuration)
+__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Composition](#crossplane-cdk-composition), [Configuration](#crossplane-cdk-configuration)
 
 ### Initializer
 
@@ -529,6 +673,7 @@ new Resource(scope: Construct, id: string, _: ResourceProps)
 * **id** (<code>string</code>)  *No description*
 * **_** (<code>[ResourceProps](#crossplane-cdk-resourceprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
+  * **name** (<code>string</code>)  *No description* __*Optional*__
 
 
 
@@ -538,7 +683,6 @@ new Resource(scope: Construct, id: string, _: ResourceProps)
 Name | Type | Description 
 -----|------|-------------
 **apiObject** | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
-**metadata** | <code>[ApiObjectMetadataDefinition](#cdk8s-apiobjectmetadatadefinition)</code> | <span></span>
 **name** | <code>string</code> | The name of this API object.
 
 
@@ -953,6 +1097,7 @@ new Version(xrd: CompositeResourceDefinition, name: string)
 
 Name | Type | Description 
 -----|------|-------------
+**meta** | <code>[IVersionMeta](#crossplane-cdk-iversionmeta)</code> | <span></span>
 **name** | <code>string</code> | <span></span>
 
 ### Methods
@@ -1014,142 +1159,26 @@ static spec fields instead of using the fluent API.
 
 Name | Type | Description 
 -----|------|-------------
-**metadata**? | <code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code> | __*Optional*__
+**metadata**? | <code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/>__*Optional*__
 **name**? | <code>string</code> | __*Optional*__
-**spec**? | <code>[CompositeResourceDefinitionSpecProps](#crossplane-cdk-compositeresourcedefinitionspecprops)</code> | CompositeResourceDefinitionSpec specifies the desired state of the definition.<br/>__*Optional*__
 
 
 
-## struct CompositeResourceDefinitionSpecClaimNamesProps  <a id="crossplane-cdk-compositeresourcedefinitionspecclaimnamesprops"></a>
+## struct CompositionProps  <a id="crossplane-cdk-compositionprops"></a>
 
 
-ClaimNames specifies the names of an optional composite resource claim.
+Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
 
-When claim names are specified Crossplane will create a namespaced 'composite resource claim' CRD that corresponds to the defined composite resource. This composite resource claim acts as a namespaced proxy for the composite resource; creating, updating, or deleting the claim will create, update, or delete a corresponding composite resource. You may add claim names to an existing CompositeResourceDefinition, but they cannot be changed or removed once they have been set.
-
-
-
-Name | Type | Description 
------|------|-------------
-**kind** | <code>string</code> | kind is the serialized kind of the resource.
-**plural** | <code>string</code> | plural is the plural name of the resource to serve.
-**categories**? | <code>Array<string></code> | categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.<br/>__*Optional*__
-**listKind**? | <code>string</code> | listKind is the serialized kind of the list for this resource.<br/>__*Default*__: kind`List".
-**shortNames**? | <code>Array<string></code> | shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`.<br/>__*Optional*__
-**singular**? | <code>string</code> | singular is the singular name of the resource.<br/>__*Default*__: lowercased `kind`.
-
-
-
-## struct CompositeResourceDefinitionSpecDefaultCompositionRefProps  <a id="crossplane-cdk-compositeresourcedefinitionspecdefaultcompositionrefprops"></a>
-
-
-DefaultCompositionRef refers to the Composition resource that will be used in case no composition selector is given.
+TODO: Support all available props in fluent API.
+TODO: Process props.spec in Composition so you can init with
+static spec fields instead of using the fluent API.
 
 
 
 Name | Type | Description 
 -----|------|-------------
-**name** | <code>string</code> | Name of the referenced object.
-
-
-
-## struct CompositeResourceDefinitionSpecEnforcedCompositionRefProps  <a id="crossplane-cdk-compositeresourcedefinitionspecenforcedcompositionrefprops"></a>
-
-
-EnforcedCompositionRef refers to the Composition resource that will be used by all composite instances whose schema is defined by this definition.
-
-
-
-Name | Type | Description 
------|------|-------------
-**name** | <code>string</code> | Name of the referenced object.
-
-
-
-## struct CompositeResourceDefinitionSpecNamesProps  <a id="crossplane-cdk-compositeresourcedefinitionspecnamesprops"></a>
-
-
-Names specifies the resource and kind names of the defined composite resource.
-
-
-
-Name | Type | Description 
------|------|-------------
-**kind** | <code>string</code> | kind is the serialized kind of the resource.
-**plural** | <code>string</code> | plural is the plural name of the resource to serve.
-**categories**? | <code>Array<string></code> | categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.<br/>__*Optional*__
-**listKind**? | <code>string</code> | listKind is the serialized kind of the list for this resource.<br/>__*Default*__: kind`List".
-**shortNames**? | <code>Array<string></code> | shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`.<br/>__*Optional*__
-**singular**? | <code>string</code> | singular is the singular name of the resource.<br/>__*Default*__: lowercased `kind`.
-
-
-
-## struct CompositeResourceDefinitionSpecProps  <a id="crossplane-cdk-compositeresourcedefinitionspecprops"></a>
-
-
-CompositeResourceDefinitionSpec specifies the desired state of the definition.
-
-
-
-Name | Type | Description 
------|------|-------------
-**group** | <code>string</code> | Group specifies the API group of the defined composite resource.
-**names** | <code>[CompositeResourceDefinitionSpecNamesProps](#crossplane-cdk-compositeresourcedefinitionspecnamesprops)</code> | Names specifies the resource and kind names of the defined composite resource.
-**versions** | <code>Array<[CompositeResourceDefinitionSpecVersionsProps](#crossplane-cdk-compositeresourcedefinitionspecversionsprops)></code> | Versions is the list of all API versions of the defined composite resource.
-**claimNames**? | <code>[CompositeResourceDefinitionSpecClaimNamesProps](#crossplane-cdk-compositeresourcedefinitionspecclaimnamesprops)</code> | ClaimNames specifies the names of an optional composite resource claim.<br/>__*Optional*__
-**connectionSecretKeys**? | <code>Array<string></code> | ConnectionSecretKeys is the list of keys that will be exposed to the end user of the defined kind.<br/>__*Optional*__
-**defaultCompositionRef**? | <code>[CompositeResourceDefinitionSpecDefaultCompositionRefProps](#crossplane-cdk-compositeresourcedefinitionspecdefaultcompositionrefprops)</code> | DefaultCompositionRef refers to the Composition resource that will be used in case no composition selector is given.<br/>__*Optional*__
-**enforcedCompositionRef**? | <code>[CompositeResourceDefinitionSpecEnforcedCompositionRefProps](#crossplane-cdk-compositeresourcedefinitionspecenforcedcompositionrefprops)</code> | EnforcedCompositionRef refers to the Composition resource that will be used by all composite instances whose schema is defined by this definition.<br/>__*Optional*__
-
-
-
-## struct CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumnsProps  <a id="crossplane-cdk-compositeresourcedefinitionspecversionsadditionalprintercolumnsprops"></a>
-
-
-CustomResourceColumnDefinition specifies a column for server side printing.
-
-
-
-Name | Type | Description 
------|------|-------------
-**jsonPath** | <code>string</code> | jsonPath is a simple JSON path (i.e. with array notation) which is evaluated against each custom resource to produce the value for this column.
-**name** | <code>string</code> | name is a human readable name for the column.
-**type** | <code>string</code> | type is an OpenAPI type definition for this column.
-**description**? | <code>string</code> | description is a human readable description of this column.<br/>__*Optional*__
-**format**? | <code>string</code> | format is an optional OpenAPI type definition for this column.<br/>__*Optional*__
-**priority**? | <code>number</code> | priority is an integer defining the relative importance of this column compared to others.<br/>__*Optional*__
-
-
-
-## struct CompositeResourceDefinitionSpecVersionsProps  <a id="crossplane-cdk-compositeresourcedefinitionspecversionsprops"></a>
-
-
-CompositeResourceDefinitionVersion describes a version of an XR.
-
-
-
-Name | Type | Description 
------|------|-------------
-**name** | <code>string</code> | Name of this version, e.g. “v1”, “v2beta1”, etc. Composite resources are served under this version at `/apis/<group>/<version>/...` if `served` is true.
-**referenceable** | <code>boolean</code> | Referenceable specifies that this version may be referenced by a Composition in order to configure which resources an XR may be composed of.
-**served** | <code>boolean</code> | Served specifies that this version should be served via REST APIs.
-**additionalPrinterColumns**? | <code>Array<[CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumnsProps](#crossplane-cdk-compositeresourcedefinitionspecversionsadditionalprintercolumnsprops)></code> | AdditionalPrinterColumns specifies additional columns returned in Table output.<br/>__*Optional*__
-**schema**? | <code>[CompositeResourceDefinitionSpecVersionsSchemaProps](#crossplane-cdk-compositeresourcedefinitionspecversionsschemaprops)</code> | Schema describes the schema used for validation, pruning, and defaulting of this version of the defined composite resource.<br/>__*Optional*__
-
-
-
-## struct CompositeResourceDefinitionSpecVersionsSchemaProps  <a id="crossplane-cdk-compositeresourcedefinitionspecversionsschemaprops"></a>
-
-
-Schema describes the schema used for validation, pruning, and defaulting of this version of the defined composite resource.
-
-Fields required by all composite resources will be injected into this schema automatically, and will override equivalently named fields in this schema. Omitting this schema results in a schema that contains only the fields required by all composite resources.
-
-
-
-Name | Type | Description 
------|------|-------------
-**openAPIV3Schema**? | <code>any</code> | OpenAPIV3Schema is the OpenAPI v3 schema to use for validation and pruning.<br/>__*Optional*__
+**metadata**? | <code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/>__*Optional*__
+**name**? | <code>string</code> | __*Optional*__
 
 
 
@@ -1200,6 +1229,26 @@ __Returns__:
 
 
 
+## interface ICompositeResourceDefinitionMeta  <a id="crossplane-cdk-icompositeresourcedefinitionmeta"></a>
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**group** | <code>string</code> | <span></span>
+**name** | <code>string</code> | <span></span>
+**names** | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | <span></span>
+**versionServed** | <code>string</code> | <span></span>
+**claimNames**? | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | __*Optional*__
+**connectionSecret**? | <code>[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)</code> | __*Optional*__
+**versions**? | <code>Array<[IVersionMeta](#crossplane-cdk-iversionmeta)></code> | __*Optional*__
+
+
+
 ## interface IConfiguration  <a id="crossplane-cdk-iconfiguration"></a>
 
 __Implemented by__: [Configuration](#crossplane-cdk-configuration)
@@ -1215,9 +1264,39 @@ Name | Type | Description
 
 
 
+## interface IConnectionSecretMeta  <a id="crossplane-cdk-iconnectionsecretmeta"></a>
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**defaultNamespace** | <code>string</code> | <span></span>
+**keys** | <code>Array<string></code> | <span></span>
+
+
+
+## interface INamesMeta  <a id="crossplane-cdk-inamesmeta"></a>
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**kind** | <code>string</code> | <span></span>
+**plural** | <code>string</code> | <span></span>
+
+
+
 ## interface IResource  <a id="crossplane-cdk-iresource"></a>
 
-__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Configuration](#crossplane-cdk-configuration)
+__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Composition](#crossplane-cdk-composition), [Configuration](#crossplane-cdk-configuration)
 
 Represents a resource.
 
@@ -1307,6 +1386,22 @@ Name | Type | Description
 **description**? | <code>string</code> | __*Optional*__
 **uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code> | __*Optional*__
 **uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code> | __*Optional*__
+
+
+
+## interface IVersionMeta  <a id="crossplane-cdk-iversionmeta"></a>
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**name** | <code>string</code> | <span></span>
+**referencable**? | <code>boolean</code> | __*Optional*__
+**served**? | <code>boolean</code> | __*Optional*__
 
 
 
@@ -1473,6 +1568,7 @@ Initialization properties for resources.
 Name | Type | Description 
 -----|------|-------------
 **metadata**? | <code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/>__*Optional*__
+**name**? | <code>string</code> | __*Optional*__
 
 
 

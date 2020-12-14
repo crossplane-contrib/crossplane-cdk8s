@@ -2,7 +2,7 @@ import * as cdk8s from 'cdk8s';
 import { toCamelCase } from 'codemaker';
 import { Construct } from 'constructs';
 import * as yaml from 'js-yaml';
-import { Resource } from './base';
+import { Resource, ResourceProps } from './base';
 import * as l1 from './imports/apiextensions.crossplane.io';
 import { undefinedIfEmpty } from './utils';
 
@@ -10,8 +10,6 @@ import { undefinedIfEmpty } from './utils';
  * An CompositeResourceDefinition defines a new kind of composite
  * infrastructure resource. The new resource is composed of other composite or
  * managed infrastructure resources.
- *
- * @schema CompositeResourceDefinition
  */
 export class CompositeResourceDefinition extends Resource {
   /**
@@ -27,8 +25,8 @@ export class CompositeResourceDefinition extends Resource {
   protected readonly apiObject: cdk8s.ApiObject;
 
   private _group?: string;
-  private _claimNames?: Names;
   private _names?: Names;
+  private _claimNames?: Names;
   private _connectionSecret?: ConnectionSecret;
   private _versions: Version[] = [];
   private _metaUI?: MetaUI;
@@ -36,7 +34,7 @@ export class CompositeResourceDefinition extends Resource {
   public constructor(scope: Construct, id: string, props: CompositeResourceDefinitionProps = {} ) {
     super(scope, id, { metadata: props.metadata });
 
-    const name = props.name ?? id;
+    const name = props.name ?? (props.metadata?.name ?? id);
 
     let annotations: any = { };
     if (props.metadata?.annotations) { annotations = { ...props.metadata.annotations, ...annotations }; }
@@ -57,17 +55,17 @@ export class CompositeResourceDefinition extends Resource {
   private _toL1(): l1.CompositeResourceDefinitionSpec {
 
     if (this._group === undefined) {
-      throw new Error(`group is required for '${this.name}'`);
+      throw new Error(`group is required for '${this.fqn}'`);
     }
 
     const versions = this._versionsToL1();
     if (versions === undefined) {
-      throw new Error(`version is required for '${this.name}'`);
+      throw new Error(`version is required for '${this.fqn}'`);
     }
 
     const kind = this._names?._toL1();
     if (kind === undefined) {
-      throw new Error(`kind is required for '${this.name}'`);
+      throw new Error(`kind is required for '${this.fqn}'`);
     }
 
     return {
@@ -120,6 +118,59 @@ export class CompositeResourceDefinition extends Resource {
     this._metaUI = this._metaUI ?? new MetaUI();
     return this._metaUI;
   }
+
+  public get meta(): ICompositeResourceDefinitionMeta {
+    const versions = new Array();
+    let versionServed: string = '';
+    for (const version of this._versions) {
+      const v = version.meta;
+      if (v.served) {
+        versionServed = v.name;
+      }
+      versions.push(v);
+    }
+
+    return {
+      name: this.name,
+      group: this._group ?? '',
+      names: this._names?.meta ?? { kind: '', plural: '' },
+      claimNames: this._claimNames?.meta,
+      versions: undefinedIfEmpty(versions),
+      versionServed: versionServed,
+      connectionSecret: this._connectionSecret?.meta,
+    };
+  }
+
+  public get fqn(): string {
+    const xrd = this.meta;
+    return `${this.name}/${xrd.names.plural}.${xrd.group}/${xrd.versionServed}`;
+  }
+}
+
+export interface ICompositeResourceDefinitionMeta {
+  readonly name: string;
+  readonly group: string;
+  readonly names: INamesMeta;
+  readonly claimNames?: INamesMeta;
+  readonly versions?: IVersionMeta[];
+  readonly versionServed: string;
+  readonly connectionSecret?: IConnectionSecretMeta;
+}
+
+export interface INamesMeta {
+  readonly kind: string;
+  readonly plural: string;
+}
+
+export interface IVersionMeta {
+  readonly name: string;
+  readonly served?: boolean;
+  readonly referencable?: boolean;
+}
+
+export interface IConnectionSecretMeta {
+  readonly defaultNamespace: string;
+  readonly keys: string[];
 }
 
 export class MetaUI {
@@ -322,8 +373,11 @@ export class Names {
    * @internal
    */
   public _toL1(): l1.CompositeResourceDefinitionSpecClaimNames {
+    if (this._kind === undefined) {
+      throw new Error(`'kind' is required for '${this._xrd.fqn}.spec.names.kind'`);
+    }
     if (this._plural === undefined) {
-      throw new Error(`'names.plural' is required for ${this._xrd.name}`);
+      throw new Error(`'plural' is required for ${this._xrd.fqn}.spec.names.plural`);
     }
     return {
       categories: undefinedIfEmpty(this._categories),
@@ -354,10 +408,24 @@ export class Names {
   public singular(val: string) {
     this._singular = val;
   }
+
+  public get meta(): INamesMeta {
+    if (this._kind === undefined) {
+      throw new Error(`'kind' is required for '${this._xrd.fqn}.spec.names.kind'`);
+    }
+    if (this._plural === undefined) {
+      throw new Error(`'plural' is required for ${this._xrd.fqn}.spec.names.plural`);
+    }
+    return {
+      kind: this._kind,
+      plural: this._plural,
+    };
+  }
 }
 
 export class ConnectionSecret {
   private _keys: string[] = [];
+  private _defaultNamespace: string = 'crossplane-system';
 
   /**
    * use CompositeResourceDefinition.connectionSecret() instead
@@ -368,6 +436,23 @@ export class ConnectionSecret {
 
   }
 
+  public get meta(): IConnectionSecretMeta {
+    return {
+      defaultNamespace: this._defaultNamespace,
+      keys: [...this._keys],
+    };
+  }
+
+  public defaultNamespace(val: string): ConnectionSecret {
+    this._defaultNamespace = val;
+    return this;
+  }
+
+  public key(val: string): ConnectionSecret {
+    this._keys.push(val);
+    return this;
+  }
+
   /**
    * @internal
    */
@@ -375,10 +460,6 @@ export class ConnectionSecret {
     return undefinedIfEmpty(this._keys);
   }
 
-  public key(val: string): ConnectionSecret {
-    this._keys.push(val);
-    return this;
-  }
 }
 
 export class Version {
@@ -419,16 +500,24 @@ export class Version {
     return this._spec;
   }
 
+  public get meta(): IVersionMeta {
+    return {
+      name: this._name,
+      served: this._served,
+      referencable: this._referencable,
+    };
+  }
+
   /**
    * @internal
    */
   public _toL1(): l1.CompositeResourceDefinitionSpecVersions {
     if (this._referencable === undefined) {
-      throw new Error(`'referencable' is required on '${this._xrd.name}.spec.version["${this._name}"]'`);
+      throw new Error(`'referencable' is required on '${this._xrd.fqn}.spec.version["${this._name}"]'`);
     }
 
     if (this._served === undefined) {
-      throw new Error(`'served' is required on '${this._xrd.name}.spec.version["${this._name}"]'`);
+      throw new Error(`'served' is required on '${this._xrd.fqn}.spec.version["${this._name}"]'`);
     }
 
     let schema: any = { };
@@ -544,7 +633,7 @@ export class SchemaPropObject implements ISchemaProp {
   public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
     this._xrd = xrd;
     this._name = name;
-    this._path = `${parentPath}.${name}`;
+    this._path = (parentPath.length == 0) ? name : `${parentPath}.${name}`;
   }
 
   public get meta(): ISchemaPropMeta {
@@ -720,7 +809,7 @@ export class SchemaPropInteger implements ISchemaProp {
 
   public uiInput(options: MetaUIInputIntegerPropOverrides = {}): SchemaPropInteger {
     const inputType = options.inputType ?? InputType.SINGLE_INPUT;
-    const path = options.path ?? this._path;
+    let path = options.path ?? this._path;
     const name = options.name ?? toCamelCase(this._path);
     const title = options.title ?? this._name;
     const description = options.description ?? this._description;
@@ -729,6 +818,12 @@ export class SchemaPropInteger implements ISchemaProp {
     const required = options.required ?? this._required;
     const customError = options.customError;
     const def = options.default;
+
+    //UI expects paths to start with '.'
+    //but elsewhere we don't so accomodate both
+    if (!path.startsWith('.')) {
+      path = `.${path}`;
+    }
 
     this._uiInput = {
       type: this._type,
@@ -820,13 +915,19 @@ export class SchemaPropString implements ISchemaProp {
 
   public uiInput(options: MetaUIInputStringPropOverrides = {}): SchemaPropString {
     const inputType = options.inputType ?? InputType.SINGLE_INPUT;
-    const path = options.path ?? this._path;
+    let path = options.path ?? this._path;
     const name = options.name ?? toCamelCase(this._path);
     const title = options.title ?? this._name;
     const required = options.required ?? this._required;
     const description = options.description ?? this._description;
     const customError = options.customError;
     const def = options.default;
+
+    //UI expects paths to start with '.'
+    //but elsewhere we don't so accomodate both
+    if (!path.startsWith('.')) {
+      path = `.${path}`;
+    }
 
     this._uiInput = {
       type: this._type,
@@ -926,7 +1027,7 @@ export enum InputType {
 
 
 /**
- * CompositeResourceDefinition Props for those not using the fluent API
+ * CompositeResourceDefinition Props
  */
 
 /**
@@ -938,323 +1039,13 @@ export enum InputType {
  * TODO: Process props.spec in CompositeResourceDefinition so you can init with
  * static spec fields instead of using the fluent API.
  *
- * @schema CompositeResourceDefinition
+ * @schema CompositeResourceDefinitionProps
  */
-export interface CompositeResourceDefinitionProps {
-  /**
-   * @schema metadata.name
-   */
-  readonly name?: string;
-
-  /**
-   * @schema CompositeResourceDefinition#metadata
-   */
-  readonly metadata?: cdk8s.ApiObjectMetadata;
-
+export interface CompositeResourceDefinitionProps extends ResourceProps {
   /**
    * CompositeResourceDefinitionSpec specifies the desired state of the definition.
    *
-   * @schema CompositeResourceDefinition#spec
+   * @schema CompositeResourceDefinitionProps#spec
    */
-  readonly spec?: CompositeResourceDefinitionSpecProps;
-
-}
-
-/**
- * CompositeResourceDefinitionSpec specifies the desired state of the definition.
- *
- * @schema CompositeResourceDefinitionSpec
- */
-export interface CompositeResourceDefinitionSpecProps {
-  /**
-   * ClaimNames specifies the names of an optional composite resource claim. When claim names are specified Crossplane will create a namespaced 'composite resource claim' CRD that corresponds to the defined composite resource. This composite resource claim acts as a namespaced proxy for the composite resource; creating, updating, or deleting the claim will create, update, or delete a corresponding composite resource. You may add claim names to an existing CompositeResourceDefinition, but they cannot be changed or removed once they have been set.
-   *
-   * @schema CompositeResourceDefinitionSpec#claimNames
-   */
-  readonly claimNames?: CompositeResourceDefinitionSpecClaimNamesProps;
-
-  /**
-   * ConnectionSecretKeys is the list of keys that will be exposed to the end user of the defined kind.
-   *
-   * @schema CompositeResourceDefinitionSpec#connectionSecretKeys
-   */
-  readonly connectionSecretKeys?: string[];
-
-  /**
-   * DefaultCompositionRef refers to the Composition resource that will be used in case no composition selector is given.
-   *
-   * @schema CompositeResourceDefinitionSpec#defaultCompositionRef
-   */
-  readonly defaultCompositionRef?: CompositeResourceDefinitionSpecDefaultCompositionRefProps;
-
-  /**
-   * EnforcedCompositionRef refers to the Composition resource that will be used by all composite instances whose schema is defined by this definition.
-   *
-   * @schema CompositeResourceDefinitionSpec#enforcedCompositionRef
-   */
-  readonly enforcedCompositionRef?: CompositeResourceDefinitionSpecEnforcedCompositionRefProps;
-
-  /**
-   * Group specifies the API group of the defined composite resource. Composite resources are served under `/apis/<group>/...`. Must match the name of the XRD (in the form `<names.plural>.<group>`).
-   *
-   * @schema CompositeResourceDefinitionSpec#group
-   */
-  readonly group: string;
-
-  /**
-   * Names specifies the resource and kind names of the defined composite resource.
-   *
-   * @schema CompositeResourceDefinitionSpec#names
-   */
-  readonly names: CompositeResourceDefinitionSpecNamesProps;
-
-  /**
-   * Versions is the list of all API versions of the defined composite resource. Version names are used to compute the order in which served versions are listed in API discovery. If the version string is "kube-like", it will sort above non "kube-like" version strings, which are ordered lexicographically. "Kube-like" versions start with a "v", then are followed by a number (the major version), then optionally the string "alpha" or "beta" and another number (the minor version). These are sorted first by GA > beta > alpha (where GA is a version with no suffix such as beta or alpha), and then by comparing major version, then minor version. An example sorted list of versions: v10, v2, v1, v11beta2, v10beta3, v3beta1, v12alpha1, v11alpha2, foo1, foo10. Note that all versions must have identical schemas; Crossplane does not currently support conversion between different version schemas.
-   *
-   * @schema CompositeResourceDefinitionSpec#versions
-   */
-  readonly versions: CompositeResourceDefinitionSpecVersionsProps[];
-
-}
-
-/**
- * ClaimNames specifies the names of an optional composite resource claim. When claim names are specified Crossplane will create a namespaced 'composite resource claim' CRD that corresponds to the defined composite resource. This composite resource claim acts as a namespaced proxy for the composite resource; creating, updating, or deleting the claim will create, update, or delete a corresponding composite resource. You may add claim names to an existing CompositeResourceDefinition, but they cannot be changed or removed once they have been set.
- *
- * @schema CompositeResourceDefinitionSpecClaimNames
- */
-export interface CompositeResourceDefinitionSpecClaimNamesProps {
-  /**
-   * categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.
-   *
-   * @schema CompositeResourceDefinitionSpecClaimNames#categories
-   */
-  readonly categories?: string[];
-
-  /**
-   * kind is the serialized kind of the resource. It is normally CamelCase and singular. Custom resource instances will use this value as the `kind` attribute in API calls.
-   *
-   * @schema CompositeResourceDefinitionSpecClaimNames#kind
-   */
-  readonly kind: string;
-
-  /**
-   * listKind is the serialized kind of the list for this resource. Defaults to "`kind`List".
-   *
-   * @default kind`List".
-   * @schema CompositeResourceDefinitionSpecClaimNames#listKind
-   */
-  readonly listKind?: string;
-
-  /**
-   * plural is the plural name of the resource to serve. The custom resources are served under `/apis/<group>/<version>/.../<plural>`. Must match the name of the CustomResourceDefinition (in the form `<names.plural>.<group>`). Must be all lowercase.
-   *
-   * @schema CompositeResourceDefinitionSpecClaimNames#plural
-   */
-  readonly plural: string;
-
-  /**
-   * shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`. It must be all lowercase.
-   *
-   * @schema CompositeResourceDefinitionSpecClaimNames#shortNames
-   */
-  readonly shortNames?: string[];
-
-  /**
-   * singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.
-   *
-   * @default lowercased `kind`.
-   * @schema CompositeResourceDefinitionSpecClaimNames#singular
-   */
-  readonly singular?: string;
-
-}
-
-/**
- * DefaultCompositionRef refers to the Composition resource that will be used in case no composition selector is given.
- *
- * @schema CompositeResourceDefinitionSpecDefaultCompositionRef
- */
-export interface CompositeResourceDefinitionSpecDefaultCompositionRefProps {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema CompositeResourceDefinitionSpecDefaultCompositionRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * EnforcedCompositionRef refers to the Composition resource that will be used by all composite instances whose schema is defined by this definition.
- *
- * @schema CompositeResourceDefinitionSpecEnforcedCompositionRef
- */
-export interface CompositeResourceDefinitionSpecEnforcedCompositionRefProps {
-  /**
-   * Name of the referenced object.
-   *
-   * @schema CompositeResourceDefinitionSpecEnforcedCompositionRef#name
-   */
-  readonly name: string;
-
-}
-
-/**
- * Names specifies the resource and kind names of the defined composite resource.
- *
- * @schema CompositeResourceDefinitionSpecNames
- */
-export interface CompositeResourceDefinitionSpecNamesProps {
-  /**
-   * categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.
-   *
-   * @schema CompositeResourceDefinitionSpecNames#categories
-   */
-  readonly categories?: string[];
-
-  /**
-   * kind is the serialized kind of the resource. It is normally CamelCase and singular. Custom resource instances will use this value as the `kind` attribute in API calls.
-   *
-   * @schema CompositeResourceDefinitionSpecNames#kind
-   */
-  readonly kind: string;
-
-  /**
-   * listKind is the serialized kind of the list for this resource. Defaults to "`kind`List".
-   *
-   * @default kind`List".
-   * @schema CompositeResourceDefinitionSpecNames#listKind
-   */
-  readonly listKind?: string;
-
-  /**
-   * plural is the plural name of the resource to serve. The custom resources are served under `/apis/<group>/<version>/.../<plural>`. Must match the name of the CustomResourceDefinition (in the form `<names.plural>.<group>`). Must be all lowercase.
-   *
-   * @schema CompositeResourceDefinitionSpecNames#plural
-   */
-  readonly plural: string;
-
-  /**
-   * shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get <shortname>`. It must be all lowercase.
-   *
-   * @schema CompositeResourceDefinitionSpecNames#shortNames
-   */
-  readonly shortNames?: string[];
-
-  /**
-   * singular is the singular name of the resource. It must be all lowercase. Defaults to lowercased `kind`.
-   *
-   * @default lowercased `kind`.
-   * @schema CompositeResourceDefinitionSpecNames#singular
-   */
-  readonly singular?: string;
-
-}
-
-/**
- * CompositeResourceDefinitionVersion describes a version of an XR.
- *
- * @schema CompositeResourceDefinitionSpecVersions
- */
-export interface CompositeResourceDefinitionSpecVersionsProps {
-  /**
-   * AdditionalPrinterColumns specifies additional columns returned in Table output. If no columns are specified, a single column displaying the age of the custom resource is used. See the following link for details: https://kubernetes.io/docs/reference/using-api/api-concepts/#receiving-resources-as-tables
-   *
-   * @schema CompositeResourceDefinitionSpecVersions#additionalPrinterColumns
-   */
-  readonly additionalPrinterColumns?: CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumnsProps[];
-
-  /**
-   * Name of this version, e.g. “v1”, “v2beta1”, etc. Composite resources are served under this version at `/apis/<group>/<version>/...` if `served` is true.
-   *
-   * @schema CompositeResourceDefinitionSpecVersions#name
-   */
-  readonly name: string;
-
-  /**
-   * Referenceable specifies that this version may be referenced by a Composition in order to configure which resources an XR may be composed of. Exactly one version must be marked as referenceable; all Compositions must target only the referenceable version. The referenceable version must be served.
-   *
-   * @schema CompositeResourceDefinitionSpecVersions#referenceable
-   */
-  readonly referenceable: boolean;
-
-  /**
-   * Schema describes the schema used for validation, pruning, and defaulting of this version of the defined composite resource. Fields required by all composite resources will be injected into this schema automatically, and will override equivalently named fields in this schema. Omitting this schema results in a schema that contains only the fields required by all composite resources.
-   *
-   * @schema CompositeResourceDefinitionSpecVersions#schema
-   */
-  readonly schema?: CompositeResourceDefinitionSpecVersionsSchemaProps;
-
-  /**
-   * Served specifies that this version should be served via REST APIs.
-   *
-   * @schema CompositeResourceDefinitionSpecVersions#served
-   */
-  readonly served: boolean;
-
-}
-
-/**
- * CustomResourceColumnDefinition specifies a column for server side printing.
- *
- * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns
- */
-export interface CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumnsProps {
-  /**
-   * description is a human readable description of this column.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#description
-   */
-  readonly description?: string;
-
-  /**
-   * format is an optional OpenAPI type definition for this column. The 'name' format is applied to the primary identifier column to assist in clients identifying column is the resource name. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#format
-   */
-  readonly format?: string;
-
-  /**
-   * jsonPath is a simple JSON path (i.e. with array notation) which is evaluated against each custom resource to produce the value for this column.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#jsonPath
-   */
-  readonly jsonPath: string;
-
-  /**
-   * name is a human readable name for the column.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#name
-   */
-  readonly name: string;
-
-  /**
-   * priority is an integer defining the relative importance of this column compared to others. Lower numbers are considered higher priority. Columns that may be omitted in limited space scenarios should be given a priority greater than 0.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#priority
-   */
-  readonly priority?: number;
-
-  /**
-   * type is an OpenAPI type definition for this column. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types for details.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsAdditionalPrinterColumns#type
-   */
-  readonly type: string;
-
-}
-
-/**
- * Schema describes the schema used for validation, pruning, and defaulting of this version of the defined composite resource. Fields required by all composite resources will be injected into this schema automatically, and will override equivalently named fields in this schema. Omitting this schema results in a schema that contains only the fields required by all composite resources.
- *
- * @schema CompositeResourceDefinitionSpecVersionsSchema
- */
-export interface CompositeResourceDefinitionSpecVersionsSchemaProps {
-  /**
-   * OpenAPIV3Schema is the OpenAPI v3 schema to use for validation and pruning.
-   *
-   * @schema CompositeResourceDefinitionSpecVersionsSchema#openAPIV3Schema
-   */
-  readonly openAPIV3Schema?: any;
-
+  //readonly spec?: CompositeResourceDefinitionSpecProps;
 }

@@ -8,9 +8,6 @@ import { undefinedIfEmpty } from './utils';
  * Properties for initialization of `Configuration`.
  */
 export interface ConfigurationProps extends ResourceProps {
-  // metadata.name
-  readonly name?: string;
-
   // metadata.annotations.company
   readonly company?: string;
 
@@ -60,7 +57,7 @@ export class Configuration extends Resource implements IConfiguration {
 
     this.providers = new Array<ProviderDep>();
 
-    const name = props.name ?? id;
+    const name = props.name ?? (props.metadata?.name ?? id);
 
     // well known annotations
     let annotations: any = { };

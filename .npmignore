@@ -13,9 +13,6 @@ dist
 /.projenrc.js
 /tsconfig.jest.json
 /.eslintrc.json
-!*.js
-*.ts
-!*.d.ts
 !/lib
 !/lib/**/*.js
 !/lib/**/*.d.ts
