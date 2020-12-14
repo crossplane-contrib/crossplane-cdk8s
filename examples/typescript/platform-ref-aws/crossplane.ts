@@ -5,6 +5,7 @@ import { Prop, SchemaPropInteger, SchemaPropString, InputType } from '../../../s
 
 import * as xrds from './crs/xrd.apiextensions.crossplane.io';
 import * as comp from './crs/composition.apiextensions.crossplane.io';
+import * as db from './imports/database.aws.crossplane.io'
 
 export function configYaml(crossplanePackage: App): Chart {
 
@@ -99,21 +100,18 @@ export function postgresYaml(crossplanePackage: App): Chart {
   });
 
   //TODO: use imported provider-aws types
-  composition.addResource({
-    apiVersion: 'database.aws.crossplane.io/v1beta1',
-    kind: 'DBSubnetGroup',
+  composition.addResource(db.DbSubnetGroup.propsWithGVK({
     spec: {
       forProvider: {
         region: 'us-west-2',
         description: 'An excellent formation of subnetworks.',
       },
-      reclaimPolicy: 'Delete',
+      deletionPolicy: db.DbSubnetGroupSpecDeletionPolicy.DELETE,
     },
-  }).mapFieldPath(xrdNetRef!.meta.path,'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
+  }))
+  .mapFieldPath(xrdNetRef!.meta.path,'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
 
-  composition.addResource({
-    apiVersion: 'database.aws.crossplane.io/v1beta1',
-    kind: 'RDSInstance',
+  composition.addResource(db.RdsInstance.propsWithGVK({
     spec: {
       forProvider: {
         region: 'us-west-2',
@@ -129,13 +127,15 @@ export function postgresYaml(crossplanePackage: App): Chart {
       },
       writeConnectionSecretToRef: {
         namespace: 'crossplane-system',
+        name: 'default-db-conn'
       },
-      reclaimPolicy: 'Delete',
+      deletionPolicy: db.RdsInstanceSpecDeletionPolicy.DELETE,
     }
-  }).mapFieldPathXFormStringFormat('metadata.uid','%s-postgresql', 'spec.writeConnectionSecretToRef.name')
-    .mapFieldPath(xrdStorageGB!.meta.path, 'spec.forProvider.allocatedStorage')
-    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]')
-    .connectionDetailsFromXrd();
+  }))
+  .mapFieldPathXFormStringFormat('metadata.uid','%s-postgresql', 'spec.writeConnectionSecretToRef.name')
+  .mapFieldPath(xrdStorageGB!.meta.path, 'spec.forProvider.allocatedStorage')
+  .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]')
+  .connectionDetailsFromXrd();
 
   return yaml;
 }

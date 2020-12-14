@@ -192,11 +192,11 @@ configSections:
             "apiVersion": "database.aws.crossplane.io/v1beta1",
             "kind": "DBSubnetGroup",
             "spec": Object {
+              "deletionPolicy": "Delete",
               "forProvider": Object {
                 "description": "An excellent formation of subnetworks.",
                 "region": "us-west-2",
               },
-              "reclaimPolicy": "Delete",
             },
           },
           "patches": Array [
@@ -211,6 +211,7 @@ configSections:
             "apiVersion": "database.aws.crossplane.io/v1beta1",
             "kind": "RDSInstance",
             "spec": Object {
+              "deletionPolicy": "Delete",
               "forProvider": Object {
                 "dbInstanceClass": "db.t2.small",
                 "dbSubnetGroupNameSelector": Object {
@@ -223,8 +224,8 @@ configSections:
                 "region": "us-west-2",
                 "skipFinalSnapshotBeforeDeletion": true,
               },
-              "reclaimPolicy": "Delete",
               "writeConnectionSecretToRef": Object {
+                "name": "default-db-conn",
                 "namespace": "crossplane-system",
               },
             },
