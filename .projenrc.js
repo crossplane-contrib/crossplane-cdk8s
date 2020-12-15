@@ -2,19 +2,26 @@ const { readdirSync, statSync } = require('fs');
 const { join, relative } = require('path');
 const { ConstructLibraryCdk8s } = require('projen');
 
+const CDK8S_VERSION = '1.0.0-beta.5';
+
 const project = new ConstructLibraryCdk8s({
   authorAddress: 'prasek@gmail.com',
   authorName: 'Phil Prasek',
-  cdk8sVersion: '1.0.0-beta.3',
+  cdk8sVersion: CDK8S_VERSION,
   name: 'crossplane-cdk',
   description: 'CDK for Crossplane',
   repository: 'https://github.com/crossplane-contrib/crossplane-cdk.git',
   defaultReleaseBranch: 'master',
-  peerDeps: [
-    'constructs@^3.2.42',
-    'cdk8s-plus-17@^1.0.0-beta.3',
+  bundledDeps: [
+    'codemaker@^1.16.0',
+    'js-yaml@^3.1.3',
   ],
-  devDeps: ['typescript'],
+  devDeps: [
+    'typescript',
+    'ts-node',
+    '@types/js-yaml',
+    `cdk8s-cli@${CDK8S_VERSION}`,
+  ],
 });
 
 project.eslint.addRules(
@@ -30,7 +37,11 @@ project.eslint.addRules(
   },
 );
 
-const compileExamples = project.addTask('compile-examples');
+project.gitignore.exclude('.vscode/');
+project.gitignore.exclude('*.d.ts');
+project.gitignore.exclude('*.js');
+
+const synthExamples = project.addTask('compile-examples');
 
 const base = join('examples', 'typescript');
 for (const dir of readdirSync(base)) {
@@ -39,11 +50,16 @@ for (const dir of readdirSync(base)) {
     continue;
   }
 
-  compileExamples.exec(`(cd ${dirpath} && mkdir -p node_modules && cd node_modules && rm -f crossplane-cdk && ln -s ../../../../ crossplane-cdk)`);
-  compileExamples.exec(`(cd ${dirpath} && ${relative(dirpath, require.resolve('typescript/bin/tsc'))})`);
+  synthExamples.exec(`(cd ${dirpath} && rm -fr imports && npx cdk8s import)`);
+  synthExamples.exec(`(cd ${dirpath} && npx cdk8s synth)`);
 }
 
-project.compileTask.spawn(compileExamples);
+project.compileTask.spawn(synthExamples);
+
+// include "examples" in the tsconfig for tests.
+project.tryFindJsonFile('tsconfig.jest.json').obj.include.push('examples/**/*.ts');
 
 
 project.synth();
+
+

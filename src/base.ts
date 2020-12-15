@@ -6,8 +6,14 @@ import { Construct } from 'constructs';
  */
 export interface ResourceProps {
   /**
+   * @schema ResourceProps#name
+   */
+  readonly name?: string;
+
+  /**
    * Metadata that all persisted resources must have, which includes all objects
    * users must create.
+   * @schema ResourceProps#metadata
    */
   readonly metadata?: cdk8s.ApiObjectMetadata;
 }
@@ -34,10 +40,6 @@ export abstract class Resource extends Construct implements IResource {
 
   constructor(scope: Construct, id: string, _: ResourceProps) {
     super(scope, id);
-  }
-
-  public get metadata(): cdk8s.ApiObjectMetadataDefinition {
-    return this.apiObject.metadata;
   }
 
   /**

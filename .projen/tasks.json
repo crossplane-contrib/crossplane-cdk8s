@@ -160,10 +160,16 @@
       "name": "compile-examples",
       "steps": [
         {
-          "exec": "(cd examples/typescript/l1-platform-ref-aws && mkdir -p node_modules && cd node_modules && rm -f crossplane-cdk && ln -s ../../../../ crossplane-cdk)"
+          "exec": "(cd examples/typescript/app-dev-ops && rm -fr imports && npx cdk8s import)"
         },
         {
-          "exec": "(cd examples/typescript/l1-platform-ref-aws && ../../../node_modules/typescript/bin/tsc)"
+          "exec": "(cd examples/typescript/app-dev-ops && npx cdk8s synth)"
+        },
+        {
+          "exec": "(cd examples/typescript/platform-ref-aws && rm -fr imports && npx cdk8s import)"
+        },
+        {
+          "exec": "(cd examples/typescript/platform-ref-aws && npx cdk8s synth)"
         }
       ]
     }

@@ -1,0 +1,6 @@
+language: typescript
+app: npx ts-node --project ../../../tsconfig.jest.json main.ts
+imports:
+  - k8s
+  - github:crossplane/crossplane@1.0.0
+  - github:crossplane/provider-aws

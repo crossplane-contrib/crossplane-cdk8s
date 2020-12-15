@@ -43,6 +43,9 @@ junit.xml
 /dist
 .jsii
 tsconfig.json
+.vscode/
+*.d.ts
+*.js
 !/.projen/tasks.json
 !/package.json
 !/.npmignore

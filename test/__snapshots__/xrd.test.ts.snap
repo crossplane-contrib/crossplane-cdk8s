@@ -3,7 +3,7 @@
 exports[`compositeClusters 1`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -183,7 +183,7 @@ configSections:
                     },
                   },
                   "required": Array [
-                    "name",
+                    "id",
                     "parameters",
                   ],
                   "type": "object",
@@ -203,7 +203,7 @@ configSections:
 exports[`compositeClusters 2`] = `
 Array [
   Object {
-    "apiVersion": "apiextensions.crossplane.io/v1alpha1",
+    "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
       "annotations": Object {
@@ -383,7 +383,7 @@ configSections:
                     },
                   },
                   "required": Array [
-                    "name",
+                    "id",
                     "parameters",
                   ],
                   "type": "object",
