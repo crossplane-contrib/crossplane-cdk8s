@@ -259,6 +259,12 @@ Verify all underlying resources have been cleanly deleted:
 kubectl get managed
 ```
 
+which after a few minutes should report:
+
+```console
+No resources found
+```
+
 #### Uninstall Provider & Platform Configuration
 
 ```console
