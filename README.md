@@ -76,7 +76,7 @@ See [Crossplane Docs](https://crossplane.github.io/docs/v1.0/getting-started/ins
 #### Install Platform Configuration Package
 
 ```console
-PLATFORM_CONFIG=registry.upbound.io/prasek/platform-ref-aws:v0.2.0
+PLATFORM_CONFIG=registry.upbound.io/prasek/platform-ref-aws:v0.2.1
 
 kubectl crossplane install configuration ${PLATFORM_CONFIG}
 ```
@@ -342,12 +342,19 @@ git clone https://github.com/crossplane-contrib/crossplane-cdk.git
 
 yarn install
 
-cd examples/typescript/platform-ref-aws
+yarn build
 ```
 
-#### Synth package contents
+this should generate `dist` output for:
+
+* examples/typescript/app-dev-ops
+* examples/typescript/platform-ref-aws
+
+#### Synth individual package contents
 
 ```console
+cd examples/typescript/platform-ref-aws
+
 cdk8s synth
 ```
 
@@ -361,7 +368,7 @@ dist/network-api.k8s.yaml
 dist/postgres-api.k8s.yaml
 ```
 
-#### Build package
+#### Package
 
 ```console
 cd dist
@@ -378,7 +385,7 @@ Set these to match your settings:
 UPBOUND_ORG=acme
 UPBOUND_ACCOUNT_EMAIL=me@acme.io
 REPO=platform-ref-aws
-VERSION_TAG=v0.2.0
+VERSION_TAG=v0.2.1
 REGISTRY=registry.upbound.io
 PLATFORM_CONFIG=${REGISTRY:+$REGISTRY/}${UPBOUND_ORG}/${REPO}:${VERSION_TAG}
 ```
