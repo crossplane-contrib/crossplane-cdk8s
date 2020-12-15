@@ -48,7 +48,7 @@ for (const dir of readdirSync(base)) {
   if (!statSync(dirpath).isDirectory()) {
     continue;
   }
-  const tsc = relative(dirpath, require.resolve('typescript/bin/tsc'));
+  const tsc = relative(dirpath, 'node_modules/typescript/bin/tsc');
   compileExamples.exec(`(cd ${dirpath} && rm -fr imports && npx cdk8s import)`);
   compileExamples.exec(`(cd ${dirpath} && ${tsc})`);
 }
