@@ -55,4 +55,10 @@ for (const dir of readdirSync(base)) {
 
 project.compileTask.spawn(compileExamples);
 
+// include "examples" in the tsconfig for tests.
+project.tryFindJsonFile('tsconfig.jest.json').obj.include.push('examples/**/*.ts');
+
+
 project.synth();
+
+
