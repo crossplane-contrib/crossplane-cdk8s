@@ -2,3 +2,4 @@ language: typescript
 app: npx ts-node crossplane.ts
 imports:
   - k8s
+  - crds.yaml

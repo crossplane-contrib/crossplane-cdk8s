@@ -101,7 +101,7 @@ export function postgresYaml(crossplanePackage: App): Chart {
   });
 
   //TODO: use imported provider-aws types
-  composition.addResource(db.DbSubnetGroup.propsWithGVK({
+  composition.addResource(db.DbSubnetGroup.manifest({
     spec: {
       forProvider: {
         region: 'us-west-2',
@@ -112,7 +112,7 @@ export function postgresYaml(crossplanePackage: App): Chart {
   }))
   .mapFieldPath(xrdNetRef!.meta.path,'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
 
-  composition.addResource(db.RdsInstance.propsWithGVK({
+  composition.addResource(db.RdsInstance.manifest({
     spec: {
       forProvider: {
         region: 'us-west-2',

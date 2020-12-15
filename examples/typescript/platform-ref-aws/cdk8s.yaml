@@ -2,3 +2,5 @@ language: typescript
 app: npx ts-node crossplane.ts
 imports:
   - k8s
+  - github:crossplane/crossplane@1.0.0
+  - github:crossplane/provider-aws

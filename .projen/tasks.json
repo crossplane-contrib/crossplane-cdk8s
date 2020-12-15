@@ -10,6 +10,9 @@
         },
         {
           "spawn": "docgen"
+        },
+        {
+          "spawn": "compile-examples"
         }
       ]
     },
@@ -150,6 +153,23 @@
       "steps": [
         {
           "exec": "jsii-docgen"
+        }
+      ]
+    },
+    "compile-examples": {
+      "name": "compile-examples",
+      "steps": [
+        {
+          "exec": "(cd examples/typescript/app-dev-ops && rm -fr imports && npx cdk8s import)"
+        },
+        {
+          "exec": "(cd examples/typescript/app-dev-ops && ../../../node_modules/typescript/bin/tsc)"
+        },
+        {
+          "exec": "(cd examples/typescript/platform-ref-aws && rm -fr imports && npx cdk8s import)"
+        },
+        {
+          "exec": "(cd examples/typescript/platform-ref-aws && ../../../node_modules/typescript/bin/tsc)"
         }
       ]
     }

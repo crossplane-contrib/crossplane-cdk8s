@@ -21,7 +21,8 @@
     "package": "npx projen package",
     "eslint": "npx projen eslint",
     "compat": "npx projen compat",
-    "docgen": "npx projen docgen"
+    "docgen": "npx projen docgen",
+    "compile-examples": "npx projen compile-examples"
   },
   "author": {
     "name": "Phil Prasek",
@@ -34,8 +35,9 @@
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
-    "cdk8s": "1.0.0-beta.4",
-    "cdk8s-plus-17": "1.0.0-beta.4",
+    "cdk8s": "1.0.0-beta.5",
+    "cdk8s-cli": "1.0.0-beta.5",
+    "cdk8s-plus-17": "1.0.0-beta.5",
     "constructs": "3.2.34",
     "eslint": "^7.13.0",
     "eslint-import-resolver-node": "^0.3.4",
@@ -55,8 +57,8 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "cdk8s": "^1.0.0-beta.4",
-    "cdk8s-plus-17": "^1.0.0-beta.4",
+    "cdk8s": "^1.0.0-beta.5",
+    "cdk8s-plus-17": "^1.0.0-beta.5",
     "constructs": "^3.2.34"
   },
   "dependencies": {
