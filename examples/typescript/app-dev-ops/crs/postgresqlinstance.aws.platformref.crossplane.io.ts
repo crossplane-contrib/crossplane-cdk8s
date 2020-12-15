@@ -7,6 +7,7 @@ export function postgresInstance(chart: Chart, name: string = 'postgres-instance
     {
       metadata: {
         name: 'postgres-instance',
+        namespace: 'team1',
       },
       spec: {
         parameters: {

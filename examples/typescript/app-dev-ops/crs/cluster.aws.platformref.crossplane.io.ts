@@ -7,6 +7,7 @@ export function eksCluster(chart: Chart, name: string = 'eks-cluster/cluster/aws
     {
       metadata: {
         name: 'eks-cluster',
+        namespace: 'team1',
       },
       spec: {
         id: 'platform-ref-aws-cluster',

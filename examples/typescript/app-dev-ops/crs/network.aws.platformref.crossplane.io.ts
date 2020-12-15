@@ -7,6 +7,7 @@ export function networkFabric(chart: Chart, name: string = 'network-fabric/netwo
     {
       metadata: {
         name: 'network-fabric',
+        namespace: 'team1',
       },
       spec: {
         id: 'platform-ref-aws-network',
