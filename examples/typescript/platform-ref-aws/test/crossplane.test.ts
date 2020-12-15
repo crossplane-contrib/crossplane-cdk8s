@@ -1,6 +1,6 @@
 import { App, Testing } from 'cdk8s';
 
-import * as crossplane from '../crossplane';
+import * as crossplane from '../main';
 
 test('platform-ref-aws', () => {
 
