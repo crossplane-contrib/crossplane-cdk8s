@@ -18,6 +18,7 @@ const project = new ConstructLibraryCdk8s({
   ],
   devDeps: [
     'typescript',
+    'ts-node',
     '@types/js-yaml',
     `cdk8s-cli@${CDK8S_VERSION}`,
   ],
@@ -40,7 +41,7 @@ project.gitignore.exclude('.vscode/');
 project.gitignore.exclude('*.d.ts');
 project.gitignore.exclude('*.js');
 
-const compileExamples = project.addTask('compile-examples');
+const synthExamples = project.addTask('compile-examples');
 
 const base = join('examples', 'typescript');
 for (const dir of readdirSync(base)) {
@@ -48,12 +49,12 @@ for (const dir of readdirSync(base)) {
   if (!statSync(dirpath).isDirectory()) {
     continue;
   }
-  const tsc = relative(dirpath, 'node_modules/typescript/bin/tsc');
-  compileExamples.exec(`(cd ${dirpath} && rm -fr imports && npx cdk8s import)`);
-  compileExamples.exec(`(cd ${dirpath} && ${tsc})`);
+
+  synthExamples.exec(`(cd ${dirpath} && rm -fr imports && npx cdk8s import)`);
+  synthExamples.exec(`(cd ${dirpath} && npx cdk8s synth)`);
 }
 
-project.compileTask.spawn(compileExamples);
+project.compileTask.spawn(synthExamples);
 
 // include "examples" in the tsconfig for tests.
 project.tryFindJsonFile('tsconfig.jest.json').obj.include.push('examples/**/*.ts');
