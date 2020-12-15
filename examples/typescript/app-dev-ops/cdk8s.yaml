@@ -1,5 +1,5 @@
 language: typescript
-app: npx ts-node crossplane.ts
+app: npx ts-node main.ts
 imports:
   - k8s
   - crds.yaml
