@@ -22,19 +22,19 @@ Crossplane-cdk is a new multi-language toolkit built on [cdk8s](https://cdk8s.io
 ![Overview](docs/media/overview.png)
 
 ### Example AWS Platform in TypeScript
-This examples in this repository contain a reference AWS Platform
-[Configuration](https://crossplane.io/docs/v0.13/getting-started/package-infrastructure.html)
-written entirely in TypeScript using `cdk8s`, `crossplane-cdk8s` L2 constructs, and
-imported `crossplane/provider-aws` resources. The reference platform in `examples/typescript/platform-ref-aws` contains
-[Configuration](https://crossplane.io/docs/v0.13/getting-started/package-infrastructure.html)
-for use as a starting point in [Upbound Cloud](https://upbound.io) to build,
-run and operate your own internal cloud platform and offer a self-service
-console and API to your internal teams.
+The examples in this repository include an AWS Platform
+[Configuration](https://crossplane.io/docs)
+written entirely in TypeScript using `cdk8s`, `crossplane-cdk8s` L2
+constructs, and imported `crossplane/provider-aws` resources. Consider
+`examples/typescript/platform-ref-aws` as a starting point to build your own
+internal cloud platform for use in [Upbound Cloud](https://upbound.io) or
+with any self-hosted Crossplane instance.
 
-The AWS Reference Platform provides platform APIs to provision
-fully configured EKS clusters, with secure networking, and stateful cloud
-services (RDS) designed to securely connect to the nodes in each EKS cluster --
-all composed using cloud service primitives from the [Crossplane AWS
+The example `Configuration` includes platform APIs
+(`CompositeResourceDefinitions` and `Compositions`) to provision fully
+configured EKS clusters, with secure networking, and stateful cloud services
+(RDS) designed to securely connect to the nodes in each EKS cluster -- all
+composed using cloud service primitives from the [Crossplane AWS
 Provider](https://doc.crds.dev/github.com/crossplane/provider-aws).
 
 App teams can easily spin up a new Kubernetes environment using their
