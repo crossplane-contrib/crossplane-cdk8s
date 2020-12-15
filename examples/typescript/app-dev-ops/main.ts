@@ -10,7 +10,7 @@ class MyChart extends Chart {
 
     const clusterId = 'platform-ref-aws-cluster';
     const networkId = 'platform-ref-aws-network';
-  
+
     new acme.Network(this, 'network', {
       spec: {
         id: networkId,
@@ -38,7 +38,7 @@ class MyChart extends Chart {
     });
 
 
-    new acme.PostgreSqlInstance(chart, 'database', {
+    new acme.PostgreSqlInstance(this, 'database', {
       spec: {
         parameters: {
           storageGB: 20,
@@ -53,6 +53,6 @@ class MyChart extends Chart {
 }
 
 const app = new App();
-const chart = new MyChart(app, 'dev-env');
+new MyChart(app, 'dev-env');
 
 app.synth();
