@@ -19,58 +19,43 @@ export class PostgresChart extends Chart {
     let xrdNetRef: crossplane.SchemaPropString;
     let xrdStorageGB: crossplane.SchemaPropInteger;
 
-    xrd.version('v1alpha1').served().referencable()
-      .spec().with(crossplane.Prop.for({
-        object: (spec) => {
-          spec.propObject('parameters').required().with(crossplane.Prop.for({
-            object: (params) => {
-              params.uiSection( {
-                title: 'Database Size',
-                description: 'Enter information to size your database',
+    xrd.version('v1alpha1').served().referencable().spec().with(crossplane.Prop.for({ object: (spec) => {
+      spec.uiSection( {
+        title: 'Database Size',
+        description: 'Enter information to size your database',
+      });
+
+      spec.propObject('parameters').required().with(crossplane.Prop.for({ object: (params) => { 
+        xrdStorageGB = params.propInteger('storageGB').required().min(1).max(500)
+          .description('GB of storage for your database')
+          .uiInput({
+            title: 'Storage (GB)',
+            default: 5,
+          });
+
+        params.propObject('networkRef').required()
+          .description('A reference to the Network object that this postgres should be connected to.')
+          .with(crossplane.Prop.for({ object: (networkRef) => {
+
+            xrdNetRef = networkRef.propString('id')
+              .description('ID of the Network object this ref points to.')
+              .required()
+              .uiInput({
+                title: 'Network Ref',
+                default: 'platform-ref-aws-network',
+                customError: 'Network ref is required and should match the network ref of the app cluster.',
               });
+          }}));
+      }}));
 
-              xrdStorageGB = params.propInteger('storageGB').required().min(1).max(500)
-                .description('GB of storage for your database')
-                .uiInput({
-                  name: 'storageGB',
-                  inputType: crossplane.InputType.SINGLE_INPUT,
-                  title: 'Storage (GB)',
-                  default: 5,
-                });
-
-              params.propObject('networkRef').required()
-                .description('A reference to the Network object that this postgres should be connected to.')
-                .with(crossplane.Prop.for({
-                  object: (networkRef) => {
-
-                    xrdNetRef = networkRef.propString('id')
-                      .description('ID of the Network object this ref points to.')
-                      .required()
-                      .uiInput({
-                        name: 'networkRef',
-                        inputType: crossplane.InputType.SINGLE_INPUT,
-                        title: 'Network Ref',
-                        default: 'platform-ref-aws-network',
-                        customError: 'Network ref is required and should match the network ref of the app cluster.',
-                      });
-
-                  },
-                }));
-
-              params.propString('writeSecretRef').implicit().required()
-                .uiInput({
-                  name: 'writeSecretRef',
-                  inputType: crossplane.InputType.SINGLE_INPUT,
-                  title: 'Connection Secret Ref',
-                  description: 'name of the secret to write to this namespace',
-                  default: 'db-conn',
-                  path: '.spec.writeConnectionSecretToRef.name',
-                });
-            },
-          }));
-
-        },
-      }));
+      spec.propString('writeSecretRef').implicit().required()
+        .uiInput({
+          title: 'Connection Secret Ref',
+          description: 'name of the secret to write to this namespace',
+          default: 'db-conn',
+          path: '.spec.writeConnectionSecretToRef.name',
+      });
+    }}));
 
     const composition = new crossplane.Composition(this, 'postgres-composition', xrd, {
       name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',

@@ -246,8 +246,8 @@ export class MetaUISection {
    */
   public _toL1(): any {
     const result = new Array();
-    for (const s of this._fields) {
-      result.push(s._toL1());
+    for (const f of this._fields) {
+      result.push(f._toL1());
     }
     const items = undefinedIfEmpty(result);
     return {
@@ -304,7 +304,7 @@ export class MetaUIInput {
         break;
 
       case PropType.STRING:
-        const strProps = this._props as MetaUIInputIntegerProps;
+        const strProps = this._props as MetaUIInputStringProps;
         if (strProps.default) { specific.default = strProps.default; }
         if (strProps.required || strProps.customError) {
 
@@ -315,6 +315,27 @@ export class MetaUIInput {
           specific.validation = validation;
         }
         break;
+
+      case PropType.ENUM:
+        const enumProps = this._props as MetaUIInputEnumProps;
+        if (enumProps.inputType !== InputType.SINGLE_SELECT) {
+          throw new Error(`unsupported enum InputType '${this._props.type}'`);
+        }
+        //InputType.SINGLE_SELECT doesn't accept a `type` field
+        delete base.type;
+
+        if (enumProps.default) { specific.default = enumProps.default; }
+        if (enumProps.enum) { specific.enum = enumProps.enum; }
+        if (enumProps.required || enumProps.customError) {
+
+          const validation: any[] = [];
+          if (enumProps.required) { validation.push({ required: enumProps.required }); }
+          if (enumProps.customError) { validation.push({ customError: enumProps.customError }); }
+
+          specific.validation = validation;
+        }
+        break;
+
 
       default:
         throw new Error(`unsupported MetaUI type '${this._props.type}'`);
@@ -353,6 +374,11 @@ export interface MetaUIInputIntegerProps extends MetaUIInputProps {
 
 export interface MetaUIInputStringProps extends MetaUIInputProps {
   readonly default?: string;
+}
+
+export interface MetaUIInputEnumProps extends MetaUIInputProps {
+  readonly default?: string;
+  readonly enum?: string[];
 }
 
 export class Names {
@@ -588,6 +614,10 @@ export interface ISchemaPropMetaString extends ISchemaPropMeta {
 
 }
 
+export interface ISchemaPropMetaEnum extends ISchemaPropMeta {
+
+}
+
 /**
  * JSII callback class/interface for SchemaProp.with()
  */
@@ -665,6 +695,12 @@ export class SchemaPropObject implements ISchemaProp {
     return o;
   }
 
+  public propEnum(name: string): SchemaPropEnum {
+    const o = new SchemaPropEnum(this._xrd, this._path, name);
+    this._children.push(o);
+    return o;
+  }
+
   public description(val: string): SchemaPropObject {
     this._description = val;
     return this;
@@ -726,16 +762,102 @@ export class SchemaPropObject implements ISchemaProp {
   }
 }
 
-export class SchemaPropInteger implements ISchemaProp {
-  private _xrd: CompositeResourceDefinition;
-  private _type: PropType = PropType.INTEGER;
-  private _path: string;
-  private _name: string;
-  private _description?: string;
-  private _required: boolean = false;
+export class SchemaPropScalarBase {
+  /**
+   * @internal
+   */
+
+  protected _xrd: CompositeResourceDefinition;
+  /**
+   * @internal
+   */
+  protected _type: PropType;
+
+  /**
+   * @internal
+   */
+  protected _path: string;
+
+  /**
+   * @internal
+   */
+  protected _name: string;
+
+  /**
+   * @internal
+   */
+  protected _description?: string;
+
+  /**
+   * @internal
+   */
+  protected _required: boolean = false;
+
+  /**
+   * @internal
+   */
+  protected _implicit: boolean = false;
+
+  /**
+   * use SchemaPropObject.propInteger() instead
+   * e.g. CompositeResourceDefinition.version().spec().propInteger()
+   * @param xrd
+   * @param parentPath
+   * @param name
+   */
+  public constructor(type: PropType, xrd: CompositeResourceDefinition, parentPath: string, name: string) {
+    this._type = type;
+    this._xrd = xrd;
+    this._name = name;
+    this._path = `${parentPath}.${name}`;
+  }
+
+  protected get baseMeta(): ISchemaPropMeta {
+    return {
+      path: this._path,
+      type: this._type,
+      name: this._name,
+      description: this._description,
+      required: this._required,
+      implicit: this._implicit,
+    };
+  }
+
+  protected uiInputPropsWithDefaults(options: MetaUIInputPropOverrides = {}): MetaUIInputProps {
+    const inputType = options.inputType ?? InputType.SINGLE_INPUT;
+    let path = options.path ?? this._path;
+    const name = options.name ?? toCamelCase(this._path);
+    const title = options.title ?? this._name;
+    const description = options.description ?? this._description;
+    const required = options.required ?? this._required;
+    const customError = options.customError;
+
+    //UI expects paths to start with '.'
+    //but elsewhere we don't so accomodate both
+    if (!path.startsWith('.')) {
+      path = `.${path}`;
+    }
+
+    const res = {
+      ...options,
+      type: this._type,
+      inputType,
+      path,
+      name,
+      title,
+      description,
+      required,
+      customError,
+    };
+
+    return res;
+  }
+
+}
+
+export class SchemaPropInteger extends SchemaPropScalarBase implements ISchemaProp {
   private _min?: number;
   private _max?: number;
-  private _implicit: boolean = false;
   private _uiInput?: MetaUIInputIntegerProps;
 
   /**
@@ -746,21 +868,14 @@ export class SchemaPropInteger implements ISchemaProp {
    * @param name
    */
   public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
-    this._xrd = xrd;
-    this._name = name;
-    this._path = `${parentPath}.${name}`;
+    super(PropType.INTEGER, xrd, parentPath, name);
   }
 
   public get meta(): ISchemaPropMeta {
     return {
-      path: this._path,
-      type: this._type,
-      name: this._name,
-      description: this._description,
-      required: this._required,
+      ...this.baseMeta,
       min: this._min,
       max: this._max,
-      implicit: this._implicit,
       uiInput: this._uiInput,
     };
   }
@@ -808,34 +923,14 @@ export class SchemaPropInteger implements ISchemaProp {
   }
 
   public uiInput(options: MetaUIInputIntegerPropOverrides = {}): SchemaPropInteger {
-    const inputType = options.inputType ?? InputType.SINGLE_INPUT;
-    let path = options.path ?? this._path;
-    const name = options.name ?? toCamelCase(this._path);
-    const title = options.title ?? this._name;
-    const description = options.description ?? this._description;
     const min = options.min ?? this._min;
     const max = options.max ?? this._max;
-    const required = options.required ?? this._required;
-    const customError = options.customError;
     const def = options.default;
 
-    //UI expects paths to start with '.'
-    //but elsewhere we don't so accomodate both
-    if (!path.startsWith('.')) {
-      path = `.${path}`;
-    }
-
     this._uiInput = {
-      type: this._type,
-      inputType,
-      path,
-      name,
-      title,
-      description,
+      ...this.uiInputPropsWithDefaults(options),
       min,
       max,
-      required,
-      customError,
       default: def,
     };
 
@@ -850,18 +945,13 @@ export class SchemaPropInteger implements ISchemaProp {
     return {
       description: this._description,
       type: this._type,
+      minimum: this._min,
+      maximum: this._max,
     };
   }
 }
 
-export class SchemaPropString implements ISchemaProp {
-  private _xrd: CompositeResourceDefinition;
-  private _type: PropType = PropType.STRING;
-  private _path: string;
-  private _name: string;
-  private _description?: string;
-  private _required: boolean = false;
-  private _implicit: boolean = false;
+export class SchemaPropString extends SchemaPropScalarBase implements ISchemaProp {
   private _uiInput?: MetaUIInputStringProps;
 
   /**
@@ -872,9 +962,7 @@ export class SchemaPropString implements ISchemaProp {
    * @param name
    */
   public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
-    this._xrd = xrd;
-    this._name = name;
-    this._path = `${parentPath}.${name}`;
+    super(PropType.STRING, xrd, parentPath, name);
   }
 
   /**
@@ -894,11 +982,7 @@ export class SchemaPropString implements ISchemaProp {
 
   public get meta(): ISchemaPropMeta {
     return {
-      type: this._type,
-      name: this._name,
-      path: this._path,
-      required: this._required,
-      implicit: this._implicit,
+      ...this.baseMeta,
       uiInput: this._uiInput,
     };
   }
@@ -914,32 +998,13 @@ export class SchemaPropString implements ISchemaProp {
   }
 
   public uiInput(options: MetaUIInputStringPropOverrides = {}): SchemaPropString {
-    const inputType = options.inputType ?? InputType.SINGLE_INPUT;
-    let path = options.path ?? this._path;
-    const name = options.name ?? toCamelCase(this._path);
-    const title = options.title ?? this._name;
-    const required = options.required ?? this._required;
-    const description = options.description ?? this._description;
-    const customError = options.customError;
     const def = options.default;
 
-    //UI expects paths to start with '.'
-    //but elsewhere we don't so accomodate both
-    if (!path.startsWith('.')) {
-      path = `.${path}`;
-    }
-
     this._uiInput = {
-      type: this._type,
-      inputType,
-      path,
-      name,
-      title,
-      description,
-      required,
-      customError,
+      ...this.uiInputPropsWithDefaults(options),
       default: def,
     };
+
     this._xrd.ui.activeSection.addInput(this._uiInput);
     return this;
   }
@@ -951,6 +1016,114 @@ export class SchemaPropString implements ISchemaProp {
     return {
       description: this._description,
       type: this._type,
+    };
+  }
+}
+
+export class SchemaPropEnum extends SchemaPropScalarBase implements ISchemaProp {
+  private _enumValueDefault?: string;
+  private _enumValues: string[] = [];
+  private _uiInput?: MetaUIInputEnumProps;
+
+  /**
+   * use SchemaPropObject.propString() instead
+   * e.g. CompositeResourceDefinition.version().spec().propString()
+   * @param xrd
+   * @param parentPath
+   * @param name
+   */
+  public constructor(xrd: CompositeResourceDefinition, parentPath: string, name: string) {
+    super(PropType.ENUM, xrd, parentPath, name);
+  }
+
+  /**
+   * field is implicitly added by Crossplane.
+   * used for UI only fields and to suppress
+   * adding this field to XRD schema props
+   * during synth.
+   *
+   * defaults to false if not set
+   *
+   * @param val boolean - default true
+   */
+  public implicit(val: boolean = true): SchemaPropEnum {
+    this._implicit = val;
+    return this;
+  }
+
+  public get meta(): ISchemaPropMeta {
+    return {
+      ...this.baseMeta,
+      uiInput: this._uiInput,
+    };
+  }
+
+  public description(val: string): SchemaPropEnum {
+    this._description = val;
+    return this;
+  }
+
+  public required(val: boolean = true): SchemaPropEnum {
+    this._required = val;
+    return this;
+  }
+
+  /**
+   * adds an enum value
+   * @param val - enum value
+   * @param def - is default enum value
+   */
+  public enumValue(val: string, def: boolean = false): SchemaPropEnum {
+    if (def && this._enumValueDefault) {
+      throw new Error(`Default 'enumValue' already specified for '${this._xrd.fqn}.spec.version["${this._name}"].schema.properties${this._path}', got '${this._enumValueDefault}' and '${def}'`);
+    }
+    if (def) {
+      this._enumValueDefault = val;
+    }
+    this._enumValues.push(val);
+    return this;
+  }
+
+  public uiInput(options: MetaUIInputEnumPropOverrides = {}): SchemaPropEnum {
+    this._enumValueDefault = this._enumValueDefault ?? options.default;
+
+    if (options.default && options.default !== this._enumValueDefault) {
+      throw new Error(`Default 'enumValue' must match for '${this._xrd.fqn}.spec.version["${this._name}"].schema.properties${this._path}', got '${this._enumValueDefault}' and '${options.default}'`);
+    }
+
+    const def = this._enumValues.find(v => v == this._enumValueDefault);
+    if (def === undefined) {
+      throw new Error(`Default 'enumValue' must be in enum values for '${this._xrd.fqn}.spec.version["${this._name}"].schema.properties${this._path}', got '${this._enumValueDefault}' and '${this._enumValues}'`);
+    }
+
+    this._uiInput = {
+      ...this.uiInputPropsWithDefaults(options),
+      inputType: InputType.SINGLE_SELECT,
+      enum: undefinedIfEmpty(this._enumValues),
+      default: def,
+    };
+
+    this._xrd.ui.activeSection.addInput(this._uiInput);
+    return this;
+  }
+
+  /**
+   * @internal
+   */
+  public _toL1(): any {
+    const values = undefinedIfEmpty(this._enumValues);
+    if (values === undefined) {
+      throw new Error(`'enumValues' are required for '${this._xrd.fqn}.spec.version["${this._name}"].schema.properties${this._path}'`);
+    }
+
+    if (this._enumValueDefault === undefined) {
+      throw new Error(`'enumValueDefault' is required for '${this._xrd.fqn}.spec.version["${this._name}"].schema.properties${this._path}'`);
+    }
+
+    return {
+      description: this._description,
+      type: PropType.STRING,
+      enum: values,
     };
   }
 }
@@ -1014,15 +1187,20 @@ export interface MetaUIInputStringPropOverrides extends MetaUIInputPropOverrides
   readonly default?: string;
 }
 
+export interface MetaUIInputEnumPropOverrides extends MetaUIInputPropOverrides {
+  readonly default?: string;
+}
 
 export enum PropType {
   OBJECT = 'object',
   INTEGER = 'integer',
   STRING = 'string',
+  ENUM = 'enum',
 }
 
 export enum InputType {
   SINGLE_INPUT = 'singleInput',
+  SINGLE_SELECT = 'singleSelect',
 }
 
 

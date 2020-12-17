@@ -46,6 +46,7 @@ tsconfig.json
 .vscode/
 *.d.ts
 *.js
+creds.conf
 !/.projen/tasks.json
 !/package.json
 !/.npmignore

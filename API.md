@@ -15,8 +15,10 @@ Name|Description
 [Names](#crossplane-cdk8s-names)|*No description*
 [Prop](#crossplane-cdk8s-prop)|JSII callback class/interface for SchemaProp.with().
 [Resource](#crossplane-cdk8s-resource)|Base class for all Crossplane core objects.
+[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)|*No description*
 [SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)|*No description*
 [SchemaPropObject](#crossplane-cdk8s-schemapropobject)|openAPIv3Schema Object with MetaUI.
+[SchemaPropScalarBase](#crossplane-cdk8s-schemapropscalarbase)|*No description*
 [SchemaPropString](#crossplane-cdk8s-schemapropstring)|*No description*
 [Version](#crossplane-cdk8s-version)|*No description*
 
@@ -28,6 +30,8 @@ Name|Description
 [CompositeResourceDefinitionProps](#crossplane-cdk8s-compositeresourcedefinitionprops)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
 [CompositionProps](#crossplane-cdk8s-compositionprops)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
 [ConfigurationProps](#crossplane-cdk8s-configurationprops)|Properties for initialization of `Configuration`.
+[MetaUIInputEnumPropOverrides](#crossplane-cdk8s-metauiinputenumpropoverrides)|*No description*
+[MetaUIInputEnumProps](#crossplane-cdk8s-metauiinputenumprops)|*No description*
 [MetaUIInputIntegerPropOverrides](#crossplane-cdk8s-metauiinputintegerpropoverrides)|*No description*
 [MetaUIInputIntegerProps](#crossplane-cdk8s-metauiinputintegerprops)|*No description*
 [MetaUIInputPropOverrides](#crossplane-cdk8s-metauiinputpropoverrides)|Overrides with optional inputs for fluent API with reasonable defaults.
@@ -51,6 +55,7 @@ Name|Description
 [IResource](#crossplane-cdk8s-iresource)|Represents a resource.
 [ISchemaProp](#crossplane-cdk8s-ischemaprop)|Schema Props.
 [ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)|*No description*
+[ISchemaPropMetaEnum](#crossplane-cdk8s-ischemapropmetaenum)|*No description*
 [ISchemaPropMetaInteger](#crossplane-cdk8s-ischemapropmetainteger)|*No description*
 [ISchemaPropMetaString](#crossplane-cdk8s-ischemapropmetastring)|*No description*
 [IVersionMeta](#crossplane-cdk8s-iversionmeta)|*No description*
@@ -687,11 +692,126 @@ Name | Type | Description
 
 
 
+## class SchemaPropEnum  <a id="crossplane-cdk8s-schemapropenum"></a>
+
+
+
+__Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
+__Extends__: [SchemaPropScalarBase](#crossplane-cdk8s-schemapropscalarbase)
+
+### Initializer
+
+
+use SchemaPropObject.propString() instead e.g. CompositeResourceDefinition.version().spec().propString().
+
+```ts
+new SchemaPropEnum(xrd: CompositeResourceDefinition, parentPath: string, name: string)
+```
+
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
+* **parentPath** (<code>string</code>)  *No description*
+* **name** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**meta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
+
+### Methods
+
+
+#### description(val) <a id="crossplane-cdk8s-schemapropenum-description"></a>
+
+
+
+```ts
+description(val: string): SchemaPropEnum
+```
+
+* **val** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
+#### enumValue(val, def?) <a id="crossplane-cdk8s-schemapropenum-enumvalue"></a>
+
+adds an enum value.
+
+```ts
+enumValue(val: string, def?: boolean): SchemaPropEnum
+```
+
+* **val** (<code>string</code>)  - enum value.
+* **def** (<code>boolean</code>)  - is default enum value.
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
+#### implicit(val?) <a id="crossplane-cdk8s-schemapropenum-implicit"></a>
+
+field is implicitly added by Crossplane.
+
+used for UI only fields and to suppress
+adding this field to XRD schema props
+during synth.
+
+defaults to false if not set
+
+```ts
+implicit(val?: boolean): SchemaPropEnum
+```
+
+* **val** (<code>boolean</code>)  boolean - default true.
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
+#### required(val?) <a id="crossplane-cdk8s-schemapropenum-required"></a>
+
+
+
+```ts
+required(val?: boolean): SchemaPropEnum
+```
+
+* **val** (<code>boolean</code>)  *No description*
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
+#### uiInput(options?) <a id="crossplane-cdk8s-schemapropenum-uiinput"></a>
+
+
+
+```ts
+uiInput(options?: MetaUIInputEnumPropOverrides): SchemaPropEnum
+```
+
+* **options** (<code>[MetaUIInputEnumPropOverrides](#crossplane-cdk8s-metauiinputenumpropoverrides)</code>)  *No description*
+  * **customError** (<code>string</code>)  *No description* __*Optional*__
+  * **description** (<code>string</code>)  defaults to ISchemaPropMeta.description if not specified. __*Optional*__
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
+  * **name** (<code>string</code>)  defaults to camel case ISchemaPropMeta.path if not specified. __*Optional*__
+  * **path** (<code>string</code>)  defaults to ISchemaPropMeta.path if not specified. __*Optional*__
+  * **required** (<code>boolean</code>)  defaults to ISchemaPropMeta.required if not specified. __*Optional*__
+  * **title** (<code>string</code>)  defaults to ISchemaPropMeta.name if not specified. __*Optional*__
+  * **default** (<code>string</code>)  *No description* __*Optional*__
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
+
+
 ## class SchemaPropInteger  <a id="crossplane-cdk8s-schemapropinteger"></a>
 
 
 
 __Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
+__Extends__: [SchemaPropScalarBase](#crossplane-cdk8s-schemapropscalarbase)
 
 ### Initializer
 
@@ -892,6 +1012,19 @@ implicit(val?: boolean): SchemaPropObject
 __Returns__:
 * <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
+#### propEnum(name) <a id="crossplane-cdk8s-schemapropobject-propenum"></a>
+
+
+
+```ts
+propEnum(name: string): SchemaPropEnum
+```
+
+* **name** (<code>string</code>)  *No description*
+
+__Returns__:
+* <code>[SchemaPropEnum](#crossplane-cdk8s-schemapropenum)</code>
+
 #### propInteger(name) <a id="crossplane-cdk8s-schemapropobject-propinteger"></a>
 
 
@@ -974,11 +1107,65 @@ __Returns__:
 
 
 
+## class SchemaPropScalarBase  <a id="crossplane-cdk8s-schemapropscalarbase"></a>
+
+
+
+
+### Initializer
+
+
+use SchemaPropObject.propInteger() instead e.g. CompositeResourceDefinition.version().spec().propInteger().
+
+```ts
+new SchemaPropScalarBase(type: PropType, xrd: CompositeResourceDefinition, parentPath: string, name: string)
+```
+
+* **type** (<code>[PropType](#crossplane-cdk8s-proptype)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
+* **parentPath** (<code>string</code>)  *No description*
+* **name** (<code>string</code>)  *No description*
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**baseMeta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
+
+### Methods
+
+
+#### protected uiInputPropsWithDefaults(options?) <a id="crossplane-cdk8s-schemapropscalarbase-uiinputpropswithdefaults"></a>
+
+
+
+```ts
+protected uiInputPropsWithDefaults(options?: MetaUIInputPropOverrides): MetaUIInputProps
+```
+
+* **options** (<code>[MetaUIInputPropOverrides](#crossplane-cdk8s-metauiinputpropoverrides)</code>)  *No description*
+  * **customError** (<code>string</code>)  *No description* __*Optional*__
+  * **description** (<code>string</code>)  defaults to ISchemaPropMeta.description if not specified. __*Optional*__
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
+  * **name** (<code>string</code>)  defaults to camel case ISchemaPropMeta.path if not specified. __*Optional*__
+  * **path** (<code>string</code>)  defaults to ISchemaPropMeta.path if not specified. __*Optional*__
+  * **required** (<code>boolean</code>)  defaults to ISchemaPropMeta.required if not specified. __*Optional*__
+  * **title** (<code>string</code>)  defaults to ISchemaPropMeta.name if not specified. __*Optional*__
+
+__Returns__:
+* <code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code>
+
+
+
 ## class SchemaPropString  <a id="crossplane-cdk8s-schemapropstring"></a>
 
 
 
 __Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
+__Extends__: [SchemaPropScalarBase](#crossplane-cdk8s-schemapropscalarbase)
 
 ### Initializer
 
@@ -1311,7 +1498,7 @@ Name | Type | Description
 
 ## interface ISchemaProp  <a id="crossplane-cdk8s-ischemaprop"></a>
 
-__Implemented by__: [SchemaPropInteger](#crossplane-cdk8s-schemapropinteger), [SchemaPropObject](#crossplane-cdk8s-schemapropobject), [SchemaPropString](#crossplane-cdk8s-schemapropstring)
+__Implemented by__: [SchemaPropEnum](#crossplane-cdk8s-schemapropenum), [SchemaPropInteger](#crossplane-cdk8s-schemapropinteger), [SchemaPropObject](#crossplane-cdk8s-schemapropobject), [SchemaPropString](#crossplane-cdk8s-schemapropstring)
 
 Schema Props.
 
@@ -1325,6 +1512,27 @@ Name | Type | Description
 
 
 ## interface ISchemaPropMeta  <a id="crossplane-cdk8s-ischemapropmeta"></a>
+
+
+
+
+### Properties
+
+
+Name | Type | Description 
+-----|------|-------------
+**implicit** | <code>boolean</code> | <span></span>
+**name** | <code>string</code> | <span></span>
+**path** | <code>string</code> | <span></span>
+**required** | <code>boolean</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
+**description**? | <code>string</code> | __*Optional*__
+**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code> | __*Optional*__
+**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code> | __*Optional*__
+
+
+
+## interface ISchemaPropMetaEnum  <a id="crossplane-cdk8s-ischemapropmetaenum"></a>
 
 
 
@@ -1405,6 +1613,48 @@ Name | Type | Description
 
 
 
+## struct MetaUIInputEnumPropOverrides  <a id="crossplane-cdk8s-metauiinputenumpropoverrides"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**customError**? | <code>string</code> | __*Optional*__
+**default**? | <code>string</code> | __*Optional*__
+**description**? | <code>string</code> | defaults to ISchemaPropMeta.description if not specified.<br/>__*Optional*__
+**inputType**? | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
+**name**? | <code>string</code> | defaults to camel case ISchemaPropMeta.path if not specified.<br/>__*Optional*__
+**path**? | <code>string</code> | defaults to ISchemaPropMeta.path if not specified.<br/>__*Optional*__
+**required**? | <code>boolean</code> | defaults to ISchemaPropMeta.required if not specified.<br/>__*Optional*__
+**title**? | <code>string</code> | defaults to ISchemaPropMeta.name if not specified.<br/>__*Optional*__
+
+
+
+## struct MetaUIInputEnumProps  <a id="crossplane-cdk8s-metauiinputenumprops"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**inputType** | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | <span></span>
+**name** | <code>string</code> | <span></span>
+**path** | <code>string</code> | <span></span>
+**required** | <code>boolean</code> | <span></span>
+**title** | <code>string</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
+**customError**? | <code>string</code> | __*Optional*__
+**default**? | <code>string</code> | __*Optional*__
+**description**? | <code>string</code> | __*Optional*__
+**enum**? | <code>Array<string></code> | __*Optional*__
+
+
+
 ## struct MetaUIInputIntegerPropOverrides  <a id="crossplane-cdk8s-metauiinputintegerpropoverrides"></a>
 
 
@@ -1471,6 +1721,7 @@ Name | Type | Description
 
 ## struct MetaUIInputProps  <a id="crossplane-cdk8s-metauiinputprops"></a>
 
+__Obtainable from__: [SchemaPropScalarBase](#crossplane-cdk8s-schemapropscalarbase).[uiInputPropsWithDefaults](#crossplane-cdk8s-schemapropscalarbase#crossplane-cdk8s-schemapropscalarbase-uiinputpropswithdefaults)()
 
 
 
@@ -1579,6 +1830,7 @@ Name | Type | Description
 Name | Description
 -----|-----
 **SINGLE_INPUT** |
+**SINGLE_SELECT** |
 
 
 ## enum PropType  <a id="crossplane-cdk8s-proptype"></a>
@@ -1590,5 +1842,6 @@ Name | Description
 **OBJECT** |
 **INTEGER** |
 **STRING** |
+**ENUM** |
 
 

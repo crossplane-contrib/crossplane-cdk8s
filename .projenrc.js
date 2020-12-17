@@ -40,6 +40,7 @@ project.eslint.addRules(
 project.gitignore.exclude('.vscode/');
 project.gitignore.exclude('*.d.ts');
 project.gitignore.exclude('*.js');
+project.gitignore.exclude('creds.conf');
 
 const synthExamples = project.addTask('compile-examples');
 
