@@ -4,76 +4,76 @@
 
 Name|Description
 ----|-----------
-[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
-[Composition](#crossplane-cdk-composition)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
-[CompositionSpecResource](#crossplane-cdk-compositionspecresource)|*No description*
-[Configuration](#crossplane-cdk-configuration)|*No description*
-[ConnectionSecret](#crossplane-cdk-connectionsecret)|*No description*
-[MetaUI](#crossplane-cdk-metaui)|*No description*
-[MetaUIInput](#crossplane-cdk-metauiinput)|*No description*
-[MetaUISection](#crossplane-cdk-metauisection)|*No description*
-[Names](#crossplane-cdk-names)|*No description*
-[Prop](#crossplane-cdk-prop)|JSII callback class/interface for SchemaProp.with().
-[Resource](#crossplane-cdk-resource)|Base class for all Crossplane core objects.
-[SchemaPropInteger](#crossplane-cdk-schemapropinteger)|*No description*
-[SchemaPropObject](#crossplane-cdk-schemapropobject)|openAPIv3Schema Object with MetaUI.
-[SchemaPropString](#crossplane-cdk-schemapropstring)|*No description*
-[Version](#crossplane-cdk-version)|*No description*
+[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
+[Composition](#crossplane-cdk8s-composition)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+[CompositionSpecResource](#crossplane-cdk8s-compositionspecresource)|*No description*
+[Configuration](#crossplane-cdk8s-configuration)|*No description*
+[ConnectionSecret](#crossplane-cdk8s-connectionsecret)|*No description*
+[MetaUI](#crossplane-cdk8s-metaui)|*No description*
+[MetaUIInput](#crossplane-cdk8s-metauiinput)|*No description*
+[MetaUISection](#crossplane-cdk8s-metauisection)|*No description*
+[Names](#crossplane-cdk8s-names)|*No description*
+[Prop](#crossplane-cdk8s-prop)|JSII callback class/interface for SchemaProp.with().
+[Resource](#crossplane-cdk8s-resource)|Base class for all Crossplane core objects.
+[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)|*No description*
+[SchemaPropObject](#crossplane-cdk8s-schemapropobject)|openAPIv3Schema Object with MetaUI.
+[SchemaPropString](#crossplane-cdk8s-schemapropstring)|*No description*
+[Version](#crossplane-cdk8s-version)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[CompositeResourceDefinitionProps](#crossplane-cdk-compositeresourcedefinitionprops)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
-[CompositionProps](#crossplane-cdk-compositionprops)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
-[ConfigurationProps](#crossplane-cdk-configurationprops)|Properties for initialization of `Configuration`.
-[MetaUIInputIntegerPropOverrides](#crossplane-cdk-metauiinputintegerpropoverrides)|*No description*
-[MetaUIInputIntegerProps](#crossplane-cdk-metauiinputintegerprops)|*No description*
-[MetaUIInputPropOverrides](#crossplane-cdk-metauiinputpropoverrides)|Overrides with optional inputs for fluent API with reasonable defaults.
-[MetaUIInputProps](#crossplane-cdk-metauiinputprops)|*No description*
-[MetaUIInputStringPropOverrides](#crossplane-cdk-metauiinputstringpropoverrides)|*No description*
-[MetaUIInputStringProps](#crossplane-cdk-metauiinputstringprops)|*No description*
-[MetaUISectionProps](#crossplane-cdk-metauisectionprops)|*No description*
-[ProviderDep](#crossplane-cdk-providerdep)|*No description*
-[ResourceProps](#crossplane-cdk-resourceprops)|Initialization properties for resources.
+[CompositeResourceDefinitionProps](#crossplane-cdk8s-compositeresourcedefinitionprops)|An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
+[CompositionProps](#crossplane-cdk8s-compositionprops)|Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
+[ConfigurationProps](#crossplane-cdk8s-configurationprops)|Properties for initialization of `Configuration`.
+[MetaUIInputIntegerPropOverrides](#crossplane-cdk8s-metauiinputintegerpropoverrides)|*No description*
+[MetaUIInputIntegerProps](#crossplane-cdk8s-metauiinputintegerprops)|*No description*
+[MetaUIInputPropOverrides](#crossplane-cdk8s-metauiinputpropoverrides)|Overrides with optional inputs for fluent API with reasonable defaults.
+[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)|*No description*
+[MetaUIInputStringPropOverrides](#crossplane-cdk8s-metauiinputstringpropoverrides)|*No description*
+[MetaUIInputStringProps](#crossplane-cdk8s-metauiinputstringprops)|*No description*
+[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)|*No description*
+[ProviderDep](#crossplane-cdk8s-providerdep)|*No description*
+[ResourceProps](#crossplane-cdk8s-resourceprops)|Initialization properties for resources.
 
 
 **Interfaces**
 
 Name|Description
 ----|-----------
-[IAnyProp](#crossplane-cdk-ianyprop)|*No description*
-[ICompositeResourceDefinitionMeta](#crossplane-cdk-icompositeresourcedefinitionmeta)|*No description*
-[IConfiguration](#crossplane-cdk-iconfiguration)|Represents a Crossplane Configuration package.
-[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)|*No description*
-[INamesMeta](#crossplane-cdk-inamesmeta)|*No description*
-[IResource](#crossplane-cdk-iresource)|Represents a resource.
-[ISchemaProp](#crossplane-cdk-ischemaprop)|Schema Props.
-[ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)|*No description*
-[ISchemaPropMetaInteger](#crossplane-cdk-ischemapropmetainteger)|*No description*
-[ISchemaPropMetaString](#crossplane-cdk-ischemapropmetastring)|*No description*
-[IVersionMeta](#crossplane-cdk-iversionmeta)|*No description*
+[IAnyProp](#crossplane-cdk8s-ianyprop)|*No description*
+[ICompositeResourceDefinitionMeta](#crossplane-cdk8s-icompositeresourcedefinitionmeta)|*No description*
+[IConfiguration](#crossplane-cdk8s-iconfiguration)|Represents a Crossplane Configuration package.
+[IConnectionSecretMeta](#crossplane-cdk8s-iconnectionsecretmeta)|*No description*
+[INamesMeta](#crossplane-cdk8s-inamesmeta)|*No description*
+[IResource](#crossplane-cdk8s-iresource)|Represents a resource.
+[ISchemaProp](#crossplane-cdk8s-ischemaprop)|Schema Props.
+[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)|*No description*
+[ISchemaPropMetaInteger](#crossplane-cdk8s-ischemapropmetainteger)|*No description*
+[ISchemaPropMetaString](#crossplane-cdk8s-ischemapropmetastring)|*No description*
+[IVersionMeta](#crossplane-cdk8s-iversionmeta)|*No description*
 
 
 **Enums**
 
 Name|Description
 ----|-----------
-[InputType](#crossplane-cdk-inputtype)|*No description*
-[PropType](#crossplane-cdk-proptype)|*No description*
+[InputType](#crossplane-cdk8s-inputtype)|*No description*
+[PropType](#crossplane-cdk8s-proptype)|*No description*
 
 
 
-## class CompositeResourceDefinition  <a id="crossplane-cdk-compositeresourcedefinition"></a>
+## class CompositeResourceDefinition  <a id="crossplane-cdk8s-compositeresourcedefinition"></a>
 
 An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
 
 The new resource is composed of other composite or
 managed infrastructure resources.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource)
-__Extends__: [Resource](#crossplane-cdk-resource)
+__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk8s-iresource)
+__Extends__: [Resource](#crossplane-cdk8s-resource)
 
 ### Initializer
 
@@ -86,7 +86,7 @@ new CompositeResourceDefinition(scope: Construct, id: string, props?: CompositeR
 
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[CompositeResourceDefinitionProps](#crossplane-cdk-compositeresourcedefinitionprops)</code>)  *No description*
+* **props** (<code>[CompositeResourceDefinitionProps](#crossplane-cdk8s-compositeresourcedefinitionprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **name** (<code>string</code>)  *No description* __*Optional*__
 
@@ -99,13 +99,13 @@ Name | Type | Description
 -----|------|-------------
 **apiObject** | <code>[ApiObject](#cdk8s-apiobject)</code> | The underlying cdk8s API object.
 **fqn** | <code>string</code> | <span></span>
-**meta** | <code>[ICompositeResourceDefinitionMeta](#crossplane-cdk-icompositeresourcedefinitionmeta)</code> | <span></span>
-**ui** | <code>[MetaUI](#crossplane-cdk-metaui)</code> | <span></span>
+**meta** | <code>[ICompositeResourceDefinitionMeta](#crossplane-cdk8s-icompositeresourcedefinitionmeta)</code> | <span></span>
+**ui** | <code>[MetaUI](#crossplane-cdk8s-metaui)</code> | <span></span>
 
 ### Methods
 
 
-#### claimKind(kind) <a id="crossplane-cdk-compositeresourcedefinition-claimkind"></a>
+#### claimKind(kind) <a id="crossplane-cdk8s-compositeresourcedefinition-claimkind"></a>
 
 
 
@@ -116,9 +116,9 @@ claimKind(kind: string): Names
 * **kind** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[Names](#crossplane-cdk-names)</code>
+* <code>[Names](#crossplane-cdk8s-names)</code>
 
-#### connectionSecret() <a id="crossplane-cdk-compositeresourcedefinition-connectionsecret"></a>
+#### connectionSecret() <a id="crossplane-cdk8s-compositeresourcedefinition-connectionsecret"></a>
 
 
 
@@ -128,9 +128,9 @@ connectionSecret(): ConnectionSecret
 
 
 __Returns__:
-* <code>[ConnectionSecret](#crossplane-cdk-connectionsecret)</code>
+* <code>[ConnectionSecret](#crossplane-cdk8s-connectionsecret)</code>
 
-#### group(val) <a id="crossplane-cdk-compositeresourcedefinition-group"></a>
+#### group(val) <a id="crossplane-cdk8s-compositeresourcedefinition-group"></a>
 
 
 
@@ -141,9 +141,9 @@ group(val: string): CompositeResourceDefinition
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>
+* <code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>
 
-#### kind(kind) <a id="crossplane-cdk-compositeresourcedefinition-kind"></a>
+#### kind(kind) <a id="crossplane-cdk8s-compositeresourcedefinition-kind"></a>
 
 
 
@@ -154,9 +154,9 @@ kind(kind: string): Names
 * **kind** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[Names](#crossplane-cdk-names)</code>
+* <code>[Names](#crossplane-cdk8s-names)</code>
 
-#### version(name) <a id="crossplane-cdk-compositeresourcedefinition-version"></a>
+#### version(name) <a id="crossplane-cdk8s-compositeresourcedefinition-version"></a>
 
 
 
@@ -167,16 +167,16 @@ version(name: string): Version
 * **name** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[Version](#crossplane-cdk-version)</code>
+* <code>[Version](#crossplane-cdk8s-version)</code>
 
 
 
-## class Composition  <a id="crossplane-cdk-composition"></a>
+## class Composition  <a id="crossplane-cdk8s-composition"></a>
 
 Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource)
-__Extends__: [Resource](#crossplane-cdk-resource)
+__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk8s-iresource)
+__Extends__: [Resource](#crossplane-cdk8s-resource)
 
 ### Initializer
 
@@ -189,8 +189,8 @@ new Composition(scope: Construct, id: string, xrd: CompositeResourceDefinition, 
 
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
-* **props** (<code>[CompositionProps](#crossplane-cdk-compositionprops)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
+* **props** (<code>[CompositionProps](#crossplane-cdk8s-compositionprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **name** (<code>string</code>)  *No description* __*Optional*__
 
@@ -206,7 +206,7 @@ Name | Type | Description
 ### Methods
 
 
-#### addResource(base) <a id="crossplane-cdk-composition-addresource"></a>
+#### addResource(base) <a id="crossplane-cdk8s-composition-addresource"></a>
 
 
 
@@ -217,11 +217,11 @@ addResource(base: any): CompositionSpecResource
 * **base** (<code>any</code>)  *No description*
 
 __Returns__:
-* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+* <code>[CompositionSpecResource](#crossplane-cdk8s-compositionspecresource)</code>
 
 
 
-## class CompositionSpecResource  <a id="crossplane-cdk-compositionspecresource"></a>
+## class CompositionSpecResource  <a id="crossplane-cdk8s-compositionspecresource"></a>
 
 
 
@@ -235,14 +235,14 @@ use Composition.addResource() instead.
 new CompositionSpecResource(xrd: CompositeResourceDefinition, base: any)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **base** (<code>any</code>)  *No description*
 
 
 ### Methods
 
 
-#### connectionDetailsFromXrd(xrd?) <a id="crossplane-cdk-compositionspecresource-connectiondetailsfromxrd"></a>
+#### connectionDetailsFromXrd(xrd?) <a id="crossplane-cdk8s-compositionspecresource-connectiondetailsfromxrd"></a>
 
 
 
@@ -250,12 +250,12 @@ new CompositionSpecResource(xrd: CompositeResourceDefinition, base: any)
 connectionDetailsFromXrd(xrd?: CompositeResourceDefinition): CompositionSpecResource
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 
 __Returns__:
-* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+* <code>[CompositionSpecResource](#crossplane-cdk8s-compositionspecresource)</code>
 
-#### mapFieldPath(from, to) <a id="crossplane-cdk-compositionspecresource-mapfieldpath"></a>
+#### mapFieldPath(from, to) <a id="crossplane-cdk8s-compositionspecresource-mapfieldpath"></a>
 
 
 
@@ -267,9 +267,9 @@ mapFieldPath(from: string, to: string): CompositionSpecResource
 * **to** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+* <code>[CompositionSpecResource](#crossplane-cdk8s-compositionspecresource)</code>
 
-#### mapFieldPathXFormStringFormat(from, format, to) <a id="crossplane-cdk-compositionspecresource-mapfieldpathxformstringformat"></a>
+#### mapFieldPathXFormStringFormat(from, format, to) <a id="crossplane-cdk8s-compositionspecresource-mapfieldpathxformstringformat"></a>
 
 
 
@@ -282,16 +282,16 @@ mapFieldPathXFormStringFormat(from: string, format: string, to: string): Composi
 * **to** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[CompositionSpecResource](#crossplane-cdk-compositionspecresource)</code>
+* <code>[CompositionSpecResource](#crossplane-cdk8s-compositionspecresource)</code>
 
 
 
-## class Configuration  <a id="crossplane-cdk-configuration"></a>
+## class Configuration  <a id="crossplane-cdk8s-configuration"></a>
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource), [IConfiguration](#crossplane-cdk-iconfiguration), [IResource](#crossplane-cdk-iresource)
-__Extends__: [Resource](#crossplane-cdk-resource)
+__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk8s-iresource), [IConfiguration](#crossplane-cdk8s-iconfiguration), [IResource](#crossplane-cdk8s-iresource)
+__Extends__: [Resource](#crossplane-cdk8s-resource)
 
 ### Initializer
 
@@ -304,7 +304,7 @@ new Configuration(scope: Construct, id: string, props?: ConfigurationProps)
 
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[ConfigurationProps](#crossplane-cdk-configurationprops)</code>)  *No description*
+* **props** (<code>[ConfigurationProps](#crossplane-cdk8s-configurationprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **name** (<code>string</code>)  *No description* __*Optional*__
   * **company** (<code>string</code>)  *No description* __*Optional*__
@@ -315,7 +315,7 @@ new Configuration(scope: Construct, id: string, props?: ConfigurationProps)
   * **keywords** (<code>Array<string></code>)  *No description* __*Optional*__
   * **license** (<code>string</code>)  *No description* __*Optional*__
   * **maintainer** (<code>string</code>)  *No description* __*Optional*__
-  * **providers** (<code>Array<[ProviderDep](#crossplane-cdk-providerdep)></code>)  *No description* __*Optional*__
+  * **providers** (<code>Array<[ProviderDep](#crossplane-cdk8s-providerdep)></code>)  *No description* __*Optional*__
   * **readme** (<code>string</code>)  *No description* __*Optional*__
   * **source** (<code>string</code>)  *No description* __*Optional*__
 
@@ -331,7 +331,7 @@ Name | Type | Description
 ### Methods
 
 
-#### addProvider(provider, version) <a id="crossplane-cdk-configuration-addprovider"></a>
+#### addProvider(provider, version) <a id="crossplane-cdk8s-configuration-addprovider"></a>
 
 
 
@@ -347,7 +347,7 @@ addProvider(provider: string, version: string): void
 
 
 
-## class ConnectionSecret  <a id="crossplane-cdk-connectionsecret"></a>
+## class ConnectionSecret  <a id="crossplane-cdk8s-connectionsecret"></a>
 
 
 
@@ -369,12 +369,12 @@ new ConnectionSecret()
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)</code> | <span></span>
+**meta** | <code>[IConnectionSecretMeta](#crossplane-cdk8s-iconnectionsecretmeta)</code> | <span></span>
 
 ### Methods
 
 
-#### defaultNamespace(val) <a id="crossplane-cdk-connectionsecret-defaultnamespace"></a>
+#### defaultNamespace(val) <a id="crossplane-cdk8s-connectionsecret-defaultnamespace"></a>
 
 
 
@@ -385,9 +385,9 @@ defaultNamespace(val: string): ConnectionSecret
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[ConnectionSecret](#crossplane-cdk-connectionsecret)</code>
+* <code>[ConnectionSecret](#crossplane-cdk8s-connectionsecret)</code>
 
-#### key(val) <a id="crossplane-cdk-connectionsecret-key"></a>
+#### key(val) <a id="crossplane-cdk8s-connectionsecret-key"></a>
 
 
 
@@ -398,11 +398,11 @@ key(val: string): ConnectionSecret
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[ConnectionSecret](#crossplane-cdk-connectionsecret)</code>
+* <code>[ConnectionSecret](#crossplane-cdk8s-connectionsecret)</code>
 
 
 
-## class MetaUI  <a id="crossplane-cdk-metaui"></a>
+## class MetaUI  <a id="crossplane-cdk8s-metaui"></a>
 
 
 
@@ -424,12 +424,12 @@ new MetaUI()
 
 Name | Type | Description 
 -----|------|-------------
-**activeSection** | <code>[MetaUISection](#crossplane-cdk-metauisection)</code> | <span></span>
+**activeSection** | <code>[MetaUISection](#crossplane-cdk8s-metauisection)</code> | <span></span>
 
 ### Methods
 
 
-#### addSection(props) <a id="crossplane-cdk-metaui-addsection"></a>
+#### addSection(props) <a id="crossplane-cdk8s-metaui-addsection"></a>
 
 
 
@@ -437,16 +437,16 @@ Name | Type | Description
 addSection(props: MetaUISectionProps): MetaUISection
 ```
 
-* **props** (<code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code>)  *No description*
+* **props** (<code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code>)  *No description*
   * **description** (<code>string</code>)  *No description* 
   * **title** (<code>string</code>)  *No description* 
 
 __Returns__:
-* <code>[MetaUISection](#crossplane-cdk-metauisection)</code>
+* <code>[MetaUISection](#crossplane-cdk8s-metauisection)</code>
 
 
 
-## class MetaUIInput  <a id="crossplane-cdk-metauiinput"></a>
+## class MetaUIInput  <a id="crossplane-cdk8s-metauiinput"></a>
 
 
 
@@ -460,20 +460,20 @@ Use CompositeResourceDefinition.ui.activeSection.addInput() instead.
 new MetaUIInput(props: MetaUIInputProps)
 ```
 
-* **props** (<code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code>)  *No description*
-  * **inputType** (<code>[InputType](#crossplane-cdk-inputtype)</code>)  *No description* 
+* **props** (<code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code>)  *No description*
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  *No description* 
   * **name** (<code>string</code>)  *No description* 
   * **path** (<code>string</code>)  *No description* 
   * **required** (<code>boolean</code>)  *No description* 
   * **title** (<code>string</code>)  *No description* 
-  * **type** (<code>[PropType](#crossplane-cdk-proptype)</code>)  *No description* 
+  * **type** (<code>[PropType](#crossplane-cdk8s-proptype)</code>)  *No description* 
   * **customError** (<code>string</code>)  *No description* __*Optional*__
   * **description** (<code>string</code>)  *No description* __*Optional*__
 
 
 
 
-## class MetaUISection  <a id="crossplane-cdk-metauisection"></a>
+## class MetaUISection  <a id="crossplane-cdk8s-metauisection"></a>
 
 
 
@@ -487,7 +487,7 @@ Use CompositeResourceDefinition.ui.addSection() instead.
 new MetaUISection(props: MetaUISectionProps)
 ```
 
-* **props** (<code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code>)  *No description*
+* **props** (<code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code>)  *No description*
   * **description** (<code>string</code>)  *No description* 
   * **title** (<code>string</code>)  *No description* 
 
@@ -495,7 +495,7 @@ new MetaUISection(props: MetaUISectionProps)
 ### Methods
 
 
-#### addInput(field) <a id="crossplane-cdk-metauisection-addinput"></a>
+#### addInput(field) <a id="crossplane-cdk8s-metauisection-addinput"></a>
 
 
 
@@ -503,22 +503,22 @@ new MetaUISection(props: MetaUISectionProps)
 addInput(field: MetaUIInputProps): MetaUIInput
 ```
 
-* **field** (<code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code>)  *No description*
-  * **inputType** (<code>[InputType](#crossplane-cdk-inputtype)</code>)  *No description* 
+* **field** (<code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code>)  *No description*
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  *No description* 
   * **name** (<code>string</code>)  *No description* 
   * **path** (<code>string</code>)  *No description* 
   * **required** (<code>boolean</code>)  *No description* 
   * **title** (<code>string</code>)  *No description* 
-  * **type** (<code>[PropType](#crossplane-cdk-proptype)</code>)  *No description* 
+  * **type** (<code>[PropType](#crossplane-cdk8s-proptype)</code>)  *No description* 
   * **customError** (<code>string</code>)  *No description* __*Optional*__
   * **description** (<code>string</code>)  *No description* __*Optional*__
 
 __Returns__:
-* <code>[MetaUIInput](#crossplane-cdk-metauiinput)</code>
+* <code>[MetaUIInput](#crossplane-cdk8s-metauiinput)</code>
 
 
 
-## class Names  <a id="crossplane-cdk-names"></a>
+## class Names  <a id="crossplane-cdk8s-names"></a>
 
 
 
@@ -532,7 +532,7 @@ __Returns__:
 new Names(xrd: CompositeResourceDefinition, kind: string)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **kind** (<code>string</code>)  *No description*
 
 
@@ -542,12 +542,12 @@ new Names(xrd: CompositeResourceDefinition, kind: string)
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | <span></span>
+**meta** | <code>[INamesMeta](#crossplane-cdk8s-inamesmeta)</code> | <span></span>
 
 ### Methods
 
 
-#### category(val) <a id="crossplane-cdk-names-category"></a>
+#### category(val) <a id="crossplane-cdk8s-names-category"></a>
 
 
 
@@ -560,7 +560,7 @@ category(val: string): void
 
 
 
-#### listKind(val) <a id="crossplane-cdk-names-listkind"></a>
+#### listKind(val) <a id="crossplane-cdk8s-names-listkind"></a>
 
 
 
@@ -573,7 +573,7 @@ listKind(val: string): void
 
 
 
-#### plural(val) <a id="crossplane-cdk-names-plural"></a>
+#### plural(val) <a id="crossplane-cdk8s-names-plural"></a>
 
 
 
@@ -586,7 +586,7 @@ plural(val: string): void
 
 
 
-#### shortNames(val) <a id="crossplane-cdk-names-shortnames"></a>
+#### shortNames(val) <a id="crossplane-cdk8s-names-shortnames"></a>
 
 
 
@@ -599,7 +599,7 @@ shortNames(val: string): void
 
 
 
-#### singular(val) <a id="crossplane-cdk-names-singular"></a>
+#### singular(val) <a id="crossplane-cdk8s-names-singular"></a>
 
 
 
@@ -614,7 +614,7 @@ singular(val: string): void
 
 
 
-## class Prop  <a id="crossplane-cdk-prop"></a>
+## class Prop  <a id="crossplane-cdk8s-prop"></a>
 
 JSII callback class/interface for SchemaProp.with().
 
@@ -622,7 +622,7 @@ JSII callback class/interface for SchemaProp.with().
 ### Methods
 
 
-#### object(prop) <a id="crossplane-cdk-prop-object"></a>
+#### object(prop) <a id="crossplane-cdk8s-prop-object"></a>
 
 
 
@@ -630,12 +630,12 @@ JSII callback class/interface for SchemaProp.with().
 object(prop: SchemaPropObject): any
 ```
 
-* **prop** (<code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>)  *No description*
+* **prop** (<code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>)  *No description*
 
 __Returns__:
 * <code>any</code>
 
-#### *static* for(doer) <a id="crossplane-cdk-prop-for"></a>
+#### *static* for(doer) <a id="crossplane-cdk8s-prop-for"></a>
 
 
 
@@ -643,22 +643,22 @@ __Returns__:
 static for(doer: IAnyProp): any
 ```
 
-* **doer** (<code>[IAnyProp](#crossplane-cdk-ianyprop)</code>)  *No description*
+* **doer** (<code>[IAnyProp](#crossplane-cdk8s-ianyprop)</code>)  *No description*
 
 __Returns__:
 * <code>any</code>
 
 
 
-## class Resource  <a id="crossplane-cdk-resource"></a>
+## class Resource  <a id="crossplane-cdk8s-resource"></a>
 
 Base class for all Crossplane core objects.
 
 Represents a single resource.
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk-iresource)
+__Implements__: [IConstruct](#constructs-iconstruct), [IResource](#crossplane-cdk8s-iresource)
 __Extends__: [Construct](#constructs-construct)
-__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Composition](#crossplane-cdk-composition), [Configuration](#crossplane-cdk-configuration)
+__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition), [Composition](#crossplane-cdk8s-composition), [Configuration](#crossplane-cdk8s-configuration)
 
 ### Initializer
 
@@ -671,7 +671,7 @@ new Resource(scope: Construct, id: string, _: ResourceProps)
 
 * **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **_** (<code>[ResourceProps](#crossplane-cdk-resourceprops)</code>)  *No description*
+* **_** (<code>[ResourceProps](#crossplane-cdk8s-resourceprops)</code>)  *No description*
   * **metadata** (<code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code>)  Metadata that all persisted resources must have, which includes all objects users must create. __*Optional*__
   * **name** (<code>string</code>)  *No description* __*Optional*__
 
@@ -687,11 +687,11 @@ Name | Type | Description
 
 
 
-## class SchemaPropInteger  <a id="crossplane-cdk-schemapropinteger"></a>
+## class SchemaPropInteger  <a id="crossplane-cdk8s-schemapropinteger"></a>
 
 
 
-__Implements__: [ISchemaProp](#crossplane-cdk-ischemaprop)
+__Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
 
 ### Initializer
 
@@ -702,7 +702,7 @@ use SchemaPropObject.propInteger() instead e.g. CompositeResourceDefinition.vers
 new SchemaPropInteger(xrd: CompositeResourceDefinition, parentPath: string, name: string)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **parentPath** (<code>string</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 
@@ -713,12 +713,12 @@ new SchemaPropInteger(xrd: CompositeResourceDefinition, parentPath: string, name
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)</code> | <span></span>
+**meta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
 
 ### Methods
 
 
-#### description(val) <a id="crossplane-cdk-schemapropinteger-description"></a>
+#### description(val) <a id="crossplane-cdk8s-schemapropinteger-description"></a>
 
 
 
@@ -729,9 +729,9 @@ description(val: string): SchemaPropInteger
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### implicit(val?) <a id="crossplane-cdk-schemapropinteger-implicit"></a>
+#### implicit(val?) <a id="crossplane-cdk8s-schemapropinteger-implicit"></a>
 
 field is implicitly added by Crossplane.
 
@@ -750,9 +750,9 @@ implicit(val?: boolean): SchemaPropInteger
 * **val** (<code>boolean</code>)  boolean - default true.
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### max(val) <a id="crossplane-cdk-schemapropinteger-max"></a>
+#### max(val) <a id="crossplane-cdk8s-schemapropinteger-max"></a>
 
 
 
@@ -763,9 +763,9 @@ max(val: number): SchemaPropInteger
 * **val** (<code>number</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### min(val) <a id="crossplane-cdk-schemapropinteger-min"></a>
+#### min(val) <a id="crossplane-cdk8s-schemapropinteger-min"></a>
 
 
 
@@ -776,9 +776,9 @@ min(val: number): SchemaPropInteger
 * **val** (<code>number</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### path(val) <a id="crossplane-cdk-schemapropinteger-path"></a>
+#### path(val) <a id="crossplane-cdk8s-schemapropinteger-path"></a>
 
 
 
@@ -789,9 +789,9 @@ path(val: string): SchemaPropInteger
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### required(val?) <a id="crossplane-cdk-schemapropinteger-required"></a>
+#### required(val?) <a id="crossplane-cdk8s-schemapropinteger-required"></a>
 
 
 
@@ -802,9 +802,9 @@ required(val?: boolean): SchemaPropInteger
 * **val** (<code>boolean</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### uiInput(options?) <a id="crossplane-cdk-schemapropinteger-uiinput"></a>
+#### uiInput(options?) <a id="crossplane-cdk8s-schemapropinteger-uiinput"></a>
 
 
 
@@ -812,10 +812,10 @@ __Returns__:
 uiInput(options?: MetaUIInputIntegerPropOverrides): SchemaPropInteger
 ```
 
-* **options** (<code>[MetaUIInputIntegerPropOverrides](#crossplane-cdk-metauiinputintegerpropoverrides)</code>)  *No description*
+* **options** (<code>[MetaUIInputIntegerPropOverrides](#crossplane-cdk8s-metauiinputintegerpropoverrides)</code>)  *No description*
   * **customError** (<code>string</code>)  *No description* __*Optional*__
   * **description** (<code>string</code>)  defaults to ISchemaPropMeta.description if not specified. __*Optional*__
-  * **inputType** (<code>[InputType](#crossplane-cdk-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
   * **name** (<code>string</code>)  defaults to camel case ISchemaPropMeta.path if not specified. __*Optional*__
   * **path** (<code>string</code>)  defaults to ISchemaPropMeta.path if not specified. __*Optional*__
   * **required** (<code>boolean</code>)  defaults to ISchemaPropMeta.required if not specified. __*Optional*__
@@ -825,15 +825,15 @@ uiInput(options?: MetaUIInputIntegerPropOverrides): SchemaPropInteger
   * **min** (<code>number</code>)  defaults to ISchemaPropMetaInteger.min if not specified. __*Optional*__
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
 
 
-## class SchemaPropObject  <a id="crossplane-cdk-schemapropobject"></a>
+## class SchemaPropObject  <a id="crossplane-cdk8s-schemapropobject"></a>
 
 openAPIv3Schema Object with MetaUI.
 
-__Implements__: [ISchemaProp](#crossplane-cdk-ischemaprop)
+__Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
 
 ### Initializer
 
@@ -844,7 +844,7 @@ use SchemaPropObject.propObject() instead e.g. CompositeResourceDefinition.versi
 new SchemaPropObject(xrd: CompositeResourceDefinition, parentPath: string, name: string)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **parentPath** (<code>string</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 
@@ -855,12 +855,12 @@ new SchemaPropObject(xrd: CompositeResourceDefinition, parentPath: string, name:
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)</code> | <span></span>
+**meta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
 
 ### Methods
 
 
-#### description(val) <a id="crossplane-cdk-schemapropobject-description"></a>
+#### description(val) <a id="crossplane-cdk8s-schemapropobject-description"></a>
 
 
 
@@ -871,9 +871,9 @@ description(val: string): SchemaPropObject
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
-#### implicit(val?) <a id="crossplane-cdk-schemapropobject-implicit"></a>
+#### implicit(val?) <a id="crossplane-cdk8s-schemapropobject-implicit"></a>
 
 field is implicitly added by Crossplane.
 
@@ -890,9 +890,9 @@ implicit(val?: boolean): SchemaPropObject
 * **val** (<code>boolean</code>)  boolean - default true.
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
-#### propInteger(name) <a id="crossplane-cdk-schemapropobject-propinteger"></a>
+#### propInteger(name) <a id="crossplane-cdk8s-schemapropobject-propinteger"></a>
 
 
 
@@ -903,9 +903,9 @@ propInteger(name: string): SchemaPropInteger
 * **name** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropInteger](#crossplane-cdk-schemapropinteger)</code>
+* <code>[SchemaPropInteger](#crossplane-cdk8s-schemapropinteger)</code>
 
-#### propObject(name) <a id="crossplane-cdk-schemapropobject-propobject"></a>
+#### propObject(name) <a id="crossplane-cdk8s-schemapropobject-propobject"></a>
 
 
 
@@ -916,9 +916,9 @@ propObject(name: string): SchemaPropObject
 * **name** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
-#### propString(name) <a id="crossplane-cdk-schemapropobject-propstring"></a>
+#### propString(name) <a id="crossplane-cdk8s-schemapropobject-propstring"></a>
 
 
 
@@ -929,9 +929,9 @@ propString(name: string): SchemaPropString
 * **name** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropString](#crossplane-cdk-schemapropstring)</code>
+* <code>[SchemaPropString](#crossplane-cdk8s-schemapropstring)</code>
 
-#### required(val?) <a id="crossplane-cdk-schemapropobject-required"></a>
+#### required(val?) <a id="crossplane-cdk8s-schemapropobject-required"></a>
 
 
 
@@ -942,9 +942,9 @@ required(val?: boolean): SchemaPropObject
 * **val** (<code>boolean</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
-#### uiSection(options) <a id="crossplane-cdk-schemapropobject-uisection"></a>
+#### uiSection(options) <a id="crossplane-cdk8s-schemapropobject-uisection"></a>
 
 
 
@@ -952,14 +952,14 @@ __Returns__:
 uiSection(options: MetaUISectionProps): SchemaPropObject
 ```
 
-* **options** (<code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code>)  *No description*
+* **options** (<code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code>)  *No description*
   * **description** (<code>string</code>)  *No description* 
   * **title** (<code>string</code>)  *No description* 
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
-#### with(prop) <a id="crossplane-cdk-schemapropobject-with"></a>
+#### with(prop) <a id="crossplane-cdk8s-schemapropobject-with"></a>
 
 
 
@@ -967,18 +967,18 @@ __Returns__:
 with(prop: Prop): SchemaPropObject
 ```
 
-* **prop** (<code>[Prop](#crossplane-cdk-prop)</code>)  *No description*
+* **prop** (<code>[Prop](#crossplane-cdk8s-prop)</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
 
 
-## class SchemaPropString  <a id="crossplane-cdk-schemapropstring"></a>
+## class SchemaPropString  <a id="crossplane-cdk8s-schemapropstring"></a>
 
 
 
-__Implements__: [ISchemaProp](#crossplane-cdk-ischemaprop)
+__Implements__: [ISchemaProp](#crossplane-cdk8s-ischemaprop)
 
 ### Initializer
 
@@ -989,7 +989,7 @@ use SchemaPropObject.propString() instead e.g. CompositeResourceDefinition.versi
 new SchemaPropString(xrd: CompositeResourceDefinition, parentPath: string, name: string)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **parentPath** (<code>string</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 
@@ -1000,12 +1000,12 @@ new SchemaPropString(xrd: CompositeResourceDefinition, parentPath: string, name:
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)</code> | <span></span>
+**meta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
 
 ### Methods
 
 
-#### description(val) <a id="crossplane-cdk-schemapropstring-description"></a>
+#### description(val) <a id="crossplane-cdk8s-schemapropstring-description"></a>
 
 
 
@@ -1016,9 +1016,9 @@ description(val: string): SchemaPropString
 * **val** (<code>string</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropString](#crossplane-cdk-schemapropstring)</code>
+* <code>[SchemaPropString](#crossplane-cdk8s-schemapropstring)</code>
 
-#### implicit(val?) <a id="crossplane-cdk-schemapropstring-implicit"></a>
+#### implicit(val?) <a id="crossplane-cdk8s-schemapropstring-implicit"></a>
 
 field is implicitly added by Crossplane.
 
@@ -1035,9 +1035,9 @@ implicit(val?: boolean): SchemaPropString
 * **val** (<code>boolean</code>)  boolean - default true.
 
 __Returns__:
-* <code>[SchemaPropString](#crossplane-cdk-schemapropstring)</code>
+* <code>[SchemaPropString](#crossplane-cdk8s-schemapropstring)</code>
 
-#### required(val?) <a id="crossplane-cdk-schemapropstring-required"></a>
+#### required(val?) <a id="crossplane-cdk8s-schemapropstring-required"></a>
 
 
 
@@ -1048,9 +1048,9 @@ required(val?: boolean): SchemaPropString
 * **val** (<code>boolean</code>)  *No description*
 
 __Returns__:
-* <code>[SchemaPropString](#crossplane-cdk-schemapropstring)</code>
+* <code>[SchemaPropString](#crossplane-cdk8s-schemapropstring)</code>
 
-#### uiInput(options?) <a id="crossplane-cdk-schemapropstring-uiinput"></a>
+#### uiInput(options?) <a id="crossplane-cdk8s-schemapropstring-uiinput"></a>
 
 
 
@@ -1058,10 +1058,10 @@ __Returns__:
 uiInput(options?: MetaUIInputStringPropOverrides): SchemaPropString
 ```
 
-* **options** (<code>[MetaUIInputStringPropOverrides](#crossplane-cdk-metauiinputstringpropoverrides)</code>)  *No description*
+* **options** (<code>[MetaUIInputStringPropOverrides](#crossplane-cdk8s-metauiinputstringpropoverrides)</code>)  *No description*
   * **customError** (<code>string</code>)  *No description* __*Optional*__
   * **description** (<code>string</code>)  defaults to ISchemaPropMeta.description if not specified. __*Optional*__
-  * **inputType** (<code>[InputType](#crossplane-cdk-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
+  * **inputType** (<code>[InputType](#crossplane-cdk8s-inputtype)</code>)  defaults to InputType.SINGLE_INPUT. __*Optional*__
   * **name** (<code>string</code>)  defaults to camel case ISchemaPropMeta.path if not specified. __*Optional*__
   * **path** (<code>string</code>)  defaults to ISchemaPropMeta.path if not specified. __*Optional*__
   * **required** (<code>boolean</code>)  defaults to ISchemaPropMeta.required if not specified. __*Optional*__
@@ -1069,11 +1069,11 @@ uiInput(options?: MetaUIInputStringPropOverrides): SchemaPropString
   * **default** (<code>string</code>)  *No description* __*Optional*__
 
 __Returns__:
-* <code>[SchemaPropString](#crossplane-cdk-schemapropstring)</code>
+* <code>[SchemaPropString](#crossplane-cdk8s-schemapropstring)</code>
 
 
 
-## class Version  <a id="crossplane-cdk-version"></a>
+## class Version  <a id="crossplane-cdk8s-version"></a>
 
 
 
@@ -1087,7 +1087,7 @@ use CompositeResourceDefinition.version() instead.
 new Version(xrd: CompositeResourceDefinition, name: string)
 ```
 
-* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition)</code>)  *No description*
+* **xrd** (<code>[CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition)</code>)  *No description*
 * **name** (<code>string</code>)  *No description*
 
 
@@ -1097,13 +1097,13 @@ new Version(xrd: CompositeResourceDefinition, name: string)
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[IVersionMeta](#crossplane-cdk-iversionmeta)</code> | <span></span>
+**meta** | <code>[IVersionMeta](#crossplane-cdk8s-iversionmeta)</code> | <span></span>
 **name** | <code>string</code> | <span></span>
 
 ### Methods
 
 
-#### referencable(val?) <a id="crossplane-cdk-version-referencable"></a>
+#### referencable(val?) <a id="crossplane-cdk8s-version-referencable"></a>
 
 
 
@@ -1114,9 +1114,9 @@ referencable(val?: boolean): Version
 * **val** (<code>boolean</code>)  *No description*
 
 __Returns__:
-* <code>[Version](#crossplane-cdk-version)</code>
+* <code>[Version](#crossplane-cdk8s-version)</code>
 
-#### served(val?) <a id="crossplane-cdk-version-served"></a>
+#### served(val?) <a id="crossplane-cdk8s-version-served"></a>
 
 
 
@@ -1127,9 +1127,9 @@ served(val?: boolean): Version
 * **val** (<code>boolean</code>)  *No description*
 
 __Returns__:
-* <code>[Version](#crossplane-cdk-version)</code>
+* <code>[Version](#crossplane-cdk8s-version)</code>
 
-#### spec() <a id="crossplane-cdk-version-spec"></a>
+#### spec() <a id="crossplane-cdk8s-version-spec"></a>
 
 
 
@@ -1139,11 +1139,11 @@ spec(): SchemaPropObject
 
 
 __Returns__:
-* <code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>
+* <code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>
 
 
 
-## struct CompositeResourceDefinitionProps  <a id="crossplane-cdk-compositeresourcedefinitionprops"></a>
+## struct CompositeResourceDefinitionProps  <a id="crossplane-cdk8s-compositeresourcedefinitionprops"></a>
 
 
 An CompositeResourceDefinition defines a new kind of composite infrastructure resource.
@@ -1164,7 +1164,7 @@ Name | Type | Description
 
 
 
-## struct CompositionProps  <a id="crossplane-cdk-compositionprops"></a>
+## struct CompositionProps  <a id="crossplane-cdk8s-compositionprops"></a>
 
 
 Composition defines the group of resources to be created when a compatible type is created with reference to the composition.
@@ -1182,7 +1182,7 @@ Name | Type | Description
 
 
 
-## struct ConfigurationProps  <a id="crossplane-cdk-configurationprops"></a>
+## struct ConfigurationProps  <a id="crossplane-cdk8s-configurationprops"></a>
 
 
 Properties for initialization of `Configuration`.
@@ -1201,20 +1201,20 @@ Name | Type | Description
 **maintainer**? | <code>string</code> | __*Optional*__
 **metadata**? | <code>[ApiObjectMetadata](#cdk8s-apiobjectmetadata)</code> | Metadata that all persisted resources must have, which includes all objects users must create.<br/>__*Optional*__
 **name**? | <code>string</code> | __*Optional*__
-**providers**? | <code>Array<[ProviderDep](#crossplane-cdk-providerdep)></code> | __*Optional*__
+**providers**? | <code>Array<[ProviderDep](#crossplane-cdk8s-providerdep)></code> | __*Optional*__
 **readme**? | <code>string</code> | __*Optional*__
 **source**? | <code>string</code> | __*Optional*__
 
 
 
-## interface IAnyProp  <a id="crossplane-cdk-ianyprop"></a>
+## interface IAnyProp  <a id="crossplane-cdk8s-ianyprop"></a>
 
 
 
 ### Methods
 
 
-#### object(prop) <a id="crossplane-cdk-ianyprop-object"></a>
+#### object(prop) <a id="crossplane-cdk8s-ianyprop-object"></a>
 
 
 
@@ -1222,14 +1222,14 @@ Name | Type | Description
 object(prop: SchemaPropObject): any
 ```
 
-* **prop** (<code>[SchemaPropObject](#crossplane-cdk-schemapropobject)</code>)  *No description*
+* **prop** (<code>[SchemaPropObject](#crossplane-cdk8s-schemapropobject)</code>)  *No description*
 
 __Returns__:
 * <code>any</code>
 
 
 
-## interface ICompositeResourceDefinitionMeta  <a id="crossplane-cdk-icompositeresourcedefinitionmeta"></a>
+## interface ICompositeResourceDefinitionMeta  <a id="crossplane-cdk8s-icompositeresourcedefinitionmeta"></a>
 
 
 
@@ -1241,17 +1241,17 @@ Name | Type | Description
 -----|------|-------------
 **group** | <code>string</code> | <span></span>
 **name** | <code>string</code> | <span></span>
-**names** | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | <span></span>
+**names** | <code>[INamesMeta](#crossplane-cdk8s-inamesmeta)</code> | <span></span>
 **versionServed** | <code>string</code> | <span></span>
-**claimNames**? | <code>[INamesMeta](#crossplane-cdk-inamesmeta)</code> | __*Optional*__
-**connectionSecret**? | <code>[IConnectionSecretMeta](#crossplane-cdk-iconnectionsecretmeta)</code> | __*Optional*__
-**versions**? | <code>Array<[IVersionMeta](#crossplane-cdk-iversionmeta)></code> | __*Optional*__
+**claimNames**? | <code>[INamesMeta](#crossplane-cdk8s-inamesmeta)</code> | __*Optional*__
+**connectionSecret**? | <code>[IConnectionSecretMeta](#crossplane-cdk8s-iconnectionsecretmeta)</code> | __*Optional*__
+**versions**? | <code>Array<[IVersionMeta](#crossplane-cdk8s-iversionmeta)></code> | __*Optional*__
 
 
 
-## interface IConfiguration  <a id="crossplane-cdk-iconfiguration"></a>
+## interface IConfiguration  <a id="crossplane-cdk8s-iconfiguration"></a>
 
-__Implemented by__: [Configuration](#crossplane-cdk-configuration)
+__Implemented by__: [Configuration](#crossplane-cdk8s-configuration)
 
 Represents a Crossplane Configuration package.
 
@@ -1264,7 +1264,7 @@ Name | Type | Description
 
 
 
-## interface IConnectionSecretMeta  <a id="crossplane-cdk-iconnectionsecretmeta"></a>
+## interface IConnectionSecretMeta  <a id="crossplane-cdk8s-iconnectionsecretmeta"></a>
 
 
 
@@ -1279,7 +1279,7 @@ Name | Type | Description
 
 
 
-## interface INamesMeta  <a id="crossplane-cdk-inamesmeta"></a>
+## interface INamesMeta  <a id="crossplane-cdk8s-inamesmeta"></a>
 
 
 
@@ -1294,9 +1294,9 @@ Name | Type | Description
 
 
 
-## interface IResource  <a id="crossplane-cdk-iresource"></a>
+## interface IResource  <a id="crossplane-cdk8s-iresource"></a>
 
-__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk-compositeresourcedefinition), [Composition](#crossplane-cdk-composition), [Configuration](#crossplane-cdk-configuration)
+__Implemented by__: [CompositeResourceDefinition](#crossplane-cdk8s-compositeresourcedefinition), [Composition](#crossplane-cdk8s-composition), [Configuration](#crossplane-cdk8s-configuration)
 
 Represents a resource.
 
@@ -1309,9 +1309,9 @@ Name | Type | Description
 
 
 
-## interface ISchemaProp  <a id="crossplane-cdk-ischemaprop"></a>
+## interface ISchemaProp  <a id="crossplane-cdk8s-ischemaprop"></a>
 
-__Implemented by__: [SchemaPropInteger](#crossplane-cdk-schemapropinteger), [SchemaPropObject](#crossplane-cdk-schemapropobject), [SchemaPropString](#crossplane-cdk-schemapropstring)
+__Implemented by__: [SchemaPropInteger](#crossplane-cdk8s-schemapropinteger), [SchemaPropObject](#crossplane-cdk8s-schemapropobject), [SchemaPropString](#crossplane-cdk8s-schemapropstring)
 
 Schema Props.
 
@@ -1320,11 +1320,11 @@ Schema Props.
 
 Name | Type | Description 
 -----|------|-------------
-**meta** | <code>[ISchemaPropMeta](#crossplane-cdk-ischemapropmeta)</code> | <span></span>
+**meta** | <code>[ISchemaPropMeta](#crossplane-cdk8s-ischemapropmeta)</code> | <span></span>
 
 
 
-## interface ISchemaPropMeta  <a id="crossplane-cdk-ischemapropmeta"></a>
+## interface ISchemaPropMeta  <a id="crossplane-cdk8s-ischemapropmeta"></a>
 
 
 
@@ -1338,14 +1338,14 @@ Name | Type | Description
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **description**? | <code>string</code> | __*Optional*__
-**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code> | __*Optional*__
-**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code> | __*Optional*__
+**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code> | __*Optional*__
+**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code> | __*Optional*__
 
 
 
-## interface ISchemaPropMetaInteger  <a id="crossplane-cdk-ischemapropmetainteger"></a>
+## interface ISchemaPropMetaInteger  <a id="crossplane-cdk8s-ischemapropmetainteger"></a>
 
 
 
@@ -1359,16 +1359,16 @@ Name | Type | Description
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **description**? | <code>string</code> | __*Optional*__
 **max**? | <code>number</code> | __*Optional*__
 **min**? | <code>number</code> | __*Optional*__
-**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code> | __*Optional*__
-**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code> | __*Optional*__
+**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code> | __*Optional*__
+**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code> | __*Optional*__
 
 
 
-## interface ISchemaPropMetaString  <a id="crossplane-cdk-ischemapropmetastring"></a>
+## interface ISchemaPropMetaString  <a id="crossplane-cdk8s-ischemapropmetastring"></a>
 
 
 
@@ -1382,14 +1382,14 @@ Name | Type | Description
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **description**? | <code>string</code> | __*Optional*__
-**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk-metauiinputprops)</code> | __*Optional*__
-**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk-metauisectionprops)</code> | __*Optional*__
+**uiInput**? | <code>[MetaUIInputProps](#crossplane-cdk8s-metauiinputprops)</code> | __*Optional*__
+**uiSection**? | <code>[MetaUISectionProps](#crossplane-cdk8s-metauisectionprops)</code> | __*Optional*__
 
 
 
-## interface IVersionMeta  <a id="crossplane-cdk-iversionmeta"></a>
+## interface IVersionMeta  <a id="crossplane-cdk8s-iversionmeta"></a>
 
 
 
@@ -1405,7 +1405,7 @@ Name | Type | Description
 
 
 
-## struct MetaUIInputIntegerPropOverrides  <a id="crossplane-cdk-metauiinputintegerpropoverrides"></a>
+## struct MetaUIInputIntegerPropOverrides  <a id="crossplane-cdk8s-metauiinputintegerpropoverrides"></a>
 
 
 
@@ -1417,7 +1417,7 @@ Name | Type | Description
 **customError**? | <code>string</code> | __*Optional*__
 **default**? | <code>number</code> | __*Optional*__
 **description**? | <code>string</code> | defaults to ISchemaPropMeta.description if not specified.<br/>__*Optional*__
-**inputType**? | <code>[InputType](#crossplane-cdk-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
+**inputType**? | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
 **max**? | <code>number</code> | defaults to ISchemaPropMetaInteger.max if not specified.<br/>__*Optional*__
 **min**? | <code>number</code> | defaults to ISchemaPropMetaInteger.min if not specified.<br/>__*Optional*__
 **name**? | <code>string</code> | defaults to camel case ISchemaPropMeta.path if not specified.<br/>__*Optional*__
@@ -1427,7 +1427,7 @@ Name | Type | Description
 
 
 
-## struct MetaUIInputIntegerProps  <a id="crossplane-cdk-metauiinputintegerprops"></a>
+## struct MetaUIInputIntegerProps  <a id="crossplane-cdk8s-metauiinputintegerprops"></a>
 
 
 
@@ -1436,12 +1436,12 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**inputType** | <code>[InputType](#crossplane-cdk-inputtype)</code> | <span></span>
+**inputType** | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | <span></span>
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
 **title** | <code>string</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **customError**? | <code>string</code> | __*Optional*__
 **default**? | <code>number</code> | __*Optional*__
 **description**? | <code>string</code> | __*Optional*__
@@ -1450,7 +1450,7 @@ Name | Type | Description
 
 
 
-## struct MetaUIInputPropOverrides  <a id="crossplane-cdk-metauiinputpropoverrides"></a>
+## struct MetaUIInputPropOverrides  <a id="crossplane-cdk8s-metauiinputpropoverrides"></a>
 
 
 Overrides with optional inputs for fluent API with reasonable defaults.
@@ -1461,7 +1461,7 @@ Name | Type | Description
 -----|------|-------------
 **customError**? | <code>string</code> | __*Optional*__
 **description**? | <code>string</code> | defaults to ISchemaPropMeta.description if not specified.<br/>__*Optional*__
-**inputType**? | <code>[InputType](#crossplane-cdk-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
+**inputType**? | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
 **name**? | <code>string</code> | defaults to camel case ISchemaPropMeta.path if not specified.<br/>__*Optional*__
 **path**? | <code>string</code> | defaults to ISchemaPropMeta.path if not specified.<br/>__*Optional*__
 **required**? | <code>boolean</code> | defaults to ISchemaPropMeta.required if not specified.<br/>__*Optional*__
@@ -1469,7 +1469,7 @@ Name | Type | Description
 
 
 
-## struct MetaUIInputProps  <a id="crossplane-cdk-metauiinputprops"></a>
+## struct MetaUIInputProps  <a id="crossplane-cdk8s-metauiinputprops"></a>
 
 
 
@@ -1478,18 +1478,18 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**inputType** | <code>[InputType](#crossplane-cdk-inputtype)</code> | <span></span>
+**inputType** | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | <span></span>
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
 **title** | <code>string</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **customError**? | <code>string</code> | __*Optional*__
 **description**? | <code>string</code> | __*Optional*__
 
 
 
-## struct MetaUIInputStringPropOverrides  <a id="crossplane-cdk-metauiinputstringpropoverrides"></a>
+## struct MetaUIInputStringPropOverrides  <a id="crossplane-cdk8s-metauiinputstringpropoverrides"></a>
 
 
 
@@ -1501,7 +1501,7 @@ Name | Type | Description
 **customError**? | <code>string</code> | __*Optional*__
 **default**? | <code>string</code> | __*Optional*__
 **description**? | <code>string</code> | defaults to ISchemaPropMeta.description if not specified.<br/>__*Optional*__
-**inputType**? | <code>[InputType](#crossplane-cdk-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
+**inputType**? | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | defaults to InputType.SINGLE_INPUT.<br/>__*Optional*__
 **name**? | <code>string</code> | defaults to camel case ISchemaPropMeta.path if not specified.<br/>__*Optional*__
 **path**? | <code>string</code> | defaults to ISchemaPropMeta.path if not specified.<br/>__*Optional*__
 **required**? | <code>boolean</code> | defaults to ISchemaPropMeta.required if not specified.<br/>__*Optional*__
@@ -1509,7 +1509,7 @@ Name | Type | Description
 
 
 
-## struct MetaUIInputStringProps  <a id="crossplane-cdk-metauiinputstringprops"></a>
+## struct MetaUIInputStringProps  <a id="crossplane-cdk8s-metauiinputstringprops"></a>
 
 
 
@@ -1518,19 +1518,19 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**inputType** | <code>[InputType](#crossplane-cdk-inputtype)</code> | <span></span>
+**inputType** | <code>[InputType](#crossplane-cdk8s-inputtype)</code> | <span></span>
 **name** | <code>string</code> | <span></span>
 **path** | <code>string</code> | <span></span>
 **required** | <code>boolean</code> | <span></span>
 **title** | <code>string</code> | <span></span>
-**type** | <code>[PropType](#crossplane-cdk-proptype)</code> | <span></span>
+**type** | <code>[PropType](#crossplane-cdk8s-proptype)</code> | <span></span>
 **customError**? | <code>string</code> | __*Optional*__
 **default**? | <code>string</code> | __*Optional*__
 **description**? | <code>string</code> | __*Optional*__
 
 
 
-## struct MetaUISectionProps  <a id="crossplane-cdk-metauisectionprops"></a>
+## struct MetaUISectionProps  <a id="crossplane-cdk8s-metauisectionprops"></a>
 
 
 
@@ -1544,7 +1544,7 @@ Name | Type | Description
 
 
 
-## struct ProviderDep  <a id="crossplane-cdk-providerdep"></a>
+## struct ProviderDep  <a id="crossplane-cdk8s-providerdep"></a>
 
 
 
@@ -1558,7 +1558,7 @@ Name | Type | Description
 
 
 
-## struct ResourceProps  <a id="crossplane-cdk-resourceprops"></a>
+## struct ResourceProps  <a id="crossplane-cdk8s-resourceprops"></a>
 
 
 Initialization properties for resources.
@@ -1572,7 +1572,7 @@ Name | Type | Description
 
 
 
-## enum InputType  <a id="crossplane-cdk-inputtype"></a>
+## enum InputType  <a id="crossplane-cdk8s-inputtype"></a>
 
 
 
@@ -1581,7 +1581,7 @@ Name | Description
 **SINGLE_INPUT** |
 
 
-## enum PropType  <a id="crossplane-cdk-proptype"></a>
+## enum PropType  <a id="crossplane-cdk8s-proptype"></a>
 
 
 

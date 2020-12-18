@@ -8,9 +8,9 @@ const project = new ConstructLibraryCdk8s({
   authorAddress: 'prasek@gmail.com',
   authorName: 'Phil Prasek',
   cdk8sVersion: CDK8S_VERSION,
-  name: 'crossplane-cdk',
+  name: 'crossplane-cdk8s',
   description: 'CDK for Crossplane',
-  repository: 'https://github.com/crossplane-contrib/crossplane-cdk.git',
+  repository: 'https://github.com/crossplane-contrib/crossplane-cdk8s.git',
   defaultReleaseBranch: 'master',
   bundledDeps: [
     'codemaker@^1.16.0',
@@ -61,5 +61,4 @@ project.tryFindJsonFile('tsconfig.jest.json').obj.include.push('examples/**/*.ts
 
 
 project.synth();
-
 

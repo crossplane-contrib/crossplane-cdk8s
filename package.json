@@ -1,9 +1,9 @@
 {
-  "name": "crossplane-cdk",
+  "name": "crossplane-cdk8s",
   "description": "CDK for Crossplane",
   "repository": {
     "type": "git",
-    "url": "https://github.com/crossplane-contrib/crossplane-cdk.git"
+    "url": "https://github.com/crossplane-contrib/crossplane-cdk8s.git"
   },
   "bin": {},
   "scripts": {

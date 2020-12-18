@@ -18,7 +18,7 @@ Compose your own cloud APIs in Kubernetes using familiar languages including Typ
 ## Overview
 Kubernetes was designed for extensibility and projects like [Crossplane](https://crossplane.io) have enabled you to define cloud API abstractions in idiomatic Kubernetes YAML, but what if you’re more familiar with TypeScript, Python, or Java? If managing YAML indentation has you down, is there a better way to define CRDs and composite resources that capture your infrastructure best practices and to dynamically generate subnets, CIDR ranges, and more -- without writing complex controllers in Go?
 
-Crossplane-cdk is a new multi-language toolkit built on [cdk8s](https://cdk8s.io) to define CRDs and composite Kubernetes resources with all the benefits of using imperative code and libraries to build declarative resources. Crossplane-cdk can statically generate CRDs and compositions in a CI pipeline -- and future versions will allow `Compositions` to run dynamically behind the Kubernetes API line with Crossplane and a cdk8s sidecar. The result is faster platform definition and app delivery using your languages of choice.
+crossplane-cdk8s is a new multi-language toolkit built on [cdk8s](https://cdk8s.io) to define CRDs and composite Kubernetes resources with all the benefits of using imperative code and libraries to build declarative resources. Crossplane-cdk can statically generate CRDs and compositions in a CI pipeline -- and future versions will allow `Compositions` to run dynamically behind the Kubernetes API line with Crossplane and a cdk8s sidecar. The result is faster platform definition and app delivery using your languages of choice.
 
 ![Overview](docs/media/overview.png)
 
@@ -102,9 +102,9 @@ provider.pkg.crossplane.io/crossplane-provider-helm   True        True      regi
 
 Clone this repo:
 ```console
-git clone https://github.com/crossplane-contrib/crossplane-cdk.git
+git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
 
-cd crossplane-cdk
+cd crossplane-cdk8s
 ```
 
 Create `ProviderConfig` and `Secret`
@@ -144,9 +144,9 @@ Note: the configs in this guide use the `team1` as their `Workspace` / `namespac
 
 #### Clone this repo
 ```console
-git clone https://github.com/crossplane-contrib/crossplane-cdk.git
+git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
 
-cd crossplane-cdk/examples/typescript/app-dev-ops
+cd crossplane-cdk8s/examples/typescript/app-dev-ops
 ```
 
 #### import CRDs from control cluster
@@ -326,7 +326,7 @@ Since we're using the `crossplane-cdk8s` repo and the `crossplane/provider-aws` 
 
 To update the imported `crossplane/provider-aws` resources:
 ```console
-cd crossplane-cdk/examples/typescript/platform-ref-aws
+cd crossplane-cdk8s/examples/typescript/platform-ref-aws
 
 cdk8s import -l typescript github.com:crossplane/provider-aws
 # or
@@ -338,7 +338,7 @@ cdk8s import -l typescript github.com:crossplane/provider-aws@0.15.0
 #### Clone GitHub repo:
 
 ```console
-git clone https://github.com/crossplane-contrib/crossplane-cdk.git
+git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
 
 yarn install
 
