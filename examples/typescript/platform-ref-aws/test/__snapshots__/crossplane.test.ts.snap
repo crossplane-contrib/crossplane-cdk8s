@@ -65,7 +65,7 @@ configSections:
 - title: Database Size
   description: Enter information to size your database
   items:
-  - name: storageGB
+  - name: specParametersStorageGb
     controlType: singleInput
     type: integer
     path: .spec.parameters.storageGB
@@ -76,7 +76,7 @@ configSections:
     - minimum: 1
     - maximum: 500
     - required: true
-  - name: networkRef
+  - name: specParametersNetworkRefId
     controlType: singleInput
     type: string
     path: .spec.parameters.networkRef.id
@@ -88,7 +88,7 @@ configSections:
     - customError: >-
         Network ref is required and should match the network ref of the app
         cluster.
-  - name: writeSecretRef
+  - name: specWriteSecretRef
     controlType: singleInput
     type: string
     path: .spec.writeConnectionSecretToRef.name
@@ -143,6 +143,8 @@ configSections:
                         },
                         "storageGB": Object {
                           "description": "GB of storage for your database",
+                          "maximum": 500,
+                          "minimum": 1,
                           "type": "integer",
                         },
                       },
@@ -704,20 +706,20 @@ configSections:
 - title: Cluster Info
   description: Information about this cluster
   items:
-  - name: id
+  - name: specId
     controlType: singleInput
     type: string
-    path: \\".spec.id\\"
+    path: .spec.id
     title: Cluster ID
     description: Cluster ID that other objects will use to refer to this cluster
     default: platform-ref-aws-cluster
     validation:
     - required: true
-      customError: Cluster ID is required.
-  - name: writeSecretRef
+    - customError: Cluster ID is required.
+  - name: specWriteSecretRef
     controlType: singleInput
     type: string
-    path: \\".spec.writeConnectionSecretToRef.name\\"
+    path: .spec.writeConnectionSecretToRef.name
     title: Connection Secret Ref
     description: name of the secret to write to this namespace
     default: cluster-conn
@@ -726,23 +728,23 @@ configSections:
 - title: Cluster Nodes
   description: Enter information to size your cluster
   items:
-  - name: clusterNodeCount
+  - name: specParametersNodesCount
     controlType: singleInput
     type: integer
-    path: \\".spec.parameters.nodes.count\\"
+    path: .spec.parameters.nodes.count
     title: Node Count
-    description: Number of nodes in the cluster
+    description: 'Desired node count, from 1 to 100.'
     default: 1
     validation:
     - minimum: 1
     - maximum: 100
     - required: true
-      customError: Node count is required.
-  - name: clusterNodeSize
+    - customError: Node count is required.
+  - name: specParametersNodesSize
     controlType: singleSelect
-    path: \\".spec.parameters.nodes.size\\"
+    path: .spec.parameters.nodes.size
     title: Node Size
-    description: Desired node count, from 1 to 100.
+    description: Size of node.
     default: small
     enum:
     - small
@@ -750,32 +752,33 @@ configSections:
     - large
     validation:
     - required: true
-      customError: Node size is required.
+    - customError: Node size is required.
 - title: Cluster Networking
   description: Select a network fabric for your cluster
   items:
-  - name: networkRef
+  - name: specParametersNetworkRefId
     controlType: singleInput
     type: string
-    path: \\".spec.parameters.networkRef.id\\"
+    path: .spec.parameters.networkRef.id
     title: Network Ref
-    description: Network fabric to connect the database to
+    description: ID of the Network object this ref points to.
     default: platform-ref-aws-network
     validation:
     - required: true
-      customError: Network ref is required.
+    - customError: >-
+        Network ref is required and should match the network ref of the app
+        cluster.
 - title: Cluster Services
   description: Configure cluster services and operators
   items:
-  - name: promVersion
+  - name: specParametersServicesOperatorsPrometheusVersion
     controlType: singleInput
     type: string
-    path: \\".spec.parameters.services.operators.prometheus.version\\"
+    path: .spec.parameters.services.operators.prometheus.version
     title: Prometheus Chart Version
     description: The version of kube-prometheus-stack chart to install
     default: 10.1.0
-    validation:
-    - required: false",
+",
       },
       "name": "compositeclusters.aws.platformref.crossplane.io",
     },
@@ -802,11 +805,11 @@ configSections:
                 "spec": Object {
                   "properties": Object {
                     "id": Object {
-                      "description": "ID of this Cluster that other objects will use to refer to it.",
+                      "description": "Cluster ID that other objects will use to refer to this cluster",
                       "type": "string",
                     },
                     "parameters": Object {
-                      "description": "Cluster configuration parameters.",
+                      "description": "Cluster node configuration parameters",
                       "properties": Object {
                         "networkRef": Object {
                           "description": "A reference to the Network object that this cluster should be connected to.",
@@ -822,10 +825,11 @@ configSections:
                           "type": "object",
                         },
                         "nodes": Object {
-                          "description": "Cluster node configuration parameters.",
                           "properties": Object {
                             "count": Object {
                               "description": "Desired node count, from 1 to 100.",
+                              "maximum": 100,
+                              "minimum": 1,
                               "type": "integer",
                             },
                             "size": Object {
@@ -854,7 +858,7 @@ configSections:
                                   "description": "Configuration for the Prometheus operator.",
                                   "properties": Object {
                                     "version": Object {
-                                      "description": "Prometheus operator version to run.",
+                                      "description": "The version of kube-prometheus-stack chart to install",
                                       "type": "string",
                                     },
                                   },

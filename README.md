@@ -3,10 +3,12 @@
 Compose your own cloud APIs in Kubernetes using familiar languages including TypeScript, Python, and Java.
 
 ## Contents
+
 * [Overview](#overview)
 * [Quick Start](#quick-start)
   * [Install Platform Configuration](#install-platform-configuration)
   * [Provision Kubernetes Environment](#provision-kubernetes-environment)
+  * [Cleanup & Uninstall](#cleanup--uninstall)
 * [Build your own Platform Configuration](#build-your-own-platform-configuration)
   * [Introduction](#introduction)
   * [Write Code](#write-code)
@@ -16,6 +18,7 @@ Compose your own cloud APIs in Kubernetes using familiar languages including Typ
 * [Learn More](#learn-more)
 
 ## Overview
+
 Kubernetes was designed for extensibility and projects like [Crossplane](https://crossplane.io) have enabled you to define cloud API abstractions in idiomatic Kubernetes YAML, but what if you’re more familiar with TypeScript, Python, or Java? If managing YAML indentation has you down, is there a better way to define CRDs and composite resources that capture your infrastructure best practices and to dynamically generate subnets, CIDR ranges, and more -- without writing complex controllers in Go?
 
 crossplane-cdk8s is a new multi-language toolkit built on [cdk8s](https://cdk8s.io) to define CRDs and composite Kubernetes resources with all the benefits of using imperative code and libraries to build declarative resources. Crossplane-cdk can statically generate CRDs and compositions in a CI pipeline -- and future versions will allow `Compositions` to run dynamically behind the Kubernetes API line with Crossplane and a cdk8s sidecar. The result is faster platform definition and app delivery using your languages of choice.
@@ -23,6 +26,7 @@ crossplane-cdk8s is a new multi-language toolkit built on [cdk8s](https://cdk8s.
 ![Overview](docs/media/overview.png)
 
 ### Example AWS Platform in TypeScript
+
 The examples in this repository include an AWS Platform
 [Configuration](https://crossplane.io/docs)
 written entirely in TypeScript using `cdk8s`, `crossplane-cdk8s` L2
@@ -65,10 +69,13 @@ Note: the Platform instance should have Crossplane v1.0 or higher as this
 dependencies listed in crossplane.yaml.
 
 #### Install Crossplane CLI
+
 A kubectl extension for convenience.
+
 ```console
 curl -sL https://raw.githubusercontent.com/crossplane/crossplane/release-1.0/install.sh | sh
-cp kubectl-crossplane /usr/local/bin
+sudo mv kubectl-crossplane /usr/local/bin
+kubectl crossplane --help
 ```
 
 See [Crossplane Docs](https://crossplane.github.io/docs/v1.0/getting-started/install-configure.html) for details.
@@ -76,7 +83,7 @@ See [Crossplane Docs](https://crossplane.github.io/docs/v1.0/getting-started/ins
 #### Install Platform Configuration Package
 
 ```console
-PLATFORM_CONFIG=registry.upbound.io/prasek/platform-ref-aws:v0.2.1
+PLATFORM_CONFIG=registry.upbound.io/prasek/platform-ref-aws:v0.2.2
 
 kubectl crossplane install configuration ${PLATFORM_CONFIG}
 ```
@@ -101,6 +108,7 @@ provider.pkg.crossplane.io/crossplane-provider-helm   True        True      regi
 #### Configure Cloud Provider
 
 Clone this repo:
+
 ```console
 git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
 
@@ -115,6 +123,8 @@ AWS_PROFILE=default && echo -e "[default]\naws_access_key_id = $(aws configure g
 kubectl create secret generic aws-creds -n crossplane-system --from-file=key=./creds.conf
 
 kubectl apply -f examples/typescript/platform-ref-aws/hack/aws-default-provider.yaml
+
+rm creds.conf
 ```
 
 ### Invite App Teams to your Organization in Upbound Cloud
@@ -143,6 +153,7 @@ App teams can self-service or platform teams automate deployment in pipelines or
 Note: the configs in this guide use the `team1` as their `Workspace` / `namespace`.
 
 #### Clone this repo
+
 ```console
 git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
 
@@ -150,6 +161,7 @@ cd crossplane-cdk8s/examples/typescript/app-dev-ops
 ```
 
 #### import CRDs from control cluster
+
 ```console
 cdk8s import --language typescript crds.yaml
 ```
@@ -248,6 +260,7 @@ kubectl delete -f dist/dev-env.k8s.yaml
 ```
 
 which should result in the `claims` being deleted:
+
 ```console
 cluster.aws.platformref.crossplane.io "eks-cluster" deleted
 network.aws.platformref.crossplane.io "network-fabric" deleted
@@ -269,7 +282,7 @@ No resources found
 #### Uninstall Provider & Platform Configuration
 
 ```console
-kubectl delete pkg
+kubectl delete pkg --all
 ```
 
 #### Uninstall Crossplane kubectl plugin
@@ -287,23 +300,25 @@ To extend the existing example platform in TypeScript we'll be using this workfl
 ![Compose](docs/media/platform.png)
 
 #### APIs in this Platform Configuration* `Cluster` - provision a fully configured EKS cluster
-    * `EKSCluster`
-    * `NodeGroup`
-    * `IAMRole`
-    * `IAMRolePolicyAttachment`
-    * `HelmReleases` for Prometheus and other cluster services.
+
+* `EKSCluster`
+  * `NodeGroup`
+  * `IAMRole`
+  * `IAMRolePolicyAttachment`
+  * `HelmReleases` for Prometheus and other cluster services.
 * `Network` - fabric for a `Cluster` to securely connect to Data Services and
   the Internet.
-    * `VPC`
-    * `Subnet`
-    * `InternetGateway`
-    * `RouteTable`
-    * `SecurityGroup`
+  * `VPC`
+  * `Subnet`
+  * `InternetGateway`
+  * `RouteTable`
+  * `SecurityGroup`
 * `PostgreSQLInstance` - provision a PostgreSQL RDS instance that securely connects to a `Cluster`
-    * `RDSInstance`
-    * `DBSubnetGroup`
+  * `RDSInstance`
+  * `DBSubnetGroup`
 
 #### Core Crossplane Resources
+
 `crossplane-cdk8s` provides cdk8s L2 constructs for core Crossplane types:
 
 * The Platform `Configuration` Crossplane package metadata.
@@ -325,6 +340,7 @@ Docs](https://crossplane.github.io/docs/v0.13/getting-started/compose-infrastruc
 Since we're using the `crossplane-cdk8s` repo and the `crossplane/provider-aws` resources have already been imported you can skip directly to [build and push](#build).
 
 To update the imported `crossplane/provider-aws` resources:
+
 ```console
 cd crossplane-cdk8s/examples/typescript/platform-ref-aws
 
@@ -333,9 +349,13 @@ cdk8s import -l typescript github.com:crossplane/provider-aws
 cdk8s import -l typescript github.com:crossplane/provider-aws@0.15.0
 ```
 
+See the follow examples for how to create `CompositeResourceDefinitions` and `Compositions`:
+
+* XRDs: examples/typescript/platform-ref-aws/charts/cluster.ts
+
 ### Build
 
-#### Clone GitHub repo:
+#### Clone GitHub repo
 
 ```console
 git clone https://github.com/crossplane-contrib/crossplane-cdk8s.git
@@ -377,6 +397,7 @@ kubectl crossplane build configuration --name package.xpkg
 ```
 
 ### Push
+
 Create a `Repository` called `platform-ref-aws` in your Upbound Cloud `Organization`:
 
 Set these to match your settings:
@@ -385,7 +406,7 @@ Set these to match your settings:
 UPBOUND_ORG=acme
 UPBOUND_ACCOUNT_EMAIL=me@acme.io
 REPO=platform-ref-aws
-VERSION_TAG=v0.2.1
+VERSION_TAG=v0.2.2
 REGISTRY=registry.upbound.io
 PLATFORM_CONFIG=${REGISTRY:+$REGISTRY/}${UPBOUND_ORG}/${REPO}:${VERSION_TAG}
 ```
@@ -403,6 +424,7 @@ kubectl crossplane push configuration ${PLATFORM_CONFIG} -f package.xpkg
 ```
 
 ### Install
+
 Install package into an Upbound `Platform` instance.
 
 ```console
