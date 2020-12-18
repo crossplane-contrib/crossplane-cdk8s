@@ -11,7 +11,7 @@ export class ConfigurationChart extends Chart {
     const config = new crossplane.Configuration(this, 'config', {
       name: 'platform-ref-aws',
       company: 'Upbound',
-      maintainer: 'Jared Watts <jared@upbound.io>',
+      maintainer: 'Phil Prasek <phil@upbound.io>',
       keywords: ['aws', 'cloud-native', 'kubernetes', 'example', 'platform', 'reference'],
       source: 'github.com/upbound/platform-ref-aws',
       license: 'Apache-2.0',

@@ -160,16 +160,16 @@
       "name": "compile-examples",
       "steps": [
         {
-          "exec": "(cd examples/typescript/app-dev-ops && rm -fr imports && npx cdk8s import)"
+          "exec": "(cd examples/typescript/acme-platform-aws && rm -fr imports && npx cdk8s import)"
         },
         {
-          "exec": "(cd examples/typescript/app-dev-ops && npx cdk8s synth)"
+          "exec": "(cd examples/typescript/acme-platform-aws && npx cdk8s synth)"
         },
         {
-          "exec": "(cd examples/typescript/platform-ref-aws && rm -fr imports && npx cdk8s import)"
+          "exec": "(cd examples/typescript/acme-platform-aws-consumer && rm -fr imports && npx cdk8s import)"
         },
         {
-          "exec": "(cd examples/typescript/platform-ref-aws && npx cdk8s synth)"
+          "exec": "(cd examples/typescript/acme-platform-aws-consumer && npx cdk8s synth)"
         }
       ]
     }
