@@ -3,6 +3,7 @@
 Compose your own cloud APIs in Kubernetes using familiar languages including TypeScript, Python, and Java.
 
 ## Contents
+
 * [Overview](#overview)
 * [Getting Started](#getting-started)
   * [Build your own Platform Configuration](#build-your-own-platform-configuration)
@@ -39,11 +40,13 @@ The examples in this repository are a starting point to build your own
 internal cloud platform for use with [Upbound Cloud](https://upbound.io) or
 any self-hosted Crossplane instance. They are written entirely in languages like
 TypeScript using:
+
 * `crossplane-cdk8s` high level abstractions for - `CompositeResourceDefinitions`, `Compositions`, `Configurations`
 * imported cloud service primitives - `cdk8s import github:crossplane/provider-aws`
 * `cdk8s` tooling
 
 To build and consume your internal cloud platform, `cdk8s` can be used by:
+
 * `Platform Builders` - to author Crossplane Platform `Configurations` that vend a set of cloud APIs for teams to self-service
 * `Platform Consumers` - to provision resources from the self-service API
 
@@ -118,6 +121,7 @@ sudo mv kubectl-crossplane /usr/local/bin
 ```
 
 #### Init Project
+
 Generate a new project with `cdk8s init` or [projen](https://github.com/projen/projen):
 
 ```console
@@ -157,19 +161,52 @@ Any project known to [doc.crds.dev](https://doc.crds.dev/) can be imported with 
 
 ### Code
 
-A [Crossplane](https://crossplane.io) Platform `Configurations` requires the following:
+A [Crossplane](https://crossplane.io) Platform `Configuration` requires the following:
 
 * `Configuration` package metadata
 * `CompositeResourceDefinitions` (`XRDs`) define the platform's self-service APIs
 * `Compositions` offer classes-of-service for each self-service API
 
 In `examples/typescript/acme-platform-aws` these resource are bundled into the following cdk8s `Charts`:
+
 * [charts/config.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/config.ts) - `Configuration` package metadata
 * [charts/postgres.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/postgres.ts) - `XRD` and `Composition`
 * [charts/cluster.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/cluster.ts) - `XRD` and `Composition`
 * [charts/network.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/network.ts) - `XRD` and `Composition`
 
 Each `Chart` emits a separate YAML file.
+
+[main.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/main.ts) adds these `Charts` to a cdk8s `App` called `pkg` and calls `synth()` to render the YAML files:
+
+```ts
+import { App } from 'cdk8s';
+import { ClusterChart } from './charts/cluster';
+import { ConfigurationChart } from './charts/config';
+import { NetworkChart } from './charts/network';
+import { PostgresChart } from './charts/postgres';
+
+const pkg = new App();
+
+new ConfigurationChart(pkg, 'crossplane');
+new ClusterChart(pkg, 'cluster-api');
+new NetworkChart(pkg, 'network-api');
+new PostgresChart(pkg, 'postgres-api');
+
+pkg.synth();
+
+```
+
+When `cdk8s synth` is called it executes the `app` defined in the [cdk8s.yaml](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/cdk8s.yaml):
+
+```yaml
+app: node main.js
+```
+
+You can change the `app` command to whatever you like, for example:
+
+```yaml
+app: npx ts-node main.ts
+```
 
 #### Configuration (Package Metadata)
 
@@ -196,6 +233,7 @@ Each `Chart` emits a separate YAML file.
 ```
 
 #### CompositeResourceDefinition (XRD)
+
 [charts/postgres.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/postgres.ts) - `CompositeResourceDefinition`
 
 ```ts
@@ -290,10 +328,11 @@ cdk8s synth
 ```
 
 This will generate one or more YAML files in the `dist` directory, for example:
+
 * `dist/project.k8s.yaml`
 
-However until you add content to `synth` it will be empty, so let's switch to
-the `acme-platform-aws` example.
+However until you add `Charts` to your `main.ts` the `cdk8s synth` output will be
+empty, so let's switch to the `acme-platform-aws` example.
 
 #### Build and Synth: `examples/typescript/acme-platform-aws`
 
@@ -425,7 +464,7 @@ See [crossplane.io/docs](https://crossplane.io/docs) for how to connect Azure, G
 
 #### Share
 
-**Important**: the examples in this guide use the `team1` as their `Workspace` / `Namespace`.
+**Important**: the examples in this guide use `team1` as their `Workspace` / `Namespace`.
 
 If using [Upbound Cloud](https://upbound.io):
 

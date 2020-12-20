@@ -8,7 +8,7 @@ const pkg = new App();
 
 new ConfigurationChart(pkg, 'crossplane');
 new ClusterChart(pkg, 'cluster-api');
-new PostgresChart(pkg, 'postgres-api');
 new NetworkChart(pkg, 'network-api');
+new PostgresChart(pkg, 'postgres-api');
 
 pkg.synth();
