@@ -213,23 +213,22 @@ app: npx ts-node main.ts
 [charts/config.ts](https://github.com/crossplane-contrib/crossplane-cdk8s/blob/master/examples/typescript/acme-platform-aws/charts/config.ts) - `Configuration` package metadata
 
 ```ts
-    const config = new crossplane.Configuration(this, 'config', {
-      name: 'acme-platform-aws',
-      company: 'Upbound',
-      maintainer: 'Phil Prasek <phil@upbound.io>',
-      keywords: ['aws', 'cloud-native', 'kubernetes', 'example', 'platform', 'reference'],
-      source: 'github.com/crossplane-contrib/crossplane-cdk8s/examples/typescript/acme-platform-aws',
-      license: 'Apache-2.0',
-      descriptionShort: 'An example AWS platform for Kubernetes and Data Services.',
-      description: 'An example AWS platform for Kubernetes and Data Services.'
-      readme: fromResource('readme.md'),
-      crossplaneVersion: '>=v1.0.0-0',
-      iconData: fromResource('icon.txt'),
-    });
+const config = new crossplane.Configuration(this, 'config', {
+  name: 'acme-platform-aws',
+  company: 'Upbound',
+  maintainer: 'Phil Prasek <phil@upbound.io>',
+  keywords: ['aws', 'cloud-native', 'kubernetes', 'example', 'platform', 'reference'],
+  source: 'github.com/crossplane-contrib/crossplane-cdk8s/examples/typescript/acme-platform-aws',
+  license: 'Apache-2.0',
+  descriptionShort: 'An example AWS platform for Kubernetes and Data Services.',
+  description: 'An example AWS platform for Kubernetes and Data Services.'
+  readme: fromResource('readme.md'),
+  crossplaneVersion: '>=v1.0.0-0',
+  iconData: fromResource('icon.txt'),
+});
 
-    config.addProvider('registry.upbound.io/crossplane/provider-aws', '>=v0.14.0-0');
-    config.addProvider('registry.upbound.io/crossplane/provider-helm', '>=v0.3.6-0');
-}
+config.addProvider('registry.upbound.io/crossplane/provider-aws', '>=v0.14.0-0');
+config.addProvider('registry.upbound.io/crossplane/provider-helm', '>=v0.3.6-0');
 ```
 
 #### CompositeResourceDefinition (XRD)
