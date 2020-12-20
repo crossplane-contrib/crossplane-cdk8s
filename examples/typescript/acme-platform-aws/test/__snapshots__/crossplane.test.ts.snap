@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`platform-ref-aws 1`] = `
+exports[`acme-platform-aws 1`] = `
 Array [
   Object {
     "apiVersion": "meta.pkg.crossplane.io/v1alpha1",
@@ -14,7 +14,7 @@ Array [
         "keywords": "aws, cloud-native, kubernetes, example, platform, reference",
         "license": "Apache-2.0",
         "maintainer": "Phil Prasek <phil@upbound.io>",
-        "readme": "This reference platform \`Configuration\` for Kubernetes and Data Services is a
+        "readme": "This Acme platform \`Configuration\` for Kubernetes and Data Services is a
 starting point to build, run, and operate your own internal cloud platform and
 offer a self-service console and API to your internal teams. It provides
 platform APIs to provision fully configured EKS clusters, with secure
@@ -24,15 +24,14 @@ from the [Crossplane AWS Provider](https://doc.crds.dev/github.com/crossplane/pr
 App deployments can securely connect to the infrastructure they need using secrets
 distributed directly to the app namespace.
 
-[Quickstart Guide](https://github.com/upbound/platform-ref-aws/#quick-start)
+[Quickstart Guide](https://github.com/crossplane-contrib/crossplane-cdk8s)
 
-[APIs in this Configuration](https://github.com/upbound/platform-ref-aws/#apis-in-this-configuration)
-
-To learn more checkout the [GitHub repo](https://github.com/upbound/platform-ref-aws/) that you can copy and customize to meet the exact needs of your organization!
-",
-        "source": "github.com/upbound/platform-ref-aws",
+To learn more checkout the examples in the [GitHub
+repo](https://github.com/crossplane-contrib/crossplane-cdk8s) that you can
+copy and customize to meet the exact needs of your organization!",
+        "source": "github.com/crossplane-contrib/crossplane-cdk8s/examples/typescript/acme-platform-aws",
       },
-      "name": "platform-ref-aws",
+      "name": "acme-platform-aws",
     },
     "spec": Object {
       "crossplane": Object {
@@ -53,7 +52,7 @@ To learn more checkout the [GitHub repo](https://github.com/upbound/platform-ref
 ]
 `;
 
-exports[`platform-ref-aws 2`] = `
+exports[`acme-platform-aws 2`] = `
 Array [
   Object {
     "apiVersion": "apiextensions.crossplane.io/v1",
@@ -82,7 +81,7 @@ configSections:
     path: .spec.parameters.networkRef.id
     title: Network Ref
     description: ID of the Network object this ref points to.
-    default: platform-ref-aws-network
+    default: acme-platform-aws-network
     validation:
     - required: true
     - customError: >-
@@ -99,7 +98,7 @@ configSections:
     - required: true
 ",
       },
-      "name": "compositepostgresqlinstances.aws.platformref.crossplane.io",
+      "name": "compositepostgresqlinstances.aws.platform.acme.io",
     },
     "spec": Object {
       "claimNames": Object {
@@ -112,7 +111,7 @@ configSections:
         "endpoint",
         "port",
       ],
-      "group": "aws.platformref.crossplane.io",
+      "group": "aws.platform.acme.io",
       "names": Object {
         "kind": "CompositePostgreSQLInstance",
         "plural": "compositepostgresqlinstances",
@@ -176,11 +175,11 @@ configSections:
       "labels": Object {
         "provider": "aws",
       },
-      "name": "compositepostgresqlinstances.aws.platformref.crossplane.io",
+      "name": "compositepostgresqlinstances.aws.platform.acme.io",
     },
     "spec": Object {
       "compositeTypeRef": Object {
-        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "apiVersion": "aws.platform.acme.io/v1alpha1",
         "kind": "CompositePostgreSQLInstance",
       },
       "resources": Array [
@@ -199,7 +198,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.parameters.networkRef.id",
-              "toFieldPath": "spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -260,7 +259,7 @@ configSections:
             },
             Object {
               "fromFieldPath": "spec.parameters.networkRef.id",
-              "toFieldPath": "spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -271,7 +270,7 @@ configSections:
 ]
 `;
 
-exports[`platform-ref-aws 3`] = `
+exports[`acme-platform-aws 3`] = `
 Array [
   Object {
     "apiVersion": "apiextensions.crossplane.io/v1",
@@ -289,7 +288,7 @@ configSections:
     path: \\".spec.id\\"
     title: Network ID
     description: Network ID that other objects will use to refer (and connect) to this network fabric
-    default: platform-ref-aws-network
+    default: acme-platform-aws-network
     validation:
     - required: true
       customError: Network ID is required.
@@ -302,19 +301,19 @@ configSections:
     path: \\".spec.clusterRef.id\\"
     title: Cluster Ref
     description: ID of the Cluster object that will use this network fabric
-    default: platform-ref-aws-cluster
+    default: acme-platform-aws-cluster
     validation:
     - required: true
       customError: Cluster ref is required.",
       },
-      "name": "compositenetworks.aws.platformref.crossplane.io",
+      "name": "compositenetworks.aws.platform.acme.io",
     },
     "spec": Object {
       "claimNames": Object {
         "kind": "Network",
         "plural": "networks",
       },
-      "group": "aws.platformref.crossplane.io",
+      "group": "aws.platform.acme.io",
       "names": Object {
         "kind": "CompositeNetwork",
         "plural": "compositenetworks",
@@ -368,11 +367,11 @@ configSections:
       "labels": Object {
         "provider": "aws",
       },
-      "name": "compositenetworks.aws.platformref.crossplane.io",
+      "name": "compositenetworks.aws.platform.acme.io",
     },
     "spec": Object {
       "compositeTypeRef": Object {
-        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "apiVersion": "aws.platform.acme.io/v1alpha1",
         "kind": "CompositeNetwork",
       },
       "resources": Array [
@@ -392,7 +391,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -412,7 +411,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -447,7 +446,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -482,7 +481,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -520,7 +519,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
             Object {
               "fromFieldPath": "spec.clusterRef.id",
@@ -570,7 +569,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
             Object {
               "fromFieldPath": "spec.clusterRef.id",
@@ -648,7 +647,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -659,7 +658,7 @@ configSections:
             "spec": Object {
               "forProvider": Object {
                 "description": "Allow access to PostgreSQL",
-                "groupName": "platform-ref-aws-cluster",
+                "groupName": "acme-platform-aws-cluster",
                 "ingress": Array [
                   Object {
                     "fromPort": 5432,
@@ -683,7 +682,7 @@ configSections:
           "patches": Array [
             Object {
               "fromFieldPath": "spec.id",
-              "toFieldPath": "metadata.labels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "metadata.labels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -694,7 +693,7 @@ configSections:
 ]
 `;
 
-exports[`platform-ref-aws 4`] = `
+exports[`acme-platform-aws 4`] = `
 Array [
   Object {
     "apiVersion": "apiextensions.crossplane.io/v1",
@@ -712,7 +711,7 @@ configSections:
     path: .spec.id
     title: Cluster ID
     description: Cluster ID that other objects will use to refer to this cluster
-    default: platform-ref-aws-cluster
+    default: acme-platform-aws-cluster
     validation:
     - required: true
     - customError: Cluster ID is required.
@@ -762,7 +761,7 @@ configSections:
     path: .spec.parameters.networkRef.id
     title: Network Ref
     description: ID of the Network object this ref points to.
-    default: platform-ref-aws-network
+    default: acme-platform-aws-network
     validation:
     - required: true
     - customError: >-
@@ -780,7 +779,7 @@ configSections:
     default: 10.1.0
 ",
       },
-      "name": "compositeclusters.aws.platformref.crossplane.io",
+      "name": "compositeclusters.aws.platform.acme.io",
     },
     "spec": Object {
       "claimNames": Object {
@@ -790,7 +789,7 @@ configSections:
       "connectionSecretKeys": Array [
         "kubeconfig",
       ],
-      "group": "aws.platformref.crossplane.io",
+      "group": "aws.platform.acme.io",
       "names": Object {
         "kind": "CompositeCluster",
         "plural": "compositeclusters",
@@ -897,17 +896,17 @@ configSections:
     "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "Composition",
     "metadata": Object {
-      "name": "compositeclusters.aws.platformref.crossplane.io",
+      "name": "compositeclusters.aws.platform.acme.io",
     },
     "spec": Object {
       "compositeTypeRef": Object {
-        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "apiVersion": "aws.platform.acme.io/v1alpha1",
         "kind": "CompositeCluster",
       },
       "resources": Array [
         Object {
           "base": Object {
-            "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+            "apiVersion": "aws.platform.acme.io/v1alpha1",
             "kind": "EKS",
           },
           "connectionDetails": Array [
@@ -956,7 +955,7 @@ configSections:
         },
         Object {
           "base": Object {
-            "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+            "apiVersion": "aws.platform.acme.io/v1alpha1",
             "kind": "Services",
           },
           "patches": Array [
@@ -978,13 +977,13 @@ configSections:
     "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
-      "name": "eks.aws.platformref.crossplane.io",
+      "name": "eks.aws.platform.acme.io",
     },
     "spec": Object {
       "connectionSecretKeys": Array [
         "kubeconfig",
       ],
-      "group": "aws.platformref.crossplane.io",
+      "group": "aws.platform.acme.io",
       "names": Object {
         "kind": "EKS",
         "plural": "eks",
@@ -1070,11 +1069,11 @@ configSections:
       "labels": Object {
         "provider": "aws",
       },
-      "name": "eks.aws.platformref.crossplane.io",
+      "name": "eks.aws.platform.acme.io",
     },
     "spec": Object {
       "compositeTypeRef": Object {
-        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "apiVersion": "aws.platform.acme.io/v1alpha1",
         "kind": "EKS",
       },
       "resources": Array [
@@ -1176,11 +1175,11 @@ configSections:
             },
             Object {
               "fromFieldPath": "spec.parameters.networkRef.id",
-              "toFieldPath": "spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]",
             },
             Object {
               "fromFieldPath": "spec.parameters.networkRef.id",
-              "toFieldPath": "spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -1324,7 +1323,7 @@ configSections:
             },
             Object {
               "fromFieldPath": "spec.parameters.networkRef.id",
-              "toFieldPath": "spec.forProvider.subnetSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]",
+              "toFieldPath": "spec.forProvider.subnetSelector.matchLabels[networks.aws.platform.acme.io/network-id]",
             },
           ],
         },
@@ -1374,10 +1373,10 @@ configSections:
     "apiVersion": "apiextensions.crossplane.io/v1",
     "kind": "CompositeResourceDefinition",
     "metadata": Object {
-      "name": "services.aws.platformref.crossplane.io",
+      "name": "services.aws.platform.acme.io",
     },
     "spec": Object {
-      "group": "aws.platformref.crossplane.io",
+      "group": "aws.platform.acme.io",
       "names": Object {
         "kind": "Services",
         "plural": "services",
@@ -1443,11 +1442,11 @@ configSections:
         "plan": "full",
         "provider": "helm",
       },
-      "name": "services.aws.platformref.crossplane.io",
+      "name": "services.aws.platform.acme.io",
     },
     "spec": Object {
       "compositeTypeRef": Object {
-        "apiVersion": "aws.platformref.crossplane.io/v1alpha1",
+        "apiVersion": "aws.platform.acme.io/v1alpha1",
         "kind": "Services",
       },
       "resources": Array [

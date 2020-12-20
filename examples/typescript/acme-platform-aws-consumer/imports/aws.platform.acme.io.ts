@@ -12,7 +12,7 @@ export class Cluster extends ApiObject {
    * Returns the apiVersion and kind for "Cluster"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+    apiVersion: 'aws.platform.acme.io/v1alpha1',
     kind: 'Cluster',
   }
 
@@ -286,7 +286,7 @@ export class Network extends ApiObject {
    * Returns the apiVersion and kind for "Network"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+    apiVersion: 'aws.platform.acme.io/v1alpha1',
     kind: 'Network',
   }
 
@@ -450,7 +450,7 @@ export class PostgreSqlInstance extends ApiObject {
    * Returns the apiVersion and kind for "PostgreSQLInstance"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+    apiVersion: 'aws.platform.acme.io/v1alpha1',
     kind: 'PostgreSQLInstance',
   }
 

@@ -1,13 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: compositenetworks.aws.platformref.crossplane.io
+  name: compositenetworks.aws.platform.acme.io
   labels:
     provider: aws
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: aws.platformref.crossplane.io/v1alpha1
+    apiVersion: aws.platform.acme.io/v1alpha1
     kind: CompositeNetwork
   resources:
     - base:
@@ -21,7 +21,7 @@ spec:
             enableDnsHostNames: true
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: InternetGateway
@@ -32,7 +32,7 @@ spec:
               matchControllerRef: true
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
@@ -53,7 +53,7 @@ spec:
                 value: "1"
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
@@ -74,7 +74,7 @@ spec:
                 value: "1"
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: Subnet
@@ -96,7 +96,7 @@ spec:
                 value: "1"
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
         - fromFieldPath: spec.clusterRef.id
           toFieldPath: spec.forProvider.tags[0].key
           transforms:
@@ -124,7 +124,7 @@ spec:
                 value: "1"
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
         - fromFieldPath: spec.clusterRef.id
           toFieldPath: spec.forProvider.tags[0].key
           transforms:
@@ -166,7 +166,7 @@ spec:
                     access: private
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: ec2.aws.crossplane.io/v1beta1
         kind: SecurityGroup
@@ -175,7 +175,7 @@ spec:
             region: us-west-2
             vpcIdSelector:
               matchControllerRef: true
-            groupName: platform-ref-aws-cluster
+            groupName: acme-platform-aws-cluster
             description: Allow access to PostgreSQL
             ingress:
               - fromPort: 5432
@@ -186,4 +186,4 @@ spec:
                     description: Everywhere
       patches:
         - fromFieldPath: spec.id
-          toFieldPath: metadata.labels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: metadata.labels[networks.aws.platform.acme.io/network-id]

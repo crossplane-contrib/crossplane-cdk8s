@@ -1,13 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: eks.aws.platformref.crossplane.io
+  name: eks.aws.platform.acme.io
   labels:
     provider: aws
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: aws.platformref.crossplane.io/v1alpha1
+    apiVersion: aws.platform.acme.io/v1alpha1
     kind: EKS
   resources:
     - base:
@@ -71,9 +71,9 @@ spec:
         - fromFieldPath: spec.writeConnectionSecretToRef.namespace
           toFieldPath: spec.writeConnectionSecretToRef.namespace
         - fromFieldPath: "spec.parameters.networkRef.id"
-          toFieldPath: spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]
         - fromFieldPath: "spec.parameters.networkRef.id"
-          toFieldPath: spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]
       connectionDetails:
         - fromConnectionSecretKey: kubeconfig
     - base:
@@ -166,7 +166,7 @@ spec:
                 medium: t3.medium
                 large: t3.large
         - fromFieldPath: "spec.parameters.networkRef.id"
-          toFieldPath: spec.forProvider.subnetSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]
+          toFieldPath: spec.forProvider.subnetSelector.matchLabels[networks.aws.platform.acme.io/network-id]
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: ProviderConfig

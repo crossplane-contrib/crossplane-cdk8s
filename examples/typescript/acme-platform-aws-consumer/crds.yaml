@@ -42,20 +42,20 @@ metadata:
     manager: crossplane
     operation: Update
     time: "2020-12-14T07:53:31Z"
-  name: clusters.aws.platformref.crossplane.io
+  name: clusters.aws.platform.acme.io
   ownerReferences:
   - apiVersion: apiextensions.crossplane.io/v1
     controller: true
     kind: CompositeResourceDefinition
-    name: compositeclusters.aws.platformref.crossplane.io
+    name: compositeclusters.aws.platform.acme.io
     uid: 369dab72-cabd-45db-8cfe-7c7c5033d5ff
   resourceVersion: "21587439"
-  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/clusters.aws.platformref.crossplane.io
+  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/clusters.aws.platform.acme.io
   uid: b11026b7-4f7e-4aa7-a5b1-4aa806e3e6d6
 spec:
   conversion:
     strategy: None
-  group: aws.platformref.crossplane.io
+  group: aws.platform.acme.io
   names:
     categories:
     - claim
@@ -284,20 +284,20 @@ metadata:
     manager: crossplane
     operation: Update
     time: "2020-12-14T07:53:32Z"
-  name: networks.aws.platformref.crossplane.io
+  name: networks.aws.platform.acme.io
   ownerReferences:
   - apiVersion: apiextensions.crossplane.io/v1
     controller: true
     kind: CompositeResourceDefinition
-    name: compositenetworks.aws.platformref.crossplane.io
+    name: compositenetworks.aws.platform.acme.io
     uid: 8f50e7ef-dadb-4e3c-a970-a4ee5c1bea8a
   resourceVersion: "21587456"
-  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/networks.aws.platformref.crossplane.io
+  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/networks.aws.platform.acme.io
   uid: 11ea509d-6b47-4c46-b8d7-c08d06c9e7cb
 spec:
   conversion:
     strategy: None
-  group: aws.platformref.crossplane.io
+  group: aws.platform.acme.io
   names:
     categories:
     - claim
@@ -487,20 +487,20 @@ metadata:
     manager: crossplane
     operation: Update
     time: "2020-12-14T07:54:01Z"
-  name: postgresqlinstances.aws.platformref.crossplane.io
+  name: postgresqlinstances.aws.platform.acme.io
   ownerReferences:
   - apiVersion: apiextensions.crossplane.io/v1
     controller: true
     kind: CompositeResourceDefinition
-    name: compositepostgresqlinstances.aws.platformref.crossplane.io
+    name: compositepostgresqlinstances.aws.platform.acme.io
     uid: b2f8d20f-b316-47f6-98d3-46129b136279
   resourceVersion: "21587533"
-  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/postgresqlinstances.aws.platformref.crossplane.io
+  selfLink: /apis/apiextensions.k8s.io/v1/customresourcedefinitions/postgresqlinstances.aws.platform.acme.io
   uid: 728b81a9-baf1-4218-8834-591ac83bdbfc
 spec:
   conversion:
     strategy: None
-  group: aws.platformref.crossplane.io
+  group: aws.platform.acme.io
   names:
     categories:
     - claim

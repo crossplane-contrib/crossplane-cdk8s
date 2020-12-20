@@ -2,22 +2,22 @@
 import { Chart, ApiObject } from 'cdk8s';
 import * as group from '../imports/apiextensions.crossplane.io';
 
-export function compositeclustersAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositeclusters.aws.platformref.crossplane.io/composition/apiextensions.crossplane.io') : ApiObject {
+export function compositeclustersAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositeclusters.aws.platform.acme.io/composition/apiextensions.crossplane.io') : ApiObject {
   return new group.Composition(chart, name,
     {
       metadata: {
-        name: 'compositeclusters.aws.platformref.crossplane.io',
+        name: 'compositeclusters.aws.platform.acme.io',
       },
       spec: {
         writeConnectionSecretsToNamespace: 'crossplane-system',
         compositeTypeRef: {
-          apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+          apiVersion: 'aws.platform.acme.io/v1alpha1',
           kind: 'CompositeCluster',
         },
         resources: [
           {
             base: {
-              apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+              apiVersion: 'aws.platform.acme.io/v1alpha1',
               kind: 'EKS',
             },
             connectionDetails: [
@@ -66,7 +66,7 @@ export function compositeclustersAwsPlatformrefCrossplaneIo(chart: Chart, name: 
           },
           {
             base: {
-              apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+              apiVersion: 'aws.platform.acme.io/v1alpha1',
               kind: 'Services',
             },
             patches: [
@@ -86,11 +86,11 @@ export function compositeclustersAwsPlatformrefCrossplaneIo(chart: Chart, name: 
   );
 }
 
-export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.aws.platformref.crossplane.io/composition/apiextensions.crossplane.io') : ApiObject {
+export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.aws.platform.acme.io/composition/apiextensions.crossplane.io') : ApiObject {
   return new group.Composition(chart, name,
     {
       metadata: {
-        name: 'eks.aws.platformref.crossplane.io',
+        name: 'eks.aws.platform.acme.io',
         labels: {
           provider: 'aws',
         },
@@ -98,7 +98,7 @@ export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.
       spec: {
         writeConnectionSecretsToNamespace: 'crossplane-system',
         compositeTypeRef: {
-          apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+          apiVersion: 'aws.platform.acme.io/v1alpha1',
           kind: 'EKS',
         },
         resources: [
@@ -179,11 +179,11 @@ export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.
               },
               {
                 fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'spec.forProvider.resourcesVpcConfig.securityGroupIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]',
               },
               {
                 fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'spec.forProvider.resourcesVpcConfig.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]',
               },
             ],
             connectionDetails: [
@@ -316,7 +316,7 @@ export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.
               },
               {
                 fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.subnetSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'spec.forProvider.subnetSelector.matchLabels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -364,11 +364,11 @@ export function eksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'eks.
   );
 }
 
-export function servicesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'services.aws.platformref.crossplane.io/composition/apiextensions.crossplane.io') : ApiObject {
+export function servicesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'services.aws.platform.acme.io/composition/apiextensions.crossplane.io') : ApiObject {
   return new group.Composition(chart, name,
     {
       metadata: {
-        name: 'services.aws.platformref.crossplane.io',
+        name: 'services.aws.platform.acme.io',
         labels: {
           plan: 'full',
           provider: 'helm',
@@ -377,7 +377,7 @@ export function servicesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 
       spec: {
         writeConnectionSecretsToNamespace: 'crossplane-system',
         compositeTypeRef: {
-          apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+          apiVersion: 'aws.platform.acme.io/v1alpha1',
           kind: 'Services',
         },
         resources: [
@@ -423,11 +423,11 @@ export function servicesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 
   );
 }
 
-export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositepostgresqlinstances.aws.platformref.crossplane.io/composition/apiextensions.crossplane.io') : ApiObject {
+export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositepostgresqlinstances.aws.platform.acme.io/composition/apiextensions.crossplane.io') : ApiObject {
   return new group.Composition(chart, name,
     {
       metadata: {
-        name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+        name: 'compositepostgresqlinstances.aws.platform.acme.io',
         labels: {
           provider: 'aws',
         },
@@ -435,7 +435,7 @@ export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Ch
       spec: {
         writeConnectionSecretsToNamespace: 'crossplane-system',
         compositeTypeRef: {
-          apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+          apiVersion: 'aws.platform.acme.io/v1alpha1',
           kind: 'CompositePostgreSQLInstance',
         },
         resources: [
@@ -454,7 +454,7 @@ export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Ch
             patches: [
               {
                 fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -500,7 +500,7 @@ export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Ch
               },
               {
                 fromFieldPath: 'spec.parameters.networkRef.id',
-                toFieldPath: 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platform.acme.io/network-id]',
               },
             ],
             connectionDetails: [
@@ -524,11 +524,11 @@ export function compositepostgresqlinstancesAwsPlatformrefCrossplaneIo(chart: Ch
   );
 }
 
-export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositenetworks.aws.platformref.crossplane.io/composition/apiextensions.crossplane.io') : ApiObject {
+export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: string = 'compositenetworks.aws.platform.acme.io/composition/apiextensions.crossplane.io') : ApiObject {
   return new group.Composition(chart, name,
     {
       metadata: {
-        name: 'compositenetworks.aws.platformref.crossplane.io',
+        name: 'compositenetworks.aws.platform.acme.io',
         labels: {
           provider: 'aws',
         },
@@ -536,7 +536,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
       spec: {
         writeConnectionSecretsToNamespace: 'crossplane-system',
         compositeTypeRef: {
-          apiVersion: 'aws.platformref.crossplane.io/v1alpha1',
+          apiVersion: 'aws.platform.acme.io/v1alpha1',
           kind: 'CompositeNetwork',
         },
         resources: [
@@ -556,7 +556,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -576,7 +576,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -611,7 +611,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -646,7 +646,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -684,7 +684,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
               {
                 fromFieldPath: 'spec.clusterRef.id',
@@ -734,7 +734,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
               {
                 fromFieldPath: 'spec.clusterRef.id',
@@ -812,7 +812,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },
@@ -826,7 +826,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
                   vpcIdSelector: {
                     matchControllerRef: true,
                   },
-                  groupName: 'platform-ref-aws-cluster',
+                  groupName: 'acme-platform-aws-cluster',
                   description: 'Allow access to PostgreSQL',
                   ingress: [
                     {
@@ -847,7 +847,7 @@ export function compositenetworksAwsPlatformrefCrossplaneIo(chart: Chart, name: 
             patches: [
               {
                 fromFieldPath: 'spec.id',
-                toFieldPath: 'metadata.labels[networks.aws.platformref.crossplane.io/network-id]',
+                toFieldPath: 'metadata.labels[networks.aws.platform.acme.io/network-id]',
               },
             ],
           },

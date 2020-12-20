@@ -9,10 +9,10 @@ export class ClusterChart extends Chart {
     super(scope, id);
 
     const xrd = new crossplane.CompositeResourceDefinition(this, 'cluster-xrd', {
-        name: 'compositeclusters.aws.platformref.crossplane.io'
+        name: 'compositeclusters.aws.platform.acme.io'
     });
 
-    xrd.group('aws.platformref.crossplane.io');
+    xrd.group('aws.platform.acme.io');
     xrd.claimKind('Cluster').plural('clusters');
     xrd.kind('CompositeCluster').plural('compositeclusters');
     xrd.connectionSecret().key('kubeconfig');
@@ -26,7 +26,7 @@ export class ClusterChart extends Chart {
         .description('Cluster ID that other objects will use to refer to this cluster')
         .uiInput({
           title: 'Cluster ID',
-          default: 'platform-ref-aws-cluster',
+          default: 'acme-platform-aws-cluster',
           customError: 'Cluster ID is required.'
         });
         
@@ -75,7 +75,7 @@ export class ClusterChart extends Chart {
               networkRef.propString('id').description('ID of the Network object this ref points to.').required()
                 .uiInput({
                   title: 'Network Ref',
-                  default: 'platform-ref-aws-network',
+                  default: 'acme-platform-aws-network',
                   customError: 'Network ref is required and should match the network ref of the app cluster.',
                 });
             }}));

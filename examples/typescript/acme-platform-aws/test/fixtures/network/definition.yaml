@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: compositenetworks.aws.platformref.crossplane.io
+  name: compositenetworks.aws.platform.acme.io
   annotations:
     upbound.io/ui-schema: |-
       ---
@@ -15,7 +15,7 @@ metadata:
           path: ".spec.id"
           title: Network ID
           description: Network ID that other objects will use to refer (and connect) to this network fabric
-          default: platform-ref-aws-network
+          default: acme-platform-aws-network
           validation:
           - required: true
             customError: Network ID is required.
@@ -28,7 +28,7 @@ metadata:
           path: ".spec.clusterRef.id"
           title: Cluster Ref
           description: ID of the Cluster object that will use this network fabric
-          default: platform-ref-aws-cluster
+          default: acme-platform-aws-cluster
           validation:
           - required: true
             customError: Cluster ref is required.
@@ -36,7 +36,7 @@ spec:
   claimNames:
     kind: Network
     plural: networks
-  group: aws.platformref.crossplane.io
+  group: aws.platform.acme.io
   names:
     kind: CompositeNetwork
     plural: compositenetworks

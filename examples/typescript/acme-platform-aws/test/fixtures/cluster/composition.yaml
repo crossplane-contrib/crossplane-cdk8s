@@ -1,15 +1,15 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: compositeclusters.aws.platformref.crossplane.io
+  name: compositeclusters.aws.platform.acme.io
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: aws.platformref.crossplane.io/v1alpha1
+    apiVersion: aws.platform.acme.io/v1alpha1
     kind: CompositeCluster
   resources:
     - base:
-        apiVersion: aws.platformref.crossplane.io/v1alpha1
+        apiVersion: aws.platform.acme.io/v1alpha1
         kind: EKS
       connectionDetails:
         - fromConnectionSecretKey: kubeconfig
@@ -33,7 +33,7 @@ spec:
         - fromFieldPath: spec.parameters.networkRef.id
           toFieldPath: spec.parameters.networkRef.id
     - base:
-        apiVersion: aws.platformref.crossplane.io/v1alpha1
+        apiVersion: aws.platform.acme.io/v1alpha1
         kind: Services
       patches:
         - fromFieldPath: spec.id

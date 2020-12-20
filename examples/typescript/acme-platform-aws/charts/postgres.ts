@@ -8,10 +8,10 @@ export class PostgresChart extends Chart {
     super(scope, id);
 
     const xrd = new crossplane.CompositeResourceDefinition(this, 'xrd', {
-      name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+      name: 'compositepostgresqlinstances.aws.platform.acme.io',
     });
 
-    xrd.group('aws.platformref.crossplane.io');
+    xrd.group('aws.platform.acme.io');
     xrd.claimKind('PostgreSQLInstance').plural('postgresqlinstances');
     xrd.kind('CompositePostgreSQLInstance').plural('compositepostgresqlinstances');
     xrd.connectionSecret().key('username').key('password').key('endpoint').key('port').defaultNamespace('crossplane-system');
@@ -42,7 +42,7 @@ export class PostgresChart extends Chart {
               .required()
               .uiInput({
                 title: 'Network Ref',
-                default: 'platform-ref-aws-network',
+                default: 'acme-platform-aws-network',
                 customError: 'Network ref is required and should match the network ref of the app cluster.',
               });
           }}));
@@ -58,7 +58,7 @@ export class PostgresChart extends Chart {
     }}));
 
     const composition = new crossplane.Composition(this, 'postgres-composition', xrd, {
-      name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+      name: 'compositepostgresqlinstances.aws.platform.acme.io',
       metadata: {
         labels: {
           provider: 'aws',
@@ -74,7 +74,7 @@ export class PostgresChart extends Chart {
         },
         deletionPolicy: db.DbSubnetGroupSpecDeletionPolicy.DELETE,
     }}))
-    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
+    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]');
 
     composition.addResource(db.RdsInstance.manifest({
       spec: {
@@ -98,7 +98,7 @@ export class PostgresChart extends Chart {
     }}))
     .mapFieldPathXFormStringFormat('metadata.uid', '%s-postgresql', 'spec.writeConnectionSecretToRef.name')
     .mapFieldPath(xrdStorageGB!.meta.path, 'spec.forProvider.allocatedStorage')
-    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]')
+    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platform.acme.io/network-id]')
     .connectionDetailsFromXrd();
 
   }

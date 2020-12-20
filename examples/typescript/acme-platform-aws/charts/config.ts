@@ -9,11 +9,11 @@ export class ConfigurationChart extends Chart {
     super(scope, id);
 
     const config = new crossplane.Configuration(this, 'config', {
-      name: 'platform-ref-aws',
+      name: 'acme-platform-aws',
       company: 'Upbound',
       maintainer: 'Phil Prasek <phil@upbound.io>',
       keywords: ['aws', 'cloud-native', 'kubernetes', 'example', 'platform', 'reference'],
-      source: 'github.com/upbound/platform-ref-aws',
+      source: 'github.com/crossplane-contrib/crossplane-cdk8s/examples/typescript/acme-platform-aws',
       license: 'Apache-2.0',
       descriptionShort: 'The AWS reference platform for Kubernetes and Data Services.',
       description: 'This reference platform Configuration for Kubernetes and Data Services is a starting point to build, run, and operate your own internal cloud platform and offer a self-service console and API to your internal teams.',
