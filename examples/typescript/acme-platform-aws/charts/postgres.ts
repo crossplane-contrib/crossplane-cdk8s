@@ -66,7 +66,6 @@ export class PostgresChart extends Chart {
       },
     });
 
-    //TODO: use imported provider-aws types
     composition.addResource(db.DbSubnetGroup.manifest({
       spec: {
         forProvider: {
@@ -74,9 +73,8 @@ export class PostgresChart extends Chart {
           description: 'An excellent formation of subnetworks.',
         },
         deletionPolicy: db.DbSubnetGroupSpecDeletionPolicy.DELETE,
-      },
-    }))
-      .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
+    }}))
+    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
 
     composition.addResource(db.RdsInstance.manifest({
       spec: {
@@ -97,12 +95,11 @@ export class PostgresChart extends Chart {
           name: 'default-db-conn',
         },
         deletionPolicy: db.RdsInstanceSpecDeletionPolicy.DELETE,
-      },
-    }))
-      .mapFieldPathXFormStringFormat('metadata.uid', '%s-postgresql', 'spec.writeConnectionSecretToRef.name')
-      .mapFieldPath(xrdStorageGB!.meta.path, 'spec.forProvider.allocatedStorage')
-      .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]')
-      .connectionDetailsFromXrd();
+    }}))
+    .mapFieldPathXFormStringFormat('metadata.uid', '%s-postgresql', 'spec.writeConnectionSecretToRef.name')
+    .mapFieldPath(xrdStorageGB!.meta.path, 'spec.forProvider.allocatedStorage')
+    .mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.vpcSecurityGroupIDSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]')
+    .connectionDetailsFromXrd();
 
   }
 }
