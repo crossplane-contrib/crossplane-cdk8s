@@ -200,10 +200,10 @@ Each `Chart` emits a separate YAML file.
 
 ```ts
 const xrd = new crossplane.CompositeResourceDefinition(this, 'xrd', {
-  name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+  name: 'compositepostgresqlinstances.aws.platform.acme.io',
 });
 
-xrd.group('aws.platformref.crossplane.io');
+xrd.group('aws.platform.acme.io');
 xrd.claimKind('PostgreSQLInstance').plural('postgresqlinstances');
 xrd.kind('CompositePostgreSQLInstance').plural('compositepostgresqlinstances');
 xrd.connectionSecret().key('username').key('password').key('endpoint').key('port');
@@ -232,7 +232,7 @@ xrd.version('v1alpha1').served().referencable().spec().with(crossplane.Prop.for(
 
 ```ts
 const composition = new crossplane.Composition(this, 'postgres-composition', xrd, {
-  name: 'compositepostgresqlinstances.aws.platformref.crossplane.io',
+  name: 'compositepostgresqlinstances.aws.platform.acme.io',
   metadata: {
     labels: {
       provider: 'aws',
@@ -248,7 +248,7 @@ composition.addResource(db.DbSubnetGroup.manifest({
     },
     deletionPolicy: db.DbSubnetGroupSpecDeletionPolicy.DELETE,
 }}))
-.mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platformref.crossplane.io/network-id]');
+.mapFieldPath(xrdNetRef!.meta.path, 'spec.forProvider.subnetIdSelector.matchLabels[networks.aws.platform.acme.io/network-id]');
 
 composition.addResource(db.RdsInstance.manifest({
   spec: {
@@ -346,7 +346,7 @@ Set these to match your continer registry settings:
 ACCOUNT=acme
 ACCOUNT_EMAIL=me@acme.io
 REPO=acme-platform-aws
-VERSION_TAG=v0.2.2
+VERSION_TAG=v0.2.3
 REGISTRY=registry.upbound.io
 PLATFORM_CONFIG=${REGISTRY:+$REGISTRY/}${ACCOUNT}/${REPO}:${VERSION_TAG}
 ```
@@ -445,12 +445,12 @@ If using self-hosted Crossplane:
 
 #### Provision
 
-Once installed and configured the Platform can be consumed by creating claim resources in a given `Namespace`.
+Once installed and configured the Platform can be consumed by creating claim resources in a given `Namespace` using `kubectl`, GitOps, or anything that works with the Kubernetes API. `Platform Consumers` can keep using existing tools and workflows.
 
 For example:
 
 ```yaml
-apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+apiVersion: "aws.platform.acme.io/v1alpha1"
 kind: "Network"
 metadata:
   name: "dev-env-network-c89a128d"
@@ -460,7 +460,7 @@ spec:
     id: "acme-platform-aws-cluster"
   id: "acme-platform-aws-network"
 ---
-apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+apiVersion: "aws.platform.acme.io/v1alpha1"
 kind: "Cluster"
 metadata:
   name: "dev-env-cluster-c81d06d0"
@@ -480,7 +480,7 @@ spec:
   writeConnectionSecretToRef:
     name: "acme-platform-aws-cluster"
 ---
-apiVersion: "aws.platformref.crossplane.io/v1alpha1"
+apiVersion: "aws.platform.acme.io/v1alpha1"
 kind: "PostgreSQLInstance"
 metadata:
   name: "dev-env-database-c8a2b064"
@@ -494,9 +494,23 @@ spec:
     name: "my-db-conn"
 ```
 
-`cdk8s` can also be used by `Platform Consumers` to generate the YAML above using this workflow:
+However, `cdk8s` can also be used by `Platform Consumers` to generate the YAML above with this workflow:
 
 ![Compose](docs/media/consumer.png)
+
+Get access to your team `Workspace` / `Namespace`:
+
+If using [Upbound Cloud](https://upbound.io):
+
+* Join your Organization in Upbound Cloud:
+
+  1. Join your [Upbound Cloud](https://cloud.upbound.io/register) `Organization`
+  1. Verify access to your team `Workspaces`
+  1. [Connect](https://cloud.upbound.io/docs/getting-started/connect-to-your-platform) `kubectl` to the `team1` `Workspace`
+
+If using self-hosted Crossplane:
+
+* Get `Namespace` connect info from your cluster admin.
 
 Ensure you're in the `acme-platform-aws-consumer` directory:
 
@@ -512,6 +526,76 @@ Import CRDs from control cluster:
 cdk8s import crds.yaml
 ```
 
+which should result in:
+
+```console
+aws.platform.acme.io
+  aws.platform.acme.io/cluster
+  aws.platform.acme.io/network
+  aws.platform.acme.io/postgresqlinstance
+```
+
+```ts
+import { App, Chart } from 'cdk8s';
+import { Construct } from 'constructs';
+import * as acme from './imports/aws.platform.acme.io';
+
+class MyChart extends Chart {
+  constructor(scope: Construct, id: string) {
+    super(scope, id, {
+      namespace: 'team1',
+    });
+
+    const clusterId = 'acme-platform-aws-cluster';
+    const networkId = 'acme-platform-aws-network';
+
+    new acme.Network(this, 'network', {
+      spec: {
+        id: networkId,
+        clusterRef: { id: clusterId },
+      },
+    });
+
+    new acme.Cluster(this, 'cluster', {
+      spec: {
+        id: clusterId,
+        parameters: {
+          nodes: {
+            count: 3,
+            size: acme.ClusterSpecParametersNodesSize.SMALL,
+          },
+          services: {
+            operators: {
+              prometheus: { version: '10.0.2' },
+            },
+          },
+          networkRef: { id: networkId },
+        },
+        writeConnectionSecretToRef: { name: clusterId },
+      },
+    });
+
+
+    new acme.PostgreSqlInstance(this, 'database', {
+      spec: {
+        parameters: {
+          storageGB: 20,
+          networkRef: { id: networkId },
+        },
+        writeConnectionSecretToRef: {
+          name: 'my-db-conn',
+        },
+      },
+    });
+  }
+}
+
+const app = new App();
+new MyChart(app, 'dev-env');
+
+app.synth();
+```
+
 Synth the manifest
 
 ```console
@@ -525,20 +609,6 @@ npx: installed 9 in 1.141s
 dist/dev-env.k8s.yaml
 ```
 
-Get access to your team `Workspace` / `Namespace`:
-
-If using [Upbound Cloud](https://upbound.io):
-
-* Join your Organization in Upbound Cloud:
-
-  1. Join your [Upbound Cloud](https://cloud.upbound.io/register) `Organization`
-  1. Verify access to your team `Workspaces`
-  1. [Connect](https://cloud.upbound.io/docs/getting-started/connect-to-your-platform) `kubectl` to the `team1` `Workspace`
-
-If using self-hosted Crossplane:
-
-* Manually share `Namespace` connect info with your teams.
-
 Apply the claim resources to provision a Kubernetes app cluster with secure networking and attached RDS database:
 
 ```console
@@ -548,9 +618,9 @@ kubectl apply -f dist/dev-env.k8s.yaml
 which should result in:
 
 ```console
-cluster.aws.platformref.crossplane.io/eks-cluster created
-network.aws.platformref.crossplane.io/network-fabric created
-postgresqlinstance.aws.platformref.crossplane.io/postgres-instance created
+cluster.aws.platform.acme.io/eks-cluster created
+network.aws.platform.acme.io/network-fabric created
+postgresqlinstance.aws.platform.acme.io/postgres-instance created
 ```
 
 Verify status:
@@ -622,9 +692,9 @@ kubectl delete -f dist/dev-env.k8s.yaml
 which should result in the `claims` being deleted:
 
 ```console
-cluster.aws.platformref.crossplane.io "eks-cluster" deleted
-network.aws.platformref.crossplane.io "network-fabric" deleted
-postgresqlinstance.aws.platformref.crossplane.io "postgres-instance" deleted
+cluster.aws.platform.acme.io "eks-cluster" deleted
+network.aws.platform.acme.io "network-fabric" deleted
+postgresqlinstance.aws.platform.acme.io "postgres-instance" deleted
 ```
 
 Verify all underlying resources have been cleanly deleted:

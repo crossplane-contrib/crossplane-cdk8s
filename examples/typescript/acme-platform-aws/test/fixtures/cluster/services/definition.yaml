@@ -1,9 +1,9 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: services.aws.platformref.crossplane.io
+  name: services.aws.platform.acme.io
 spec:
-  group: aws.platformref.crossplane.io
+  group: aws.platform.acme.io
   names:
     kind: Services
     plural: services

@@ -1,6 +1,6 @@
 import { App, Chart } from 'cdk8s';
 import { Construct } from 'constructs';
-import * as acme from './imports/aws.platformref.crossplane.io';
+import * as acme from './imports/aws.platform.acme.io';
 
 class MyChart extends Chart {
   constructor(scope: Construct, id: string) {
@@ -8,8 +8,8 @@ class MyChart extends Chart {
       namespace: 'team1',
     });
 
-    const clusterId = 'platform-ref-aws-cluster';
-    const networkId = 'platform-ref-aws-network';
+    const clusterId = 'acme-platform-aws-cluster';
+    const networkId = 'acme-platform-aws-network';
 
     new acme.Network(this, 'network', {
       spec: {

@@ -1,14 +1,14 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: services.aws.platformref.crossplane.io
+  name: services.aws.platform.acme.io
   labels:
     plan: full
     provider: helm
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: aws.platformref.crossplane.io/v1alpha1
+    apiVersion: aws.platform.acme.io/v1alpha1
     kind: Services
   resources:
     - base:
